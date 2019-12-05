@@ -179,22 +179,52 @@ h6 {
   margin: 20px 0 15px;
 }
 h1 {
-  font-size: 1.675em;
-}
-h2 {
-  font-size: 1.55em;
-}
-h3 {
-  font-size: 1.425em;
-}
-h4 {
-  font-size: 1.3em;
-}
-h5 {
   font-size: 1.175em;
 }
-h6 {
+@media (max-width: 767px) {
+  h1 {
+    font-size: 0.915em;
+  }
+}
+h2 {
   font-size: 1.05em;
+}
+@media (max-width: 767px) {
+  h2 {
+    font-size: 0.79em;
+  }
+}
+h3 {
+  font-size: 0.925em;
+}
+@media (max-width: 767px) {
+  h3 {
+    font-size: 0.665em;
+  }
+}
+h4 {
+  font-size: 0.8em;
+}
+@media (max-width: 767px) {
+  h4 {
+    font-size: 0.54em;
+  }
+}
+h5 {
+  font-size: 0.675em;
+}
+@media (max-width: 767px) {
+  h5 {
+    font-size: 0.415em;
+  }
+}
+h6 {
+  font-size: 0.55em;
+}
+@media (max-width: 767px) {
+  h6 {
+    font-size: 0.29em;
+  }
 }
 p {
   margin: 0 0 20px 0;
@@ -234,6 +264,7 @@ blockquote {
   color: #666;
   margin: 0;
   padding: 0 15px;
+  word-break: break-all;
 }
 blockquote cite::before {
   content: '-';
@@ -1167,7 +1198,6 @@ pre .javascript .function {
   display: inline-block;
 }
 .site-author-image {
-  border: 1px solid #eee;
   display: block;
   height: auto;
   margin: 0 auto;
@@ -1175,6 +1205,7 @@ pre .javascript .function {
   padding: 2px;
 }
 .site-author-name {
+  font-size: 20px;
   color: #222;
   font-weight: 600;
   margin: 0;
@@ -1200,7 +1231,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #46ffe2;
+  background: #6193ee;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1287,7 +1318,7 @@ pre .javascript .function {
   color: #555;
   cursor: pointer;
   display: inline-block;
-  font-size: 0.85em;
+  font-size: 1em;
 }
 .sidebar-nav li.sidebar-nav-overview {
   margin-left: 10px;
@@ -1334,7 +1365,7 @@ pre .javascript .function {
   overflow-y: auto;
 }
 .post-toc {
-  font-size: 0.85em;
+  font-size: 1em;
 }
 .post-toc ol {
   list-style: none;
@@ -1804,17 +1835,16 @@ pre .javascript .function {
   padding-top: 40px;
   background: #fff;
   margin-top: 10px;
-  margin-bottom: 60px;
+  margin-bottom: 20px;
   padding: 21px;
   -webkit-box-shadow: 0 0 5px rgba(202,203,203,0.5);
   -moz-box-shadow: 0 0 5px rgba(202,203,204,0.5);
 }
 @media (max-width: 767px) {
   .posts-expand {
-    padding: 5px;
+    padding: 0;
     font-size: 15px;
-    line-height: 20px;
-    margin: 0 10px;
+    margin: 0 0;
   }
 }
 @media (min-width: 992px) {
@@ -1826,6 +1856,7 @@ pre .javascript .function {
   .post-body {
     font-size: 15px;
     text-align: left;
+    line-height: 1.5em;
   }
 }
 .post-body h1,
