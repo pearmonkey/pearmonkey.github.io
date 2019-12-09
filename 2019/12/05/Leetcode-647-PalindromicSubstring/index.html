@@ -46,15 +46,15 @@
   };
 </script>
 
-  <meta name="description" content="【题目链接】 https:&#x2F;&#x2F;leetcode.com&#x2F;problems&#x2F;palindromic-substrings&#x2F;  【题目难度】 Medium 58.5%">
+  <meta name="description" content="【题目链接】 https:&#x2F;&#x2F;leetcode.com&#x2F;problems&#x2F;palindromic-substrings&#x2F;【题目难度】 Medium 58.5%">
 <meta name="keywords" content="Leetcode,字符串">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Leetcode | 647. Palindromic Substring">
 <meta property="og:url" content="http:&#x2F;&#x2F;pearmonkey.com&#x2F;2019&#x2F;12&#x2F;05&#x2F;Leetcode-647-PalindromicSubstring&#x2F;index.html">
 <meta property="og:site_name" content="雪梨猴的博客">
-<meta property="og:description" content="【题目链接】 https:&#x2F;&#x2F;leetcode.com&#x2F;problems&#x2F;palindromic-substrings&#x2F;  【题目难度】 Medium 58.5%">
+<meta property="og:description" content="【题目链接】 https:&#x2F;&#x2F;leetcode.com&#x2F;problems&#x2F;palindromic-substrings&#x2F;【题目难度】 Medium 58.5%">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-12-09T04:14:52.371Z">
+<meta property="og:updated_time" content="2019-12-09T20:35:44.680Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://pearmonkey.com/2019/12/05/Leetcode-647-PalindromicSubstring/">
@@ -216,7 +216,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-12-08 23:14:52" itemprop="dateModified" datetime="2019-12-08T23:14:52-05:00">2019-12-08</time>
+                <time title="修改时间：2019-12-09 15:35:44" itemprop="dateModified" datetime="2019-12-09T15:35:44-05:00">2019-12-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -262,20 +262,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="题目链接-httpsleetcodecomproblemspalindromic-substrings"><a class="markdownIt-Anchor" href="#题目链接-httpsleetcodecomproblemspalindromic-substrings"></a> 【题目链接】 <a href="https://leetcode.com/problems/palindromic-substrings/" target="_blank" rel="noopener">https://leetcode.com/problems/palindromic-substrings/</a></h1>
-<h1 id="题目难度-medium-585"><a class="markdownIt-Anchor" href="#题目难度-medium-585"></a> 【题目难度】 Medium 58.5%</h1>
-<a id="more"></a>
-<h1 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 【题目描述】</h1>
-<p>Given a string, your task is to count how many palindromic substrings in this string.<br />
-The substrings with different start indexes or end indexes are counted as different substrings even they consist of same characters.<br />
-Example 1:</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">Input:</span> <span class="string">"abc"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="string">Output:</span> <span class="number">3</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="string">Explanation:</span> Three palindromic <span class="string">strings:</span> <span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>.</span></pre></td></tr></table></figure>
-<p>Example 2:</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">Input:</span> <span class="string">"aaa"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="string">Output:</span> <span class="number">6</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="string">Explanation:</span> Six palindromic <span class="string">strings:</span> <span class="string">"a"</span>, <span class="string">"a"</span>, <span class="string">"a"</span>, <span class="string">"aa"</span>, <span class="string">"aa"</span>, <span class="string">"aaa"</span>.</span></pre></td></tr></table></figure>
-<h1 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 【题目分析】</h1>
-<p>题目要求给定字符串的所有为回文串的子串。从最简单的开始，不管字符串是什么，每一个字符一定是它的子串，并且也是回文串，例如“abc”中的“a”，“b”，“c”，然后，我们要找是否有更长的子串为回文串。最直接的想法是，从第一个元素（i = 0 : len - 1, O(n)）开始作为子串的开始端，然后以i以及之后的位置作为结束端（j = i : len - 1, O(n)）,这样形成的每一个子串都送去判断一下（O(n)），若为回文，则加入结果集中。这样做的时间复杂度是O(n^3)。我们选择仔细想一想，这个过程中有没有重复的地方，其实所谓的算法的改进，就是将那些重复做的地方识别出来然后剔除，以降低时间复杂度。在刚刚的问题中，如果我们的字符串为“abcba”，当i = 0, j = 4, 子串“abcba”被检查为回文（这一检查的时间复杂度是O(n)）, 这里也就意味着里面的“bcb”和“c”也都是回文。所以，当后面i = 1, j = 3时，我们再次判断“bcb”是否为回文的这一操作就是重复的了。所以，如果从两端开始往中间判断的办法会有重复的，那我们就从中间往两边判断。也就是让每一个字符都当一回 回文串 的中间字符（奇数回文）和中间偏左的字符（偶数回文），时间复杂度为O(2n)，然后向两边延伸判断，时间复杂度为O(n)。整体复杂度为O(2 * n^2)。</p>
-<h1 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 【完整代码】</h1>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> res;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">countSubstrings</span><span class="params">(String s)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        res = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length(); i++)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            helper(s, i, i);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">            helper(s, i, i+<span class="number">1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> res;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">helper</span><span class="params">(String s, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span>(i &gt;= <span class="number">0</span> &amp;&amp; j &lt; s.length() &amp;&amp; s.charAt(i) == s.charAt(j))&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            res++;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">            i--;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">            j++;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+        <h1 id="【题目链接】-https-leetcode-com-problems-palindromic-substrings"><a href="#【题目链接】-https-leetcode-com-problems-palindromic-substrings" class="headerlink" title="【题目链接】 https://leetcode.com/problems/palindromic-substrings/"></a>【题目链接】 <a href="https://leetcode.com/problems/palindromic-substrings/" target="_blank" rel="noopener">https://leetcode.com/problems/palindromic-substrings/</a></h1><h1 id="【题目难度】-Medium-58-5"><a href="#【题目难度】-Medium-58-5" class="headerlink" title="【题目难度】 Medium 58.5%"></a>【题目难度】 Medium 58.5%</h1><a id="more"></a>
+<h1 id="【题目描述】"><a href="#【题目描述】" class="headerlink" title="【题目描述】"></a>【题目描述】</h1><p>Given a string, your task is to count how many palindromic substrings in this string.<br>The substrings with different start indexes or end indexes are counted as different substrings even they consist of same characters.<br>Example 1:<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">Input:</span> <span class="string">"abc"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="string">Output:</span> <span class="number">3</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="string">Explanation:</span> Three palindromic <span class="string">strings:</span> <span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>.</span></pre></td></tr></table></figure><br>Example 2:<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="string">Input:</span> <span class="string">"aaa"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="string">Output:</span> <span class="number">6</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="string">Explanation:</span> Six palindromic <span class="string">strings:</span> <span class="string">"a"</span>, <span class="string">"a"</span>, <span class="string">"a"</span>, <span class="string">"aa"</span>, <span class="string">"aa"</span>, <span class="string">"aaa"</span>.</span></pre></td></tr></table></figure></p>
+<h1 id="【题目分析】"><a href="#【题目分析】" class="headerlink" title="【题目分析】"></a>【题目分析】</h1><p>题目要求给定字符串的所有为回文串的子串。从最简单的开始，不管字符串是什么，每一个字符一定是它的子串，并且也是回文串，例如“abc”中的“a”，“b”，“c”，然后，我们要找是否有更长的子串为回文串。最直接的想法是，从第一个元素（i = 0 : len - 1, O(n)）开始作为子串的开始端，然后以i以及之后的位置作为结束端（j = i : len - 1, O(n)）,这样形成的每一个子串都送去判断一下（O(n)），若为回文，则加入结果集中。这样做的时间复杂度是O(n^3)。我们选择仔细想一想，这个过程中有没有重复的地方，其实所谓的算法的改进，就是将那些重复做的地方识别出来然后剔除，以降低时间复杂度。在刚刚的问题中，如果我们的字符串为“abcba”，当i = 0, j = 4, 子串“abcba”被检查为回文（这一检查的时间复杂度是O(n)）, 这里也就意味着里面的“bcb”和“c”也都是回文。所以，当后面i = 1, j = 3时，我们再次判断“bcb”是否为回文的这一操作就是重复的了。所以，如果从两端开始往中间判断的办法会有重复的，那我们就从中间往两边判断。也就是让每一个字符都当一回 回文串 的中间字符（奇数回文）和中间偏左的字符（偶数回文），时间复杂度为O(2n)，然后向两边延伸判断，时间复杂度为O(n)。整体复杂度为O(2 * n^2)。</p>
+<h1 id="【完整代码】"><a href="#【完整代码】" class="headerlink" title="【完整代码】"></a>【完整代码】</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> res;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">countSubstrings</span><span class="params">(String s)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        res = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length(); i++)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            helper(s, i, i);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">            helper(s, i, i+<span class="number">1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> res;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">helper</span><span class="params">(String s, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span>(i &gt;= <span class="number">0</span> &amp;&amp; j &lt; s.length() &amp;&amp; s.charAt(i) == s.charAt(j))&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            res++;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">            i--;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">            j++;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
 
     </div>
 
@@ -295,7 +285,7 @@ Example 1:</p>
   <p><span>本文标题:</span><a href="/2019/12/05/Leetcode-647-PalindromicSubstring/">Leetcode | 647. Palindromic Substring</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 PearMonkey 的个人博客">PearMonkey</a></p>
   <p><span>发布时间:</span>2019年12月05日 - 13:48</p>
-  <p><span>最后更新:</span>2019年12月08日 - 23:14</p>
+  <p><span>最后更新:</span>2019年12月09日 - 15:35</p>
   <p><span>原始链接:</span><a href="/2019/12/05/Leetcode-647-PalindromicSubstring/" title="Leetcode | 647. Palindromic Substring">http://pearmonkey.com/2019/12/05/Leetcode-647-PalindromicSubstring/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://pearmonkey.com/2019/12/05/Leetcode-647-PalindromicSubstring/"  aria-label="复制成功！"></i></span>
   </p>
@@ -387,7 +377,7 @@ Example 1:</p>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目链接-httpsleetcodecomproblemspalindromic-substrings"><span class="nav-number">1.</span> <span class="nav-text"> 【题目链接】 https://leetcode.com/problems/palindromic-substrings/</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目难度-medium-585"><span class="nav-number">2.</span> <span class="nav-text"> 【题目难度】 Medium 58.5%</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目描述"><span class="nav-number">3.</span> <span class="nav-text"> 【题目描述】</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目分析"><span class="nav-number">4.</span> <span class="nav-text"> 【题目分析】</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#完整代码"><span class="nav-number">5.</span> <span class="nav-text"> 【完整代码】</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#【题目链接】-https-leetcode-com-problems-palindromic-substrings"><span class="nav-number">1.</span> <span class="nav-text">【题目链接】 https://leetcode.com/problems/palindromic-substrings/</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#【题目难度】-Medium-58-5"><span class="nav-number">2.</span> <span class="nav-text">【题目难度】 Medium 58.5%</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#【题目描述】"><span class="nav-number">3.</span> <span class="nav-text">【题目描述】</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#【题目分析】"><span class="nav-number">4.</span> <span class="nav-text">【题目分析】</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#【完整代码】"><span class="nav-number">5.</span> <span class="nav-text">【完整代码】</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -614,54 +604,6 @@ show_date_time();
   
 
   
-      
-<script type="text/x-mathjax-config">
-
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
-      processEscapes: true,
-      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    },
-    TeX: {
-      equationNumbers: {
-        autoNumber: 'AMS'
-      }
-    }
-  });
-
-  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
-    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
-      if (data.display) {
-        var next = data.script.nextSibling;
-        while (next && next.nodeName.toLowerCase() === '#text') {
-          next = next.nextSibling;
-        }
-        if (next && next.nodeName.toLowerCase() === 'br') {
-          next.parentNode.removeChild(next);
-        }
-      }
-    });
-  });
-
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for (i = 0; i < all.length; i += 1) {
-      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
-      if (element.nodeName.toLowerCase() == 'li') {
-        element = element.parentNode;
-      }
-      element.classList.add('has-jax');
-    }
-  });
-</script>
-<script>
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
-    MathJax.Hub.Typeset();
-  }, window.MathJax);
-</script>
-
-    
 
   
 
