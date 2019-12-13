@@ -1231,7 +1231,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #86eb7c;
+  background: #b9fffe;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1752,6 +1752,7 @@ pre .javascript .function {
 .posts-collapse .collection-header {
   display: inline-block;
   margin: 0 0 0 20px;
+  font-size: 1.3em;
 }
 .posts-collapse .collection-header small {
   color: #bbb;
