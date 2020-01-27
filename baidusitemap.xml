@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://pearmonkey.com/2020/01/27/Leetcode-437-Path-Sum-III/</loc>
+    <lastmod>2020-01-27</lastmod>
+  </url>  <url>
     <loc>http://pearmonkey.com/2019/12/23/Leetcode-RelatedThings/</loc>
+    <lastmod>2019-12-25</lastmod>
+  </url>  <url>
+    <loc>http://pearmonkey.com/2019/12/24/697-Degree-of-an-Array/</loc>
+    <lastmod>2019-12-24</lastmod>
+  </url>  <url>
+    <loc>http://pearmonkey.com/2019/12/23/Leetcode-1029-Two-City-Scheduling/</loc>
     <lastmod>2019-12-23</lastmod>
   </url>  <url>
     <loc>http://pearmonkey.com/2019/11/27/Leetcode-Palindromic/</loc>
