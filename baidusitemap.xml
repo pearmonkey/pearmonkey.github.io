@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://pearmonkey.com/2020/01/27/Leetcode-299-Bulls-and-Cows/</loc>
+    <lastmod>2020-01-27</lastmod>
+  </url>  <url>
+    <loc>http://pearmonkey.com/2020/01/27/Leetcode-849-Maximize-Distance-to-Closest-Person/</loc>
+    <lastmod>2020-01-27</lastmod>
+  </url>  <url>
     <loc>http://pearmonkey.com/2020/01/27/Leetcode-437-Path-Sum-III/</loc>
     <lastmod>2020-01-27</lastmod>
   </url>  <url>
     <loc>http://pearmonkey.com/2019/12/23/Leetcode-RelatedThings/</loc>
     <lastmod>2019-12-25</lastmod>
   </url>  <url>
-    <loc>http://pearmonkey.com/2019/12/24/697-Degree-of-an-Array/</loc>
+    <loc>http://pearmonkey.com/2019/12/24/Leetcode-697-Degree-of-an-Array/</loc>
     <lastmod>2019-12-24</lastmod>
   </url>  <url>
     <loc>http://pearmonkey.com/2019/12/23/Leetcode-1029-Two-City-Scheduling/</loc>
