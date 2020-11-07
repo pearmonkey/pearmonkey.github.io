@@ -12,9 +12,7 @@
 
   <title>雪梨猴的博客</title>
   
-    <link rel="stylesheet" href="/js/aos/aos.css">
-  
-  <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
   <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   
@@ -25,8 +23,6 @@
     <link rel="stylesheet" href="/js/fancybox/jquery.fancybox.min.css">
   
   
-    <link rel="stylesheet" href="/js/shareJs/share.min.css">
-  
   <style>
         @media (max-width: 992px) {
             #waifu {
@@ -34,12 +30,13 @@
             }
         }
     </style>
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
   <script src="/js/jquery3.5.1.js"></script>
   <script src="/js/vue2.6.11.js"></script>
   <body>
-    <!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="header bg-color" 
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="header bg-color"
   style="position: fixed; 
   left: 0; top: 0; z-index: 10;width: 100%;"
 >
@@ -51,7 +48,6 @@
   </div>
   <div class="drawer-box" :class="{'active': visible}">
     <div class="drawer-box-head bg-color">
-      <img class="drawer-box-head_logo" src="/medias/logo.png" alt="logo">
       <h3 class="drawer-box-head_title">雪梨猴的博客</h3>
       <h5 class="drawer-box-head_desc">千磨万击还坚劲，任尔东西南北风</h5>
     </div>
@@ -112,12 +108,6 @@
             </a>
           </li>
         
-        <li class="drawer-box-content_item">
-          <a href="">
-            <i class="fa fa-github" aria-hidden="true"></i>
-            <span>Github</span>
-          </a>
-        </li>
       </ul>
     </div>
   </div>
@@ -151,11 +141,9 @@
     created() {}
   })
 </script>
+
     </div>
     <div class="blog-title" id="author-avatar">
-      <div class="avatar">
-        <img src="/medias/logo.png" alt="logo">
-      </div>
       <a href="/" class="logo">雪梨猴的博客</a>
     </div>
     <nav class="navbar">
@@ -286,828 +274,187 @@
       
     </nav>
   </div>
-  
-  <a href="https://github.com/yuang01/hexo-theme-bamboo" target="_blank" rel="noopener" class="github-corner color-primary" aria-label="View source on GitHub"><svg width="60" height="60" viewBox="0 0 250 250" style="fill:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
 </header>
+
     <main class="main" style="margin-top: 60px;">
       
-<link href="https://cdn.bootcdn.net/ajax/libs/Swiper/5.4.1/css/swiper.min.css" rel="stylesheet">
 
 
-
-<div class="swiper-length" style="display: none;">0</div>
-<div id="appSwiper"
-  class="swiper-no-swiping"
-  @mouseenter="stopAutoPlay()" 
-  @mouseleave="startAutoPlay()"
->
-  <swiper v-cloak ref="mySwiper" :options="swiperOptions" @slideChangeTransitionEnd="slideChangeTransitionEnd">
-    
-      <swiper-slide>
-        <div class="item" style="background-image: url('/medias/14.png'); background-size: 40000px; 
-          background-position: center center;">
-            <div class="flag">
-              <div class="img-mask" style="height: 100%;background-image: url('/medias/14.png'); background-size: cover; 
-                background-position: center center;"></div>
-              <!-- <img class="homeSwiper img-mask" src="/medias/7.jpg" alt="" style="width: 100%;background-size: cover; 
-              background-position: center center;"> -->
-              <div class="flag-text">
-                <div>
-                  <div class="title ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s">Hexo-theme-Bamboo</div>
-                  <div class="excerpt ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s">大家好，这是一个Hexo主题，希望这款主题能得到你的喜爱</div>
-                </div>
-                <div style="display: flex;">
-                  <div class="ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s"><a href="https://github.com/yuang01/hexo-theme-bamboo" target="_blank" rel="noopener" class="read-more border-color bg-color" style="display: inline-block; z-index:1;">阅读更多</a></div>
-                  <div class="ani animated" style="margin-left: 10px;" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s"><a href="https://github.com/yuang01/hexo-theme-bamboo" target="_blank" rel="noopener" class="read-more " style="display: inline-block; z-index:1;border: 1px solid white;">Download theme</a></div>
-                </div>
-              </div>
+  <section class="container" style="background-color: #206a5d">
+    <div class="post-more">
+      <h2>Leetcode
+      
+      <a href="/categories/Leetcode/">更多文章(88) </a></h2>
+    </div>
+    <section class="posts">
+      
+        <article class="post" data-aos="fade-up">
+          <div class="post-main">
+            <div class="post-title">
+              <a class="post-title-link" href="/2020/02/18/Leetcode-1008-Construct-Binary-Search-Tree-from-Preorder-Traversal/">1008. Construct Binary Search Tree from Preorder Traversal</a>
             </div>
-          </div>
-      </swiper-slide>
-    
-  </swiper>
-</div>
-<script src="/js/swiper.min.js"></script>
-<script src="/js/vue-awesome-swiper.js"></script>
-<script src="/js/swiper.animate1.0.3.min.js"></script>
-<script type="text/javascript">
-  Vue.use(window.VueAwesomeSwiper)
-</script>
-<script>
-  let autoplay = 'true';
-  let delay = '5000';
-  let loop = JSON.parse('true');
-  let effect = 'slide';
-  let swiperLength = parseInt(document.querySelector(".swiper-length").innerText);
-  var vm = new Vue({
-    el: '#appSwiper',
-    data: {
-      swiperOptions: {
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true // 允许点击小圆点跳转
-        },
-        loop: loop ? true : false,
-        effect, // fade
-        autoplay: (autoplay && swiperLength > 1) ? {
-  　　　　delay,
-  　　　　disableOnInteraction: false // 手动切换之后继续自动轮播
-    　　} : false,
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-        },
-        on:{
-          init: function() {
-            swiperAnimateCache(this); //隐藏动画元素 
-            swiperAnimate(this); //初始化完成开始动画
-          }, 
-          slideChangeTransitionEnd: function(){ 
-            swiperAnimate(this); //每个slide切换结束时也运行当前slide动画
-          } 
-        }
-        // Some Swiper option/callback...
-      }
-    },
-    computed: {
-      swiper() {
-        return this.$refs.mySwiper.$swiper
-      }
-    },
-    mounted() {
-      // console.log('Current Swiper instance object', this.swiper)
-      // this.swiper.slideTo(0, 1000, false)
-    },
-    methods: {
-      stopAutoPlay() {
-        (autoplay && swiperLength > 1) && this.swiper.autoplay.stop();
-      },
-      startAutoPlay() {
-        (autoplay && swiperLength > 1) && this.swiper.autoplay.start();
-      },
-      slideChangeTransitionEnd() {
-        console.log('1');
-      }
-    },
-    created() {}
-  })
-</script>
-
-<style>
-.swiper-container {
-  overflow: hidden;
-}
-.swiper-slide {
-  height: 350px;
-  position: relative;
-}
-.swiper-button-prev,
-.swiper-button-next {
-  padding: 10px 10px;
-  transition: background 0.2s;
-}
-.swiper-button-prev:hover,
-.swiper-button-next:hover {
-  background: rgba(0, 0, 0, 0.2);
-}
-.swiper-slide .item {
-  width: 100%;
-  height: 100%;
-}
-.flag {
-  position: relative;
-  width: 60%;
-  margin: 0 auto;
-  color: #ffffff;
-  height: 100%;
-  background: #000;
-}
-.flag img {
-  min-height: 100%;
-}
-.flag-text {
-  position: absolute;
-  top: 50px;
-  left: 50px;
-  width: 80%;
-  height: 280px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.flag-text .title {
-  font-size: 1.8rem;
-}
-.flag-text .excerpt {
-  width: 70%;
-  line-height: 27px;
-  height: 135px;
-  margin-top: 2%;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 5;
-  overflow: hidden;
-}
-.swiper-pagination-bullet-active {
-  opacity: 1;
-  background-color: #42b983;
-}
-.img-mask {
-  opacity:0.6; filter: alpha(opacity=60);
-}
-.flag-text .read-more {
-  margin-bottom: 30px;
-  padding: 5px 15px;
-  color: #ffffff;
-  border-radius: 20px;
-}
-@media (min-width: 992px) {
-  .swiper-button-prev {
-    margin-left: 20%;
-    transform: translateX(-180%);
-  }
-  .swiper-button-next {
-    margin-right: 20%;
-    transform: translateX(180%);
-  }
-  .flag-text .title {
-    width: 80%;
-    line-height: 35px;
-    max-height: 70px;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
-  }
-}
-@media (max-width: 992px) {
-  .flag {
-    width: 100%;
-  }
-  .flag-text .title {
-    font-size: 1.5rem;
-    margin-top: 50px;
-  }
-  .flag-text {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 80%;
-    height: 100%;
-    margin-left: 50%;
-    transform: translateX(-50%);
-  }
-  .flag-text .excerpt {
-    width: 100%;
-    line-height: 20px;
-    height: 100px;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 5;
-    overflow: hidden;
-  }
-  .flag-text .read-more {
-    margin-bottom: 80px;
-  }
-}
-@media (max-width: 992px) and (min-width: 551px) {
-  .flag-text .excerpt {
-    width: 70%;
-  }
-}
-@media (max-width: 551px) {
-  .swiper-slide {
-    height: 250px;
-  }
-  .flag-text .title {
-    line-height: 30px;
-    max-height: 60px;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
-    margin-top: 20px;
-  }
-  .flag-text .excerpt {
-    font-size: 1rem;
-    line-height: 20px;
-    height: 80px;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 4;
-  }
-  .flag-text .excerpt { 
-    margin-top: 10px;
-  }
-  .flag-text .read-more {
-    margin-top: 10px;
-    margin-bottom: 50px;
-  }
-  .swiper-button-prev,
-  .swiper-button-next {
-    transform: scale(0.5);
-  }
-  .swiper-button-prev {
-    left: 0;
-  }
-  .swiper-button-next {
-    right: 0;
-  }
-}
-</style>
-
-
-
-
-
-
-<section class="posts">
-  
-    <article class="post" data-aos="fade-up" style="flex-direction: row-reverse;">
-      <div class="post-main">
-        <div class="post-info">
-          <div class="post-time">
+            <div class="post-content">
+              <h2 id="题目链接https-leetcode-com-problems-construct-binary-search-tree-from-preorder-traversal"><a href="#题目链接https-leetcode-com-problems-construct-binary-search-tree-from-preorder-traversal" class="headerlink" title="题目链接https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/"></a>题目链接<a href="https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/" target="_blank" rel="noopener">https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/</a></h2><h2 id="题目难度Medium-75-1"><a href="#题目难度Medium-75-1" class="headerlink" title="题目难度Medium 75.1%"></a>题目难度Medium 75.1%</h2>
+            </div>
+        </div>
+        <div class="post-time">
             <i class="fa fa-clock-o" aria-hidden="true"></i>
-            <span class="post-time">2020-02-04</span>
-          </div>
-          <div class="post-title">
-            <a class="post-title-link" href="/2020/02/04/Leetcode-401-Binary-Watch/">Leetcode | 401. Binary Watch</a>
-          </div>
-          <div class="post-meta">
-            <div class="post-tags">
-              
-    <i class="iconfont icontag"></i>
-    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Leetcode/" rel="tag">Leetcode</a></li></ul>
-
-            </div>
-            <div class="post-categories">
-              
-<div class="article-category">
-  <i class="iconfont iconbookmark1"></i>
-  <a class="article-category-link" href="/categories/Leetcode/">Leetcode</a>
-</div>
-
-            </div>
-          </div>
-          <div class="post-img-mobile">
-            
-              
-              <a href="/2020/02/04/Leetcode-401-Binary-Watch/" style="background: url('/medias/7.jpg');background-size: cover; 
-                background-position: center center;">
-              </a>
-            
-          </div>
-          <div class="post-content">
-            <h1 id="题目链接-httpsleetcodecomproblemsbinary-watch"><a class="markdownIt-Anchor" href="#题目链接-httpsleetcodecomproblemsbinary-watch"></a> 【题目链接】 <a href="https://leetcode.com/problems/binary-watch/" target="_blank" rel="noopener">https://leetcode.com/problems/binary-watch/</a></h1>
-<h1 id="题目难度-easy-463"><a class="markdownIt-Anchor" href="#题目难度-easy-463"></a> 【题目难度】 Easy 46.3%</h1>
-          </div>
+            <span>2020-02-18</span>
         </div>
-        <div class="post-more">
-          <a href="/2020/02/04/Leetcode-401-Binary-Watch/">
-            <i class="iconfont iconmore" style="float: right;" title="阅读更多"></i>
+        <div class="read-more">
+          <a href="/2020/02/18/Leetcode-1008-Construct-Binary-Search-Tree-from-Preorder-Traversal/">
+            阅读更多
           </a>
         </div>
-      </div>
-      <div class="post-img">
-        
-          <a href="/2020/02/04/Leetcode-401-Binary-Watch/" style="background: url('/medias/7.jpg');background-size: cover; 
-            background-position: center center;">
-          </a>
-        
-      </div>
-    </article>
-  
-    <article class="post" data-aos="fade-up" style="">
-      <div class="post-main">
-        <div class="post-info">
-          <div class="post-time">
+      </article>
+      
+        <article class="post" data-aos="fade-up">
+          <div class="post-main">
+            <div class="post-title">
+              <a class="post-title-link" href="/2020/02/18/Leetcode-14-Longest-Common-Prefix/">14. Longest Common Prefix</a>
+            </div>
+            <div class="post-content">
+              <h2 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h2><p><a href="https://leetcode.com/problems/longest-common-prefix/" target="_blank" rel="noopener">https://leetcode.com/problems/longest-common-prefix/</a><br>
+            </div>
+        </div>
+        <div class="post-time">
             <i class="fa fa-clock-o" aria-hidden="true"></i>
-            <span class="post-time">2020-02-04</span>
-          </div>
-          <div class="post-title">
-            <a class="post-title-link" href="/2020/02/04/Leetcode-551-Student-Attendance-Record-I/">Leetcode | 551. Student Attendance Record I</a>
-          </div>
-          <div class="post-meta">
-            <div class="post-tags">
-              
-    <i class="iconfont icontag"></i>
-    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Leetcode/" rel="tag">Leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/String/" rel="tag">String</a></li></ul>
-
-            </div>
-            <div class="post-categories">
-              
-<div class="article-category">
-  <i class="iconfont iconbookmark1"></i>
-  <a class="article-category-link" href="/categories/Leetcode/">Leetcode</a>
-</div>
-
-            </div>
-          </div>
-          <div class="post-img-mobile">
-            
-              
-              <a href="/2020/02/04/Leetcode-551-Student-Attendance-Record-I/" style="background: url('/medias/16.png');background-size: cover; 
-                background-position: center center;">
-              </a>
-            
-          </div>
-          <div class="post-content">
-            <h1 id="题目链接-httpsleetcodecomproblemsstudent-attendance-record-i"><a class="markdownIt-Anchor" href="#题目链接-httpsleetcodecomproblemsstudent-attendance-record-i"></a> 【题目链接】 <a href="https://leetcode.com/problems/student-attendance-record-i/" target="_blank" rel="noopener">https://leetcode.com/problems/student-attendance-record-i/</a></h1>
-<h1 id="题目难度-easy-464"><a class="markdownIt-Anchor" href="#题目难度-easy-464"></a> 【题目难度】 Easy 46.4%</h1>
-          </div>
+            <span>2020-02-18</span>
         </div>
-        <div class="post-more">
-          <a href="/2020/02/04/Leetcode-551-Student-Attendance-Record-I/">
-            <i class="iconfont iconmore" style="" title="阅读更多"></i>
+        <div class="read-more">
+          <a href="/2020/02/18/Leetcode-14-Longest-Common-Prefix/">
+            阅读更多
           </a>
         </div>
-      </div>
-      <div class="post-img">
-        
-          <a href="/2020/02/04/Leetcode-551-Student-Attendance-Record-I/" style="background: url('/medias/16.png');background-size: cover; 
-            background-position: center center;">
-          </a>
-        
-      </div>
-    </article>
-  
-    <article class="post" data-aos="fade-up" style="flex-direction: row-reverse;">
-      <div class="post-main">
-        <div class="post-info">
-          <div class="post-time">
+      </article>
+      
+        <article class="post" data-aos="fade-up">
+          <div class="post-main">
+            <div class="post-title">
+              <a class="post-title-link" href="/2020/02/16/Leetcode-648-Replace-Words/">648. Replace Words</a>
+            </div>
+            <div class="post-content">
+              <h2 id="题目链接https-leetcode-com-problems-replace-words"><a href="#题目链接https-leetcode-com-problems-replace-words" class="headerlink" title="题目链接https://leetcode.com/problems/replace-words/"></a>题目链接<a href="https://leetcode.com/problems/replace-words/" target="_blank" rel="noopener">https://leetcode.com/problems/replace-words/</a></h2><h2 id="题目难度Medium-54-7"><a href="#题目难度Medium-54-7" class="headerlink" title="题目难度Medium 54.7%"></a>题目难度Medium 54.7%</h2>
+            </div>
+        </div>
+        <div class="post-time">
             <i class="fa fa-clock-o" aria-hidden="true"></i>
-            <span class="post-time">2020-02-03</span>
-          </div>
-          <div class="post-title">
-            <a class="post-title-link" href="/2020/02/03/Leetcode-572-Subtree-of-Another-Tree/">Leetcode | 572. Subtree of Another Tree</a>
-          </div>
-          <div class="post-meta">
-            <div class="post-tags">
-              
-    <i class="iconfont icontag"></i>
-    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BFS/" rel="tag">BFS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Grid/" rel="tag">Grid</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Leetcode/" rel="tag">Leetcode</a></li></ul>
-
-            </div>
-            <div class="post-categories">
-              
-<div class="article-category">
-  <i class="iconfont iconbookmark1"></i>
-  <a class="article-category-link" href="/categories/Leetcode/">Leetcode</a>
-</div>
-
-            </div>
-          </div>
-          <div class="post-img-mobile">
-            
-              
-              <a href="/2020/02/03/Leetcode-572-Subtree-of-Another-Tree/" style="background: url('/medias/8.png');background-size: cover; 
-                background-position: center center;">
-              </a>
-            
-          </div>
-          <div class="post-content">
-            <h1 id="题目链接-httpsleetcodecomproblemssubtree-of-another-tree"><a class="markdownIt-Anchor" href="#题目链接-httpsleetcodecomproblemssubtree-of-another-tree"></a> 【题目链接】 <a href="https://leetcode.com/problems/subtree-of-another-tree/" target="_blank" rel="noopener">https://leetcode.com/problems/subtree-of-another-tree/</a></h1>
-<h1 id="题目难度-easy-437"><a class="markdownIt-Anchor" href="#题目难度-easy-437"></a> 【题目难度】 Easy 43.7%</h1>
-          </div>
+            <span>2020-02-16</span>
         </div>
-        <div class="post-more">
-          <a href="/2020/02/03/Leetcode-572-Subtree-of-Another-Tree/">
-            <i class="iconfont iconmore" style="float: right;" title="阅读更多"></i>
+        <div class="read-more">
+          <a href="/2020/02/16/Leetcode-648-Replace-Words/">
+            阅读更多
           </a>
         </div>
-      </div>
-      <div class="post-img">
-        
-          <a href="/2020/02/03/Leetcode-572-Subtree-of-Another-Tree/" style="background: url('/medias/8.png');background-size: cover; 
-            background-position: center center;">
-          </a>
-        
-      </div>
-    </article>
-  
-    <article class="post" data-aos="fade-up" style="">
-      <div class="post-main">
-        <div class="post-info">
-          <div class="post-time">
+      </article>
+      
+    </section>
+  </section>
+
+  <section class="container" style="background-color: #e28746">
+    <div class="post-more">
+      <h2>金融
+      
+      <a href="/categories/%E9%87%91%E8%9E%8D/">更多文章(2) </a></h2>
+    </div>
+    <section class="posts">
+      
+        <article class="post" data-aos="fade-up">
+          <div class="post-main">
+            <div class="post-title">
+              <a class="post-title-link" href="/2019/11/29/jf2/">期刊系列JF | 市场信息如何反应在股价中?</a>
+            </div>
+            <div class="post-content">
+              <h2 id="原文题目"><a href="#原文题目" class="headerlink" title="原文题目"></a>原文题目</h2><p>《Continuous Auctions and Insider Trading？》— 连续时间“拍卖”与知情交易<br>
+            </div>
+        </div>
+        <div class="post-time">
             <i class="fa fa-clock-o" aria-hidden="true"></i>
-            <span class="post-time">2020-02-03</span>
-          </div>
-          <div class="post-title">
-            <a class="post-title-link" href="/2020/02/03/Leetcode-191-Number-of-1-Bits/">Leetcode | 191. Number of 1 Bits</a>
-          </div>
-          <div class="post-meta">
-            <div class="post-tags">
-              
-    <i class="iconfont icontag"></i>
-    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Bit/" rel="tag">Bit</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Leetcode/" rel="tag">Leetcode</a></li></ul>
-
-            </div>
-            <div class="post-categories">
-              
-<div class="article-category">
-  <i class="iconfont iconbookmark1"></i>
-  <a class="article-category-link" href="/categories/Leetcode/">Leetcode</a>
-</div>
-
-            </div>
-          </div>
-          <div class="post-img-mobile">
-            
-              
-              <a href="/2020/02/03/Leetcode-191-Number-of-1-Bits/" style="background: url('/medias/17.png');background-size: cover; 
-                background-position: center center;">
-              </a>
-            
-          </div>
-          <div class="post-content">
-            <h1 id="题目链接-httpsleetcodecomproblemsnumber-of-1-bits"><a class="markdownIt-Anchor" href="#题目链接-httpsleetcodecomproblemsnumber-of-1-bits"></a> 【题目链接】 <a href="https://leetcode.com/problems/number-of-1-bits/" target="_blank" rel="noopener">https://leetcode.com/problems/number-of-1-bits/</a></h1>
-<h1 id="题目难度-easy-466"><a class="markdownIt-Anchor" href="#题目难度-easy-466"></a> 【题目难度】 Easy 46.6%</h1>
-          </div>
+            <span>2019-11-29</span>
         </div>
-        <div class="post-more">
-          <a href="/2020/02/03/Leetcode-191-Number-of-1-Bits/">
-            <i class="iconfont iconmore" style="" title="阅读更多"></i>
+        <div class="read-more">
+          <a href="/2019/11/29/jf2/">
+            阅读更多
           </a>
         </div>
-      </div>
-      <div class="post-img">
-        
-          <a href="/2020/02/03/Leetcode-191-Number-of-1-Bits/" style="background: url('/medias/17.png');background-size: cover; 
-            background-position: center center;">
-          </a>
-        
-      </div>
-    </article>
-  
-    <article class="post" data-aos="fade-up" style="flex-direction: row-reverse;">
-      <div class="post-main">
-        <div class="post-info">
-          <div class="post-time">
+      </article>
+      
+        <article class="post" data-aos="fade-up">
+          <div class="post-main">
+            <div class="post-title">
+              <a class="post-title-link" href="/2019/11/27/jf1/">期刊系列JF | 频繁买卖对收益的损害</a>
+            </div>
+            <div class="post-content">
+              <h2 id="原文信息"><a href="#原文信息" class="headerlink" title="原文信息"></a>原文信息</h2><p>《Trading Is Hazardous to Your Wealth: The Common Stock Investment Performance of Individual Investors》<br>
+            </div>
+        </div>
+        <div class="post-time">
             <i class="fa fa-clock-o" aria-hidden="true"></i>
-            <span class="post-time">2020-02-03</span>
-          </div>
-          <div class="post-title">
-            <a class="post-title-link" href="/2020/02/03/Leetcode-994-Rotting-Oranges/">Leetcode | 994. Rotting Oranges</a>
-          </div>
-          <div class="post-meta">
-            <div class="post-tags">
-              
-    <i class="iconfont icontag"></i>
-    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Leetcode/" rel="tag">Leetcode</a></li></ul>
-
-            </div>
-            <div class="post-categories">
-              
-<div class="article-category">
-  <i class="iconfont iconbookmark1"></i>
-  <a class="article-category-link" href="/categories/Leetcode/">Leetcode</a>
-</div>
-
-            </div>
-          </div>
-          <div class="post-img-mobile">
-            
-              
-              <a href="/2020/02/03/Leetcode-994-Rotting-Oranges/" style="background: url('/medias/9.png');background-size: cover; 
-                background-position: center center;">
-              </a>
-            
-          </div>
-          <div class="post-content">
-            <h1 id="题目链接-httpsleetcodecomproblemsrotting-oranges"><a class="markdownIt-Anchor" href="#题目链接-httpsleetcodecomproblemsrotting-oranges"></a> 【题目链接】 <a href="https://leetcode.com/problems/rotting-oranges/" target="_blank" rel="noopener">https://leetcode.com/problems/rotting-oranges/</a></h1>
-<h1 id="题目难度-easy-470"><a class="markdownIt-Anchor" href="#题目难度-easy-470"></a> 【题目难度】 Easy 47.0%</h1>
-          </div>
+            <span>2019-11-27</span>
         </div>
-        <div class="post-more">
-          <a href="/2020/02/03/Leetcode-994-Rotting-Oranges/">
-            <i class="iconfont iconmore" style="float: right;" title="阅读更多"></i>
+        <div class="read-more">
+          <a href="/2019/11/27/jf1/">
+            阅读更多
           </a>
         </div>
-      </div>
-      <div class="post-img">
-        
-          <a href="/2020/02/03/Leetcode-994-Rotting-Oranges/" style="background: url('/medias/9.png');background-size: cover; 
-            background-position: center center;">
-          </a>
-        
-      </div>
-    </article>
-  
-    <article class="post" data-aos="fade-up" style="">
-      <div class="post-main">
-        <div class="post-info">
-          <div class="post-time">
+      </article>
+      
+    </section>
+  </section>
+
+  <section class="container" style="background-color: #adb36e">
+    <div class="post-more">
+      <h2>制作博客相关
+      
+      <a href="/categories/%E5%88%B6%E4%BD%9C%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3/">更多文章(2) </a></h2>
+    </div>
+    <section class="posts">
+      
+        <article class="post" data-aos="fade-up">
+          <div class="post-main">
+            <div class="post-title">
+              <a class="post-title-link" href="/2019/12/03/hexo-add-shadow/">NexT | 如何给文章轮廓添加阴影</a>
+            </div>
+            <div class="post-content">
+              <ol>
+<li>编辑<code>themes/next/source/css/_custom/custom.styl</code>文件；</li>
+<li>在这个文件添加如下配置：
+            </div>
+        </div>
+        <div class="post-time">
             <i class="fa fa-clock-o" aria-hidden="true"></i>
-            <span class="post-time">2020-02-03</span>
-          </div>
-          <div class="post-title">
-            <a class="post-title-link" href="/2020/02/03/Leetcode-1018-Binary-Prefix-Divisible-By-5/">Leetcode | 1018. Binary Prefix Divisible By 5</a>
-          </div>
-          <div class="post-meta">
-            <div class="post-tags">
-              
-    <i class="iconfont icontag"></i>
-    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Leetcode/" rel="tag">Leetcode</a></li></ul>
-
-            </div>
-            <div class="post-categories">
-              
-<div class="article-category">
-  <i class="iconfont iconbookmark1"></i>
-  <a class="article-category-link" href="/categories/Leetcode/">Leetcode</a>
-</div>
-
-            </div>
-          </div>
-          <div class="post-img-mobile">
-            
-              
-              <a href="/2020/02/03/Leetcode-1018-Binary-Prefix-Divisible-By-5/" style="background: url('/medias/12.png');background-size: cover; 
-                background-position: center center;">
-              </a>
-            
-          </div>
-          <div class="post-content">
-            <h1 id="题目链接-httpsleetcodecomproblemsbinary-prefix-divisible-by-5"><a class="markdownIt-Anchor" href="#题目链接-httpsleetcodecomproblemsbinary-prefix-divisible-by-5"></a> 【题目链接】 <a href="https://leetcode.com/problems/binary-prefix-divisible-by-5/" target="_blank" rel="noopener">https://leetcode.com/problems/binary-prefix-divisible-by-5/</a></h1>
-<h1 id="题目难度-easy-470"><a class="markdownIt-Anchor" href="#题目难度-easy-470"></a> 【题目难度】 Easy 47.0%</h1>
-          </div>
+            <span>2019-12-03</span>
         </div>
-        <div class="post-more">
-          <a href="/2020/02/03/Leetcode-1018-Binary-Prefix-Divisible-By-5/">
-            <i class="iconfont iconmore" style="" title="阅读更多"></i>
+        <div class="read-more">
+          <a href="/2019/12/03/hexo-add-shadow/">
+            阅读更多
           </a>
         </div>
-      </div>
-      <div class="post-img">
-        
-          <a href="/2020/02/03/Leetcode-1018-Binary-Prefix-Divisible-By-5/" style="background: url('/medias/12.png');background-size: cover; 
-            background-position: center center;">
-          </a>
-        
-      </div>
-    </article>
-  
-    <article class="post" data-aos="fade-up" style="flex-direction: row-reverse;">
-      <div class="post-main">
-        <div class="post-info">
-          <div class="post-time">
+      </article>
+      
+        <article class="post" data-aos="fade-up">
+          <div class="post-main">
+            <div class="post-title">
+              <a class="post-title-link" href="/2019/11/29/hexo1/">NexT | 如何取消主题加载的滑动效果</a>
+            </div>
+            <div class="post-content">
+              <p>NexT主题是一个易用又完善的博客主题，内置的风格也就是scheme也有四种以供选择。但是每个风格都带有同样的滑动效果，就是每点击一个item，加载的页面都以animation的效果呈现。为了在夹缝中透露一点小个性的倔强，想取消这种效果也很简单。</p>
+            </div>
+        </div>
+        <div class="post-time">
             <i class="fa fa-clock-o" aria-hidden="true"></i>
-            <span class="post-time">2020-02-03</span>
-          </div>
-          <div class="post-title">
-            <a class="post-title-link" href="/2020/02/03/Leetcode-541-Reverse-String-II/">Leetcode | 541. Reverse String II</a>
-          </div>
-          <div class="post-meta">
-            <div class="post-tags">
-              
-    <i class="iconfont icontag"></i>
-    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Leetcode/" rel="tag">Leetcode</a></li></ul>
-
-            </div>
-            <div class="post-categories">
-              
-<div class="article-category">
-  <i class="iconfont iconbookmark1"></i>
-  <a class="article-category-link" href="/categories/Leetcode/">Leetcode</a>
-</div>
-
-            </div>
-          </div>
-          <div class="post-img-mobile">
-            
-              
-              <a href="/2020/02/03/Leetcode-541-Reverse-String-II/" style="background: url('/medias/4.png');background-size: cover; 
-                background-position: center center;">
-              </a>
-            
-          </div>
-          <div class="post-content">
-            <h1 id="题目链接-httpsleetcodecomproblemsreverse-string-ii"><a class="markdownIt-Anchor" href="#题目链接-httpsleetcodecomproblemsreverse-string-ii"></a> 【题目链接】 <a href="https://leetcode.com/problems/reverse-string-ii/" target="_blank" rel="noopener">https://leetcode.com/problems/reverse-string-ii/</a></h1>
-<h1 id="题目难度-easy-471"><a class="markdownIt-Anchor" href="#题目难度-easy-471"></a> 【题目难度】 Easy 47.1%</h1>
-          </div>
+            <span>2019-11-29</span>
         </div>
-        <div class="post-more">
-          <a href="/2020/02/03/Leetcode-541-Reverse-String-II/">
-            <i class="iconfont iconmore" style="float: right;" title="阅读更多"></i>
+        <div class="read-more">
+          <a href="/2019/11/29/hexo1/">
+            阅读更多
           </a>
         </div>
-      </div>
-      <div class="post-img">
-        
-          <a href="/2020/02/03/Leetcode-541-Reverse-String-II/" style="background: url('/medias/4.png');background-size: cover; 
-            background-position: center center;">
-          </a>
-        
-      </div>
-    </article>
-  
-    <article class="post" data-aos="fade-up" style="">
-      <div class="post-main">
-        <div class="post-info">
-          <div class="post-time">
-            <i class="fa fa-clock-o" aria-hidden="true"></i>
-            <span class="post-time">2020-01-27</span>
-          </div>
-          <div class="post-title">
-            <a class="post-title-link" href="/2020/01/27/Leetcode-299-Bulls-and-Cows/">Leetcode | 299. Bulls and Cows</a>
-          </div>
-          <div class="post-meta">
-            <div class="post-tags">
-              
-    <i class="iconfont icontag"></i>
-    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Leetcode/" rel="tag">Leetcode</a></li></ul>
+      </article>
+      
+    </section>
+  </section>
 
-            </div>
-            <div class="post-categories">
-              
-<div class="article-category">
-  <i class="iconfont iconbookmark1"></i>
-  <a class="article-category-link" href="/categories/Leetcode/">Leetcode</a>
-</div>
-
-            </div>
-          </div>
-          <div class="post-img-mobile">
-            
-              
-              <a href="/2020/01/27/Leetcode-299-Bulls-and-Cows/" style="background: url('/medias/12.png');background-size: cover; 
-                background-position: center center;">
-              </a>
-            
-          </div>
-          <div class="post-content">
-            <h1 id="题目链接-httpsleetcodecomproblemsbulls-and-cows"><a class="markdownIt-Anchor" href="#题目链接-httpsleetcodecomproblemsbulls-and-cows"></a> 【题目链接】 <a href="https://leetcode.com/problems/bulls-and-cows/" target="_blank" rel="noopener">https://leetcode.com/problems/bulls-and-cows/</a></h1>
-<h1 id="题目难度-easy-413"><a class="markdownIt-Anchor" href="#题目难度-easy-413"></a> 【题目难度】 Easy 41.3%</h1>
-          </div>
-        </div>
-        <div class="post-more">
-          <a href="/2020/01/27/Leetcode-299-Bulls-and-Cows/">
-            <i class="iconfont iconmore" style="" title="阅读更多"></i>
-          </a>
-        </div>
-      </div>
-      <div class="post-img">
-        
-          <a href="/2020/01/27/Leetcode-299-Bulls-and-Cows/" style="background: url('/medias/12.png');background-size: cover; 
-            background-position: center center;">
-          </a>
-        
-      </div>
-    </article>
-  
-    <article class="post" data-aos="fade-up" style="flex-direction: row-reverse;">
-      <div class="post-main">
-        <div class="post-info">
-          <div class="post-time">
-            <i class="fa fa-clock-o" aria-hidden="true"></i>
-            <span class="post-time">2020-01-27</span>
-          </div>
-          <div class="post-title">
-            <a class="post-title-link" href="/2020/01/27/Leetcode-849-Maximize-Distance-to-Closest-Person/">Leetcode | 849. Maximize Distance to Closest Person</a>
-          </div>
-          <div class="post-meta">
-            <div class="post-tags">
-              
-    <i class="iconfont icontag"></i>
-    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Leetcode/" rel="tag">Leetcode</a></li></ul>
-
-            </div>
-            <div class="post-categories">
-              
-<div class="article-category">
-  <i class="iconfont iconbookmark1"></i>
-  <a class="article-category-link" href="/categories/Leetcode/">Leetcode</a>
-</div>
-
-            </div>
-          </div>
-          <div class="post-img-mobile">
-            
-              
-              <a href="/2020/01/27/Leetcode-849-Maximize-Distance-to-Closest-Person/" style="background: url('/medias/10.jpg');background-size: cover; 
-                background-position: center center;">
-              </a>
-            
-          </div>
-          <div class="post-content">
-            <h1 id="题目链接-httpsleetcodecomproblemsmaximize-distance-to-closest-person"><a class="markdownIt-Anchor" href="#题目链接-httpsleetcodecomproblemsmaximize-distance-to-closest-person"></a> 【题目链接】 <a href="https://leetcode.com/problems/maximize-distance-to-closest-person/" target="_blank" rel="noopener">https://leetcode.com/problems/maximize-distance-to-closest-person/</a></h1>
-<h1 id="题目难度-easy-421"><a class="markdownIt-Anchor" href="#题目难度-easy-421"></a> 【题目难度】 Easy 42.1%</h1>
-          </div>
-        </div>
-        <div class="post-more">
-          <a href="/2020/01/27/Leetcode-849-Maximize-Distance-to-Closest-Person/">
-            <i class="iconfont iconmore" style="float: right;" title="阅读更多"></i>
-          </a>
-        </div>
-      </div>
-      <div class="post-img">
-        
-          <a href="/2020/01/27/Leetcode-849-Maximize-Distance-to-Closest-Person/" style="background: url('/medias/10.jpg');background-size: cover; 
-            background-position: center center;">
-          </a>
-        
-      </div>
-    </article>
-  
-    <article class="post" data-aos="fade-up" style="">
-      <div class="post-main">
-        <div class="post-info">
-          <div class="post-time">
-            <i class="fa fa-clock-o" aria-hidden="true"></i>
-            <span class="post-time">2020-01-27</span>
-          </div>
-          <div class="post-title">
-            <a class="post-title-link" href="/2020/01/27/Leetcode-437-Path-Sum-III/">Leetcode | 437. Path Sum III</a>
-          </div>
-          <div class="post-meta">
-            <div class="post-tags">
-              
-    <i class="iconfont icontag"></i>
-    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Leetcode/" rel="tag">Leetcode</a></li></ul>
-
-            </div>
-            <div class="post-categories">
-              
-<div class="article-category">
-  <i class="iconfont iconbookmark1"></i>
-  <a class="article-category-link" href="/categories/Leetcode/">Leetcode</a>
-</div>
-
-            </div>
-          </div>
-          <div class="post-img-mobile">
-            
-              
-              <a href="/2020/01/27/Leetcode-437-Path-Sum-III/" style="background: url('/medias/9.png');background-size: cover; 
-                background-position: center center;">
-              </a>
-            
-          </div>
-          <div class="post-content">
-            <h1 id="题目链接-httpsleetcodecomproblemspath-sum-iii"><a class="markdownIt-Anchor" href="#题目链接-httpsleetcodecomproblemspath-sum-iii"></a> 【题目链接】 <a href="https://leetcode.com/problems/path-sum-iii/" target="_blank" rel="noopener">https://leetcode.com/problems/path-sum-iii/</a></h1>
-<h1 id="题目难度-easy-446"><a class="markdownIt-Anchor" href="#题目难度-easy-446"></a> 【题目难度】 Easy 44.6%</h1>
-          </div>
-        </div>
-        <div class="post-more">
-          <a href="/2020/01/27/Leetcode-437-Path-Sum-III/">
-            <i class="iconfont iconmore" style="" title="阅读更多"></i>
-          </a>
-        </div>
-      </div>
-      <div class="post-img">
-        
-          <a href="/2020/01/27/Leetcode-437-Path-Sum-III/" style="background: url('/medias/9.png');background-size: cover; 
-            background-position: center center;">
-          </a>
-        
-      </div>
-    </article>
-  
-</section>
-
-  <nav class="page-nav">
-    <a class="extend prev" rel="prev" href="/page/6/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/8/">下一页</a>
-  </nav>
 
     </main>
     <div class="footer bg-color">
@@ -1116,7 +463,7 @@
       <a href="https://github.com/yuang01/hexo-theme-bamboo" target="_blank" rel="noopener">
         <i class="fa fa-github" aria-hidden="true"></i>
       </a>
-      <a href="mailto:1730241541@qq.com" target="_blank" rel="noopener">
+      <a href="mailto:pearmonkeyhou@gmail.com" target="_blank" rel="noopener">
         <i class="fa fa-envelope-o" aria-hidden="true"></i>
       </a>
       <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1730241541" target="_blank" rel="noopener">
@@ -1127,23 +474,8 @@
       </a>
     </div>
     <div class="footer-copyright">
-      Copyright © 2019 - 2020 <a href="https://github.com/yuang01" target="_blank" rel="noopener">yuang01</a> | Powered by <a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">Hexo</a> | Theme <a href="https://github.com/yuang01/theme" target="_blank" rel="noopener">Bamboo</a> 
+      Copyright © 2019 - 2021 <a href="https://github.com/yuang01" target="_blank" rel="noopener">雪梨猴</a> | Powered by <a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">Hexo</a>
     </div>
-    
-      
-  <!-- 不蒜子统计 -->
-  <span id="busuanzi_container_site_pv">
-        <i class="fa fa-book" aria-hidden="true"></i>本站总阅读量：<span id="busuanzi_value_page_pv"></span> 次
-  </span>
-  <span id="busuanzi_container_site_pv">
-        <i class="fa fa-eye" aria-hidden="true"></i>本站总访问量：<span id="busuanzi_value_site_pv"></span> 次
-  </span>
-  <span class="post-meta-divider">|</span>
-  <span id="busuanzi_container_site_uv" style='display:none'>
-        <i class="fa fa-users" aria-hidden="true"></i>本站访客数：<span id="busuanzi_value_site_uv"></span> 人
-  </span>
-  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
     
   </div>
 </div>
@@ -1156,62 +488,6 @@
 <script src="/js/goTop.js"></script>
     
 
-    
-      <link href="https://cdn.bootcdn.net/ajax/libs/aplayer/1.10.1/APlayer.min.css" rel="stylesheet">
-<style>
-.aplayer .aplayer-lrc p {
-  
-  display: none;
-  
-  font-size: 12px;
-  font-weight: 700;
-  line-height: 16px !important;
-}
-
-.aplayer .aplayer-lrc p.aplayer-lrc-current {
-  
-  display: none;
-  
-  font-size: 15px;
-  color: #42b983;
-}
-
-
-.aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
-  left: -66px !important;
-}
-
-.aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
-  left: 0px !important;
-}
-
-
-</style>
-<meting-js  
-  class=""
-  server="netease"
-  type="playlist"
-  id="442274724"
-  fixed='true'
-  autoplay='false'
-  theme='#42b983'
-  loop='all'
-  order='random'
-  preload='auto'
-  volume='0.7'
-  list-folded='true'
->
-</meting-js>
-
-<!-- <style>
-  #aplayer {
-    position: fixed;
-    left: 0;
-    bottom: 300px;
-  }
-</style> -->
-<script src="https://cdn.bootcdn.net/ajax/libs/aplayer/1.10.1/APlayer.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
     
 
     <!-- 图片放大 -->
@@ -1243,39 +519,6 @@
 
     
     <script type="text/javascript" size="100" alpha='0.4' zIndex="-1" src="/js/ribbon.min.js"></script>
-    
-      <script src="/js/aos/aos.js"></script>
-      <script>
-        // https://github.com/michalsnik/aos
-        const themeOffset = parseInt('120') || 120;
-        const themeDelay = parseInt('0')|| 0;
-        const themeDuration = parseInt('400') || 400;
-        const themeEasing = 'ease' || 'ease';
-        const themeOnce = JSON.parse('true' || true);
-        const themeMirror = JSON.parse('false' || false);
-        const themeAnchorPlacement = 'top-bottom' || 'top-bottom';
-        AOS.init({
-          // Global settings:
-          disable: false, // accepts following values: 'phone', 'tablet', 'mobile', boolean, expression or function
-          startEvent: 'DOMContentLoaded', // name of the event dispatched on the document, that AOS should initialize on
-          initClassName: 'aos-init', // class applied after initialization
-          animatedClassName: 'aos-animate', // class applied on animation
-          useClassNames: false, // if true, will add content of `data-aos` as classes on scroll
-          disableMutationObserver: false, // disables automatic mutations' detections (advanced)
-          debounceDelay: 50, // the delay on debounce used while resizing window (advanced)
-          throttleDelay: 99, // the delay on throttle used while scrolling the page (advanced)
-
-          // Settings that can be overridden on per-element basis, by `data-aos-*` attributes:
-          offset: themeOffset, // offset (in px) from the original trigger point
-          delay: themeDelay, // values from 0 to 3000, with step 50ms
-          duration: themeDuration, // values from 0 to 3000, with step 50ms
-          easing: themeEasing, // default easing for AOS animations
-          once: themeOnce, // whether animation should happen only once - while scrolling down
-          mirror: themeMirror, // whether elements should animate out while scrolling past them
-          anchorPlacement: themeAnchorPlacement, // defines which position of the element regarding to window should trigger the animation
-
-        });
-      </script>
     
 
     
