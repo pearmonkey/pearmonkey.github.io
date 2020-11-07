@@ -318,65 +318,57 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接httpsleetcodecomproblemsredundant-connection"><a class="markdownIt-Anchor" href="#题目链接httpsleetcodecomproblemsredundant-connection"></a> 题目链接https://leetcode.com/problems/redundant-connection/</h2>
-<h2 id="题目难度medium-552"><a class="markdownIt-Anchor" href="#题目难度medium-552"></a> 题目难度Medium 55.2%</h2>
-<a id="more"></a>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<p>In this problem, a tree is an undirected graph that is connected and has no cycles.</p>
+        <h2 id="题目链接https-leetcode-com-problems-redundant-connection"><a href="#题目链接https-leetcode-com-problems-redundant-connection" class="headerlink" title="题目链接https://leetcode.com/problems/redundant-connection/"></a>题目链接<a href="https://leetcode.com/problems/redundant-connection/" target="_blank" rel="noopener">https://leetcode.com/problems/redundant-connection/</a></h2><h2 id="题目难度Medium-55-2"><a href="#题目难度Medium-55-2" class="headerlink" title="题目难度Medium 55.2%"></a>题目难度Medium 55.2%</h2><a id="more"></a>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>In this problem, a tree is an undirected graph that is connected and has no cycles.</p>
 <p>The given input is a graph that started as a tree with N nodes (with distinct values 1, 2, …, N), with one additional edge added. The added edge has two different vertices chosen from 1 to N, and was not an edge that already existed.</p>
 <p>The resulting graph is given as a 2D-array of edges. Each element of edges is a pair [u, v] with u &lt; v, that represents an undirected edge connecting nodes u and v.</p>
 <p>Return an edge that can be removed so that the resulting graph is a tree of N nodes. If there are multiple answers, return the answer that occurs last in the given 2D-array. The answer edge [u, v] should be in the same format, with u &lt; v.</p>
 <p>Example 1:</p>
-<pre class="highlight"><code class="">Input: [[1,2], [2,3], [3,4], [1,4], [1,5]]
+<pre><code>Input: [[1,2], [2,3], [3,4], [1,4], [1,5]]
 Output: [1,4]
 Explanation: The given undirected graph will be like this:
 5 - 1 - 2
     |   |
     4 - 3
-</code></pre>
-<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
-<p>等做完union find了再来写。</p>
-<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
-<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
-    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UnionFind</span></span>{
-        <span class="hljs-keyword">int</span>[] parent;
+</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>等做完union find了再来写。</p>
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre class="line-numbers language-lang-java"><code class="language-lang-java">class Solution {
+    class UnionFind{
+        int[] parent;
 
-        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">UnionFind</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span></span>{
-            parent = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[n];
-            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; n; i++)
+        public UnionFind(int n){
+            parent = new int[n];
+            for(int i = 1; i < n; i++)
                 parent[i] = i;
         }
 
-        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">find</span><span class="hljs-params">(<span class="hljs-keyword">int</span> p)</span></span>{
-            <span class="hljs-keyword">if</span>(p == parent[p])
-                <span class="hljs-keyword">return</span> p;
-            <span class="hljs-keyword">return</span> parent[p] = find(parent[p]);
+        public int find(int p){
+            if(p == parent[p])
+                return p;
+            return parent[p] = find(parent[p]);
         }
 
-        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">union</span><span class="hljs-params">(<span class="hljs-keyword">int</span> p, <span class="hljs-keyword">int</span> q)</span></span>{
-            <span class="hljs-keyword">int</span> rootp = find(p);
-            <span class="hljs-keyword">int</span> rootq = find(q);
-            <span class="hljs-keyword">if</span>(rootp == rootq)
-                <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+        public boolean union(int p, int q){
+            int rootp = find(p);
+            int rootq = find(q);
+            if(rootp == rootq)
+                return false;
             parent[rootp] = rootq;
-            <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+            return true;
         }
     }
 
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span>[] findRedundantConnection(<span class="hljs-keyword">int</span>[][] edges) {
-        <span class="hljs-keyword">int</span> N = edges.length;
-        UnionFind uf = <span class="hljs-keyword">new</span> UnionFind(N + <span class="hljs-number">1</span>);
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span>[] e : edges){
-            <span class="hljs-keyword">if</span>(!uf.union(e[<span class="hljs-number">0</span>], e[<span class="hljs-number">1</span>]))
-                <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[]{e[<span class="hljs-number">0</span>], e[<span class="hljs-number">1</span>]};
+    public int[] findRedundantConnection(int[][] edges) {
+        int N = edges.length;
+        UnionFind uf = new UnionFind(N + 1);
+        for(int[] e : edges){
+            if(!uf.union(e[0], e[1]))
+                return new int[]{e[0], e[1]};
         }
-        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[]{-<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>};
+        return new int[]{-1, -1};
     }
 }
-</code></pre>
-<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
-<p>Runtime: 100.00%<br />
-Memory: 63.64%</p>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 100.00%<br>Memory: 63.64%</p>
 
       </div>
       
@@ -513,13 +505,10 @@ Memory: 63.64%</p>
     <div class="footer bg-color">
   <div class="footer-main">
     <div class="link">
-      <a href="https://github.com/yuang01/hexo-theme-bamboo" target="_blank" rel="noopener">
-        <i class="fa fa-github" aria-hidden="true"></i>
-      </a>
       <a href="mailto:pearmonkeyhou@gmail.com" target="_blank" rel="noopener">
         <i class="fa fa-envelope-o" aria-hidden="true"></i>
       </a>
-      <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1730241541" target="_blank" rel="noopener">
+      <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=270052740" target="_blank" rel="noopener">
         <i class="fa fa-qq" aria-hidden="true"></i>
       </a>
       <a href="/atom.xml" target="_blank">
@@ -527,7 +516,7 @@ Memory: 63.64%</p>
       </a>
     </div>
     <div class="footer-copyright">
-      Copyright © 2019 - 2021 <a href="https://github.com/yuang01" target="_blank" rel="noopener">雪梨猴</a> | Powered by <a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">Hexo</a>
+      Copyright © 2019 - 2021 | 雪梨猴 | Powered by <a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">Hexo</a>
     </div>
     
   </div>

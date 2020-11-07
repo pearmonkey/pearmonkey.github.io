@@ -318,38 +318,29 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接"><a class="markdownIt-Anchor" href="#题目链接"></a> 题目链接</h2>
-<p><a href="https://leetcode.com/problems/intersection-of-two-linked-lists/" target="_blank" rel="noopener">https://leetcode.com/problems/intersection-of-two-linked-lists/</a></p>
-<h2 id="题目难度"><a class="markdownIt-Anchor" href="#题目难度"></a> 题目难度</h2>
-<p>Easy 37.6%</p>
-<a id="more"></a>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<p>Write a program to find the node at which the intersection of two singly linked lists begins.</p>
+        <h2 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h2><p><a href="https://leetcode.com/problems/intersection-of-two-linked-lists/" target="_blank" rel="noopener">https://leetcode.com/problems/intersection-of-two-linked-lists/</a></p>
+<h2 id="题目难度"><a href="#题目难度" class="headerlink" title="题目难度"></a>题目难度</h2><p>Easy 37.6%<br><a id="more"></a></p>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Write a program to find the node at which the intersection of two singly linked lists begins.</p>
 <p>Example 1:</p>
-<pre class="highlight"><code class="">Input: intersectVal = 8, listA = [4,1,8,4,5], listB = [5,0,1,8,4,5], skipA = 2, skipB = 3
+<pre><code>Input: intersectVal = 8, listA = [4,1,8,4,5], listB = [5,0,1,8,4,5], skipA = 2, skipB = 3
 Output: Reference of the node with value = 8
-Input Explanation: The intersected node's value is 8 (note that this must not be 0 if the two lists intersect). From the head of A, it reads as [4,1,8,4,5]. From the head of B, it reads as [5,0,1,8,4,5]. There are 2 nodes before the intersected node in A; There are 3 nodes before the intersected node in B.
-</code></pre>
-<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
-<p>返回两个list重合的地方，这个题要不是之前看到过好几次要我一下子想出来也挺难的。就是用两个指针交换scan，直到指到相同的node就是答案，或者两个的next都是空，说明没有这样的node存在，就返回null。</p>
-<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
-<pre class="highlight"><code class="java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
-    <span class="hljs-function"><span class="hljs-keyword">public</span> ListNode <span class="hljs-title">getIntersectionNode</span><span class="hljs-params">(ListNode headA, ListNode headB)</span> </span>{
-        <span class="hljs-keyword">if</span>(headA == <span class="hljs-keyword">null</span> || headB == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+Input Explanation: The intersected node&#39;s value is 8 (note that this must not be 0 if the two lists intersect). From the head of A, it reads as [4,1,8,4,5]. From the head of B, it reads as [5,0,1,8,4,5]. There are 2 nodes before the intersected node in A; There are 3 nodes before the intersected node in B.
+</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>返回两个list重合的地方，这个题要不是之前看到过好几次要我一下子想出来也挺难的。就是用两个指针交换scan，直到指到相同的node就是答案，或者两个的next都是空，说明没有这样的node存在，就返回null。</p>
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre class="line-numbers language-lang-java"><code class="language-lang-java">public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        if(headA == null || headB == null) return null;
         ListNode n1 = headA;
         ListNode n2 = headB;
-        <span class="hljs-keyword">while</span>(n1 != n2){
-            <span class="hljs-keyword">if</span>(n1.next == <span class="hljs-keyword">null</span> &amp;&amp; n2.next == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
-            n1 = n1.next == <span class="hljs-keyword">null</span> ? headB : n1.next;
-            n2 = n2.next == <span class="hljs-keyword">null</span> ? headA : n2.next;
+        while(n1 != n2){
+            if(n1.next == null && n2.next == null) return null;
+            n1 = n1.next == null ? headB : n1.next;
+            n2 = n2.next == null ? headA : n2.next;
         }
-        <span class="hljs-keyword">return</span> n1;
+        return n1;
     }
 }
-</code></pre>
-<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
-<p>Runtime: 98.72%<br />
-Memory: 5.71%</p>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 98.72%<br>Memory: 5.71%</p>
 
       </div>
       
@@ -486,13 +477,10 @@ Memory: 5.71%</p>
     <div class="footer bg-color">
   <div class="footer-main">
     <div class="link">
-      <a href="https://github.com/yuang01/hexo-theme-bamboo" target="_blank" rel="noopener">
-        <i class="fa fa-github" aria-hidden="true"></i>
-      </a>
       <a href="mailto:pearmonkeyhou@gmail.com" target="_blank" rel="noopener">
         <i class="fa fa-envelope-o" aria-hidden="true"></i>
       </a>
-      <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1730241541" target="_blank" rel="noopener">
+      <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=270052740" target="_blank" rel="noopener">
         <i class="fa fa-qq" aria-hidden="true"></i>
       </a>
       <a href="/atom.xml" target="_blank">
@@ -500,7 +488,7 @@ Memory: 5.71%</p>
       </a>
     </div>
     <div class="footer-copyright">
-      Copyright © 2019 - 2021 <a href="https://github.com/yuang01" target="_blank" rel="noopener">雪梨猴</a> | Powered by <a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">Hexo</a>
+      Copyright © 2019 - 2021 | 雪梨猴 | Powered by <a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">Hexo</a>
     </div>
     
   </div>

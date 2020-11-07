@@ -318,49 +318,39 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接-httpsleetcodecomproblemscount-binary-substrings"><a class="markdownIt-Anchor" href="#题目链接-httpsleetcodecomproblemscount-binary-substrings"></a> 题目链接 <a href="https://leetcode.com/problems/count-binary-substrings/" target="_blank" rel="noopener">https://leetcode.com/problems/count-binary-substrings/</a></h2>
-<h2 id="题目难度-easy-549"><a class="markdownIt-Anchor" href="#题目难度-easy-549"></a> 题目难度 Easy 54.9%</h2>
-<a id="more"></a>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<p>Give a string s, count the number of non-empty (contiguous) substrings that have the same number of 0’s and 1’s, and all the 0’s and all the 1’s in these substrings are grouped consecutively.<br />
-Substrings that occur multiple times are counted the number of times they occur.<br />
-Example 1:</p>
-<pre class="highlight"><code class="">Input: &quot;00110011&quot;
+        <h2 id="题目链接-https-leetcode-com-problems-count-binary-substrings"><a href="#题目链接-https-leetcode-com-problems-count-binary-substrings" class="headerlink" title="题目链接 https://leetcode.com/problems/count-binary-substrings/"></a>题目链接 <a href="https://leetcode.com/problems/count-binary-substrings/" target="_blank" rel="noopener">https://leetcode.com/problems/count-binary-substrings/</a></h2><h2 id="题目难度-Easy-54-9"><a href="#题目难度-Easy-54-9" class="headerlink" title="题目难度 Easy 54.9%"></a>题目难度 Easy 54.9%</h2><a id="more"></a>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Give a string s, count the number of non-empty (contiguous) substrings that have the same number of 0’s and 1’s, and all the 0’s and all the 1’s in these substrings are grouped consecutively.<br>Substrings that occur multiple times are counted the number of times they occur.<br>Example 1:</p>
+<pre><code>Input: &quot;00110011&quot;
 Output: 6
-Explanation: There are 6 substrings that have equal number of consecutive 1's and 0's: &quot;0011&quot;, &quot;01&quot;, &quot;1100&quot;, &quot;10&quot;, &quot;0011&quot;, and &quot;01&quot;.
+Explanation: There are 6 substrings that have equal number of consecutive 1&#39;s and 0&#39;s: &quot;0011&quot;, &quot;01&quot;, &quot;1100&quot;, &quot;10&quot;, &quot;0011&quot;, and &quot;01&quot;.
 
 Notice that some of these substrings repeat and are counted the number of times they occur.
 
-Also, &quot;00110011&quot; is not a valid substring because all the 0's (and 1's) are not grouped together.
-</code></pre>
-<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
-<p>题目给定一个字符串s，要求找出子串的个数，子串的要求是0和1的个数相等，并且所有的0在一半，1在一半。所以0011这样的就有2个结果。其实这道题和有多少回文子串很像，都是从中间开始判断比较容易，因为中间满足条件才需要往两边去检查。</p>
-<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
-<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">countBinarySubstrings</span><span class="hljs-params">(String s)</span> </span>{
-        <span class="hljs-keyword">int</span> n = s.length();
-        <span class="hljs-keyword">if</span>(n == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-        <span class="hljs-keyword">int</span> res = <span class="hljs-number">0</span>;
-        <span class="hljs-keyword">char</span>[] c = s.toCharArray();
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> left = <span class="hljs-number">0</span>; left &lt; n - <span class="hljs-number">1</span>; left++){
-            <span class="hljs-keyword">int</span> right = left + <span class="hljs-number">1</span>;
-            <span class="hljs-keyword">if</span>(c[left] != c[right]){
+Also, &quot;00110011&quot; is not a valid substring because all the 0&#39;s (and 1&#39;s) are not grouped together.
+</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>题目给定一个字符串s，要求找出子串的个数，子串的要求是0和1的个数相等，并且所有的0在一半，1在一半。所以0011这样的就有2个结果。其实这道题和有多少回文子串很像，都是从中间开始判断比较容易，因为中间满足条件才需要往两边去检查。</p>
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre class="line-numbers language-lang-java"><code class="language-lang-java">class Solution {
+    public int countBinarySubstrings(String s) {
+        int n = s.length();
+        if(n == 1) return 0;
+        int res = 0;
+        char[] c = s.toCharArray();
+        for(int left = 0; left < n - 1; left++){
+            int right = left + 1;
+            if(c[left] != c[right]){
                 res++;
-                <span class="hljs-keyword">int</span> i = left - <span class="hljs-number">1</span>, j = right + <span class="hljs-number">1</span>;
-                <span class="hljs-keyword">while</span>(i &gt;= <span class="hljs-number">0</span> &amp;&amp; j &lt; n &amp;&amp; c[i] == c[i+<span class="hljs-number">1</span>] &amp;&amp; c[j] == c[j-<span class="hljs-number">1</span>]){
+                int i = left - 1, j = right + 1;
+                while(i >= 0 && j < n && c[i] == c[i+1] && c[j] == c[j-1]){
                     res++;
                     i--;
                     j++;
                 }
             }
         }
-        <span class="hljs-keyword">return</span> res;
+        return res;
     }
 }
-</code></pre>
-<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
-<p>Runtime: 98.79%<br />
-Memory: 6.25%</p>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 98.79%<br>Memory: 6.25%</p>
 
       </div>
       
@@ -497,13 +487,10 @@ Memory: 6.25%</p>
     <div class="footer bg-color">
   <div class="footer-main">
     <div class="link">
-      <a href="https://github.com/yuang01/hexo-theme-bamboo" target="_blank" rel="noopener">
-        <i class="fa fa-github" aria-hidden="true"></i>
-      </a>
       <a href="mailto:pearmonkeyhou@gmail.com" target="_blank" rel="noopener">
         <i class="fa fa-envelope-o" aria-hidden="true"></i>
       </a>
-      <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1730241541" target="_blank" rel="noopener">
+      <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=270052740" target="_blank" rel="noopener">
         <i class="fa fa-qq" aria-hidden="true"></i>
       </a>
       <a href="/atom.xml" target="_blank">
@@ -511,7 +498,7 @@ Memory: 6.25%</p>
       </a>
     </div>
     <div class="footer-copyright">
-      Copyright © 2019 - 2021 <a href="https://github.com/yuang01" target="_blank" rel="noopener">雪梨猴</a> | Powered by <a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">Hexo</a>
+      Copyright © 2019 - 2021 | 雪梨猴 | Powered by <a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">Hexo</a>
     </div>
     
   </div>

@@ -318,38 +318,29 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接"><a class="markdownIt-Anchor" href="#题目链接"></a> 题目链接</h2>
-<p><a href="https://leetcode.com/problems/number-of-1-bits/" target="_blank" rel="noopener">https://leetcode.com/problems/number-of-1-bits/</a></p>
-<h2 id="题目难度"><a class="markdownIt-Anchor" href="#题目难度"></a> 题目难度</h2>
-<p>Easy 46.6%</p>
-<a id="more"></a>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<p>Write a function that takes an unsigned integer and return the number of ‘1’ bits it has (also known as the Hamming weight).</p>
+        <h2 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h2><p><a href="https://leetcode.com/problems/number-of-1-bits/" target="_blank" rel="noopener">https://leetcode.com/problems/number-of-1-bits/</a></p>
+<h2 id="题目难度"><a href="#题目难度" class="headerlink" title="题目难度"></a>题目难度</h2><p>Easy 46.6%<br><a id="more"></a></p>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Write a function that takes an unsigned integer and return the number of ‘1’ bits it has (also known as the Hamming weight).</p>
 <p>Example 1:</p>
-<pre class="highlight"><code class="">Input: 00000000000000000000000000001011
+<pre><code>Input: 00000000000000000000000000001011
 Output: 3
-Explanation: The input binary string 00000000000000000000000000001011 has a total of three '1' bits.
-</code></pre>
-<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
-<p>题目的意思是，给一个整数，要count有多少个bit是1，把这个整数当作无符号整数。那么就用一个mask，每一位的去看是否为一。如果为1，那么&amp;之后就不会是0，但注意也不一定是1。</p>
-<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
-<pre class="highlight"><code class="java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
-    <span class="hljs-comment">// you need to treat n as an unsigned value</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">hammingWeight</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>{
-        <span class="hljs-keyword">int</span> res = <span class="hljs-number">0</span>;
-        <span class="hljs-keyword">int</span> mask = <span class="hljs-number">1</span>;
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">32</span>; i++){
-            <span class="hljs-keyword">if</span>((n &amp; mask) != <span class="hljs-number">0</span>)
+Explanation: The input binary string 00000000000000000000000000001011 has a total of three &#39;1&#39; bits.
+</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>题目的意思是，给一个整数，要count有多少个bit是1，把这个整数当作无符号整数。那么就用一个mask，每一位的去看是否为一。如果为1，那么&amp;之后就不会是0，但注意也不一定是1。</p>
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre class="line-numbers language-lang-java"><code class="language-lang-java">public class Solution {
+    // you need to treat n as an unsigned value
+    public int hammingWeight(int n) {
+        int res = 0;
+        int mask = 1;
+        for(int i = 0; i < 32; i++){
+            if((n & mask) != 0)
                 res++;
-            mask = mask &lt;&lt; <span class="hljs-number">1</span>;
+            mask = mask << 1;
         }
-        <span class="hljs-keyword">return</span> res;
+        return res;
     }
 }
-</code></pre>
-<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
-<p>Runtime: 100%<br />
-Memory: 5.41%</p>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 100%<br>Memory: 5.41%</p>
 
       </div>
       
@@ -486,13 +477,10 @@ Memory: 5.41%</p>
     <div class="footer bg-color">
   <div class="footer-main">
     <div class="link">
-      <a href="https://github.com/yuang01/hexo-theme-bamboo" target="_blank" rel="noopener">
-        <i class="fa fa-github" aria-hidden="true"></i>
-      </a>
       <a href="mailto:pearmonkeyhou@gmail.com" target="_blank" rel="noopener">
         <i class="fa fa-envelope-o" aria-hidden="true"></i>
       </a>
-      <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1730241541" target="_blank" rel="noopener">
+      <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=270052740" target="_blank" rel="noopener">
         <i class="fa fa-qq" aria-hidden="true"></i>
       </a>
       <a href="/atom.xml" target="_blank">
@@ -500,7 +488,7 @@ Memory: 5.41%</p>
       </a>
     </div>
     <div class="footer-copyright">
-      Copyright © 2019 - 2021 <a href="https://github.com/yuang01" target="_blank" rel="noopener">雪梨猴</a> | Powered by <a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">Hexo</a>
+      Copyright © 2019 - 2021 | 雪梨猴 | Powered by <a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">Hexo</a>
     </div>
     
   </div>

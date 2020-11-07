@@ -318,16 +318,12 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接-httpsleetcodecomproblemsfind-elements-in-a-contaminated-binary-tree"><a class="markdownIt-Anchor" href="#题目链接-httpsleetcodecomproblemsfind-elements-in-a-contaminated-binary-tree"></a> 题目链接 <a href="https://leetcode.com/problems/find-elements-in-a-contaminated-binary-tree/" target="_blank" rel="noopener">https://leetcode.com/problems/find-elements-in-a-contaminated-binary-tree/</a></h2>
-<h2 id="题目难度-medium-726"><a class="markdownIt-Anchor" href="#题目难度-medium-726"></a> 题目难度 Medium 72.6%</h2>
-<a id="more"></a>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<p>Given a binary tree with the following rules:</p>
+        <h2 id="题目链接-https-leetcode-com-problems-find-elements-in-a-contaminated-binary-tree"><a href="#题目链接-https-leetcode-com-problems-find-elements-in-a-contaminated-binary-tree" class="headerlink" title="题目链接 https://leetcode.com/problems/find-elements-in-a-contaminated-binary-tree/"></a>题目链接 <a href="https://leetcode.com/problems/find-elements-in-a-contaminated-binary-tree/" target="_blank" rel="noopener">https://leetcode.com/problems/find-elements-in-a-contaminated-binary-tree/</a></h2><h2 id="题目难度-Medium-72-6"><a href="#题目难度-Medium-72-6" class="headerlink" title="题目难度 Medium 72.6%"></a>题目难度 Medium 72.6%</h2><a id="more"></a>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Given a binary tree with the following rules:</p>
 <ol>
 <li>root.val == 0</li>
 <li>If treeNode.val == x and treeNode.left != null, then treeNode.left.val == 2 * x + 1</li>
-<li>If treeNode.val == x and treeNode.right != null, then treeNode.right.val == 2 * x + 2<br />
-Now the binary tree is contaminated, which means all treeNode.val have been changed to -1.</li>
+<li>If treeNode.val == x and treeNode.right != null, then treeNode.right.val == 2 * x + 2<br>Now the binary tree is contaminated, which means all treeNode.val have been changed to -1.</li>
 </ol>
 <p>You need to first recover the binary tree and then implement the FindElements class:</p>
 <ul>
@@ -335,7 +331,7 @@ Now the binary tree is contaminated, which means all treeNode.val have been chan
 <li>bool find(int target) Return if the target value exists in the recovered binary tree.</li>
 </ul>
 <p>Example 1:</p>
-<pre class="highlight"><code class="">Input
+<pre><code>Input
 [&quot;FindElements&quot;,&quot;find&quot;,&quot;find&quot;]
 [[[-1,null,-1]],[1],[2]]
 Output
@@ -344,33 +340,27 @@ Explanation
 FindElements findElements = new FindElements([-1,null,-1]);
 findElements.find(1); // return False
 findElements.find(2); // return True
-</code></pre>
-<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
-<p>题目很简单，想到用set记录值再以O(1)查找target就行。</p>
-<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
-<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FindElements</span> </span>{
-    Set&lt;Integer&gt; set;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">FindElements</span><span class="hljs-params">(TreeNode root)</span> </span>{
-        set = <span class="hljs-keyword">new</span> HashSet();
-        helper(root, <span class="hljs-number">0</span>);
+</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>题目很简单，想到用set记录值再以O(1)查找target就行。</p>
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre class="line-numbers language-lang-java"><code class="language-lang-java">class FindElements {
+    Set<Integer> set;
+    public FindElements(TreeNode root) {
+        set = new HashSet();
+        helper(root, 0);
     }
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">helper</span><span class="hljs-params">(TreeNode root, <span class="hljs-keyword">int</span> val)</span></span>{
+    public void helper(TreeNode root, int val){
         root.val = val;
         set.add(val);
-        <span class="hljs-keyword">if</span>(root.left != <span class="hljs-keyword">null</span>) helper(root.left, val * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>);
-        <span class="hljs-keyword">if</span>(root.right != <span class="hljs-keyword">null</span>) helper(root.right, val * <span class="hljs-number">2</span> + <span class="hljs-number">2</span>);
+        if(root.left != null) helper(root.left, val * 2 + 1);
+        if(root.right != null) helper(root.right, val * 2 + 2);
     }
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">find</span><span class="hljs-params">(<span class="hljs-keyword">int</span> target)</span> </span>{
-        <span class="hljs-keyword">return</span> set.contains(target);
+    public boolean find(int target) {
+        return set.contains(target);
     }
 }
-
-</code></pre>
-<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
-<p>Runtime: 35.37%<br />
-Memory: 100.00%</p>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 35.37%<br>Memory: 100.00%</p>
 
       </div>
       
@@ -507,13 +497,10 @@ Memory: 100.00%</p>
     <div class="footer bg-color">
   <div class="footer-main">
     <div class="link">
-      <a href="https://github.com/yuang01/hexo-theme-bamboo" target="_blank" rel="noopener">
-        <i class="fa fa-github" aria-hidden="true"></i>
-      </a>
       <a href="mailto:pearmonkeyhou@gmail.com" target="_blank" rel="noopener">
         <i class="fa fa-envelope-o" aria-hidden="true"></i>
       </a>
-      <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1730241541" target="_blank" rel="noopener">
+      <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=270052740" target="_blank" rel="noopener">
         <i class="fa fa-qq" aria-hidden="true"></i>
       </a>
       <a href="/atom.xml" target="_blank">
@@ -521,7 +508,7 @@ Memory: 100.00%</p>
       </a>
     </div>
     <div class="footer-copyright">
-      Copyright © 2019 - 2021 <a href="https://github.com/yuang01" target="_blank" rel="noopener">雪梨猴</a> | Powered by <a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">Hexo</a>
+      Copyright © 2019 - 2021 | 雪梨猴 | Powered by <a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">Hexo</a>
     </div>
     
   </div>

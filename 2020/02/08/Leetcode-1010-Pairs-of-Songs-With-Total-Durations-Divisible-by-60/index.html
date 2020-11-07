@@ -314,40 +314,30 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接-httpsleetcodecomproblemspairs-of-songs-with-total-durations-divisible-by-60"><a class="markdownIt-Anchor" href="#题目链接-httpsleetcodecomproblemspairs-of-songs-with-total-durations-divisible-by-60"></a> 题目链接 <a href="https://leetcode.com/problems/pairs-of-songs-with-total-durations-divisible-by-60/" target="_blank" rel="noopener">https://leetcode.com/problems/pairs-of-songs-with-total-durations-divisible-by-60/</a></h2>
-<h2 id="题目难度-easy-469"><a class="markdownIt-Anchor" href="#题目难度-easy-469"></a> 题目难度 Easy 46.9%</h2>
-<a id="more"></a>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<p>In a list of songs, the i-th song has a duration of time[i] seconds.<br />
-Return the number of pairs of songs for which their total duration in seconds is divisible by 60.  Formally, we want the number of indices i &lt; j with (time[i] + time[j]) % 60 == 0.<br />
-Example 1:</p>
-<pre class="highlight"><code class="">Input: [30,20,150,100,40]
+        <h2 id="题目链接-https-leetcode-com-problems-pairs-of-songs-with-total-durations-divisible-by-60"><a href="#题目链接-https-leetcode-com-problems-pairs-of-songs-with-total-durations-divisible-by-60" class="headerlink" title="题目链接 https://leetcode.com/problems/pairs-of-songs-with-total-durations-divisible-by-60/"></a>题目链接 <a href="https://leetcode.com/problems/pairs-of-songs-with-total-durations-divisible-by-60/" target="_blank" rel="noopener">https://leetcode.com/problems/pairs-of-songs-with-total-durations-divisible-by-60/</a></h2><h2 id="题目难度-Easy-46-9"><a href="#题目难度-Easy-46-9" class="headerlink" title="题目难度 Easy 46.9%"></a>题目难度 Easy 46.9%</h2><a id="more"></a>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>In a list of songs, the i-th song has a duration of time[i] seconds.<br>Return the number of pairs of songs for which their total duration in seconds is divisible by 60.  Formally, we want the number of indices i &lt; j with (time[i] + time[j]) % 60 == 0.<br>Example 1:</p>
+<pre><code>Input: [30,20,150,100,40]
 Output: 3
 Explanation: Three pairs have a total duration divisible by 60:
 (time[0] = 30, time[2] = 150): total duration 180
 (time[1] = 20, time[3] = 100): total duration 120
 (time[1] = 20, time[4] = 40): total duration 60
-</code></pre>
-<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
-<p>题目给一个数组表示每一首歌的时长，要求返回有多少个pair歌时长加起来是60的倍数。这个题目和two sum很像，都是找满足条件的pair。所以这里可以用hashmap记录每个数出现的次数，当满足后面某个数的时候将次数加在结果中就行。这里需要特殊处理的是60，因为如果用60-n%60来看需要多少，那结果就是60，但储存的时候是储存n%60是0，这样就找不到了，所以需要把为60的转化成需要0.</p>
-<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
-<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">numPairsDivisibleBy60</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] time)</span> </span>{
-        Map&lt;Integer, Integer&gt; map = <span class="hljs-keyword">new</span> HashMap();
-        <span class="hljs-keyword">int</span> res = <span class="hljs-number">0</span>;
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; time.length; i++){
-            <span class="hljs-keyword">int</span> need = (<span class="hljs-number">60</span> -(time[i] % <span class="hljs-number">60</span>)) % <span class="hljs-number">60</span>;
-            <span class="hljs-keyword">if</span>(map.containsKey(need))
+</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>题目给一个数组表示每一首歌的时长，要求返回有多少个pair歌时长加起来是60的倍数。这个题目和two sum很像，都是找满足条件的pair。所以这里可以用hashmap记录每个数出现的次数，当满足后面某个数的时候将次数加在结果中就行。这里需要特殊处理的是60，因为如果用60-n%60来看需要多少，那结果就是60，但储存的时候是储存n%60是0，这样就找不到了，所以需要把为60的转化成需要0.</p>
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre class="line-numbers language-lang-java"><code class="language-lang-java">class Solution {
+    public int numPairsDivisibleBy60(int[] time) {
+        Map<Integer, Integer> map = new HashMap();
+        int res = 0;
+        for(int i = 0; i < time.length; i++){
+            int need = (60 -(time[i] % 60)) % 60;
+            if(map.containsKey(need))
                 res += map.get(need);
-            map.put(time[i] % <span class="hljs-number">60</span>, map.getOrDefault(time[i] % <span class="hljs-number">60</span>, <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>);
+            map.put(time[i] % 60, map.getOrDefault(time[i] % 60, 0) + 1);
         }
-        <span class="hljs-keyword">return</span> res;
+        return res;
     }
 }
-</code></pre>
-<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
-<p>Runtime: 34.23%<br />
-Memory: 7.14%</p>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 34.23%<br>Memory: 7.14%</p>
 
       </div>
       
@@ -484,13 +474,10 @@ Memory: 7.14%</p>
     <div class="footer bg-color">
   <div class="footer-main">
     <div class="link">
-      <a href="https://github.com/yuang01/hexo-theme-bamboo" target="_blank" rel="noopener">
-        <i class="fa fa-github" aria-hidden="true"></i>
-      </a>
       <a href="mailto:pearmonkeyhou@gmail.com" target="_blank" rel="noopener">
         <i class="fa fa-envelope-o" aria-hidden="true"></i>
       </a>
-      <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1730241541" target="_blank" rel="noopener">
+      <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=270052740" target="_blank" rel="noopener">
         <i class="fa fa-qq" aria-hidden="true"></i>
       </a>
       <a href="/atom.xml" target="_blank">
@@ -498,7 +485,7 @@ Memory: 7.14%</p>
       </a>
     </div>
     <div class="footer-copyright">
-      Copyright © 2019 - 2021 <a href="https://github.com/yuang01" target="_blank" rel="noopener">雪梨猴</a> | Powered by <a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">Hexo</a>
+      Copyright © 2019 - 2021 | 雪梨猴 | Powered by <a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">Hexo</a>
     </div>
     
   </div>

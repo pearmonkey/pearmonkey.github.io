@@ -318,15 +318,10 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接-httpsleetcodecomproblemssecond-minimum-node-in-a-binary-tree"><a class="markdownIt-Anchor" href="#题目链接-httpsleetcodecomproblemssecond-minimum-node-in-a-binary-tree"></a> 题目链接 <a href="https://leetcode.com/problems/second-minimum-node-in-a-binary-tree/" target="_blank" rel="noopener">https://leetcode.com/problems/second-minimum-node-in-a-binary-tree/</a></h2>
-<h2 id="题目难度-easy-430"><a class="markdownIt-Anchor" href="#题目难度-easy-430"></a> 题目难度 Easy 43.0%</h2>
-<a id="more"></a>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<p>Given a non-empty special binary tree consisting of nodes with the non-negative value, where each node in this tree has exactly two or zero sub-node. If the node has two sub-nodes, then this node’s value is the smaller value among its two sub-nodes. More formally, the property root.val = min(root.left.val, root.right.val) always holds.<br />
-Given such a binary tree, you need to output the second minimum value in the set made of all the nodes’ value in the whole tree.<br />
-If no such second minimum value exists, output -1 instead.</p>
+        <h2 id="题目链接-https-leetcode-com-problems-second-minimum-node-in-a-binary-tree"><a href="#题目链接-https-leetcode-com-problems-second-minimum-node-in-a-binary-tree" class="headerlink" title="题目链接 https://leetcode.com/problems/second-minimum-node-in-a-binary-tree/"></a>题目链接 <a href="https://leetcode.com/problems/second-minimum-node-in-a-binary-tree/" target="_blank" rel="noopener">https://leetcode.com/problems/second-minimum-node-in-a-binary-tree/</a></h2><h2 id="题目难度-Easy-43-0"><a href="#题目难度-Easy-43-0" class="headerlink" title="题目难度 Easy 43.0%"></a>题目难度 Easy 43.0%</h2><a id="more"></a>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Given a non-empty special binary tree consisting of nodes with the non-negative value, where each node in this tree has exactly two or zero sub-node. If the node has two sub-nodes, then this node’s value is the smaller value among its two sub-nodes. More formally, the property root.val = min(root.left.val, root.right.val) always holds.<br>Given such a binary tree, you need to output the second minimum value in the set made of all the nodes’ value in the whole tree.<br>If no such second minimum value exists, output -1 instead.</p>
 <p>Example 1:</p>
-<pre class="highlight"><code class="">Input:
+<pre><code>Input:
     2
    / \
   2   5
@@ -335,33 +330,28 @@ If no such second minimum value exists, output -1 instead.</p>
 
 Output: 5
 Explanation: The smallest value is 2, the second smallest value is 5.
-</code></pre>
-<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
-<p>这个题目想要一次通过还是有难度的。因为细节很多，比如当左右子树的根相等时就要递归两边再取最小的那个，但是如果有-1出现，也就是有一边是没有答案的，这时候返回最小的就不对了，需要讨论左右两边是否为-1再进行比较。</p>
-<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
-<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">findSecondMinimumValue</span><span class="hljs-params">(TreeNode root)</span> </span>{
-        <span class="hljs-keyword">if</span>(root.left == <span class="hljs-keyword">null</span> &amp;&amp; root.right == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;
-        <span class="hljs-keyword">int</span> left = findSecondMinimumValue(root.left);
-        <span class="hljs-keyword">int</span> right = findSecondMinimumValue(root.right);
-        <span class="hljs-keyword">if</span>(root.left.val == root.right.val){
-            <span class="hljs-keyword">if</span>(left != -<span class="hljs-number">1</span> &amp;&amp; right != -<span class="hljs-number">1</span>)
-                <span class="hljs-keyword">return</span> Math.min(left, right);
-            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(left == -<span class="hljs-number">1</span>)
-                <span class="hljs-keyword">return</span> right;
-            <span class="hljs-keyword">else</span>
-                <span class="hljs-keyword">return</span> left;
+</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>这个题目想要一次通过还是有难度的。因为细节很多，比如当左右子树的根相等时就要递归两边再取最小的那个，但是如果有-1出现，也就是有一边是没有答案的，这时候返回最小的就不对了，需要讨论左右两边是否为-1再进行比较。</p>
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre class="line-numbers language-lang-java"><code class="language-lang-java">class Solution {
+    public int findSecondMinimumValue(TreeNode root) {
+        if(root.left == null && root.right == null) return -1;
+        int left = findSecondMinimumValue(root.left);
+        int right = findSecondMinimumValue(root.right);
+        if(root.left.val == root.right.val){
+            if(left != -1 && right != -1)
+                return Math.min(left, right);
+            else if(left == -1)
+                return right;
+            else
+                return left;
         }
-        <span class="hljs-keyword">if</span>(root.left.val == root.val)
-            <span class="hljs-keyword">return</span> left == -<span class="hljs-number">1</span> ? root.right.val : Math.min(left, root.right.val);
-        <span class="hljs-keyword">else</span>
-            <span class="hljs-keyword">return</span> right == -<span class="hljs-number">1</span> ? root.left.val : Math.min(right, root.left.val);
+        if(root.left.val == root.val)
+            return left == -1 ? root.right.val : Math.min(left, root.right.val);
+        else
+            return right == -1 ? root.left.val : Math.min(right, root.left.val);
     }
 }
-</code></pre>
-<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
-<p>Runtime: 100.00%<br />
-Memory: 5.25%</p>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 100.00%<br>Memory: 5.25%</p>
 
       </div>
       
@@ -498,13 +488,10 @@ Memory: 5.25%</p>
     <div class="footer bg-color">
   <div class="footer-main">
     <div class="link">
-      <a href="https://github.com/yuang01/hexo-theme-bamboo" target="_blank" rel="noopener">
-        <i class="fa fa-github" aria-hidden="true"></i>
-      </a>
       <a href="mailto:pearmonkeyhou@gmail.com" target="_blank" rel="noopener">
         <i class="fa fa-envelope-o" aria-hidden="true"></i>
       </a>
-      <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1730241541" target="_blank" rel="noopener">
+      <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=270052740" target="_blank" rel="noopener">
         <i class="fa fa-qq" aria-hidden="true"></i>
       </a>
       <a href="/atom.xml" target="_blank">
@@ -512,7 +499,7 @@ Memory: 5.25%</p>
       </a>
     </div>
     <div class="footer-copyright">
-      Copyright © 2019 - 2021 <a href="https://github.com/yuang01" target="_blank" rel="noopener">雪梨猴</a> | Powered by <a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">Hexo</a>
+      Copyright © 2019 - 2021 | 雪梨猴 | Powered by <a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">Hexo</a>
     </div>
     
   </div>

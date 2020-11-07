@@ -314,40 +314,32 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接-httpsleetcodecomproblemsminimum-number-of-steps-to-make-two-strings-anagram"><a class="markdownIt-Anchor" href="#题目链接-httpsleetcodecomproblemsminimum-number-of-steps-to-make-two-strings-anagram"></a> 题目链接 <a href="https://leetcode.com/problems/minimum-number-of-steps-to-make-two-strings-anagram/" target="_blank" rel="noopener">https://leetcode.com/problems/minimum-number-of-steps-to-make-two-strings-anagram/</a></h2>
-<h2 id="题目难度-medium-769"><a class="markdownIt-Anchor" href="#题目难度-medium-769"></a> 题目难度 Medium 76.9%</h2>
-<a id="more"></a>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<p>Given two equal-size strings s and t. In one step you can choose any character of t and replace it with another character.</p>
+        <h2 id="题目链接-https-leetcode-com-problems-minimum-number-of-steps-to-make-two-strings-anagram"><a href="#题目链接-https-leetcode-com-problems-minimum-number-of-steps-to-make-two-strings-anagram" class="headerlink" title="题目链接 https://leetcode.com/problems/minimum-number-of-steps-to-make-two-strings-anagram/"></a>题目链接 <a href="https://leetcode.com/problems/minimum-number-of-steps-to-make-two-strings-anagram/" target="_blank" rel="noopener">https://leetcode.com/problems/minimum-number-of-steps-to-make-two-strings-anagram/</a></h2><h2 id="题目难度-Medium-76-9"><a href="#题目难度-Medium-76-9" class="headerlink" title="题目难度 Medium 76.9%"></a>题目难度 Medium 76.9%</h2><a id="more"></a>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Given two equal-size strings s and t. In one step you can choose any character of t and replace it with another character.</p>
 <p>Return the minimum number of steps to make t an anagram of s.</p>
 <p>An Anagram of a string is a string that contains the same characters with a different (or the same) ordering.</p>
 <p>Example 1:</p>
-<pre class="highlight"><code class="">Input: s = &quot;bab&quot;, t = &quot;aba&quot;
+<pre><code>Input: s = &quot;bab&quot;, t = &quot;aba&quot;
 Output: 1
-Explanation: Replace the first 'a' in t with b, t = &quot;bba&quot; which is anagram of s.
-</code></pre>
-<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
-<p>看到string只有lowercase就知道是用int[26]来count再比较。比较的时候一开始把所有的差值都加上了，其实不对。以上面的例子，如果把所有差值加起来，那就是2，但结果是1.这是因为当s的某个值比t少时，就可以把另外的多余变成这个值，这样就减少2，但变化却是1.所以就只需要统计当s少于t的时候了。</p>
-<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
-<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">minSteps</span><span class="hljs-params">(String s, String t)</span> </span>{
-        <span class="hljs-keyword">int</span>[] scount = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">26</span>];
-        <span class="hljs-keyword">int</span>[] tcount = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">26</span>];
-        <span class="hljs-keyword">int</span> sum = <span class="hljs-number">0</span>;
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">char</span> c : s.toCharArray())
-            scount[c - <span class="hljs-string">'a'</span>]++;
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">char</span> c : t.toCharArray())
-            tcount[c - <span class="hljs-string">'a'</span>]++;
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">26</span>; i++){
-            sum += tcount[i] &gt; scount[i] ? <span class="hljs-number">0</span> : Math.abs(scount[i] - tcount[i]);
+Explanation: Replace the first &#39;a&#39; in t with b, t = &quot;bba&quot; which is anagram of s.
+</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>看到string只有lowercase就知道是用int[26]来count再比较。比较的时候一开始把所有的差值都加上了，其实不对。以上面的例子，如果把所有差值加起来，那就是2，但结果是1.这是因为当s的某个值比t少时，就可以把另外的多余变成这个值，这样就减少2，但变化却是1.所以就只需要统计当s少于t的时候了。</p>
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre class="line-numbers language-lang-java"><code class="language-lang-java">class Solution {
+    public int minSteps(String s, String t) {
+        int[] scount = new int[26];
+        int[] tcount = new int[26];
+        int sum = 0;
+        for(char c : s.toCharArray())
+            scount[c - 'a']++;
+        for(char c : t.toCharArray())
+            tcount[c - 'a']++;
+        for(int i = 0; i < 26; i++){
+            sum += tcount[i] > scount[i] ? 0 : Math.abs(scount[i] - tcount[i]);
         }
-        <span class="hljs-keyword">return</span> sum;
+        return sum;
     }
 }
-</code></pre>
-<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
-<p>Runtime: 92.02%<br />
-Memory: 100.00%</p>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 92.02%<br>Memory: 100.00%</p>
 
       </div>
       
@@ -484,13 +476,10 @@ Memory: 100.00%</p>
     <div class="footer bg-color">
   <div class="footer-main">
     <div class="link">
-      <a href="https://github.com/yuang01/hexo-theme-bamboo" target="_blank" rel="noopener">
-        <i class="fa fa-github" aria-hidden="true"></i>
-      </a>
       <a href="mailto:pearmonkeyhou@gmail.com" target="_blank" rel="noopener">
         <i class="fa fa-envelope-o" aria-hidden="true"></i>
       </a>
-      <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1730241541" target="_blank" rel="noopener">
+      <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=270052740" target="_blank" rel="noopener">
         <i class="fa fa-qq" aria-hidden="true"></i>
       </a>
       <a href="/atom.xml" target="_blank">
@@ -498,7 +487,7 @@ Memory: 100.00%</p>
       </a>
     </div>
     <div class="footer-copyright">
-      Copyright © 2019 - 2021 <a href="https://github.com/yuang01" target="_blank" rel="noopener">雪梨猴</a> | Powered by <a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">Hexo</a>
+      Copyright © 2019 - 2021 | 雪梨猴 | Powered by <a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">Hexo</a>
     </div>
     
   </div>

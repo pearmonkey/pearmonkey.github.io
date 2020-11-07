@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://pearmonkey.com/2020/02/18/Leetcode-1008-Construct-Binary-Search-Tree-from-Preorder-Traversal/</loc>
+    <lastmod>2020-11-07</lastmod>
+  </url>  <url>
+    <loc>http://pearmonkey.com/2020/02/16/Leetcode-648-Replace-Words/</loc>
+    <lastmod>2020-11-07</lastmod>
+  </url>  <url>
+    <loc>http://pearmonkey.com/2019/11/29/hexo1/</loc>
+    <lastmod>2020-11-07</lastmod>
+  </url>  <url>
     <loc>http://pearmonkey.com/2019/11/29/jf2/</loc>
     <lastmod>2020-11-07</lastmod>
   </url>  <url>
@@ -115,9 +124,6 @@
     <loc>http://pearmonkey.com/2020/02/08/Leetcode-1010-Pairs-of-Songs-With-Total-Durations-Divisible-by-60/</loc>
     <lastmod>2020-11-07</lastmod>
   </url>  <url>
-    <loc>http://pearmonkey.com/2020/02/18/Leetcode-1008-Construct-Binary-Search-Tree-from-Preorder-Traversal/</loc>
-    <lastmod>2020-11-07</lastmod>
-  </url>  <url>
     <loc>http://pearmonkey.com/2020/02/03/Leetcode-994-Rotting-Oranges/</loc>
     <lastmod>2020-11-07</lastmod>
   </url>  <url>
@@ -179,9 +185,6 @@
     <lastmod>2020-11-07</lastmod>
   </url>  <url>
     <loc>http://pearmonkey.com/2020/02/10/Leetcode-654-Maximum-Binary-Tree/</loc>
-    <lastmod>2020-11-07</lastmod>
-  </url>  <url>
-    <loc>http://pearmonkey.com/2020/02/16/Leetcode-648-Replace-Words/</loc>
     <lastmod>2020-11-07</lastmod>
   </url>  <url>
     <loc>http://pearmonkey.com/2019/12/05/Leetcode-647-PalindromicSubstring/</loc>
@@ -270,11 +273,5 @@
   </url>  <url>
     <loc>http://pearmonkey.com/2019/12/09/Leetcode-9-Palindrome-Number/</loc>
     <lastmod>2020-11-07</lastmod>
-  </url>  <url>
-    <loc>http://pearmonkey.com/2019/12/03/hexo-add-shadow/</loc>
-    <lastmod>2019-12-04</lastmod>
-  </url>  <url>
-    <loc>http://pearmonkey.com/2019/11/29/hexo1/</loc>
-    <lastmod>2019-12-04</lastmod>
   </url>
 </urlset>

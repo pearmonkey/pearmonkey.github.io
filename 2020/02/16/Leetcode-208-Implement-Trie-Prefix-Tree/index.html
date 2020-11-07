@@ -318,13 +318,10 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接httpsleetcodecomproblemsimplement-trie-prefix-tree"><a class="markdownIt-Anchor" href="#题目链接httpsleetcodecomproblemsimplement-trie-prefix-tree"></a> 题目链接https://leetcode.com/problems/implement-trie-prefix-tree/</h2>
-<h2 id="题目难度medium-436"><a class="markdownIt-Anchor" href="#题目难度medium-436"></a> 题目难度Medium 43.6%</h2>
-<a id="more"></a>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<p>Implement a trie with insert, search, and startsWith methods.</p>
+        <h2 id="题目链接https-leetcode-com-problems-implement-trie-prefix-tree"><a href="#题目链接https-leetcode-com-problems-implement-trie-prefix-tree" class="headerlink" title="题目链接https://leetcode.com/problems/implement-trie-prefix-tree/"></a>题目链接<a href="https://leetcode.com/problems/implement-trie-prefix-tree/" target="_blank" rel="noopener">https://leetcode.com/problems/implement-trie-prefix-tree/</a></h2><h2 id="题目难度Medium-43-6"><a href="#题目难度Medium-43-6" class="headerlink" title="题目难度Medium 43.6%"></a>题目难度Medium 43.6%</h2><a id="more"></a>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Implement a trie with insert, search, and startsWith methods.</p>
 <p>Example 1:</p>
-<pre class="highlight"><code class="">Trie trie = new Trie();
+<pre><code>Trie trie = new Trie();
 
 trie.insert(&quot;apple&quot;);
 trie.search(&quot;apple&quot;);   // returns true
@@ -332,95 +329,90 @@ trie.search(&quot;app&quot;);     // returns false
 trie.startsWith(&quot;app&quot;); // returns true
 trie.insert(&quot;app&quot;);
 trie.search(&quot;app&quot;);     // returns true
-</code></pre>
-<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
-<p>看讲解[<a href="https://leetcode.com/problems/implement-trie-prefix-tree/solution/" target="_blank" rel="noopener">https://leetcode.com/problems/implement-trie-prefix-tree/solution/</a>]</p>
-<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
-<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TrieNode</span></span>{
+</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>看讲解[<a href="https://leetcode.com/problems/implement-trie-prefix-tree/solution/" target="_blank" rel="noopener">https://leetcode.com/problems/implement-trie-prefix-tree/solution/</a>]</p>
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre class="line-numbers language-lang-java"><code class="language-lang-java">class TrieNode{
     TrieNode[] children;
-    <span class="hljs-keyword">int</span> l = <span class="hljs-number">26</span>;
-    <span class="hljs-keyword">boolean</span> isEnd;
+    int l = 26;
+    boolean isEnd;
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">TrieNode</span><span class="hljs-params">()</span></span>{
-        children = <span class="hljs-keyword">new</span> TrieNode[<span class="hljs-number">26</span>];
+    public TrieNode(){
+        children = new TrieNode[26];
     }
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">containsChild</span><span class="hljs-params">(<span class="hljs-keyword">char</span> c)</span></span>{
-        <span class="hljs-keyword">return</span> children[c - <span class="hljs-string">'a'</span>] != <span class="hljs-keyword">null</span>;
+    public boolean containsChild(char c){
+        return children[c - 'a'] != null;
     }
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> TrieNode <span class="hljs-title">get</span><span class="hljs-params">(<span class="hljs-keyword">char</span> c)</span></span>{
-        <span class="hljs-keyword">return</span> children[c - <span class="hljs-string">'a'</span>];
+    public TrieNode get(char c){
+        return children[c - 'a'];
     }
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">put</span><span class="hljs-params">(<span class="hljs-keyword">char</span> c, TrieNode node)</span></span>{
-        children[c - <span class="hljs-string">'a'</span>] = node;
+    public void put(char c, TrieNode node){
+        children[c - 'a'] = node;
     }
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setEnd</span><span class="hljs-params">()</span></span>{
-        isEnd = <span class="hljs-keyword">true</span>;
+    public void setEnd(){
+        isEnd = true;
     }
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isEnd</span><span class="hljs-params">()</span></span>{
-        <span class="hljs-keyword">return</span> isEnd;
+    public boolean isEnd(){
+        return isEnd;
     }
 }
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Trie</span> </span>{
+class Trie {
     TrieNode root;
 
-    <span class="hljs-comment">/** Initialize your data structure here. */</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Trie</span><span class="hljs-params">()</span> </span>{
-        root = <span class="hljs-keyword">new</span> TrieNode();
+    /** Initialize your data structure here. */
+    public Trie() {
+        root = new TrieNode();
     }
 
-    <span class="hljs-comment">/** Inserts a word into the trie. */</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">insert</span><span class="hljs-params">(String word)</span> </span>{
+    /** Inserts a word into the trie. */
+    public void insert(String word) {
         TrieNode node = root;
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; word.length(); i++){
-            <span class="hljs-keyword">char</span> cur = word.charAt(i);
-            <span class="hljs-keyword">if</span>(!node.containsChild(cur)){
-                node.put(cur, <span class="hljs-keyword">new</span> TrieNode());
+        for(int i = 0; i < word.length(); i++){
+            char cur = word.charAt(i);
+            if(!node.containsChild(cur)){
+                node.put(cur, new TrieNode());
             }
             node = node.get(cur);
         }
         node.setEnd();
     }
 
-    <span class="hljs-function"><span class="hljs-keyword">private</span> TrieNode <span class="hljs-title">searchPrefix</span><span class="hljs-params">(String word)</span></span>{
+    private TrieNode searchPrefix(String word){
         TrieNode node = root;
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; word.length(); i++){
-            <span class="hljs-keyword">char</span> cur = word.charAt(i);
-            <span class="hljs-keyword">if</span>(!node.containsChild(cur)) <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+        for(int i = 0; i < word.length(); i++){
+            char cur = word.charAt(i);
+            if(!node.containsChild(cur)) return null;
             node = node.get(cur);
         }
-        <span class="hljs-keyword">return</span> node;
+        return node;
     }
 
-    <span class="hljs-comment">/** Returns if the word is in the trie. */</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">search</span><span class="hljs-params">(String word)</span> </span>{
+    /** Returns if the word is in the trie. */
+    public boolean search(String word) {
         TrieNode node = searchPrefix(word);
-        <span class="hljs-keyword">return</span> node != <span class="hljs-keyword">null</span> &amp;&amp; node.isEnd();
+        return node != null && node.isEnd();
     }
 
-    <span class="hljs-comment">/** Returns if there is any word in the trie that starts with the given prefix. */</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">startsWith</span><span class="hljs-params">(String prefix)</span> </span>{
+    /** Returns if there is any word in the trie that starts with the given prefix. */
+    public boolean startsWith(String prefix) {
         TrieNode node = searchPrefix(prefix);
-        <span class="hljs-keyword">return</span> node != <span class="hljs-keyword">null</span>;
+        return node != null;
     }
 }
 
-<span class="hljs-comment">/**
+/**
  * Your Trie object will be instantiated and called as such:
  * Trie obj = new Trie();
  * obj.insert(word);
  * boolean param_2 = obj.search(word);
  * boolean param_3 = obj.startsWith(prefix);
- */</span>
-</code></pre>
-<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
-<p>Runtime: 100.00%<br />
-Memory: 100.00%</p>
+ */
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 100.00%<br>Memory: 100.00%</p>
 
       </div>
       
@@ -557,13 +549,10 @@ Memory: 100.00%</p>
     <div class="footer bg-color">
   <div class="footer-main">
     <div class="link">
-      <a href="https://github.com/yuang01/hexo-theme-bamboo" target="_blank" rel="noopener">
-        <i class="fa fa-github" aria-hidden="true"></i>
-      </a>
       <a href="mailto:pearmonkeyhou@gmail.com" target="_blank" rel="noopener">
         <i class="fa fa-envelope-o" aria-hidden="true"></i>
       </a>
-      <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1730241541" target="_blank" rel="noopener">
+      <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=270052740" target="_blank" rel="noopener">
         <i class="fa fa-qq" aria-hidden="true"></i>
       </a>
       <a href="/atom.xml" target="_blank">
@@ -571,7 +560,7 @@ Memory: 100.00%</p>
       </a>
     </div>
     <div class="footer-copyright">
-      Copyright © 2019 - 2021 <a href="https://github.com/yuang01" target="_blank" rel="noopener">雪梨猴</a> | Powered by <a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">Hexo</a>
+      Copyright © 2019 - 2021 | 雪梨猴 | Powered by <a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">Hexo</a>
     </div>
     
   </div>
