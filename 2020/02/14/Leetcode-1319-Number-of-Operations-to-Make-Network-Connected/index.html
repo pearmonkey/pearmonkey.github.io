@@ -318,55 +318,63 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接https-leetcode-com-problems-number-of-operations-to-make-network-connected"><a href="#题目链接https-leetcode-com-problems-number-of-operations-to-make-network-connected" class="headerlink" title="题目链接https://leetcode.com/problems/number-of-operations-to-make-network-connected/"></a>题目链接<a href="https://leetcode.com/problems/number-of-operations-to-make-network-connected/" target="_blank" rel="noopener">https://leetcode.com/problems/number-of-operations-to-make-network-connected/</a></h2><h2 id="题目难度Medium-50-5"><a href="#题目难度Medium-50-5" class="headerlink" title="题目难度Medium 50.5%"></a>题目难度Medium 50.5%</h2><a id="more"></a>
-<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>There are n computers numbered from 0 to n-1 connected by ethernet cables connections forming a network where connections[i] = [a, b] represents a connection between computers a and b. Any computer can reach any other computer directly or indirectly through the network.</p>
+        <h2 id="题目链接httpsleetcodecomproblemsnumber-of-operations-to-make-network-connected"><a class="markdownIt-Anchor" href="#题目链接httpsleetcodecomproblemsnumber-of-operations-to-make-network-connected"></a> 题目链接https://leetcode.com/problems/number-of-operations-to-make-network-connected/</h2>
+<h2 id="题目难度medium-505"><a class="markdownIt-Anchor" href="#题目难度medium-505"></a> 题目难度Medium 50.5%</h2>
+<a id="more"></a>
+<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
+<p>There are n computers numbered from 0 to n-1 connected by ethernet cables connections forming a network where connections[i] = [a, b] represents a connection between computers a and b. Any computer can reach any other computer directly or indirectly through the network.</p>
 <p>Given an initial computer network connections. You can extract certain cables between two directly connected computers, and place them between any pair of disconnected computers to make them directly connected. Return the minimum number of times you need to do this in order to make all the computers connected. If it’s not possible, return -1.</p>
 <p>Example 1:</p>
-<pre><code>Input: n = 4, connections = [[0,1],[0,2],[1,2]]
+<pre class="highlight"><code class="">Input: n = 4, connections = [[0,1],[0,2],[1,2]]
 Output: 1
 Explanation: Remove cable between computer 1 and 2 and place between computers 1 and 3.
-</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre class="line-numbers language-lang-java"><code class="language-lang-java">class Solution {
-    class UnionFind{
-        int[] parent;
-        int count;
+</code></pre>
+<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
+<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
+<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
+    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UnionFind</span></span>{
+        <span class="hljs-keyword">int</span>[] parent;
+        <span class="hljs-keyword">int</span> count;
 
-        public UnionFind(int n){
-            parent = new int[n];
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">UnionFind</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span></span>{
+            parent = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[n];
             count = n;
-            for(int i = 0; i < n; i++)
+            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)
                 parent[i] = i;
         }
 
-        public int find(int p){
-            if(p == parent[p])
-                return p;
-            return parent[p] = find(parent[p]);
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">find</span><span class="hljs-params">(<span class="hljs-keyword">int</span> p)</span></span>{
+            <span class="hljs-keyword">if</span>(p == parent[p])
+                <span class="hljs-keyword">return</span> p;
+            <span class="hljs-keyword">return</span> parent[p] = find(parent[p]);
         }
 
-        public boolean union(int p, int q){
-            int rootp = find(p);
-            int rootq = find(q);
-            if(rootp == rootq)
-                return false;
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">union</span><span class="hljs-params">(<span class="hljs-keyword">int</span> p, <span class="hljs-keyword">int</span> q)</span></span>{
+            <span class="hljs-keyword">int</span> rootp = find(p);
+            <span class="hljs-keyword">int</span> rootq = find(q);
+            <span class="hljs-keyword">if</span>(rootp == rootq)
+                <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
             parent[rootq] = rootp;
             count--;
-            return true;
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
         }
     }
 
-    public int makeConnected(int n, int[][] connections) {
-        UnionFind uf = new UnionFind(n);
-        int unused = 0;
-        for(int[] c : connections){
-            boolean flag = uf.union(c[0], c[1]);
-            if(!flag)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">makeConnected</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n, <span class="hljs-keyword">int</span>[][] connections)</span> </span>{
+        UnionFind uf = <span class="hljs-keyword">new</span> UnionFind(n);
+        <span class="hljs-keyword">int</span> unused = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span>[] c : connections){
+            <span class="hljs-keyword">boolean</span> flag = uf.union(c[<span class="hljs-number">0</span>], c[<span class="hljs-number">1</span>]);
+            <span class="hljs-keyword">if</span>(!flag)
                 unused++;
         }
-        return unused >= (uf.count-1) ? (uf.count-1) : -1;
+        <span class="hljs-keyword">return</span> unused &gt;= (uf.count-<span class="hljs-number">1</span>) ? (uf.count-<span class="hljs-number">1</span>) : -<span class="hljs-number">1</span>;
     }
 }
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 92.13%<br>Memory: 100.00%</p>
+</code></pre>
+<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
+<p>Runtime: 92.13%<br />
+Memory: 100.00%</p>
 
       </div>
       

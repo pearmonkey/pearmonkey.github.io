@@ -318,11 +318,14 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接-https-leetcode-com-problems-most-common-word"><a href="#题目链接-https-leetcode-com-problems-most-common-word" class="headerlink" title="题目链接 https://leetcode.com/problems/most-common-word/"></a>题目链接 <a href="https://leetcode.com/problems/most-common-word/" target="_blank" rel="noopener">https://leetcode.com/problems/most-common-word/</a></h2><h2 id="题目难度-Easy-43-7"><a href="#题目难度-Easy-43-7" class="headerlink" title="题目难度 Easy 43.7%"></a>题目难度 Easy 43.7%</h2><a id="more"></a>
-<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Given a paragraph and a list of banned words, return the most frequent word that is not in the list of banned words.  It is guaranteed there is at least one word that isn’t banned, and that the answer is unique.</p>
+        <h2 id="题目链接-httpsleetcodecomproblemsmost-common-word"><a class="markdownIt-Anchor" href="#题目链接-httpsleetcodecomproblemsmost-common-word"></a> 题目链接 <a href="https://leetcode.com/problems/most-common-word/" target="_blank" rel="noopener">https://leetcode.com/problems/most-common-word/</a></h2>
+<h2 id="题目难度-easy-437"><a class="markdownIt-Anchor" href="#题目难度-easy-437"></a> 题目难度 Easy 43.7%</h2>
+<a id="more"></a>
+<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
+<p>Given a paragraph and a list of banned words, return the most frequent word that is not in the list of banned words.  It is guaranteed there is at least one word that isn’t banned, and that the answer is unique.</p>
 <p>Words in the list of banned words are given in lowercase, and free of punctuation.  Words in the paragraph are not case sensitive.  The answer is in lowercase.</p>
 <p>Example 1:</p>
-<pre><code>Input:
+<pre class="highlight"><code class="">Input:
 paragraph = &quot;Bob hit a ball, the hit BALL flew far after it was hit.&quot;
 banned = [&quot;hit&quot;]
 Output: &quot;ball&quot;
@@ -331,33 +334,38 @@ Explanation:
 &quot;ball&quot; occurs twice (and no other word does), so it is the most frequent non-banned word in the paragraph.
 Note that words in the paragraph are not case sensitive,
 that punctuation is ignored (even if adjacent to words, such as &quot;ball,&quot;),
-and that &quot;hit&quot; isn&#39;t the answer even though it occurs more because it is banned.
-</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>这道题就考了一个东西，如何strip string。其他的count string啥的都很直接。</p>
-<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre class="line-numbers language-lang-java"><code class="language-lang-java">class Solution {
-    public String mostCommonWord(String paragraph, String[] banned) {
-        String[] words = paragraph.replaceAll("[^a-zA-Z ]", " ").toLowerCase().split("\\s+");
-        Set<String> set = new HashSet();
-        for(String s : banned)
+and that &quot;hit&quot; isn't the answer even though it occurs more because it is banned.
+</code></pre>
+<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
+<p>这道题就考了一个东西，如何strip string。其他的count string啥的都很直接。</p>
+<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
+<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">mostCommonWord</span><span class="hljs-params">(String paragraph, String[] banned)</span> </span>{
+        String[] words = paragraph.replaceAll(<span class="hljs-string">"[^a-zA-Z ]"</span>, <span class="hljs-string">" "</span>).toLowerCase().split(<span class="hljs-string">"\\s+"</span>);
+        Set&lt;String&gt; set = <span class="hljs-keyword">new</span> HashSet();
+        <span class="hljs-keyword">for</span>(String s : banned)
             set.add(s);
-        Map<String, Integer> map = new HashMap();
-        for(String s : words){
-            if(set.contains(s))
-                continue;
-            map.put(s, map.getOrDefault(s, 0) + 1);
+        Map&lt;String, Integer&gt; map = <span class="hljs-keyword">new</span> HashMap();
+        <span class="hljs-keyword">for</span>(String s : words){
+            <span class="hljs-keyword">if</span>(set.contains(s))
+                <span class="hljs-keyword">continue</span>;
+            map.put(s, map.getOrDefault(s, <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>);
         }
-        int max = 0;
-        String res = words[0];
-        for(String s : map.keySet()){
-            if(map.get(s) > max){
+        <span class="hljs-keyword">int</span> max = <span class="hljs-number">0</span>;
+        String res = words[<span class="hljs-number">0</span>];
+        <span class="hljs-keyword">for</span>(String s : map.keySet()){
+            <span class="hljs-keyword">if</span>(map.get(s) &gt; max){
                 max = map.get(s);
                 res = s;
             }
         }
-        return res;
+        <span class="hljs-keyword">return</span> res;
     }
 }
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 43.7%<br>Memory: 5.05%</p>
+</code></pre>
+<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
+<p>Runtime: 43.7%<br />
+Memory: 5.05%</p>
 
       </div>
       

@@ -318,50 +318,58 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接https-leetcode-com-problems-all-elements-in-two-binary-search-trees"><a href="#题目链接https-leetcode-com-problems-all-elements-in-two-binary-search-trees" class="headerlink" title="题目链接https://leetcode.com/problems/all-elements-in-two-binary-search-trees/"></a>题目链接<a href="https://leetcode.com/problems/all-elements-in-two-binary-search-trees/" target="_blank" rel="noopener">https://leetcode.com/problems/all-elements-in-two-binary-search-trees/</a></h2><h2 id="题目难度Medium-74-6"><a href="#题目难度Medium-74-6" class="headerlink" title="题目难度Medium 74.6%"></a>题目难度Medium 74.6%</h2><a id="more"></a>
-<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Given two binary search trees root1 and root2.</p>
+        <h2 id="题目链接httpsleetcodecomproblemsall-elements-in-two-binary-search-trees"><a class="markdownIt-Anchor" href="#题目链接httpsleetcodecomproblemsall-elements-in-two-binary-search-trees"></a> 题目链接https://leetcode.com/problems/all-elements-in-two-binary-search-trees/</h2>
+<h2 id="题目难度medium-746"><a class="markdownIt-Anchor" href="#题目难度medium-746"></a> 题目难度Medium 74.6%</h2>
+<a id="more"></a>
+<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
+<p>Given two binary search trees root1 and root2.</p>
 <p>Return a list containing all the integers from both trees sorted in ascending order.</p>
 <p>Example 1:</p>
-<pre><code>Input: root1 = [2,1,4], root2 = [1,0,3]
+<pre class="highlight"><code class="">Input: root1 = [2,1,4], root2 = [1,0,3]
 Output: [0,1,1,2,3,4]
-</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>一开始看到两个树需要merge排好序，就开始想dfs，结果怎么想都不对。后来一想，就两个tree都inorder遍历一遍得到两个sorted array，再merge就行了。这里考察的点就是inorder和merge sorted array。</p>
-<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre class="line-numbers language-lang-java"><code class="language-lang-java">class Solution {
-    List<Integer> list;
-    public List<Integer> getAllElements(TreeNode root1, TreeNode root2) {
-        list = new ArrayList();
+</code></pre>
+<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
+<p>一开始看到两个树需要merge排好序，就开始想dfs，结果怎么想都不对。后来一想，就两个tree都inorder遍历一遍得到两个sorted array，再merge就行了。这里考察的点就是inorder和merge sorted array。</p>
+<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
+<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
+    List&lt;Integer&gt; list;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title">getAllElements</span><span class="hljs-params">(TreeNode root1, TreeNode root2)</span> </span>{
+        list = <span class="hljs-keyword">new</span> ArrayList();
         inorder(root1);
-        List<Integer> l1 = new ArrayList(list);
-        list = new ArrayList();
+        List&lt;Integer&gt; l1 = <span class="hljs-keyword">new</span> ArrayList(list);
+        list = <span class="hljs-keyword">new</span> ArrayList();
         inorder(root2);
-        List<Integer> l2 = new ArrayList(list);
-        return merge(l1, l2);
+        List&lt;Integer&gt; l2 = <span class="hljs-keyword">new</span> ArrayList(list);
+        <span class="hljs-keyword">return</span> merge(l1, l2);
     }
 
-    public void inorder(TreeNode root){
-        if(root == null) return;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">inorder</span><span class="hljs-params">(TreeNode root)</span></span>{
+        <span class="hljs-keyword">if</span>(root == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span>;
         inorder(root.left);
         list.add(root.val);
         inorder(root.right);
     }
 
-    public List<Integer> merge(List<Integer> l1, List<Integer> l2){
-        List<Integer> res = new ArrayList();
-        int i = 0, j = 0;
-        while(i < l1.size() && j < l2.size()){
-            if(l1.get(i) > l2.get(j))
+    <span class="hljs-function"><span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title">merge</span><span class="hljs-params">(List&lt;Integer&gt; l1, List&lt;Integer&gt; l2)</span></span>{
+        List&lt;Integer&gt; res = <span class="hljs-keyword">new</span> ArrayList();
+        <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>, j = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">while</span>(i &lt; l1.size() &amp;&amp; j &lt; l2.size()){
+            <span class="hljs-keyword">if</span>(l1.get(i) &gt; l2.get(j))
                 res.add(l2.get(j++));
-            else
+            <span class="hljs-keyword">else</span>
                 res.add(l1.get(i++));
         }
-        while(i < l1.size())
+        <span class="hljs-keyword">while</span>(i &lt; l1.size())
             res.add(l1.get(i++));
-        while(j < l2.size())
+        <span class="hljs-keyword">while</span>(j &lt; l2.size())
             res.add(l2.get(j++));
-        return res;
+        <span class="hljs-keyword">return</span> res;
     }
 }
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 93.01%<br>Memory: 100.00%</p>
+</code></pre>
+<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
+<p>Runtime: 93.01%<br />
+Memory: 100.00%</p>
 
       </div>
       

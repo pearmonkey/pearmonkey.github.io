@@ -320,30 +320,37 @@
       <div class="post-content">
         <ol>
 <li>编辑<code>themes/next/source/css/_custom/custom.styl</code>文件；</li>
-<li>在这个文件添加如下配置：<a id="more"></a>
-</li>
+<li>在这个文件添加如下配置：</li>
 </ol>
-<pre><code>.post {
+<a id="more"></a>
+<pre class="highlight"><code class="">.post {
    margin-top: 60px;
    margin-bottom: 60px;
    padding: 25px;
    -webkit-box-shadow: 0 0 5px rgba(202, 203, 203, .5);
    -moz-box-shadow: 0 0 5px rgba(202, 203, 204, .5);
 }
-</code></pre><h2 id="3-重新hexo-d-g即可看到阴影效果。"><a href="#3-重新hexo-d-g即可看到阴影效果。" class="headerlink" title="3. 重新hexo d -g即可看到阴影效果。"></a>3. 重新hexo d -g即可看到阴影效果。</h2><p>好吧，上面是随便一搜就能看到的结果。小白如我一脸懵逼，我的next主题压根就没有<code>themes/next/source/css/_custom/custom.styl</code>这个文件，我上哪去编辑去。<br>后来经过一番摸索，发现是因为next版本更新了，文件的结构也变了，我的各种版本如下</p>
-<pre><code>Hexo v4.0.0
+</code></pre>
+<ol start="3">
+<li>重新hexo d -g即可看到阴影效果。</li>
+</ol>
+<hr />
+<p>好吧，上面是随便一搜就能看到的结果。小白如我一脸懵逼，我的next主题压根就没有<code>themes/next/source/css/_custom/custom.styl</code>这个文件，我上哪去编辑去。<br />
+后来经过一番摸索，发现是因为next版本更新了，文件的结构也变了，我的各种版本如下</p>
+<pre class="highlight"><code class="">Hexo v4.0.0
 NexT.Pisces v7.5.0
-</code></pre><p>如果你也找不到那个custom.styl的话，正确的做法是编辑这个文件<code>\themes\next\source\css\_common\components\post\post-expand.styl</code>，然后把刚刚那段code加进去，参数可以照着自己喜欢的调。</p>
-<pre class="line-numbers language-lang-diff"><code class="language-lang-diff">.posts-expand {
+</code></pre>
+<p>如果你也找不到那个custom.styl的话，正确的做法是编辑这个文件<code>\themes\next\source\css\_common\components\post\post-expand.styl</code>，然后把刚刚那段code加进去，参数可以照着自己喜欢的调。</p>
+<pre class="highlight"><code class="diff">.posts-expand {
   padding-top: 40px;
   background: white;
 
-+   //添加阴影
-+   margin-top: 10px;
-+   margin-bottom: 60px;
-+   padding: 21px;
-+   -webkit-box-shadow: 0 0 5px rgba(202, 203, 203, .5);
-+   -moz-box-shadow: 0 0 5px rgba(202, 203, 204, .5);
+<span class="hljs-addition">+   //添加阴影</span>
+<span class="hljs-addition">+   margin-top: 10px;</span>
+<span class="hljs-addition">+   margin-bottom: 60px;</span>
+<span class="hljs-addition">+   padding: 21px;</span>
+<span class="hljs-addition">+   -webkit-box-shadow: 0 0 5px rgba(202, 203, 203, .5);</span>
+<span class="hljs-addition">+   -moz-box-shadow: 0 0 5px rgba(202, 203, 204, .5);</span>
 
   +mobile() {
     padding: 10px;
@@ -351,7 +358,7 @@ NexT.Pisces v7.5.0
     margin: 0 20px;
   }
 }
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <p>然后重新部署一下就能看到文章轮廓有阴影啦。</p>
 
       </div>

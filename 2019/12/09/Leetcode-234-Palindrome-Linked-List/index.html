@@ -314,47 +314,58 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接-https-leetcode-com-problems-palindrome-linked-list"><a href="#题目链接-https-leetcode-com-problems-palindrome-linked-list" class="headerlink" title="题目链接 https://leetcode.com/problems/palindrome-linked-list/"></a>题目链接 <a href="https://leetcode.com/problems/palindrome-linked-list/" target="_blank" rel="noopener">https://leetcode.com/problems/palindrome-linked-list/</a></h2><h2 id="题目难度-Easy-37-4"><a href="#题目难度-Easy-37-4" class="headerlink" title="题目难度 Easy 37.4%"></a>题目难度 Easy 37.4%</h2><a id="more"></a>
-<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Given a singly linked list, determine if it is a palindrome.<br>Example 1:</p>
-<pre><code>Input: 1-&gt;2
+        <h2 id="题目链接-httpsleetcodecomproblemspalindrome-linked-list"><a class="markdownIt-Anchor" href="#题目链接-httpsleetcodecomproblemspalindrome-linked-list"></a> 题目链接 <a href="https://leetcode.com/problems/palindrome-linked-list/" target="_blank" rel="noopener">https://leetcode.com/problems/palindrome-linked-list/</a></h2>
+<h2 id="题目难度-easy-374"><a class="markdownIt-Anchor" href="#题目难度-easy-374"></a> 题目难度 Easy 37.4%</h2>
+<a id="more"></a>
+<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
+<p>Given a singly linked list, determine if it is a palindrome.<br />
+Example 1:</p>
+<pre class="highlight"><code class="">Input: 1-&gt;2
 Output: false
-</code></pre><p>Example 2:</p>
-<pre><code>Input: 1-&gt;2-&gt;2-&gt;1
+</code></pre>
+<p>Example 2:</p>
+<pre class="highlight"><code class="">Input: 1-&gt;2-&gt;2-&gt;1
 Output: true
-</code></pre><p>Follow up:<br>Could you do it in O(n) time and O(1) space?</p>
-<h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>和<a href="https://leetcode.com/problems/palindrome-number" target="_blank" rel="noopener">9. Palindrome Number</a>同出一辙。那题是判断一个整数是不是回文，需要反转数字的后半段。这里判断一个linked list是不是回文，那就反转list的后半段。Follow up里要求用常数空间，反转list的后半段就符合要求。所以这里考的知识点就是找list的中间点和list的反转。找中间点就是快慢指针，当停下来的时候，慢指针指的是后半段的开头，所以需要一个dummy指针的帮助来翻转list，因为不确定head是哪一个。这个dummy可以是慢指针的前一个也可以是随便一个。反转指针也是一项必定掌握的技能，有疑问的小伙伴可以先看看<a href="https://pearmonkey.com/2019/12/09/Leetcode-206-Reverse-Linked-List/">206. Reverse Linked List</a>.</p>
-<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre class="line-numbers language-lang-java"><code class="language-lang-java">class Solution {
-    public boolean isPalindrome(ListNode head) {
-        if(head == null || head.next == null)
-            return true;
-        //快慢指针找中间点
-        ListNode slow = head, fast = head, pre = null;
-        while(fast != null && fast.next != null){
+</code></pre>
+<p>Follow up:<br />
+Could you do it in O(n) time and O(1) space?</p>
+<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
+<p>和<a href="https://leetcode.com/problems/palindrome-number" target="_blank" rel="noopener">9. Palindrome Number</a>同出一辙。那题是判断一个整数是不是回文，需要反转数字的后半段。这里判断一个linked list是不是回文，那就反转list的后半段。Follow up里要求用常数空间，反转list的后半段就符合要求。所以这里考的知识点就是找list的中间点和list的反转。找中间点就是快慢指针，当停下来的时候，慢指针指的是后半段的开头，所以需要一个dummy指针的帮助来翻转list，因为不确定head是哪一个。这个dummy可以是慢指针的前一个也可以是随便一个。反转指针也是一项必定掌握的技能，有疑问的小伙伴可以先看看<a href="https://pearmonkey.com/2019/12/09/Leetcode-206-Reverse-Linked-List/">206. Reverse Linked List</a>.</p>
+<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
+<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isPalindrome</span><span class="hljs-params">(ListNode head)</span> </span>{
+        <span class="hljs-keyword">if</span>(head == <span class="hljs-keyword">null</span> || head.next == <span class="hljs-keyword">null</span>)
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+        <span class="hljs-comment">//快慢指针找中间点</span>
+        ListNode slow = head, fast = head, pre = <span class="hljs-keyword">null</span>;
+        <span class="hljs-keyword">while</span>(fast != <span class="hljs-keyword">null</span> &amp;&amp; fast.next != <span class="hljs-keyword">null</span>){
             pre = slow;
             slow = slow.next;
             fast = fast.next.next;
         }
-        //翻转后半段
+        <span class="hljs-comment">//翻转后半段</span>
         ListNode new_head = slow;
-        while(slow.next != null){
+        <span class="hljs-keyword">while</span>(slow.next != <span class="hljs-keyword">null</span>){
             pre.next = slow.next;
             slow.next = pre.next.next;
             pre.next.next = new_head;
             new_head = pre.next;
         }
-        //和前半段进行比较
-        pre.next = null;
-        while(head != null && new_head != null){
-            if(head.val != new_head.val)
-                return false;
+        <span class="hljs-comment">//和前半段进行比较</span>
+        pre.next = <span class="hljs-keyword">null</span>;
+        <span class="hljs-keyword">while</span>(head != <span class="hljs-keyword">null</span> &amp;&amp; new_head != <span class="hljs-keyword">null</span>){
+            <span class="hljs-keyword">if</span>(head.val != new_head.val)
+                <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
             head = head.next;
             new_head = new_head.next;
         }
-        return true;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
     }
 }
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 99.48%<br>Memory: 98.78%</p>
+</code></pre>
+<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
+<p>Runtime: 99.48%<br />
+Memory: 98.78%</p>
 
       </div>
       

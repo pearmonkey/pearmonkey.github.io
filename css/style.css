@@ -884,25 +884,25 @@ a {
 .post-categories .article-category .article-category-link:hover {
   color: #42b983;
 }
-#categories {
+.categories {
   min-height: calc(60vh - 60px);
 }
-#categories .card .card-content {
+.categories .card .card-content {
   margin: 20px 0 40px 0;
 }
-#categories .card .card-content .category-title {
+.categories .card .card-content .category-title {
   font-size: 1.6em;
   color: #34495e;
   text-align: center;
   padding: 15px 0;
 }
-#categories .card .card-content .category-chips {
+.categories .card .card-content .category-chips {
   text-align: center;
 }
-#categories .card .card-content .category-chips a {
+.categories .card .card-content .category-chips a {
   margin: 0 5px;
 }
-#categories .card .card-content .category-chips a .category-content {
+.categories .card .card-content .category-chips a .category-content {
   width: 30%;
   padding: 5px 10px;
   display: inline-block;
@@ -912,10 +912,10 @@ a {
   transition: all 0.3s;
   margin-top: 20px;
 }
-#categories .card .card-content .category-chips a .category-content:hover {
+.categories .card .card-content .category-chips a .category-content:hover {
   transform: scale(1.2);
 }
-#categories .card .card-content .category-chips a .category-content .category-length {
+.categories .card .card-content .category-chips a .category-content .category-length {
   color: #49b1f5;
 }
 .page-nav {
