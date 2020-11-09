@@ -49,7 +49,7 @@
   <div class="drawer-box" :class="{'active': visible}">
     <div class="drawer-box-head bg-color">
       <h3 class="drawer-box-head_title">雪梨猴的博客</h3>
-      <h5 class="drawer-box-head_desc">千磨万击还坚劲，任尔东西南北风</h5>
+      <h5 class="drawer-box-head_desc"></h5>
     </div>
     <div class="drawer-box-content">
       <ul class="drawer-box-content_menu">
@@ -322,45 +322,55 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接-https-leetcode-com-problems-palindrome-permutation-ii"><a href="#题目链接-https-leetcode-com-problems-palindrome-permutation-ii" class="headerlink" title="题目链接 https://leetcode.com/problems/palindrome-permutation-ii/"></a>题目链接 <a href="https://leetcode.com/problems/palindrome-permutation-ii/" target="_blank" rel="noopener">https://leetcode.com/problems/palindrome-permutation-ii/</a></h2><h2 id="题目难度-Medium-34-8"><a href="#题目难度-Medium-34-8" class="headerlink" title="题目难度 Medium 34.8%"></a>题目难度 Medium 34.8%</h2><a id="more"></a>
-<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Given a string s, return all the palindromic permutations (without duplicates) of it. Return an empty list if no palindromic permutation could be form.<br>Example 1:</p>
-<pre><code>Input: &quot;aabb&quot;
+        <h2 id="题目链接-httpsleetcodecomproblemspalindrome-permutation-ii"><a class="markdownIt-Anchor" href="#题目链接-httpsleetcodecomproblemspalindrome-permutation-ii"></a> 题目链接 <a href="https://leetcode.com/problems/palindrome-permutation-ii/" target="_blank" rel="noopener">https://leetcode.com/problems/palindrome-permutation-ii/</a></h2>
+<h2 id="题目难度-medium-348"><a class="markdownIt-Anchor" href="#题目难度-medium-348"></a> 题目难度 Medium 34.8%</h2>
+<a id="more"></a>
+<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
+<p>Given a string s, return all the palindromic permutations (without duplicates) of it. Return an empty list if no palindromic permutation could be form.<br />
+Example 1:</p>
+<pre class="highlight"><code class="">Input: &quot;aabb&quot;
 Output: [&quot;abba&quot;, &quot;baab&quot;]
-</code></pre><p>Example 2:</p>
-<pre><code>Input: &quot;abc&quot;
+</code></pre>
+<p>Example 2:</p>
+<pre class="highlight"><code class="">Input: &quot;abc&quot;
 Output: []
-</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>题目还是很简明，就是给定一个string，返回所有为回文的permutation。我们就仔细想一下，要我返回所有为回文的permutation，首先给我的这个字符串至少要有可能是一个回文吧。如果做这个前期判断呢？因为回文是有偶数回文和奇数回文（如果不熟悉，可以先参考一下<a href="http://localhost:4000/2019/11/27/Leetcode-Palindromic/" target="_blank" rel="noopener">这篇文章</a>），所以我们统计一下每个字符出现的次数，如果次数为奇数的字符是小于或者等于1的话，那么这个字符串就是可以组成回文串的。<br>如果得知这个字符串可以组成回文，brute-force的想法就是列举出所有的permutation（时间复杂度为O(n!)），再对每一种可能性进行回文判断（时间复杂度为O(n/2)），如果是回文就加入结果。这样的一套想法下来，总的时间复杂度是O(n!*n/2)，其中n是给定string的长度。<br>那么，有没有可能对brute-force进行改进呢？答案当然是肯定的。在前期判断是否有可能组成回文的过程中，我们应该是用一个HashMap或者长度为128（为什么是128呢，因为ASCII码总共有128个）的int[]数组来记录每个字符的个数。有了这个信息，那这道题就变成了和<a href="https://leetcode.com/problems/generate-parentheses/" target="_blank" rel="noopener">22. Generate Parentheses</a>很相似了，不过并不需要数左右的个数，只需要同时在两边加上一样的字符。</p>
-<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre class="line-numbers language-lang-java"><code class="language-lang-java">class Solution {
-    public List<String> generatePalindromes(String s) {
-        List<String> res = new ArrayList<>();
-        int[] map = new int[128];
-        String tmp = "";
-        for(char c  : s.toCharArray()) //记录每个字符的个数
+</code></pre>
+<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
+<p>题目还是很简明，就是给定一个string，返回所有为回文的permutation。我们就仔细想一下，要我返回所有为回文的permutation，首先给我的这个字符串至少要有可能是一个回文吧。如果做这个前期判断呢？因为回文是有偶数回文和奇数回文（如果不熟悉，可以先参考一下<a href="http://localhost:4000/2019/11/27/Leetcode-Palindromic/" target="_blank" rel="noopener">这篇文章</a>），所以我们统计一下每个字符出现的次数，如果次数为奇数的字符是小于或者等于1的话，那么这个字符串就是可以组成回文串的。<br />
+如果得知这个字符串可以组成回文，brute-force的想法就是列举出所有的permutation（时间复杂度为O(n!)），再对每一种可能性进行回文判断（时间复杂度为O(n/2)），如果是回文就加入结果。这样的一套想法下来，总的时间复杂度是O(n!*n/2)，其中n是给定string的长度。<br />
+那么，有没有可能对brute-force进行改进呢？答案当然是肯定的。在前期判断是否有可能组成回文的过程中，我们应该是用一个HashMap或者长度为128（为什么是128呢，因为ASCII码总共有128个）的int[]数组来记录每个字符的个数。有了这个信息，那这道题就变成了和<a href="https://leetcode.com/problems/generate-parentheses/" target="_blank" rel="noopener">22. Generate Parentheses</a>很相似了，不过并不需要数左右的个数，只需要同时在两边加上一样的字符。</p>
+<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
+<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> List&lt;String&gt; <span class="hljs-title">generatePalindromes</span><span class="hljs-params">(String s)</span> </span>{
+        List&lt;String&gt; res = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+        <span class="hljs-keyword">int</span>[] map = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">128</span>];
+        String tmp = <span class="hljs-string">""</span>;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">char</span> c  : s.toCharArray()) <span class="hljs-comment">//记录每个字符的个数</span>
             map[c]++;
-        for(int i = 0; i < map.length; i++){
-            if(map[i] % 2 == 1)
-                tmp = tmp + (char)i; //如果遇到奇数频率的字符就记录下来
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; map.length; i++){
+            <span class="hljs-keyword">if</span>(map[i] % <span class="hljs-number">2</span> == <span class="hljs-number">1</span>)
+                tmp = tmp + (<span class="hljs-keyword">char</span>)i; <span class="hljs-comment">//如果遇到奇数频率的字符就记录下来</span>
         }
-        if(tmp.length() > 1) return res; //如果奇数频率的字符超过一个就不满足组成回文条件，直接返回
-        generate(s.length(), res, map, tmp); //满足条件，就dfs生成回文，要把奇数字符传进去，没有的话就是""
-        return res;
+        <span class="hljs-keyword">if</span>(tmp.length() &gt; <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> res; <span class="hljs-comment">//如果奇数频率的字符超过一个就不满足组成回文条件，直接返回</span>
+        generate(s.length(), res, map, tmp); <span class="hljs-comment">//满足条件，就dfs生成回文，要把奇数字符传进去，没有的话就是""</span>
+        <span class="hljs-keyword">return</span> res;
     }
 
-    public void generate(int n, List<String> res, int[] map, String tmp){
-        if(tmp.length() == n){
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">generate</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n, List&lt;String&gt; res, <span class="hljs-keyword">int</span>[] map, String tmp)</span></span>{
+        <span class="hljs-keyword">if</span>(tmp.length() == n){
             res.add(tmp);
-            return;
+            <span class="hljs-keyword">return</span>;
         }
-        for(int i = 0; i < map.length; i++){
-            if(map[i] > 1){
-                map[i] -= 2;
-                generate(n, res, map, (char)i + tmp + (char)i);
-                map[i] += 2;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; map.length; i++){
+            <span class="hljs-keyword">if</span>(map[i] &gt; <span class="hljs-number">1</span>){
+                map[i] -= <span class="hljs-number">2</span>;
+                generate(n, res, map, (<span class="hljs-keyword">char</span>)i + tmp + (<span class="hljs-keyword">char</span>)i);
+                map[i] += <span class="hljs-number">2</span>;
             }
         }
     }
 }
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 
       </div>
       
@@ -416,9 +426,6 @@ Output: []
 	</script>
 </section>
 <style>
-#vcomment textarea {
-	background: url('/medias/comment_bg7.png') 100% 100% no-repeat;
-}
 </style>
 
         

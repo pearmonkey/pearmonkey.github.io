@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html>
+  
+
+
+
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+  <title>Quant有趣面试题 | 雪梨猴的博客</title>
+  
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
+  <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/css/animate.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+    <link rel="stylesheet" href="/js/fancybox/jquery.fancybox.min.css">
+  
+  
+  <style>
+        @media (max-width: 992px) {
+            #waifu {
+                display: none;
+            }
+        }
+    </style>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+  <script src="/js/jquery3.5.1.js"></script>
+  <script src="/js/vue2.6.11.js"></script>
+  <body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="header bg-color"
+  style="position: fixed; 
+  left: 0; top: 0; z-index: 10;width: 100%;"
+>
+  <div class="header-content">
+    <div class="bars">
+      <div id="appDrawer" class="sidebar-image">
+  <i class="fa fa-bars" aria-hidden="true" @click="showDialogDrawer"></i>
+  <div class="drawer-box_mask" v-cloak style="display: none;" v-show="visible" @click.self="cancelDialogDrawer">
+  </div>
+  <div class="drawer-box" :class="{'active': visible}">
+    <div class="drawer-box-head bg-color">
+      <h3 class="drawer-box-head_title">雪梨猴的博客</h3>
+      <h5 class="drawer-box-head_desc"></h5>
+    </div>
+    <div class="drawer-box-content">
+      <ul class="drawer-box-content_menu">
+        
+          <li class="drawer-box-content_item">
+            <a href="/" class="menu-item-link">
+              
+                <i class="fa fa-home" aria-hidden="true"></i>
+              
+              <span>首页</span>
+            </a>
+          </li>
+        
+          <li class="drawer-box-content_item">
+            <a href="/archives" class="menu-item-link">
+              
+                <i class="fa fa-home" aria-hidden="true"></i>
+              
+              <span>归档</span>
+            </a>
+          </li>
+        
+          <li class="drawer-box-content_item">
+            <a href="/tags" class="menu-item-link">
+              
+                <i class="fa fa-tags" aria-hidden="true"></i>
+              
+              <span>标签</span>
+            </a>
+          </li>
+        
+          <li class="drawer-box-content_item">
+            <a href="/categories" class="menu-item-link">
+              
+                <i class="fa fa-bookmark" aria-hidden="true"></i>
+              
+              <span>分类</span>
+            </a>
+          </li>
+        
+          <li class="drawer-box-content_item">
+            <a href="/about" class="menu-item-link">
+              
+                <i class="fa fa-user" aria-hidden="true"></i>
+              
+              <span>关于</span>
+            </a>
+          </li>
+        
+          <li class="drawer-box-content_item">
+            <a href="/friends" class="menu-item-link">
+              
+                <i class="fa fa-link" aria-hidden="true"></i>
+              
+              <span>友情链接</span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+  var body = document.body || document.documentElement || window;
+  var vm = new Vue({
+    el: '#appDrawer',
+    data: {
+      visible: false,
+      top: 0,
+    },
+    computed: {
+    },
+    mounted() {
+    },
+    methods: {
+      showDialogDrawer() {
+        this.visible = true;
+        // 防止页面滚动，只能让弹框滚动
+        this.top = $(document).scrollTop()
+        body.style.cssText = 'width: 100%; height: 100%; position: fixed; top: -' + this.top  + 'px; left: 0; overflow: hidden;';
+      },
+      cancelDialogDrawer() {
+        this.visible = false;
+        body.removeAttribute('style');
+        $(document).scrollTop(this.top)
+      }
+    },
+    created() {}
+  })
+</script>
+
+    </div>
+    <div class="blog-title" id="author-avatar">
+      <a href="/" class="logo">雪梨猴的博客</a>
+    </div>
+    <nav class="navbar">
+      <ul class="menu">
+        
+          <li class="menu-item">
+            <a href="/" class="menu-item-link">
+              
+                <i class="fa fa-home" aria-hidden="true"></i>
+              
+              <span>首页</span>
+            </a>
+          </li>
+        
+          <li class="menu-item">
+            <a href="/archives" class="menu-item-link">
+              
+                <i class="fa fa-archive" aria-hidden="true"></i>
+              
+              <span>归档</span>
+            </a>
+          </li>
+        
+          <li class="menu-item">
+            <a href="/tags" class="menu-item-link">
+              
+                <i class="fa fa-tags" aria-hidden="true"></i>
+              
+              <span>标签</span>
+            </a>
+          </li>
+        
+          <li class="menu-item">
+            <a href="/categories" class="menu-item-link">
+              
+                <i class="fa fa-bookmark" aria-hidden="true"></i>
+              
+              <span>分类</span>
+            </a>
+          </li>
+        
+          <li class="menu-item">
+            <a href="/about" class="menu-item-link">
+              
+                <i class="fa fa-user" aria-hidden="true"></i>
+              
+              <span>关于</span>
+            </a>
+          </li>
+        
+          <li class="menu-item">
+            <a href="/friends" class="menu-item-link">
+              
+                <i class="fa fa-link" aria-hidden="true"></i>
+              
+              <span>友情链接</span>
+            </a>
+          </li>
+        
+      </ul>
+      
+        <div id="appSearch">
+  <div class="search"  @click="showDialog()"><i class="fa fa-search" aria-hidden="true"></i></div>
+  <div class="message-box_wrapper" style="display: none;" v-cloak v-show="dialogVisible" @click.self="cancelDialogVisible()">
+    <div class="message-box">
+      <h2>
+        <i class="fa fa-search" aria-hidden="true"></i>
+        <span class="title">搜索</span>
+      </h2>
+      <form class="site-search-form">
+        <input type="text"
+          placeholder="请输入关键字"
+          id="local-search-input" 
+          @click="getSearchFile()"
+          class="st-search-input"
+          v-model="searchInput"
+        />
+      </form>
+      <div class="result-wrapper">
+        <div id="local-search-result" class="local-search-result-cls"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/js/local_search.js"></script>
+<script>
+  var body = document.body || document.documentElement || window;
+  var vm = new Vue({
+    el: '#appSearch',
+    data: {
+      dialogVisible: false,
+      searchInput: '',
+      top: 0,
+    },
+    computed: {
+    },
+    mounted() {
+    },
+    methods: {
+      showDialog() {
+        this.dialogVisible = true;
+        // 防止页面滚动，只能让弹框滚动
+        this.top = $(document).scrollTop()
+        body.style.cssText = 'width: 100%; height: 100%; position: fixed; top: -' + this.top  + 'px; left: 0; overflow: hidden;';
+      },
+      getSearchFile() {
+        if (!this.searchInput) {
+          getSearchFile();
+        }
+      },
+      cancelDialogVisible() {
+        this.dialogVisible = false;
+        body.removeAttribute('style');
+        $(document).scrollTop(this.top)
+      },
+    },
+    created() {}
+  })
+</script>
+<!-- 解决刷新页面闪烁问题，可以在元素上添加display: none, 或者用vue.extend方法，详情：https://blog.csdn.net/qq_31393401/article/details/81017912 -->
+<!-- 下面是搜索基本写法 -->
+<!-- <script type="text/javascript" id="local.search.active">
+  var inputArea = document.querySelector("#local-search-input");
+  inputArea.onclick   = function(){ getSearchFile(); this.onclick = null }
+  inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
+</script> -->
+
+      
+    </nav>
+  </div>
+</header>
+
+    <main class="main" style="margin-top: 60px;">
+      <div class="row justify-center">
+  <div class="main-content">
+    <article class="post post-detail">
+      
+        <div class="post-title">
+          Quant有趣面试题
+        </div>
+      
+
+      <div class="post-meta">
+
+      
+        Sherry
+        <h>|</h>
+      
+
+      
+        <span class="post-time">2020-11-07</span>
+        <h>|</h>
+      
+
+        
+          
+            <a href="/categories/%E6%97%A5%E5%BF%97/" class="">
+              日志
+            </a>
+          
+          <h>|</h>
+        
+
+        
+          
+            <a href="/tags/%E9%9D%A2%E8%AF%95/" class="">
+              面试
+            </a>
+          
+            <a href="/tags/Quantative-Analysis/" class="">
+              Quantative Analysis
+            </a>
+          
+
+        
+      </div>
+      <div class="post-content">
+        <p>找工作的时候顺便也投了Quantitative Research这个职位，准备过程中学习到了很多有趣的题目。涉及的知识点也很广，主要集中在Probability, Linear Regression, Calculus, Quantative Finance。</p>
+<a id="more"></a>
+<h2 id="赛道加油问题"><a class="markdownIt-Anchor" href="#赛道加油问题"></a> 赛道加油问题</h2>
+<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
+<p>假设你在一个单向环形的赛道上。有N个加油站随机分布在赛道的不同位置，所有加油站的油加起来刚好能跑完一圈。假设你的车最开始是没有油的，但是你能选择任意一个位置作为开始位置，并且在前进过程中每遇到一个加油站你能加里面的油。请问，你是否总能选择一个合适的开始位置去跑完一圈？</p>
+<h3 id="解答"><a class="markdownIt-Anchor" href="#解答"></a> 解答</h3>
+<p>从最简单的情况开始想，假如\(N=1\)，答案是肯定能跑完；假如\(N=2\)，用\(x_1\)和\(x_2\)表示站1和站2的油分别能跑的距离，用\(y_1\)和\(y_2\)表示站1-&gt;站2的距离和站2-&gt;站1的距离（赛道是单向环形），由于\(x_1+x_2=1\)并且\(y_1+y_2=1\)，那么\(x_1 \geq y_1\)或者\(x_2 \geq y_2\) (因为\(x_1 &lt; y_1\)和\(x_2 &lt; y_2\)不可能同时成立)。如果\(x_1 \geq y_1\)，我们就能从站1出发，有足够的油来到站2，并加完站2的油，去跑完剩下的。反之亦然。</p>
+<p>接下来可以用Induction来证明，假设\(N=n\)成立，那么\(N=n+1\)也成立。</p>
+<p>对于\(N=n+1\)，我们有\(x_1+x_2+…+x_{n+1}=1\)并且\(y_1+y_2+…+y_{n+1}=1\)。所以肯定存在一个\(i\)，\(1 \leq i \leq n+1\)，使得\(x_i \geq y_i\)，这就意味着一旦车到达了站\(i\)，就能到达站\(i+1\)。用另外的话说，我们可以将站\(i\)和站\(i+1\)合并起来，合并站将拥有油能跑\(x_i + x_{i+1}\)距离。这样就将问题转化为了\(N=n\)问题，所以\(N=n+1\)也就同样成立了。</p>
+<h2 id="生日问题"><a class="markdownIt-Anchor" href="#生日问题"></a> 生日问题</h2>
+<h3 id="题目-2"><a class="markdownIt-Anchor" href="#题目-2"></a> 题目</h3>
+<p>需要至少多少人在同一个房间里，能使得有两个人是同一天生日的概率大于\(1/2\)？</p>
+<h3 id="解答-2"><a class="markdownIt-Anchor" href="#解答-2"></a> 解答</h3>
+<p>答案是至少需要23人。</p>
+<p>假设有\(n\)个人，那么可能有\(365^n\)种组合。这里计算没有重复的生日会比较容易，一共有\(365 \times 364 \times … \times (365 - n + 1)\)种组合。那么我们需要找到最小的\(n\)使得<br />
+\[\frac{365 \times 364 \times … \times (365 - n + 1)}{365^n} \leq 1/2\]</p>
+<h2 id="扔硬币游戏"><a class="markdownIt-Anchor" href="#扔硬币游戏"></a> 扔硬币游戏</h2>
+<p>扔硬币的题目可能是考概率最常见的场景了。</p>
+<h3 id="1"><a class="markdownIt-Anchor" href="#1"></a> 1</h3>
+<p>A和B在玩掷硬币的游戏，A有\(n+1\)个正常的硬币，B有\(n\)个正常的硬币。如果他们都一次性掷完所有硬币，问A有更多的head的概率。</p>
+<p>我们将三种情况标记如下：</p>
+<ul>
+<li>\(E_1\): A的n个硬币中的head &gt; B的n个硬币中的head；</li>
+<li>\(E_2\): A的n个硬币中的head = B的n个硬币中的head；</li>
+<li>\(E_3\): A的n个硬币中的head &lt; B的n个硬币中的head；</li>
+</ul>
+<p>如果我们从A拿走一枚硬币，那么A和B的所有情况就都是一样了，那么\(E_1\)和\(E_3\)是对称的，所以\(P(E_1) = P(E_3)\)。让我们标记\(P(E_1) = P(E_3) = x, P(E_2) = y\)，那么\(2x + y = 1\)。</p>
+<p>如果A多一枚硬币，对于\(E_1\)，A本来就比B多，所以A增加一枚硬币不影响结果；对于\(E_2\)，如果多的那枚硬币是head，\(E_2\)就变成\(E_1\)了，概率为\(1/2\)；对于\(E_3\)，A增加一枚硬币不会改变\(E_1\)。所以最终结果就是，当A有\(n+1\)个硬币时，head比B多的概率是\(x + 0.5y = x + 0.5(1 - 2x) = 0.5\)。</p>
+<h3 id="2"><a class="markdownIt-Anchor" href="#2"></a> 2</h3>
+<p>A和B还是玩掷硬币的游戏，他们轮流掷一枚正常的硬币，A先掷。记录硬币的结果顺序，如果出现head–&gt;tail (HT)，那掷出这个tail的人赢。问A获胜的概率是多少。</p>
+<p>首先要把这个问题转换为先手和后手谁会赢的问题，因为在掷的过程中，A可能会成为新游戏的后手。<br />
+用\(P(A)\)和\(P(B)\)分别代表先手和后手获胜的概率，那么\(P(B) = 1 - P(A)\)。先手分别有\(1/2\)的概率掷\(H\)和\(T\)，那么先手获胜的条件概率为<br />
+\[P(A) = 1/2P(A|H) + 1/2P(A|T)\]<br />
+如果先手的第一次是\(T\)，那么先手将成为新游戏的后手，所以<br />
+\[P(A|T)=P(B)=1-P(A)\]<br />
+如果先手的第一次是\(H\)，那么就要讨论后手的情况。后手有\(1/2\)的概率掷得\(T\)，也就是后手赢先手输。如果后手以\(1/2\)概率掷得\(H\)，那么后手将变成新游戏中掷得一个\(H\)的先手，这种情况下，当前游戏的先手获胜的概率为\(1 - P(A|H)\)，所以<br />
+\[P(A|H) = 1/2 \times 0 + 1/2 \times (1 - P(A|H)) =&gt; P(A|H) = 1/3\]<br />
+结合以上所有信息，我们就能算出先手获胜的概率为<br />
+\[P(A) = 1/2 \times 1/3 + 1/2 \times (1 - P(A)) =&gt; P(A) = 4/9\]<br />
+直觉上想，也很容易猜到\(P(A) &lt; 1/2\)，因为先手不可能掷一次就赢，但后手有\(1/4\)的概率掷一次就赢。</p>
+<h2 id="扔色子游戏"><a class="markdownIt-Anchor" href="#扔色子游戏"></a> 扔色子游戏</h2>
+<h3 id="题目-3"><a class="markdownIt-Anchor" href="#题目-3"></a> 题目</h3>
+<p>有一个正常的六面色子，可以最多扔3次。扔到几就得几块钱，之后可以选择重新扔或者停止并获得当前的钱。你愿意花多少钱来玩这个游戏？</p>
+<h3 id="解答-3"><a class="markdownIt-Anchor" href="#解答-3"></a> 解答</h3>
+<p>问愿意花多少钱来玩这个游戏其实就是问玩这个游戏获得钱数的期望是多少。这是一个动态规划的问题，需要从最后的一轮往回推，因为最后一轮的期望值是可以直接算出来的。第三轮的期望值是\(1/6 \times (1 + 2 + 3 + 4 + 5 + 6) = $3.5\)。那么在第二轮的时候，如果扔出了4、5、6，就不会继续扔了，如果是1、2、3就会继续扔，那么第二轮的期望值是\(3/6 \times 3.5 + 1/6 \times (4 + 5 + 6) = $4.25\)。所以，在第一轮的时候，如果我花的钱比$4.25少，我是愿意扔的，也就是愿意玩这个游戏的。因此，我最多会花$4.25来玩这个游戏。</p>
+<h2 id="随机变量之和"><a class="markdownIt-Anchor" href="#随机变量之和"></a> 随机变量之和</h2>
+<h3 id="题目-4"><a class="markdownIt-Anchor" href="#题目-4"></a> 题目</h3>
+<p>假设\(X_1, X_2, …, X_n\)是IID (independent and identically-distributed) 地服从0到1 uniform distribution。问\(S_n = X_1 + X_2 + … + X_n \leq 1\)的概率。</p>
+<h3 id="解答-4"><a class="markdownIt-Anchor" href="#解答-4"></a> 解答</h3>
+<p>从\(n=1\)开始，\(P(S_1 = X_1 \leq 1) = 1\)。如果\(n=2\)，那么\(P(S_2 = X_1 + X_2 \leq 1) = 1/2\)，因为\(X_1\)和\(X_2\)画出来就是一个正方形，\(X_1 + X_2 \leq 1\)就是左下角的三角形的面积。如果\(n=3\)，那就是正方体左下角的三角锥的体积：\(1/3 \times 1/2 = 1/6\)。那么我们可以猜测\(P(S_n \leq 1) = 1 / n!\)。接下来用Induction来证明，先假设\(P(S_n \leq 1) = 1/n!\)成立，需要证明\(P(S_{n+1} \leq 1) = 1 / (n+1)!\)也成立。（证明过程有点复杂，请上网查询 😅）</p>
+
+      </div>
+      
+    </article>
+    <!-- 上一篇文章和下一篇文章 -->
+    
+      <div class="post-nav">
+
+
+
+  <div class="post-nav-next post-nav-item">
+    <a href="/2020/02/18/Leetcode-1008-Construct-Binary-Search-Tree-from-Preorder-Traversal/">
+      <span>
+        下一篇:    1008. Construct Binary Search Tree from Preorder Traversal 
+      </span>
+    </a>
+  </div>
+
+</div>
+
+    
+
+
+    <!-- 打赏 -->
+    
+
+    <!-- 分享 -->
+    
+
+    <!-- 评论 -->
+      
+        
+          <section id="comments" style="padding: 1em; background: rgba(255, 255, 255, 0.5); margin: 15px auto;" data-aos="fade-up">
+	<div id="vcomment" class="comment"></div>
+	<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js"></script>
+	<script>
+		new Valine({
+			el: '#vcomment',
+			notify: false,
+			verify: false,
+			app_id: "JeKrrf8cKxqcE2RM1Prfurdo-gzGzoHsz",
+			app_key: "49yq63vrEbnLYo5MwEG2Ktao",
+			placeholder: "",
+			avatar: ""
+		});
+	</script>
+</section>
+<style>
+</style>
+
+        
+      
+  </div>
+
+
+
+  
+    <div class="toc-aside">
+      <div class="toc-main">
+        <div class="toc-aside-title">
+          <i class="fa fa-list-ul" aria-hidden="true"></i><span>目录</span>
+        </div>
+        <div class="toc-content">
+          <link href="/js/tocbot/tocbot.css" rel="stylesheet">
+<script src="/js/tocbot/tocbot.min.js"></script>
+<div class="toc"></div>
+
+<script>
+  if ($('.toc').length > 0) {
+    var headerEl = 'h2, h3, h4',  //headers 
+      content = '.post-detail',//文章容器
+      idArr = {};  //标题数组以确定是否增加索引id
+      //add #id
+
+    $(content).children(headerEl).each(function () {
+      //去除空格以及多余标点
+      var headerId = $(this).text().replace(/[\s|\~|`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\_|\+|\=|\||\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?|\：|\，|\。]/g, '');
+
+      headerId = headerId.toLowerCase();
+      if (idArr[headerId]) {
+        //id已经存在
+        $(this).attr('id', headerId + '-' + idArr[headerId]);
+        idArr[headerId]++;
+      }
+      else {
+        //id未存在
+        idArr[headerId] = 1;
+        $(this).attr('id', headerId);
+      }
+    });
+
+    tocbot.init({
+      // Where to render the table of contents.
+      tocSelector: '.toc',
+      // Where to grab the headings to build the table of contents.
+      contentSelector: content,
+      // Which headings to grab inside of the contentSelector element.
+      headingSelector: headerEl,
+      scrollSmooth: true,
+      scrollSmoothOffset: -80,
+      headingsOffset: 130,
+      positionFixedSelector: '.toc-main',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  }
+
+</script>
+
+<style>
+.is-position-fixed {
+  position:fixed !important;
+  top: 64px;
+}
+
+</style>
+        </div>
+      </div>
+    </div>
+  
+</div>
+
+    </main>
+    <div class="footer bg-color">
+  <div class="footer-main">
+    <div class="link">
+      <a href="mailto:pearmonkeyhou@gmail.com" target="_blank" rel="noopener">
+        <i class="fa fa-envelope-o" aria-hidden="true"></i>
+      </a>
+      <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=270052740" target="_blank" rel="noopener">
+        <i class="fa fa-qq" aria-hidden="true"></i>
+      </a>
+      <a href="/atom.xml" target="_blank">
+        <i class="fa fa-rss" aria-hidden="true"></i>
+      </a>
+    </div>
+    <div class="footer-copyright">
+      Copyright © 2019 - 2021 | 雪梨猴 | Powered by <a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">Hexo</a>
+    </div>
+    
+  </div>
+</div>
+
+
+    
+      <div class="goTop bg-color">
+  <i class="fa fa-arrow-up" aria-hidden="true"></i>
+</div>
+<script src="/js/goTop.js"></script>
+    
+
+    
+
+    <!-- 图片放大 -->
+    
+      <script src="/js/fancybox/jquery.fancybox.min.js"></script>
+<script src="/js/wrapImage.js"></script>
+    
+
+    <!-- 爱心点击 -->
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script type="text/javascript" size="100" alpha='0.4' zIndex="-1" src="/js/ribbon.min.js"></script>
+    
+
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/v-plugs-ayu/lib/ayu.css">
+<script src="https://cdn.jsdelivr.net/npm/v-plugs-ayu/lib/ayu.umd.min.js"></script>
+<div id="appCopy">
+</div>
+<script>
+  var vm = new Vue({
+    el: '#appCopy',
+    data: {
+    },
+    computed: {
+    },
+    mounted() {
+      const that = this;
+      //  监听 ctrl + c事件  
+      $(document).unbind('keypress').bind('keypress', function (e) {
+        if (e.ctrlKey && e.keyCode == 67) {
+          doSomething();
+          // 返回false, 防止重复触发copy事件  
+          return false;
+        }
+      })
+
+      // 鼠标右键的复制事件  
+      $(document).unbind('copy').bind('copy', function (e) {
+        doSomething();
+        // console.log('右键复制 监听成功');
+      });
+
+      function doSomething() {
+        that.$notify({
+          title: '成功',
+          content: '复制成功了哦',
+          type: 'success'
+        })
+        // console.log('ctrl + c 监听成功');  
+      }
+    },
+    methods: {
+    },
+    created() { }
+  })
+</script>
+    
+
+    <!-- 输入框打字特效 -->
+    
+      <script src="/js/activate-power-mode.js"></script>
+      <script>
+          POWERMODE.colorful = true;  // 打开随机颜色特效
+          POWERMODE.shake = false;    // 关闭输入框抖动
+          document.body.addEventListener('input', POWERMODE);//监听打字事件
+      </script>
+    
+
+    <!-- markdown代码一键复制功能 -->
+    <script src="/js/clipboard/clipboard.min.js"></script>
+    <script>
+      !function (e, t, a) {
+        var copy = '复制';
+        /* code */
+        var initCopyCode = function(){
+          var copyHtml = '';
+          copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+          copyHtml += '<i class="fa fa-globe"></i><span>' + copy + '</span>';
+          copyHtml += '</button>';
+          $(".post-detail pre code").before(copyHtml);
+          new ClipboardJS('.btn-copy', {
+              target: function(trigger) {
+                  return trigger.nextElementSibling;
+              }
+          });
+        }
+        initCopyCode();
+      }(window, document);
+    </script>
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</body>
+</html>

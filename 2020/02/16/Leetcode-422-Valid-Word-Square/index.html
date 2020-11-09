@@ -49,7 +49,7 @@
   <div class="drawer-box" :class="{'active': visible}">
     <div class="drawer-box-head bg-color">
       <h3 class="drawer-box-head_title">雪梨猴的博客</h3>
-      <h5 class="drawer-box-head_desc">千磨万击还坚劲，任尔东西南北风</h5>
+      <h5 class="drawer-box-head_desc"></h5>
     </div>
     <div class="drawer-box-content">
       <ul class="drawer-box-content_menu">
@@ -318,8 +318,11 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接https-leetcode-com-problems-valid-word-square"><a href="#题目链接https-leetcode-com-problems-valid-word-square" class="headerlink" title="题目链接https://leetcode.com/problems/valid-word-square/"></a>题目链接<a href="https://leetcode.com/problems/valid-word-square/" target="_blank" rel="noopener">https://leetcode.com/problems/valid-word-square/</a></h2><h2 id="题目难度Easy-37-1"><a href="#题目难度Easy-37-1" class="headerlink" title="题目难度Easy 37.1%"></a>题目难度Easy 37.1%</h2><a id="more"></a>
-<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Given a sequence of words, check whether it forms a valid word square.</p>
+        <h2 id="题目链接httpsleetcodecomproblemsvalid-word-square"><a class="markdownIt-Anchor" href="#题目链接httpsleetcodecomproblemsvalid-word-square"></a> 题目链接https://leetcode.com/problems/valid-word-square/</h2>
+<h2 id="题目难度easy-371"><a class="markdownIt-Anchor" href="#题目难度easy-371"></a> 题目难度Easy 37.1%</h2>
+<a id="more"></a>
+<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
+<p>Given a sequence of words, check whether it forms a valid word square.</p>
 <p>A sequence of words forms a valid word square if the kth row and column read the exact same string, where 0 ≤ k &lt; max(numRows, numColumns).</p>
 <p>Note:</p>
 <ol>
@@ -328,7 +331,7 @@
 <li>Each word contains only lowercase English alphabet a-z.</li>
 </ol>
 <p>Example 1:</p>
-<pre><code>Input:
+<pre class="highlight"><code class="">Input:
 [
   &quot;abcd&quot;,
   &quot;bnrt&quot;,
@@ -346,27 +349,32 @@ The third row and third column both read &quot;crmy&quot;.
 The fourth row and fourth column both read &quot;dtye&quot;.
 
 Therefore, it is a valid word square.
-</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>细节挺多的。</p>
-<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre class="line-numbers language-lang-java"><code class="language-lang-java">class Solution {
-    public boolean validWordSquare(List<String> words) {
-        int N = words.size();
-        if(N != words.get(0).length()) return false;
-        char[][] ca = new char[N][N];
-        for(int i = 0; i < N; i++){
+</code></pre>
+<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
+<p>细节挺多的。</p>
+<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
+<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">validWordSquare</span><span class="hljs-params">(List&lt;String&gt; words)</span> </span>{
+        <span class="hljs-keyword">int</span> N = words.size();
+        <span class="hljs-keyword">if</span>(N != words.get(<span class="hljs-number">0</span>).length()) <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+        <span class="hljs-keyword">char</span>[][] ca = <span class="hljs-keyword">new</span> <span class="hljs-keyword">char</span>[N][N];
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; N; i++){
             String s = words.get(i);
-            if(s.length() > N) return false;
-            for(int j = 0; j < s.length(); j++)
+            <span class="hljs-keyword">if</span>(s.length() &gt; N) <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; s.length(); j++)
                 ca[i][j] = s.charAt(j);
         }
-        for(int i = 0; i < N; i++){
-            for(int j = i + 1; j < N; j++)
-                if(ca[i][j] != ca[j][i]) return false;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; N; i++){
+            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = i + <span class="hljs-number">1</span>; j &lt; N; j++)
+                <span class="hljs-keyword">if</span>(ca[i][j] != ca[j][i]) <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
         }
-        return true;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
     }
 }
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 98.18%<br>Memory: 16.67%</p>
+</code></pre>
+<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
+<p>Runtime: 98.18%<br />
+Memory: 16.67%</p>
 
       </div>
       
@@ -422,9 +430,6 @@ Therefore, it is a valid word square.
 	</script>
 </section>
 <style>
-#vcomment textarea {
-	background: url('/medias/comment_bg7.png') 100% 100% no-repeat;
-}
 </style>
 
         

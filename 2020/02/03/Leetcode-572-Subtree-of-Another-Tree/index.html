@@ -49,7 +49,7 @@
   <div class="drawer-box" :class="{'active': visible}">
     <div class="drawer-box-head bg-color">
       <h3 class="drawer-box-head_title">雪梨猴的博客</h3>
-      <h5 class="drawer-box-head_desc">千磨万击还坚劲，任尔东西南北风</h5>
+      <h5 class="drawer-box-head_desc"></h5>
     </div>
     <div class="drawer-box-content">
       <ul class="drawer-box-content_menu">
@@ -322,9 +322,13 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接-https-leetcode-com-problems-subtree-of-another-tree"><a href="#题目链接-https-leetcode-com-problems-subtree-of-another-tree" class="headerlink" title="题目链接 https://leetcode.com/problems/subtree-of-another-tree/"></a>题目链接 <a href="https://leetcode.com/problems/subtree-of-another-tree/" target="_blank" rel="noopener">https://leetcode.com/problems/subtree-of-another-tree/</a></h2><h2 id="题目难度-Easy-43-7"><a href="#题目难度-Easy-43-7" class="headerlink" title="题目难度 Easy 43.7%"></a>题目难度 Easy 43.7%</h2><a id="more"></a>
-<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Given two non-empty binary trees s and t, check whether tree t has exactly the same structure and node values with a subtree of s. A subtree of s is a tree consists of a node in s and all of this node’s descendants. The tree s could also be considered as a subtree of itself.<br>Example 1:</p>
-<pre><code>Given tree s:
+        <h2 id="题目链接-httpsleetcodecomproblemssubtree-of-another-tree"><a class="markdownIt-Anchor" href="#题目链接-httpsleetcodecomproblemssubtree-of-another-tree"></a> 题目链接 <a href="https://leetcode.com/problems/subtree-of-another-tree/" target="_blank" rel="noopener">https://leetcode.com/problems/subtree-of-another-tree/</a></h2>
+<h2 id="题目难度-easy-437"><a class="markdownIt-Anchor" href="#题目难度-easy-437"></a> 题目难度 Easy 43.7%</h2>
+<a id="more"></a>
+<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
+<p>Given two non-empty binary trees s and t, check whether tree t has exactly the same structure and node values with a subtree of s. A subtree of s is a tree consists of a node in s and all of this node’s descendants. The tree s could also be considered as a subtree of itself.<br />
+Example 1:</p>
+<pre class="highlight"><code class="">Given tree s:
      3
     / \
    4   5
@@ -336,22 +340,27 @@ Given tree t:
   / \
  1   2
 Return true, because t has the same structure and node values with a subtree of s.
-</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>t题目要求判断t是否是s的子树，子树就是s的一个树枝摘下来要完全等于t。那么就分别判断，如果root相等，那这两个树就要完全相等才行。否则就在s的左右子树中找。反正就是两种情况，包含root和不包含root。</p>
-<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre class="line-numbers language-lang-java"><code class="language-lang-java">class Solution {
-    public boolean isSubtree(TreeNode s, TreeNode t) {
-        if(t == null) return true;
-        if(s == null) return false;
-        return check(s, t) || isSubtree(s.left, t) || isSubtree(s.right, t);
+</code></pre>
+<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
+<p>t题目要求判断t是否是s的子树，子树就是s的一个树枝摘下来要完全等于t。那么就分别判断，如果root相等，那这两个树就要完全相等才行。否则就在s的左右子树中找。反正就是两种情况，包含root和不包含root。</p>
+<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
+<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isSubtree</span><span class="hljs-params">(TreeNode s, TreeNode t)</span> </span>{
+        <span class="hljs-keyword">if</span>(t == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+        <span class="hljs-keyword">if</span>(s == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+        <span class="hljs-keyword">return</span> check(s, t) || isSubtree(s.left, t) || isSubtree(s.right, t);
     }
 
-    public boolean check(TreeNode s, TreeNode t){
-        if(s == null && t == null) return true;
-        if(s == null || t == null || s.val != t.val) return false;
-        return check(s.left, t.left) && check(s.right, t.right);
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">check</span><span class="hljs-params">(TreeNode s, TreeNode t)</span></span>{
+        <span class="hljs-keyword">if</span>(s == <span class="hljs-keyword">null</span> &amp;&amp; t == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+        <span class="hljs-keyword">if</span>(s == <span class="hljs-keyword">null</span> || t == <span class="hljs-keyword">null</span> || s.val != t.val) <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+        <span class="hljs-keyword">return</span> check(s.left, t.left) &amp;&amp; check(s.right, t.right);
     }
 }
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime:  96.80%<br>Memory:  97.78%</p>
+</code></pre>
+<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
+<p>Runtime:  96.80%<br />
+Memory:  97.78%</p>
 
       </div>
       
@@ -407,9 +416,6 @@ Return true, because t has the same structure and node values with a subtree of 
 	</script>
 </section>
 <style>
-#vcomment textarea {
-	background: url('/medias/comment_bg7.png') 100% 100% no-repeat;
-}
 </style>
 
         

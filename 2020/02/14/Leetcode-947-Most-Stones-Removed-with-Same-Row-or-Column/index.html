@@ -49,7 +49,7 @@
   <div class="drawer-box" :class="{'active': visible}">
     <div class="drawer-box-head bg-color">
       <h3 class="drawer-box-head_title">雪梨猴的博客</h3>
-      <h5 class="drawer-box-head_desc">千磨万击还坚劲，任尔东西南北风</h5>
+      <h5 class="drawer-box-head_desc"></h5>
     </div>
     <div class="drawer-box-content">
       <ul class="drawer-box-content_menu">
@@ -322,55 +322,63 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接https-leetcode-com-problems-most-stones-removed-with-same-row-or-column"><a href="#题目链接https-leetcode-com-problems-most-stones-removed-with-same-row-or-column" class="headerlink" title="题目链接https://leetcode.com/problems/most-stones-removed-with-same-row-or-column/"></a>题目链接<a href="https://leetcode.com/problems/most-stones-removed-with-same-row-or-column/" target="_blank" rel="noopener">https://leetcode.com/problems/most-stones-removed-with-same-row-or-column/</a></h2><h2 id="题目难度Medium-54-8"><a href="#题目难度Medium-54-8" class="headerlink" title="题目难度Medium 54.8%"></a>题目难度Medium 54.8%</h2><a id="more"></a>
-<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>On a 2D plane, we place stones at some integer coordinate points.  Each coordinate point may have at most one stone.</p>
+        <h2 id="题目链接httpsleetcodecomproblemsmost-stones-removed-with-same-row-or-column"><a class="markdownIt-Anchor" href="#题目链接httpsleetcodecomproblemsmost-stones-removed-with-same-row-or-column"></a> 题目链接https://leetcode.com/problems/most-stones-removed-with-same-row-or-column/</h2>
+<h2 id="题目难度medium-548"><a class="markdownIt-Anchor" href="#题目难度medium-548"></a> 题目难度Medium 54.8%</h2>
+<a id="more"></a>
+<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
+<p>On a 2D plane, we place stones at some integer coordinate points.  Each coordinate point may have at most one stone.</p>
 <p>Now, a move consists of removing a stone that shares a column or row with another stone on the grid.</p>
 <p>What is the largest possible number of moves we can make?</p>
 <p>Example 1:</p>
-<pre><code>Input: stones = [[0,0],[0,1],[1,0],[1,2],[2,1],[2,2]]
+<pre class="highlight"><code class="">Input: stones = [[0,0],[0,1],[1,0],[1,2],[2,1],[2,2]]
 Output: 5
-</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre class="line-numbers language-lang-java"><code class="language-lang-java">class Solution {
-    class UnionFind{
-        int[] parent;
-        int count;
+</code></pre>
+<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
+<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
+<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
+    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UnionFind</span></span>{
+        <span class="hljs-keyword">int</span>[] parent;
+        <span class="hljs-keyword">int</span> count;
 
-        public UnionFind(int n){
-            parent = new int[n];
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">UnionFind</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span></span>{
+            parent = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[n];
             count = n;
-            for(int i = 0; i < n; i++)
+            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)
                 parent[i] = i;
         }
 
-        public int find(int p){
-            if(p == parent[p])
-                return p;
-            return parent[p] = find(parent[p]);
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">find</span><span class="hljs-params">(<span class="hljs-keyword">int</span> p)</span></span>{
+            <span class="hljs-keyword">if</span>(p == parent[p])
+                <span class="hljs-keyword">return</span> p;
+            <span class="hljs-keyword">return</span> parent[p] = find(parent[p]);
         }
 
-        public void union(int p, int q){
-            int rootp = find(p);
-            int rootq = find(q);
-            if(rootp != rootq){
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">union</span><span class="hljs-params">(<span class="hljs-keyword">int</span> p, <span class="hljs-keyword">int</span> q)</span></span>{
+            <span class="hljs-keyword">int</span> rootp = find(p);
+            <span class="hljs-keyword">int</span> rootq = find(q);
+            <span class="hljs-keyword">if</span>(rootp != rootq){
                 parent[rootq] = rootp;
                 count--;
             }
         }
     }
 
-    public int removeStones(int[][] stones) {
-        int N = stones.length;
-        UnionFind uf = new UnionFind(N);
-        for(int i = 0; i < N; i++){
-            for(int j = 0; j < N; j++){
-                if(i != j && (stones[i][0] == stones[j][0] || stones[i][1] == stones[j][1]))
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">removeStones</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[][] stones)</span> </span>{
+        <span class="hljs-keyword">int</span> N = stones.length;
+        UnionFind uf = <span class="hljs-keyword">new</span> UnionFind(N);
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; N; i++){
+            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; N; j++){
+                <span class="hljs-keyword">if</span>(i != j &amp;&amp; (stones[i][<span class="hljs-number">0</span>] == stones[j][<span class="hljs-number">0</span>] || stones[i][<span class="hljs-number">1</span>] == stones[j][<span class="hljs-number">1</span>]))
                     uf.union(i, j);
             }
         }
-        return N - uf.count;
+        <span class="hljs-keyword">return</span> N - uf.count;
     }
 }
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 25.74%<br>Memory: 78.54%</p>
+</code></pre>
+<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
+<p>Runtime: 25.74%<br />
+Memory: 78.54%</p>
 
       </div>
       
@@ -426,9 +434,6 @@ Output: 5
 	</script>
 </section>
 <style>
-#vcomment textarea {
-	background: url('/medias/comment_bg7.png') 100% 100% no-repeat;
-}
 </style>
 
         

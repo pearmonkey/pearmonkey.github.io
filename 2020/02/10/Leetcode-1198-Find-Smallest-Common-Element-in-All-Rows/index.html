@@ -49,7 +49,7 @@
   <div class="drawer-box" :class="{'active': visible}">
     <div class="drawer-box-head bg-color">
       <h3 class="drawer-box-head_title">雪梨猴的博客</h3>
-      <h5 class="drawer-box-head_desc">千磨万击还坚劲，任尔东西南北风</h5>
+      <h5 class="drawer-box-head_desc"></h5>
     </div>
     <div class="drawer-box-content">
       <ul class="drawer-box-content_menu">
@@ -314,43 +314,51 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接https-leetcode-com-problems-find-smallest-common-element-in-all-rows"><a href="#题目链接https-leetcode-com-problems-find-smallest-common-element-in-all-rows" class="headerlink" title="题目链接https://leetcode.com/problems/find-smallest-common-element-in-all-rows/"></a>题目链接<a href="https://leetcode.com/problems/find-smallest-common-element-in-all-rows/" target="_blank" rel="noopener">https://leetcode.com/problems/find-smallest-common-element-in-all-rows/</a></h2><h2 id="题目难度Medium-74-2"><a href="#题目难度Medium-74-2" class="headerlink" title="题目难度Medium 74.2%"></a>题目难度Medium 74.2%</h2><a id="more"></a>
-<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Given a matrix mat where every row is sorted in increasing order, return the smallest common element in all rows.</p>
+        <h2 id="题目链接httpsleetcodecomproblemsfind-smallest-common-element-in-all-rows"><a class="markdownIt-Anchor" href="#题目链接httpsleetcodecomproblemsfind-smallest-common-element-in-all-rows"></a> 题目链接https://leetcode.com/problems/find-smallest-common-element-in-all-rows/</h2>
+<h2 id="题目难度medium-742"><a class="markdownIt-Anchor" href="#题目难度medium-742"></a> 题目难度Medium 74.2%</h2>
+<a id="more"></a>
+<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
+<p>Given a matrix mat where every row is sorted in increasing order, return the smallest common element in all rows.</p>
 <p>If there is no common element, return -1.</p>
 <p>Example 1:</p>
-<pre><code>Input: mat = [[1,2,3,4,5],[2,4,5,8,10],[3,5,7,9,11],[1,3,5,7,9]]
+<pre class="highlight"><code class="">Input: mat = [[1,2,3,4,5],[2,4,5,8,10],[3,5,7,9,11],[1,3,5,7,9]]
 Output: 5
-</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>给定一个矩阵，每行都是sorted，找出最小的common value。从每一行的第一个数开始，纵向的最大是可能的答案，找到最大之后再在每个数组里找有没有这个数，如果有就是答案，如果没有就往后看一格。</p>
-<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre class="line-numbers language-lang-java"><code class="language-lang-java">class Solution {
-    public int smallestCommonElement(int[][] mat) {
-        int n = mat.length;
-        int m = mat[0].length;
-        int[] a = new int[n];
-        int max_ind = 0;
-        while(max_ind < m){
-            int max = get_max(mat, a);
-            boolean flag = false;
-            for(int i = 0; i < n; i++){
-                if(mat[i][a[i]] < max){
-                    flag = true;
+</code></pre>
+<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
+<p>给定一个矩阵，每行都是sorted，找出最小的common value。从每一行的第一个数开始，纵向的最大是可能的答案，找到最大之后再在每个数组里找有没有这个数，如果有就是答案，如果没有就往后看一格。</p>
+<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
+<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">smallestCommonElement</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[][] mat)</span> </span>{
+        <span class="hljs-keyword">int</span> n = mat.length;
+        <span class="hljs-keyword">int</span> m = mat[<span class="hljs-number">0</span>].length;
+        <span class="hljs-keyword">int</span>[] a = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[n];
+        <span class="hljs-keyword">int</span> max_ind = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">while</span>(max_ind &lt; m){
+            <span class="hljs-keyword">int</span> max = get_max(mat, a);
+            <span class="hljs-keyword">boolean</span> flag = <span class="hljs-keyword">false</span>;
+            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++){
+                <span class="hljs-keyword">if</span>(mat[i][a[i]] &lt; max){
+                    flag = <span class="hljs-keyword">true</span>;
                     max_ind = Math.max(max_ind, ++a[i]);
                 }
             }
-            if(flag == false)
-                return max;
+            <span class="hljs-keyword">if</span>(flag == <span class="hljs-keyword">false</span>)
+                <span class="hljs-keyword">return</span> max;
         }
-        return -1;
+        <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;
     }
 
-    public int get_max(int[][] mat, int[] a){
-        int res = mat[0][a[0]];
-        for(int i = 1; i < a.length; i++)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">get_max</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[][] mat, <span class="hljs-keyword">int</span>[] a)</span></span>{
+        <span class="hljs-keyword">int</span> res = mat[<span class="hljs-number">0</span>][a[<span class="hljs-number">0</span>]];
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; a.length; i++)
             res = Math.max(res, mat[i][a[i]]);
-        return res;
+        <span class="hljs-keyword">return</span> res;
     }
 }
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 55.43%<br>Memory: 100.00%</p>
+</code></pre>
+<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
+<p>Runtime: 55.43%<br />
+Memory: 100.00%</p>
 
       </div>
       
@@ -406,9 +414,6 @@ Output: 5
 	</script>
 </section>
 <style>
-#vcomment textarea {
-	background: url('/medias/comment_bg7.png') 100% 100% no-repeat;
-}
 </style>
 
         

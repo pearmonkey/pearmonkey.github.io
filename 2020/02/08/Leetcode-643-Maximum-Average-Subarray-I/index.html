@@ -49,7 +49,7 @@
   <div class="drawer-box" :class="{'active': visible}">
     <div class="drawer-box-head bg-color">
       <h3 class="drawer-box-head_title">雪梨猴的博客</h3>
-      <h5 class="drawer-box-head_desc">千磨万击还坚劲，任尔东西南北风</h5>
+      <h5 class="drawer-box-head_desc"></h5>
     </div>
     <div class="drawer-box-content">
       <ul class="drawer-box-content_menu">
@@ -318,28 +318,36 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接-https-leetcode-com-problems-maximum-average-subarray-i"><a href="#题目链接-https-leetcode-com-problems-maximum-average-subarray-i" class="headerlink" title="题目链接 https://leetcode.com/problems/maximum-average-subarray-i/"></a>题目链接 <a href="https://leetcode.com/problems/maximum-average-subarray-i/" target="_blank" rel="noopener">https://leetcode.com/problems/maximum-average-subarray-i/</a></h2><h2 id="题目难度-Easy-40-8"><a href="#题目难度-Easy-40-8" class="headerlink" title="题目难度 Easy 40.8%"></a>题目难度 Easy 40.8%</h2><a id="more"></a>
-<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Given an array consisting of n integers, find the contiguous subarray of given length k that has the maximum average value. And you need to output the maximum average value.</p>
+        <h2 id="题目链接-httpsleetcodecomproblemsmaximum-average-subarray-i"><a class="markdownIt-Anchor" href="#题目链接-httpsleetcodecomproblemsmaximum-average-subarray-i"></a> 题目链接 <a href="https://leetcode.com/problems/maximum-average-subarray-i/" target="_blank" rel="noopener">https://leetcode.com/problems/maximum-average-subarray-i/</a></h2>
+<h2 id="题目难度-easy-408"><a class="markdownIt-Anchor" href="#题目难度-easy-408"></a> 题目难度 Easy 40.8%</h2>
+<a id="more"></a>
+<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
+<p>Given an array consisting of n integers, find the contiguous subarray of given length k that has the maximum average value. And you need to output the maximum average value.</p>
 <p>Example 1:</p>
-<pre><code>Input: [1,12,-5,-6,50,3], k = 4
+<pre class="highlight"><code class="">Input: [1,12,-5,-6,50,3], k = 4
 Output: 12.75
 Explanation: Maximum average is (12-5-6+50)/4 = 51/4 = 12.75
-</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>题目要求找出长度为k同时平均值最大的子串，返回这个平均值。那就是维持一个k长度的sliding window去计算平均值，并且随时更新result。</p>
-<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre class="line-numbers language-lang-java"><code class="language-lang-java">class Solution {
-    public double findMaxAverage(int[] nums, int k) {
-        double start = 0;
-        for(int i = 0; i < k; i++)
+</code></pre>
+<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
+<p>题目要求找出长度为k同时平均值最大的子串，返回这个平均值。那就是维持一个k长度的sliding window去计算平均值，并且随时更新result。</p>
+<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
+<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">double</span> <span class="hljs-title">findMaxAverage</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums, <span class="hljs-keyword">int</span> k)</span> </span>{
+        <span class="hljs-keyword">double</span> start = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; k; i++)
             start += nums[i];
-        double res = start;
-        for(int i = k; i < nums.length; i++){
+        <span class="hljs-keyword">double</span> res = start;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = k; i &lt; nums.length; i++){
             start += nums[i] - nums[i - k];
             res = Math.max(res, start);
         }
-        return res / k;
+        <span class="hljs-keyword">return</span> res / k;
     }
 }
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 91.37%<br>Memory: 53.85%</p>
+</code></pre>
+<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
+<p>Runtime: 91.37%<br />
+Memory: 53.85%</p>
 
       </div>
       
@@ -395,9 +403,6 @@ Explanation: Maximum average is (12-5-6+50)/4 = 51/4 = 12.75
 	</script>
 </section>
 <style>
-#vcomment textarea {
-	background: url('/medias/comment_bg7.png') 100% 100% no-repeat;
-}
 </style>
 
         

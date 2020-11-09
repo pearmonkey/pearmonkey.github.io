@@ -49,7 +49,7 @@
   <div class="drawer-box" :class="{'active': visible}">
     <div class="drawer-box-head bg-color">
       <h3 class="drawer-box-head_title">雪梨猴的博客</h3>
-      <h5 class="drawer-box-head_desc">千磨万击还坚劲，任尔东西南北风</h5>
+      <h5 class="drawer-box-head_desc"></h5>
     </div>
     <div class="drawer-box-content">
       <ul class="drawer-box-content_menu">
@@ -318,27 +318,39 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接-https-leetcode-com-problems-find-all-numbers-disappeared-in-an-array"><a href="#题目链接-https-leetcode-com-problems-find-all-numbers-disappeared-in-an-array" class="headerlink" title="题目链接 https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/"></a>题目链接 <a href="https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/" target="_blank" rel="noopener">https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/</a></h2><h2 id="题目难度-Easy-55-0"><a href="#题目难度-Easy-55-0" class="headerlink" title="题目难度 Easy 55.0%"></a>题目难度 Easy 55.0%</h2><a id="more"></a>
-<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Given an array of integers where 1 ≤ a[i] ≤ n (n = size of array), some elements appear twice and others appear once.<br>Find all the elements of [1, n] inclusive that do not appear in this array.<br>Could you do it without extra space and in O(n) runtime? You may assume the returned list does not count as extra space.<br>Example 1:</p>
-<pre><code>Input:
+        <h2 id="题目链接-httpsleetcodecomproblemsfind-all-numbers-disappeared-in-an-array"><a class="markdownIt-Anchor" href="#题目链接-httpsleetcodecomproblemsfind-all-numbers-disappeared-in-an-array"></a> 题目链接 <a href="https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/" target="_blank" rel="noopener">https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/</a></h2>
+<h2 id="题目难度-easy-550"><a class="markdownIt-Anchor" href="#题目难度-easy-550"></a> 题目难度 Easy 55.0%</h2>
+<a id="more"></a>
+<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
+<p>Given an array of integers where 1 ≤ a[i] ≤ n (n = size of array), some elements appear twice and others appear once.<br />
+Find all the elements of [1, n] inclusive that do not appear in this array.<br />
+Could you do it without extra space and in O(n) runtime? You may assume the returned list does not count as extra space.<br />
+Example 1:</p>
+<pre class="highlight"><code class="">Input:
 [4,3,2,7,8,2,3,1]
 
 Output:
 [5,6]
-</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>题目给定一个数组，这个数组应该包含从1到n的整数（n是这个数组的长度）。但是有些元素重复了导致另外一些消失了，现在要把消失的元素都找出来。要求用O(n) time O(1) space。<br>像这种数组的值限制在长度里面，并且要求线性的时间和常数的空间，一般都是要把值当index用去标记哪些出现过。然后再统计那些没有被标记的位置得到消失的元素。</p>
-<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre class="line-numbers language-lang-java"><code class="language-lang-java">class Solution {
-    public List<Integer> findDisappearedNumbers(int[] nums) {
-        List<Integer> res = new ArrayList();
-        for(int i = 0; i < nums.length; i++)
-            nums[Math.abs(nums[i]) - 1] = -Math.abs(nums[Math.abs(nums[i]) - 1]);
-        for(int i = 0; i < nums.length; i++)
-            if(nums[i] > 0)
-                res.add(i+1);
-        return res;
+</code></pre>
+<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
+<p>题目给定一个数组，这个数组应该包含从1到n的整数（n是这个数组的长度）。但是有些元素重复了导致另外一些消失了，现在要把消失的元素都找出来。要求用O(n) time O(1) space。<br />
+像这种数组的值限制在长度里面，并且要求线性的时间和常数的空间，一般都是要把值当index用去标记哪些出现过。然后再统计那些没有被标记的位置得到消失的元素。</p>
+<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
+<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title">findDisappearedNumbers</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums)</span> </span>{
+        List&lt;Integer&gt; res = <span class="hljs-keyword">new</span> ArrayList();
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.length; i++)
+            nums[Math.abs(nums[i]) - <span class="hljs-number">1</span>] = -Math.abs(nums[Math.abs(nums[i]) - <span class="hljs-number">1</span>]);
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.length; i++)
+            <span class="hljs-keyword">if</span>(nums[i] &gt; <span class="hljs-number">0</span>)
+                res.add(i+<span class="hljs-number">1</span>);
+        <span class="hljs-keyword">return</span> res;
     }
 }
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 90.63%<br>Memory: 73.58%</p>
+</code></pre>
+<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
+<p>Runtime: 90.63%<br />
+Memory: 73.58%</p>
 
       </div>
       
@@ -394,9 +406,6 @@ Output:
 	</script>
 </section>
 <style>
-#vcomment textarea {
-	background: url('/medias/comment_bg7.png') 100% 100% no-repeat;
-}
 </style>
 
         
