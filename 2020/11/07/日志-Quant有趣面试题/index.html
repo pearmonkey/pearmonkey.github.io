@@ -327,7 +327,7 @@
 <h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h3>
 <p>假设你在一个单向环形的赛道上。有N个加油站随机分布在赛道的不同位置，所有加油站的油加起来刚好能跑完一圈。假设你的车最开始是没有油的，但是你能选择任意一个位置作为开始位置，并且在前进过程中每遇到一个加油站你能加里面的油。请问，你是否总能选择一个合适的开始位置去跑完一圈？</p>
 <h3 id="解答"><a class="markdownIt-Anchor" href="#解答"></a> 解答</h3>
-<p>从最简单的情况开始想，假如\(N=1\)，答案是肯定能跑完；假如\(N=2\)，用\(x_1\)和\(x_2\)表示站1和站2的油分别能跑的距离，用\(y_1\)和\(y_2\)表示站1-&gt;站2的距离和站2-&gt;站1的距离（赛道是单向环形），由于\(x_1+x_2=1\)并且\(y_1+y_2=1\)，那么\(x_1 \geq y_1\)或者\(x_2 \geq y_2\) (因为\(x_1 &lt; y_1\)和\(x_2 &lt; y_2\)不可能同时成立)。如果\(x_1 \geq y_1\)，我们就能从站1出发，有足够的油来到站2，并加完站2的油，去跑完剩下的。反之亦然。</p>
+<p>从最简单的情况开始想，假如<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>N</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">N=1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>，答案是肯定能跑完；假如\(N=2\)，用\(x_1\)和\(x_2\)表示站1和站2的油分别能跑的距离，用\(y_1\)和\(y_2\)表示站1-&gt;站2的距离和站2-&gt;站1的距离（赛道是单向环形），由于\(x_1+x_2=1\)并且\(y_1+y_2=1\)，那么\(x_1 \geq y_1\)或者\(x_2 \geq y_2\) (因为\(x_1 &lt; y_1\)和\(x_2 &lt; y_2\)不可能同时成立)。如果\(x_1 \geq y_1\)，我们就能从站1出发，有足够的油来到站2，并加完站2的油，去跑完剩下的。反之亦然。</p>
 <p>接下来可以用Induction来证明，假设\(N=n\)成立，那么\(N=n+1\)也成立。</p>
 <p>对于\(N=n+1\)，我们有\(x_1+x_2+…+x_{n+1}=1\)并且\(y_1+y_2+…+y_{n+1}=1\)。所以肯定存在一个\(i\)，\(1 \leq i \leq n+1\)，使得\(x_i \geq y_i\)，这就意味着一旦车到达了站\(i\)，就能到达站\(i+1\)。用另外的话说，我们可以将站\(i\)和站\(i+1\)合并起来，合并站将拥有油能跑\(x_i + x_{i+1}\)距离。这样就将问题转化为了\(N=n\)问题，所以\(N=n+1\)也就同样成立了。</p>
 <h2 id="生日问题"><a class="markdownIt-Anchor" href="#生日问题"></a> 生日问题</h2>
@@ -494,21 +494,41 @@
 
 
 
-<!-- mathjax config similar to math.stackexchange -->
 <script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    jax: ["input/TeX", "output/HTML-CSS"],   # 可以更改mathjax的默认输出样式
-    tex2jax: {
-        inlineMath: [ ['\\(', '\\)'] ],
-        displayMath: [ ['\\[', '\\]']],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    },
-    messageStyle: "none",
-    "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
-});
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            preferredFont: "TeX",
+            availableFonts: ["STIX","TeX"],
+            linebreaks: { automatic:true },
+            EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+        },
+        tex2jax: {
+            inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+            processEscapes: true,
+            ignoreClass: "tex2jax_ignore|dno",
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        },
+        TeX: {
+            equationNumbers: { autoNumber: "AMS" }, <!-- 2017.6.30，masikkk新增，MathJax公式添加编号支持 -->
+            noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+            Macros: { href: "{}" }
+        },
+      messageStyle: "none"
+    });
 </script>
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
 
 
 
