@@ -18,7 +18,8 @@
   
   <link rel="stylesheet" href="/css/animate.min.css">
   <link rel="stylesheet" href="/css/style.css">
-  
+
+  <link rel="stylesheet" href="/css/tomorrow-night.css" media="screen" type="text/css">
   
     <link rel="stylesheet" href="/js/fancybox/jquery.fancybox.min.css">
   
@@ -312,7 +313,17 @@
 
 
     </main>
-    <div class="footer bg-color">
+    <script src="/js/prettify.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+ $('pre').addClass('prettyprint linenums');
+ $('code').addClass('prettyprint');
+ prettyPrint();
+ })
+</script>
+
+<div class="footer bg-color">
   <div class="footer-main">
     <div class="link">
       <a href="mailto:pearmonkeyhou@gmail.com" target="_blank" rel="noopener">

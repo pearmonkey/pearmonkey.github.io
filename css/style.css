@@ -551,6 +551,7 @@ a {
 .post-detail pre {
 /* 方便copy代码按钮（btn-copy）的定位 */
   position: relative;
+  overflow: scroll;
 }
 .post-detail pre .btn-copy {
   display: inline-block;
