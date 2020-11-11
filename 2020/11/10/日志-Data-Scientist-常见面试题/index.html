@@ -10,7 +10,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>雪梨猴的小站</title>
+  <title>Data Scientist 常见面试题 | 雪梨猴的小站</title>
   
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -101,11 +101,11 @@
           </li>
         
           <li class="drawer-box-content_item">
-            <a href="/friends" class="menu-item-link">
+            <a href="/link" class="menu-item-link">
               
                 <i class="fa fa-link" aria-hidden="true"></i>
               
-              <span>友情链接</span>
+              <span>常用链接</span>
             </a>
           </li>
         
@@ -196,11 +196,11 @@
           </li>
         
           <li class="menu-item">
-            <a href="/friends" class="menu-item-link">
+            <a href="/link" class="menu-item-link">
               
                 <i class="fa fa-link" aria-hidden="true"></i>
               
-              <span>友情链接</span>
+              <span>常用链接</span>
             </a>
           </li>
         
@@ -278,29 +278,223 @@
 </header>
 
     <main class="main" style="margin-top: 60px;">
-      <div style="width: 100%;height: 50vh;overflow: hidden;background-image: url('/medias/archiveImg.png');background-size: cover; 
-background-position: center center;">
-</div>
-<section class="archive">
-  <div class="archive-content">
-    <ul class="post-archive">
       
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            preferredFont: "TeX",
+            availableFonts: ["STIX","TeX"],
+            linebreaks: { automatic:true },
+            EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+        },
+        tex2jax: {
+            inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+            processEscapes: true,
+            ignoreClass: "tex2jax_ignore|dno",
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        },
+        TeX: {
+            equationNumbers: { autoNumber: "AMS" }, <!-- 2017.6.30，masikkk新增，MathJax公式添加编号支持 -->
+            noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+            Macros: { href: "{}" }
+        },
+      messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+<div class="row justify-center">
+  <div class="main-content">
+    <article class="post post-detail">
       
+        <div class="post-title">
+          Data Scientist 常见面试题
+        </div>
+      
+
+      <div class="post-meta">
+
+      
+        Sherry
+        <h>|</h>
+      
+
+      
+        <span class="post-time">2020-11-10</span>
+        <h>|</h>
+      
+
         
           
-          <div class="year" data-aos="zoom-in-up">
-              <div class="bullet"></div>
-              <a href="/archives/2020">2020</a>
-          </div>
+            <a href="/categories/%E6%97%A5%E5%BF%97/" class="">
+              日志
+            </a>
+          
+          <h>|</h>
         
-        <li class="post-item" data-aos="fade-left">
-          <span class="post-date">02-18</span>
-          <a class="post-title" href="/2020/02/18/Leetcode-14-Longest-Common-Prefix/">14. Longest Common Prefix</a>
-        </li>
+
+        
+          
+            <a href="/tags/%E9%9D%A2%E8%AF%95/" class="">
+              面试
+            </a>
+          
+            <a href="/tags/%E7%BB%9F%E8%AE%A1/" class="">
+              统计
+            </a>
+          
+
+        
+      </div>
+      <div class="post-content">
+        <p>Data Scientist（DS）面试内容和Software Engineer（SE）的面试内容大不相同。SE主要是刷算法题，而DS主要是复习统计的基础知识并应用到实际场景之中。</p>
+<a id="more"></a>
+<h2 id="1-linear-regression"><a class="markdownIt-Anchor" href="#1-linear-regression"></a> 1. Linear Regression</h2>
+<p><strong>What are the assumptions of Linear Regression?</strong></p>
+<ol>
+<li>Linear Relationship (mean of the response variable is a linear combination of \(\beta\) and \(X\));</li>
+<li>Independence (observations are independent of each other);</li>
+<li>Multivariable Normality (residuals are normally distributed).</li>
+</ol>
+<p><strong>How to estimate coefficients \(\beta\), correlation \(r\), and R square \(R^2\)?</strong><br />
+If assume \(Y = \beta ^T X + \epsilon\) and \(\epsilon \sim N(0, 1)\), then<br />
+\[\hat{\beta}_{OLS} = (X ^T X)X ^T Y = \frac{cov(X, Y)}{Var(X)}\],<br />
+\[r = correlation(X, Y) = \frac{cov(X, Y)}{\sigma_X \sigma_Y}\],<br />
+\[R^2 = r^2 = \frac{cov(X, Y)^2}{Var(X) Var(Y)}\].</p>
+
+      </div>
       
-    </ul>
+    </article>
+    <!-- 上一篇文章和下一篇文章 -->
+    
+      <div class="post-nav">
+
+
+
+  <div class="post-nav-next post-nav-item">
+    <a href="/2020/11/07/%E6%97%A5%E5%BF%97-Quant%E6%9C%89%E8%B6%A3%E9%9D%A2%E8%AF%95%E9%A2%98/">
+      <span>
+        下一篇:    Quant有趣面试题 
+      </span>
+    </a>
   </div>
+
+</div>
+
+    
+
+
+    <!-- 打赏 -->
+    
+
+    <!-- 分享 -->
+    
+
+    <!-- 评论 -->
+      
+        
+          <section id="comments" style="padding: 1em; background: rgba(255, 255, 255, 0.5); margin: 15px auto;" data-aos="fade-up">
+	<div id="vcomment" class="comment"></div>
+	<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js"></script>
+	<script>
+		new Valine({
+			el: '#vcomment',
+			notify: false,
+			verify: false,
+			app_id: "JeKrrf8cKxqcE2RM1Prfurdo-gzGzoHsz",
+			app_key: "49yq63vrEbnLYo5MwEG2Ktao",
+			placeholder: "",
+			avatar: ""
+		});
+	</script>
 </section>
+
+        
+      
+  </div>
+
+
+
+  
+    <div class="toc-aside">
+      <div class="toc-main">
+        <div class="toc-aside-title">
+          <i class="fa fa-list-ul" aria-hidden="true"></i><span>目录</span>
+        </div>
+        <div class="toc-content">
+          <link href="/js/tocbot/tocbot.css" rel="stylesheet">
+<script src="/js/tocbot/tocbot.min.js"></script>
+<div class="toc"></div>
+
+<script>
+  if ($('.toc').length > 0) {
+    var headerEl = 'h2, h3, h4',  //headers 
+      content = '.post-detail',//文章容器
+      idArr = {};  //标题数组以确定是否增加索引id
+      //add #id
+
+    $(content).children(headerEl).each(function () {
+      //去除空格以及多余标点
+      var headerId = $(this).text().replace(/[\s|\~|`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\_|\+|\=|\||\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?|\：|\，|\。]/g, '');
+
+      headerId = headerId.toLowerCase();
+      if (idArr[headerId]) {
+        //id已经存在
+        $(this).attr('id', headerId + '-' + idArr[headerId]);
+        idArr[headerId]++;
+      }
+      else {
+        //id未存在
+        idArr[headerId] = 1;
+        $(this).attr('id', headerId);
+      }
+    });
+
+    tocbot.init({
+      // Where to render the table of contents.
+      tocSelector: '.toc',
+      // Where to grab the headings to build the table of contents.
+      contentSelector: content,
+      // Which headings to grab inside of the contentSelector element.
+      headingSelector: headerEl,
+      scrollSmooth: true,
+      scrollSmoothOffset: -80,
+      headingsOffset: 130,
+      positionFixedSelector: '.toc-main',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  }
+
+</script>
+
+<style>
+.is-position-fixed {
+  position:fixed !important;
+  top: 64px;
+}
+
+</style>
+        </div>
+      </div>
+    </div>
+  
+</div>
 
     </main>
     <script src="/js/prettify.js"></script>

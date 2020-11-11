@@ -330,7 +330,7 @@ a {
   margin-top: 30px;
   background-color: #fff;
   border-radius: 10px;
-  overflow: hidden;
+  overflow: auto;
 }
 .posts .post .post-main {
   flex: 1;
@@ -356,22 +356,24 @@ a {
   word-break: break-all;
   color: rgba(0,0,0,0.66);
   margin-top: 10px;
+  margin-bottom: 10px;
   line-height: 27px;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 6;
 }
 .posts .post .post-main .post-content a {
   text-decoration: none;
 }
-.posts .post .post-time {
-  padding-left: 25px;
+.posts .post .read-more {
+  padding-bottom: 15px;
+  padding-right: 20px;
+  padding-left: 24px;
+}
+.posts .post .read-more .post-time {
+  float: left;
   color: #888;
   font-size: 14px;
-}
-.posts .post .read-more {
-  padding-bottom: 20px;
-  padding-right: 20px;
 }
 .posts .post .read-more a {
   float: right;
@@ -1201,63 +1203,70 @@ a {
   color: #34495e;
   border-radius: 10px;
 }
-.friends-title {
+.link .title {
+  font-family: Microsoft YaHei;
+  text-align: center;
   font-size: 1.6em;
   color: #34495e;
-  text-align: center;
   padding: 15px 0;
 }
-#friends {
-  min-height: calc(60vh - 60px);
-}
-.friends {
+.link .link-content {
+  width: 100%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  padding: 15px;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-around;
 }
-.friends .friend {
-  width: 28%;
+.link .link-content .link-block {
   box-shadow: 0 1px 20px -6px rgba(0,0,0,0.5);
-  padding: 10px 15px;
+  width: 29%;
+  height: 360px;
   display: flex;
-  background-color: #fff;
-  transition: all 0.5s;
   margin-top: 10px;
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: auto;
 }
-.friends .friend:hover {
-  transform: scale(1.2);
-}
-.friends .friend .friend-avatar {
-  width: 60px;
-  height: 60px;
-  margin-right: 10px;
-}
-.friends .friend .friend-avatar img {
-  width: 100%;
-  height: 100%;
-}
-.friends .friend .friend-info {
+.link .link-content .link-block .link-main {
   flex: 1;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }
-.friends .friend .friend-info .friend-introduction {
-  width: 100%;
-  word-break: break-all;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  overflow: hidden;
-  color: #a3a3a3;
-  font-size: 14px;
+.link .link-content .link-block .link-main h3 {
+  text-align: center;
+  padding: 10px 0 10px 0;
+  font-size: 1.2em;
+  font-family: Microsoft YaHei;
+  color: #34495e;
 }
-@media (max-width: 730px) {
-  .friends .friend {
-    width: 43%;
+.link .link-content .link-block .link-main ul {
+  padding-left: 20px;
+  display: inline-block;
+  text-align: left;
+}
+@media (max-width: 992px) {
+  .link .link-content {
+    height: 100%;
+    width: 95%;
+    display: flex;
+    flex-direction: column;
   }
-}
-@media (max-width: 551px) {
-  .friends .friend {
+  .link .link-content .link-block {
     width: 100%;
+    margin-top: 10px;
+    flex-direction: column !important;
+    height: auto;
+  }
+  .link .link-content .link-block .link-main {
+    flex: none;
+    padding: 20px;
   }
 }
 .about .title {

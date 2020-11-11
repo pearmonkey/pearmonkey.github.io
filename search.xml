@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>Data Scientist 常见面试题</title>
+      <link href="2020/11/10/%E6%97%A5%E5%BF%97-Data-Scientist-%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
+      <url>2020/11/10/%E6%97%A5%E5%BF%97-Data-Scientist-%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[<p>Data Scientist（DS）面试内容和Software Engineer（SE）的面试内容大不相同。SE主要是刷算法题，而DS主要是复习统计的基础知识并应用到实际场景之中。</p><a id="more"></a><h2 id="1-linear-regression"><a class="markdownIt-Anchor" href="#1-linear-regression"></a> 1. Linear Regression</h2><p><strong>What are the assumptions of Linear Regression?</strong></p><ol><li>Linear Relationship (mean of the response variable is a linear combination of \(\beta\) and \(X\));</li><li>Independence (observations are independent of each other);</li><li>Multivariable Normality (residuals are normally distributed).</li></ol><p><strong>How to estimate coefficients \(\beta\), correlation \(r\), and R square \(R^2\)?</strong><br />If assume \(Y = \beta ^T X + \epsilon\) and \(\epsilon \sim N(0, 1)\), then<br />\[\hat{\beta}_{OLS} = (X ^T X)X ^T Y = \frac{cov(X, Y)}{Var(X)}\],<br />\[r = correlation(X, Y) = \frac{cov(X, Y)}{\sigma_X \sigma_Y}\],<br />\[R^2 = r^2 = \frac{cov(X, Y)^2}{Var(X) Var(Y)}\].</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 日志 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 面试 </tag>
+            
+            <tag> 统计 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Quant有趣面试题</title>
       <link href="2020/11/07/%E6%97%A5%E5%BF%97-Quant%E6%9C%89%E8%B6%A3%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
       <url>2020/11/07/%E6%97%A5%E5%BF%97-Quant%E6%9C%89%E8%B6%A3%E9%9D%A2%E8%AF%95%E9%A2%98/</url>

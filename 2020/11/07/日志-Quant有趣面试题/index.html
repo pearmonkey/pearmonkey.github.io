@@ -101,11 +101,11 @@
           </li>
         
           <li class="drawer-box-content_item">
-            <a href="/friends" class="menu-item-link">
+            <a href="/link" class="menu-item-link">
               
                 <i class="fa fa-link" aria-hidden="true"></i>
               
-              <span>友情链接</span>
+              <span>常用链接</span>
             </a>
           </li>
         
@@ -196,11 +196,11 @@
           </li>
         
           <li class="menu-item">
-            <a href="/friends" class="menu-item-link">
+            <a href="/link" class="menu-item-link">
               
                 <i class="fa fa-link" aria-hidden="true"></i>
               
-              <span>友情链接</span>
+              <span>常用链接</span>
             </a>
           </li>
         
@@ -278,7 +278,46 @@
 </header>
 
     <main class="main" style="margin-top: 60px;">
-      <div class="row justify-center">
+      
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            preferredFont: "TeX",
+            availableFonts: ["STIX","TeX"],
+            linebreaks: { automatic:true },
+            EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+        },
+        tex2jax: {
+            inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+            processEscapes: true,
+            ignoreClass: "tex2jax_ignore|dno",
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        },
+        TeX: {
+            equationNumbers: { autoNumber: "AMS" }, <!-- 2017.6.30，masikkk新增，MathJax公式添加编号支持 -->
+            noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+            Macros: { href: "{}" }
+        },
+      messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+<div class="row justify-center">
   <div class="main-content">
     <article class="post post-detail">
       
@@ -379,6 +418,12 @@
     <!-- 上一篇文章和下一篇文章 -->
     
       <div class="post-nav">
+
+  <div class="post-nav-prev post-nav-item">
+    <a href="/2020/11/10/%E6%97%A5%E5%BF%97-Data-Scientist-%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/">
+      上一篇:    Data Scientist 常见面试题
+    </a>
+  </div>
 
 
 
@@ -492,46 +537,6 @@
     </div>
   
 </div>
-
-
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        "HTML-CSS": {
-            preferredFont: "TeX",
-            availableFonts: ["STIX","TeX"],
-            linebreaks: { automatic:true },
-            EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
-        },
-        tex2jax: {
-            inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
-            processEscapes: true,
-            ignoreClass: "tex2jax_ignore|dno",
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        },
-        TeX: {
-            equationNumbers: { autoNumber: "AMS" }, <!-- 2017.6.30，masikkk新增，MathJax公式添加编号支持 -->
-            noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
-            Macros: { href: "{}" }
-        },
-      messageStyle: "none"
-    });
-</script>
-<!-- 给MathJax元素添加has-jax class -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for(i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-<!-- 通过连接CDN加载MathJax的js代码 -->
-<script type="text/javascript" async
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
-
-
 
     </main>
     <script src="/js/prettify.js"></script>
