@@ -317,57 +317,46 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接"><a class="markdownIt-Anchor" href="#题目链接"></a> 题目链接</h2>
-<p><a href="https://leetcode.com/problems/longest-palindromic-substring/" target="_blank" rel="noopener">https://leetcode.com/problems/longest-palindromic-substring/</a></p>
-<a id="more"></a>
-<h2 id="题目难度"><a class="markdownIt-Anchor" href="#题目难度"></a> 题目难度</h2>
-<p>Medium 28.4%</p>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<p>Given a string s, find the longest palindromic substring in s. You may assume that the maximum length of s is 1000.<br />
-Example 1:</p>
-<pre class="highlight"><code class="">Input: &quot;babad&quot;
+        <h2 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h2><p><a href="https://leetcode.com/problems/longest-palindromic-substring/" target="_blank" rel="noopener">https://leetcode.com/problems/longest-palindromic-substring/</a><br><a id="more"></a></p>
+<h2 id="题目难度"><a href="#题目难度" class="headerlink" title="题目难度"></a>题目难度</h2><p>Medium 28.4%</p>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Given a string s, find the longest palindromic substring in s. You may assume that the maximum length of s is 1000.<br>Example 1:</p>
+<pre><code>Input: &quot;babad&quot;
 Output: &quot;bab&quot;
 Note: &quot;aba&quot; is also a valid answer.
-</code></pre>
-<p>Example 2:</p>
-<pre class="highlight"><code class="">Input: &quot;cbbd&quot;
+</code></pre><p>Example 2:</p>
+<pre><code>Input: &quot;cbbd&quot;
 Output: &quot;bb&quot;
-</code></pre>
-<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
-<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
-<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
-    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">longestPalindrome</span><span class="hljs-params">(String s)</span> </span>{
-        <span class="hljs-keyword">int</span> n = s.length();
-        <span class="hljs-keyword">if</span>(n &lt; <span class="hljs-number">2</span>) <span class="hljs-keyword">return</span> s;
-        <span class="hljs-keyword">char</span>[] ca = s.toCharArray();
-        <span class="hljs-keyword">int</span>[][] dp = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[n][n];
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)
-            dp[i][i] = <span class="hljs-number">1</span>;
-        String res = <span class="hljs-string">""</span> + ca[<span class="hljs-number">0</span>];
-        <span class="hljs-keyword">int</span> res_l = <span class="hljs-number">1</span>;
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> k = <span class="hljs-number">1</span>; k &lt; n; k++){
-            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n - k; i++){
-                <span class="hljs-keyword">int</span> j = i + k;
-                <span class="hljs-keyword">if</span>(ca[i] != ca[j]){
-                    dp[i][j] = <span class="hljs-number">0</span>;
-                } <span class="hljs-keyword">else</span> {
-                    <span class="hljs-keyword">if</span>(j - i == <span class="hljs-number">1</span> || dp[i+<span class="hljs-number">1</span>][j-<span class="hljs-number">1</span>] == <span class="hljs-number">1</span>){
-                        dp[i][j] = <span class="hljs-number">1</span>;
-                        <span class="hljs-keyword">if</span>(j - i + <span class="hljs-number">1</span> &gt; res_l){
-                            res_l = j - i + <span class="hljs-number">1</span>;
-                            res = s.substring(i, j + <span class="hljs-number">1</span>);
+</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre class="line-numbers language-lang-java"><code class="language-lang-java">class Solution {
+    public String longestPalindrome(String s) {
+        int n = s.length();
+        if(n < 2) return s;
+        char[] ca = s.toCharArray();
+        int[][] dp = new int[n][n];
+        for(int i = 0; i < n; i++)
+            dp[i][i] = 1;
+        String res = "" + ca[0];
+        int res_l = 1;
+        for(int k = 1; k < n; k++){
+            for(int i = 0; i < n - k; i++){
+                int j = i + k;
+                if(ca[i] != ca[j]){
+                    dp[i][j] = 0;
+                } else {
+                    if(j - i == 1 || dp[i+1][j-1] == 1){
+                        dp[i][j] = 1;
+                        if(j - i + 1 > res_l){
+                            res_l = j - i + 1;
+                            res = s.substring(i, j + 1);
                         }
                     }
                 }
             }
         }
-        <span class="hljs-keyword">return</span> res;
+        return res;
     }
 }
-</code></pre>
-<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
-<p>Runtime: 19.78%<br />
-Memory: 5.24%</p>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 19.78%<br>Memory: 5.24%</p>
 
       </div>
       

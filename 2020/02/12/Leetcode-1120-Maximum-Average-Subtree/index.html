@@ -325,47 +325,41 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接-httpsleetcodecomproblemsmaximum-average-subtree"><a class="markdownIt-Anchor" href="#题目链接-httpsleetcodecomproblemsmaximum-average-subtree"></a> 题目链接 <a href="https://leetcode.com/problems/maximum-average-subtree/" target="_blank" rel="noopener">https://leetcode.com/problems/maximum-average-subtree/</a></h2>
-<h2 id="题目难度-medium-619"><a class="markdownIt-Anchor" href="#题目难度-medium-619"></a> 题目难度 Medium 61.9%</h2>
-<a id="more"></a>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<p>Given the root of a binary tree, find the maximum average value of any subtree of that tree.</p>
+        <h2 id="题目链接-https-leetcode-com-problems-maximum-average-subtree"><a href="#题目链接-https-leetcode-com-problems-maximum-average-subtree" class="headerlink" title="题目链接 https://leetcode.com/problems/maximum-average-subtree/"></a>题目链接 <a href="https://leetcode.com/problems/maximum-average-subtree/" target="_blank" rel="noopener">https://leetcode.com/problems/maximum-average-subtree/</a></h2><h2 id="题目难度-Medium-61-9"><a href="#题目难度-Medium-61-9" class="headerlink" title="题目难度 Medium 61.9%"></a>题目难度 Medium 61.9%</h2><a id="more"></a>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Given the root of a binary tree, find the maximum average value of any subtree of that tree.</p>
 <p>(A subtree of a tree is any node of that tree plus all its descendants. The average value of a tree is the sum of its values, divided by the number of nodes.)</p>
 <p>Example 1:</p>
-<pre class="highlight"><code class="">Input: [5,6,1]
+<pre><code>Input: [5,6,1]
 Output: 6.00000
 Explanation:
 For the node with value = 5 we have an average of (5 + 6 + 1) / 3 = 4.
 For the node with value = 6 we have an average of 6 / 1 = 6.
 For the node with value = 1 we have an average of 1 / 1 = 1.
 So the answer is 6 which is the maximum.
-</code></pre>
-<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
-<p>求子树最大的平均数。那么这道题又是分别对待root参与和不参与。先左右递归一下，再处理包含root的。这里有一个trick需要学习一下，本来一开始那道题看到需要求平均值，就想到每个node是需要两个值保存，一个sum，一个count，但是又不会写Pair的class，怎么办呢？学习到了用两个HashMap&lt;TreeNode, Integer&gt;来保存每个node的属性。</p>
-<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
-<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
-    Map&lt;TreeNode, Double&gt; sum_map = <span class="hljs-keyword">new</span> HashMap();
-    Map&lt;TreeNode, Integer&gt; count_map = <span class="hljs-keyword">new</span> HashMap();
-    <span class="hljs-keyword">double</span> res = <span class="hljs-number">0</span>;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">double</span> <span class="hljs-title">maximumAverageSubtree</span><span class="hljs-params">(TreeNode root)</span> </span>{
-        <span class="hljs-keyword">if</span>(root == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-        <span class="hljs-keyword">double</span> left = maximumAverageSubtree(root.left);
-        <span class="hljs-keyword">double</span> right = maximumAverageSubtree(root.right);
-        <span class="hljs-keyword">double</span> average = helper(root);
-        <span class="hljs-keyword">return</span> Math.max(Math.max(left, right), average);
+</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>求子树最大的平均数。那么这道题又是分别对待root参与和不参与。先左右递归一下，再处理包含root的。这里有一个trick需要学习一下，本来一开始那道题看到需要求平均值，就想到每个node是需要两个值保存，一个sum，一个count，但是又不会写Pair的class，怎么办呢？学习到了用两个HashMap<TreeNode, Integer>来保存每个node的属性。</p>
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre class="line-numbers language-lang-java"><code class="language-lang-java">class Solution {
+    Map<TreeNode, Double> sum_map = new HashMap();
+    Map<TreeNode, Integer> count_map = new HashMap();
+    double res = 0;
+    public double maximumAverageSubtree(TreeNode root) {
+        if(root == null) return 0;
+        double left = maximumAverageSubtree(root.left);
+        double right = maximumAverageSubtree(root.right);
+        double average = helper(root);
+        return Math.max(Math.max(left, right), average);
     }
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">double</span> <span class="hljs-title">helper</span><span class="hljs-params">(TreeNode root)</span></span>{
-        <span class="hljs-keyword">if</span>(root == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    public double helper(TreeNode root){
+        if(root == null) return 0;
         helper(root.left);
         helper(root.right);
-        <span class="hljs-keyword">double</span> sum = <span class="hljs-number">0</span>;
-        <span class="hljs-keyword">int</span> count = <span class="hljs-number">0</span>;
-        <span class="hljs-keyword">if</span>(root.left != <span class="hljs-keyword">null</span>){
+        double sum = 0;
+        int count = 0;
+        if(root.left != null){
             sum += sum_map.get(root.left);
             count += count_map.get(root.left);
         }
-        <span class="hljs-keyword">if</span>(root.right != <span class="hljs-keyword">null</span>){
+        if(root.right != null){
             sum += sum_map.get(root.right);
             count += count_map.get(root.right);
         }
@@ -373,13 +367,11 @@ So the answer is 6 which is the maximum.
         count++;
         sum_map.put(root, sum);
         count_map.put(root, count);
-        <span class="hljs-keyword">return</span> sum / count;
+        return sum / count;
     }
 }
-</code></pre>
-<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
-<p>Runtime: 5.01%<br />
-Memory: 100.00%</p>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 5.01%<br>Memory: 100.00%</p>
 
       </div>
       

@@ -317,84 +317,71 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接-httpsleetcodecomproblemsrotting-oranges"><a class="markdownIt-Anchor" href="#题目链接-httpsleetcodecomproblemsrotting-oranges"></a> 题目链接 <a href="https://leetcode.com/problems/rotting-oranges/" target="_blank" rel="noopener">https://leetcode.com/problems/rotting-oranges/</a></h2>
-<h2 id="题目难度-easy-470"><a class="markdownIt-Anchor" href="#题目难度-easy-470"></a> 题目难度 Easy 47.0%</h2>
-<a id="more"></a>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<p>In a given grid, each cell can have one of three values:</p>
+        <h2 id="题目链接-https-leetcode-com-problems-rotting-oranges"><a href="#题目链接-https-leetcode-com-problems-rotting-oranges" class="headerlink" title="题目链接 https://leetcode.com/problems/rotting-oranges/"></a>题目链接 <a href="https://leetcode.com/problems/rotting-oranges/" target="_blank" rel="noopener">https://leetcode.com/problems/rotting-oranges/</a></h2><h2 id="题目难度-Easy-47-0"><a href="#题目难度-Easy-47-0" class="headerlink" title="题目难度 Easy 47.0%"></a>题目难度 Easy 47.0%</h2><a id="more"></a>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>In a given grid, each cell can have one of three values:</p>
 <ul>
 <li>the value 0 representing an empty cell;</li>
 <li>the value 1 representing a fresh orange;</li>
 <li>the value 2 representing a rotten orange.</li>
 </ul>
-<p>Every minute, any fresh orange that is adjacent (4-directionally) to a rotten orange becomes rotten.<br />
-Return the minimum number of minutes that must elapse until no cell has a fresh orange.  If this is impossible, return -1 instead.<br />
-Example 1:</p>
-<pre class="highlight"><code class="">Input: [[2,1,1],[1,1,0],[0,1,1]]
+<p>Every minute, any fresh orange that is adjacent (4-directionally) to a rotten orange becomes rotten.<br>Return the minimum number of minutes that must elapse until no cell has a fresh orange.  If this is impossible, return -1 instead.<br>Example 1:</p>
+<pre><code>Input: [[2,1,1],[1,1,0],[0,1,1]]
 Output: 4
-</code></pre>
-<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
-<p>这是一道很有意思的题。坏了的橘子会把周围好的橘子也弄坏，然后慢慢传播开来。题目给定一个矩阵，然后问多少回合能将所有橘子都传染坏。如果不能就返回-1。这道题读下来就感觉比一般easy的题要难一点。这里的一回合，意思是所有为2的点都开始传播，这里就应该要想到BFS了，也就是tree的level traversal。level traversal就是用queue去储存一个level的点，然后遍历这个queue，做好标记，将新来的点加到后面，一直到queue为空。<br />
-在遍历的过程中，我们需要做的事情有：</p>
+</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>这是一道很有意思的题。坏了的橘子会把周围好的橘子也弄坏，然后慢慢传播开来。题目给定一个矩阵，然后问多少回合能将所有橘子都传染坏。如果不能就返回-1。这道题读下来就感觉比一般easy的题要难一点。这里的一回合，意思是所有为2的点都开始传播，这里就应该要想到BFS了，也就是tree的level traversal。level traversal就是用queue去储存一个level的点，然后遍历这个queue，做好标记，将新来的点加到后面，一直到queue为空。<br>在遍历的过程中，我们需要做的事情有：</p>
 <ol>
 <li>对于每一个点都要看看四周是否有坏橘子；</li>
 <li>将新的点加入queue并且标记2；</li>
 <li>随时记录为1的点，因为最后还要判断是否所有橘子都坏了；</li>
-<li>这里有一点是需要记住并且练习的，就是对每一个点检查上下左右四周的操作。</li>
-</ol>
-<pre class="highlight"><code class="java"><span class="hljs-keyword">int</span>[][] steps = &lt;!--￼<span class="hljs-number">0</span>--&gt;;
-<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span>[] step : steps){
-	<span class="hljs-keyword">int</span> x = pos[<span class="hljs-number">0</span>] + step[<span class="hljs-number">0</span>];
-	<span class="hljs-keyword">int</span> y = pos[<span class="hljs-number">1</span>] + step[<span class="hljs-number">1</span>];
-	<span class="hljs-keyword">if</span>(x &lt; <span class="hljs-number">0</span> || y &lt; <span class="hljs-number">0</span> || x &gt;= n || y &gt;= m || ...) <span class="hljs-comment">// not qualify</span>
-		<span class="hljs-keyword">continue</span>;
-	... <span class="hljs-comment">// if qualify</span>
+<li>这里有一点是需要记住并且练习的，就是对每一个点检查上下左右四周的操作。<pre class="line-numbers language-lang-java"><code class="language-lang-java">int[][] steps = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+for (int[] step : steps){
+ int x = pos[0] + step[0];
+ int y = pos[1] + step[1];
+ if(x < 0 || y < 0 || x >= n || y >= m || ...) // not qualify
+     continue;
+ ... // if qualify
 }
-</code></pre>
-<ol start="5">
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
 <li>用一个queue去做level traversal是需要记录queue的size的。</li>
 </ol>
-<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
-<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">orangesRotting</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[][] grid)</span> </span>{
-        <span class="hljs-keyword">int</span> n = grid.length;
-        <span class="hljs-keyword">int</span> m = grid[<span class="hljs-number">0</span>].length;
-        Queue&lt;<span class="hljs-keyword">int</span>[]&gt; q = <span class="hljs-keyword">new</span> LinkedList();
-        <span class="hljs-keyword">int</span> freshcount = <span class="hljs-number">0</span>;
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++){
-            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; m; j++){
-                <span class="hljs-keyword">if</span>(grid[i][j] == <span class="hljs-number">2</span>)
-                    q.offer(<span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[]{i, j});
-                <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(grid[i][j] == <span class="hljs-number">1</span>)
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre class="line-numbers language-lang-java"><code class="language-lang-java">class Solution {
+    public int orangesRotting(int[][] grid) {
+        int n = grid.length;
+        int m = grid[0].length;
+        Queue<int[]> q = new LinkedList();
+        int freshcount = 0;
+        for(int i = 0; i < n; i++){
+            for(int j = 0; j < m; j++){
+                if(grid[i][j] == 2)
+                    q.offer(new int[]{i, j});
+                else if(grid[i][j] == 1)
                     freshcount++;
             }
         }
-        <span class="hljs-keyword">if</span>(freshcount == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-        <span class="hljs-keyword">int</span> count = <span class="hljs-number">0</span>;
-        <span class="hljs-keyword">int</span>[][] steps = &lt;!--￼<span class="hljs-number">1</span>--&gt;;
-        <span class="hljs-keyword">while</span>(!q.isEmpty()){
+        if(freshcount == 0) return 0;
+        int count = 0;
+        int[][] steps = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+        while(!q.isEmpty()){
             count++;
-            <span class="hljs-keyword">int</span> size = q.size();
-            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; size; i++){
-                <span class="hljs-keyword">int</span>[] pos = q.poll();
-                <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span>[] step : steps){
-                    <span class="hljs-keyword">int</span> x = pos[<span class="hljs-number">0</span>] + step[<span class="hljs-number">0</span>];
-                    <span class="hljs-keyword">int</span> y = pos[<span class="hljs-number">1</span>] + step[<span class="hljs-number">1</span>];
-                    <span class="hljs-keyword">if</span>(x &lt; <span class="hljs-number">0</span> || y &lt; <span class="hljs-number">0</span> || x &gt;= n || y &gt;= m || grid[x][y] == <span class="hljs-number">2</span> || grid[x][y] == <span class="hljs-number">0</span>)
-                        <span class="hljs-keyword">continue</span>;
-                    grid[x][y] = <span class="hljs-number">2</span>;
-                    q.offer(<span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[]{x, y});
+            int size = q.size();
+            for(int i = 0; i < size; i++){
+                int[] pos = q.poll();
+                for(int[] step : steps){
+                    int x = pos[0] + step[0];
+                    int y = pos[1] + step[1];
+                    if(x < 0 || y < 0 || x >= n || y >= m || grid[x][y] == 2 || grid[x][y] == 0)
+                        continue;
+                    grid[x][y] = 2;
+                    q.offer(new int[]{x, y});
                     freshcount--;
                 }
             }
         }
-        <span class="hljs-keyword">return</span> freshcount == <span class="hljs-number">0</span> ? count - <span class="hljs-number">1</span> : -<span class="hljs-number">1</span>;
+        return freshcount == 0 ? count - 1 : -1;
     }
 }
-</code></pre>
-<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
-<p>Runtime: 31.05%<br />
-Memory: 81.25%</p>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 31.05%<br>Memory: 81.25%</p>
 
       </div>
       

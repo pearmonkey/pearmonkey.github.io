@@ -6,7 +6,7 @@
 }
 
 .pln {
-  color: #c5c8c6;
+  color: #f6fcf1;
 }
 
 /* Specify class=linenums on a pre to get line numbering */
@@ -36,13 +36,13 @@ li.L9 {
   /* string content */
 
   .str {
-    color: #b5bd68;
+    color: #f7dd22;
   }
 
   /* keyword */
 
   .kwd {
-    color: #b294bb;
+    color: #e33575;
   }
 
   /* comment */
@@ -54,13 +54,13 @@ li.L9 {
   /* type name */
 
   .typ {
-    color: #81a2be;
+    color: #67cfd5;
   }
 
   /* literal value */
 
   .lit {
-    color: #de935f;
+    color: #d755f7;
   }
 
   /* punctuation */

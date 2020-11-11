@@ -317,17 +317,14 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接httpsleetcodecomproblemssearch-a-2d-matrix-ii"><a class="markdownIt-Anchor" href="#题目链接httpsleetcodecomproblemssearch-a-2d-matrix-ii"></a> 题目链接https://leetcode.com/problems/search-a-2d-matrix-ii/</h2>
-<h2 id="题目难度medium-423"><a class="markdownIt-Anchor" href="#题目难度medium-423"></a> 题目难度Medium 42.3%</h2>
-<a id="more"></a>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<p>Write an efficient algorithm that searches for a value in an m x n matrix. This matrix has the following properties:</p>
+        <h2 id="题目链接https-leetcode-com-problems-search-a-2d-matrix-ii"><a href="#题目链接https-leetcode-com-problems-search-a-2d-matrix-ii" class="headerlink" title="题目链接https://leetcode.com/problems/search-a-2d-matrix-ii/"></a>题目链接<a href="https://leetcode.com/problems/search-a-2d-matrix-ii/" target="_blank" rel="noopener">https://leetcode.com/problems/search-a-2d-matrix-ii/</a></h2><h2 id="题目难度Medium-42-3"><a href="#题目难度Medium-42-3" class="headerlink" title="题目难度Medium 42.3%"></a>题目难度Medium 42.3%</h2><a id="more"></a>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Write an efficient algorithm that searches for a value in an m x n matrix. This matrix has the following properties:</p>
 <ul>
 <li>Integers in each row are sorted in ascending from left to right.</li>
 <li>Integers in each column are sorted in ascending from top to bottom.</li>
 </ul>
 <p>Example 1:</p>
-<pre class="highlight"><code class="">Consider the following matrix:
+<pre><code>Consider the following matrix:
 
 [
   [1,   4,  7, 11, 15],
@@ -339,29 +336,24 @@
 Given target = 5, return true.
 
 Given target = 20, return false.
-</code></pre>
-<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
-<p>逆向思维啊</p>
-<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
-<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">searchMatrix</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[][] matrix, <span class="hljs-keyword">int</span> target)</span> </span>{
-        <span class="hljs-keyword">int</span> row = matrix.length - <span class="hljs-number">1</span>;
-        <span class="hljs-keyword">int</span> col = <span class="hljs-number">0</span>;
-        <span class="hljs-keyword">while</span>(row &gt;= <span class="hljs-number">0</span> &amp;&amp; col &lt; matrix[<span class="hljs-number">0</span>].length){
-            <span class="hljs-keyword">if</span>(matrix[row][col] &gt; target)
+</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>逆向思维啊</p>
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre class="line-numbers language-lang-java"><code class="language-lang-java">class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        int row = matrix.length - 1;
+        int col = 0;
+        while(row >= 0 && col < matrix[0].length){
+            if(matrix[row][col] > target)
                 row--;
-            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(matrix[row][col] &lt; target)
+            else if(matrix[row][col] < target)
                 col++;
-            <span class="hljs-keyword">else</span>
-                <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+            else
+                return true;
         }
-        <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+        return false;
     }
 }
-</code></pre>
-<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
-<p>Runtime: 100.00%<br />
-Memory: 100.00%</p>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 100.00%<br>Memory: 100.00%</p>
 
       </div>
       

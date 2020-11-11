@@ -317,60 +317,49 @@
         
       </div>
       <div class="post-content">
-        <h4 id="题目链接-httpsleetcodecomproblemsdegree-of-an-array"><a class="markdownIt-Anchor" href="#题目链接-httpsleetcodecomproblemsdegree-of-an-array"></a> 题目链接 <a href="https://leetcode.com/problems/degree-of-an-array/" target="_blank" rel="noopener">https://leetcode.com/problems/degree-of-an-array/</a></h4>
-<h4 id="题目难度-easy-523"><a class="markdownIt-Anchor" href="#题目难度-easy-523"></a> 题目难度 Easy: 52.3%</h4>
-<a id="more"></a>
-<h4 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h4>
-<p>Given a non-empty array of non-negative integers nums, the degree of this array is defined as the maximum frequency of any one of its elements.<br />
-Your task is to find the smallest possible length of a (contiguous) subarray of nums, that has the same degree as nums.<br />
-Example 1:</p>
-<pre class="highlight"><code class="">Input: [1, 2, 2, 3, 1]
+        <h4 id="题目链接-https-leetcode-com-problems-degree-of-an-array"><a href="#题目链接-https-leetcode-com-problems-degree-of-an-array" class="headerlink" title="题目链接 https://leetcode.com/problems/degree-of-an-array/"></a>题目链接 <a href="https://leetcode.com/problems/degree-of-an-array/" target="_blank" rel="noopener">https://leetcode.com/problems/degree-of-an-array/</a></h4><h4 id="题目难度-Easy-52-3"><a href="#题目难度-Easy-52-3" class="headerlink" title="题目难度 Easy: 52.3%"></a>题目难度 Easy: 52.3%</h4><a id="more"></a>
+<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>Given a non-empty array of non-negative integers nums, the degree of this array is defined as the maximum frequency of any one of its elements.<br>Your task is to find the smallest possible length of a (contiguous) subarray of nums, that has the same degree as nums.<br>Example 1:</p>
+<pre><code>Input: [1, 2, 2, 3, 1]
 Output: 2
 Explanation:
 The input array has a degree of 2 because both elements 1 and 2 appear twice.
 Of the subarrays that have the same degree:
 [1, 2, 2, 3, 1], [1, 2, 2, 3], [2, 2, 3, 1], [1, 2, 2], [2, 2, 3], [2, 2]
 The shortest length is 2. So return 2.
-</code></pre>
-<p>Example 2:</p>
-<pre class="highlight"><code class="">Input: [1,2,2,3,1,4,2]
+</code></pre><p>Example 2:</p>
+<pre><code>Input: [1,2,2,3,1,4,2]
 Output: 6
-</code></pre>
-<h4 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h4>
-<p>按照题目的要求，要知道所有元素出现的次数，再找出出现次数最多的元素的起点与终点差，如果有多个，返回最小差的那个。要count元素很容易想到int[]和HashMap，但是这里除了count，还要知道开始和结束的坐标，所以就用HashMap&lt;Integer, List<Integer>&gt;对每个元素记录所有出现的坐标，count就是list的size。因为记录的时候是按照顺序来的，所以最后找开始和终点坐标也很简单，就是list.get(size-1)和list.get(0)。对于size一样的，就取最小的。</p>
-<h4 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h4>
-<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">findShortestSubArray</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums)</span> </span>{
-        Map&lt;Integer, List&lt;Integer&gt;&gt; map = <span class="hljs-keyword">new</span> HashMap();
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.length; i++){
-            List&lt;Integer&gt; list;
-            <span class="hljs-keyword">if</span>(map.containsKey(nums[i]))
+</code></pre><h4 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h4><p>按照题目的要求，要知道所有元素出现的次数，再找出出现次数最多的元素的起点与终点差，如果有多个，返回最小差的那个。要count元素很容易想到int[]和HashMap，但是这里除了count，还要知道开始和结束的坐标，所以就用HashMap<Integer, List<Integer>&gt;对每个元素记录所有出现的坐标，count就是list的size。因为记录的时候是按照顺序来的，所以最后找开始和终点坐标也很简单，就是list.get(size-1)和list.get(0)。对于size一样的，就取最小的。</p>
+<h4 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h4><pre class="line-numbers language-lang-java"><code class="language-lang-java">class Solution {
+    public int findShortestSubArray(int[] nums) {
+        Map<Integer, List<Integer>> map = new HashMap();
+        for(int i = 0; i < nums.length; i++){
+            List<Integer> list;
+            if(map.containsKey(nums[i]))
                 list = map.get(nums[i]);
-            <span class="hljs-keyword">else</span>
-                list = <span class="hljs-keyword">new</span> ArrayList();
+            else
+                list = new ArrayList();
             list.add(i);
             map.put(nums[i], list);
         }
 
-        <span class="hljs-keyword">int</span> distance = Integer.MAX_VALUE;
-        <span class="hljs-keyword">int</span> freq = <span class="hljs-number">0</span>;
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> n : map.keySet()){
-            List&lt;Integer&gt; list = map.get(n);
-            <span class="hljs-keyword">int</span> size = list.size();
-            <span class="hljs-keyword">if</span>(size &gt; freq){
+        int distance = Integer.MAX_VALUE;
+        int freq = 0;
+        for(int n : map.keySet()){
+            List<Integer> list = map.get(n);
+            int size = list.size();
+            if(size > freq){
                 freq = size;
-                distance = list.get(size-<span class="hljs-number">1</span>) - list.get(<span class="hljs-number">0</span>);
-            } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(size == freq){
-                distance = Math.min(distance, list.get(size-<span class="hljs-number">1</span>) - list.get(<span class="hljs-number">0</span>));
+                distance = list.get(size-1) - list.get(0);
+            } else if(size == freq){
+                distance = Math.min(distance, list.get(size-1) - list.get(0));
             }
         }
-        <span class="hljs-keyword">return</span> distance + <span class="hljs-number">1</span>;
+        return distance + 1;
     }
 }
-</code></pre>
-<h4 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h4>
-<p>Runtime: 78.37%<br />
-Memory: 16.67%</p>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h4><p>Runtime: 78.37%<br>Memory: 16.67%</p>
 
       </div>
       

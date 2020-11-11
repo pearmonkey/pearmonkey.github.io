@@ -321,45 +321,31 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接-httpsleetcodecomproblemsstudent-attendance-record-i"><a class="markdownIt-Anchor" href="#题目链接-httpsleetcodecomproblemsstudent-attendance-record-i"></a> 题目链接 <a href="https://leetcode.com/problems/student-attendance-record-i/" target="_blank" rel="noopener">https://leetcode.com/problems/student-attendance-record-i/</a></h2>
-<h2 id="题目难度-easy-464"><a class="markdownIt-Anchor" href="#题目难度-easy-464"></a> 题目难度 Easy 46.4%</h2>
-<a id="more"></a>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<p>You are given a string representing an attendance record for a student. The record only contains the following three characters:<br />
-‘A’ : Absent.<br />
-‘L’ : Late.<br />
-‘P’ : Present.<br />
-A student could be rewarded if his attendance record doesn’t contain more than one ‘A’ (absent) or more than two continuous ‘L’ (late).<br />
-You need to return whether the student could be rewarded according to his attendance record.<br />
-Example 1:</p>
-<pre class="highlight"><code class="">Input: &quot;PPALLP&quot;
+        <h2 id="题目链接-https-leetcode-com-problems-student-attendance-record-i"><a href="#题目链接-https-leetcode-com-problems-student-attendance-record-i" class="headerlink" title="题目链接 https://leetcode.com/problems/student-attendance-record-i/"></a>题目链接 <a href="https://leetcode.com/problems/student-attendance-record-i/" target="_blank" rel="noopener">https://leetcode.com/problems/student-attendance-record-i/</a></h2><h2 id="题目难度-Easy-46-4"><a href="#题目难度-Easy-46-4" class="headerlink" title="题目难度 Easy 46.4%"></a>题目难度 Easy 46.4%</h2><a id="more"></a>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>You are given a string representing an attendance record for a student. The record only contains the following three characters:<br>‘A’ : Absent.<br>‘L’ : Late.<br>‘P’ : Present.<br>A student could be rewarded if his attendance record doesn’t contain more than one ‘A’ (absent) or more than two continuous ‘L’ (late).<br>You need to return whether the student could be rewarded according to his attendance record.<br>Example 1:</p>
+<pre><code>Input: &quot;PPALLP&quot;
 Output: True
-</code></pre>
-<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
-<p>题目的意思是，如果这个学生缺勤超过1次或者连续迟到超过2次就没有奖励。这道题的评分不太好，因为是一道不太具有考察能力的题目。</p>
-<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
-<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">checkRecord</span><span class="hljs-params">(String s)</span> </span>{
-        <span class="hljs-keyword">int</span> countA = <span class="hljs-number">0</span>, countL = <span class="hljs-number">0</span>;
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; s.length(); i++){
-            <span class="hljs-keyword">char</span> c = s.charAt(i);
-            <span class="hljs-keyword">if</span>(c == <span class="hljs-string">'L'</span>)
+</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>题目的意思是，如果这个学生缺勤超过1次或者连续迟到超过2次就没有奖励。这道题的评分不太好，因为是一道不太具有考察能力的题目。</p>
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre class="line-numbers language-lang-java"><code class="language-lang-java">class Solution {
+    public boolean checkRecord(String s) {
+        int countA = 0, countL = 0;
+        for(int i = 0; i < s.length(); i++){
+            char c = s.charAt(i);
+            if(c == 'L')
                 countL++;
-            <span class="hljs-keyword">else</span>{
-                countL = <span class="hljs-number">0</span>;
-                <span class="hljs-keyword">if</span>(c == <span class="hljs-string">'A'</span>)
+            else{
+                countL = 0;
+                if(c == 'A')
                     countA++;
             }
-            <span class="hljs-keyword">if</span>(countA &gt; <span class="hljs-number">1</span> || countL &gt; <span class="hljs-number">2</span>)
-                <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+            if(countA > 1 || countL > 2)
+                return false;
         }
-        <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+        return true;
     }
 }
-</code></pre>
-<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
-<p>Runtime: 100.00%<br />
-Memory: 5.26%</p>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 100.00%<br>Memory: 5.26%</p>
 
       </div>
       

@@ -321,20 +321,17 @@
         
       </div>
       <div class="post-content">
-        <h1 id="题目链接-httpsleetcodecomproblemsmax-stack"><a class="markdownIt-Anchor" href="#题目链接-httpsleetcodecomproblemsmax-stack"></a> 题目链接 <a href="https://leetcode.com/problems/max-stack/" target="_blank" rel="noopener">https://leetcode.com/problems/max-stack/</a></h1>
-<h1 id="题目难度-420"><a class="markdownIt-Anchor" href="#题目难度-420"></a> 题目难度 42.0%</h1>
-<a id="more"></a>
-<h1 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h1>
-<p>Design a max stack that supports push, pop, top, peekMax and popMax.</p>
+        <h1 id="题目链接-https-leetcode-com-problems-max-stack"><a href="#题目链接-https-leetcode-com-problems-max-stack" class="headerlink" title="题目链接 https://leetcode.com/problems/max-stack/"></a>题目链接 <a href="https://leetcode.com/problems/max-stack/" target="_blank" rel="noopener">https://leetcode.com/problems/max-stack/</a></h1><h1 id="题目难度-42-0"><a href="#题目难度-42-0" class="headerlink" title="题目难度 42.0%"></a>题目难度 42.0%</h1><a id="more"></a>
+<h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>Design a max stack that supports push, pop, top, peekMax and popMax.</p>
 <ol>
-<li>push(x) – Push element x onto stack.</li>
-<li>pop() – Remove the element on top of the stack and return it.</li>
-<li>top() – Get the element on the top.</li>
-<li>peekMax() – Retrieve the maximum element in the stack.</li>
-<li>popMax() – Retrieve the maximum element in the stack, and remove it. If you find more than one maximum elements, only remove the top-most one.</li>
+<li>push(x) — Push element x onto stack.</li>
+<li>pop() — Remove the element on top of the stack and return it.</li>
+<li>top() — Get the element on the top.</li>
+<li>peekMax() — Retrieve the maximum element in the stack.</li>
+<li>popMax() — Retrieve the maximum element in the stack, and remove it. If you find more than one maximum elements, only remove the top-most one.</li>
 </ol>
 <p>Example 1:</p>
-<pre class="highlight"><code class="">MaxStack stack = new MaxStack();
+<pre><code>MaxStack stack = new MaxStack();
 stack.push(5);
 stack.push(1);
 stack.push(5);
@@ -344,65 +341,59 @@ stack.top(); -&gt; 1
 stack.peekMax(); -&gt; 5
 stack.pop(); -&gt; 1
 stack.top(); -&gt; 5
-</code></pre>
-<h1 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h1>
-<p>在导出导入的过程中，要用相同的structure，stack for stack， queue for queue。</p>
-<h1 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h1>
-<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MaxStack</span> </span>{
-    Stack&lt;Integer&gt; stack;
+</code></pre><h1 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h1><p>在导出导入的过程中，要用相同的structure，stack for stack， queue for queue。</p>
+<h1 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h1><pre class="line-numbers language-lang-java"><code class="language-lang-java">class MaxStack {
+    Stack<Integer> stack;
 
-    <span class="hljs-comment">/** initialize your data structure here. */</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MaxStack</span><span class="hljs-params">()</span> </span>{
-        stack = <span class="hljs-keyword">new</span> Stack();
+    /** initialize your data structure here. */
+    public MaxStack() {
+        stack = new Stack();
     }
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">push</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span> </span>{
+    public void push(int x) {
         stack.push(x);
     }
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">pop</span><span class="hljs-params">()</span> </span>{
-        <span class="hljs-keyword">return</span> stack.pop();
+    public int pop() {
+        return stack.pop();
     }
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">top</span><span class="hljs-params">()</span> </span>{
-        <span class="hljs-keyword">return</span> stack.peek();
+    public int top() {
+        return stack.peek();
     }
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">peekMax</span><span class="hljs-params">()</span> </span>{
-        Stack&lt;Integer&gt; aux = <span class="hljs-keyword">new</span> Stack();
-        <span class="hljs-keyword">int</span> max = Integer.MIN_VALUE;
-        <span class="hljs-keyword">while</span>(!stack.isEmpty()){
-            <span class="hljs-keyword">int</span> cur = stack.pop();
+    public int peekMax() {
+        Stack<Integer> aux = new Stack();
+        int max = Integer.MIN_VALUE;
+        while(!stack.isEmpty()){
+            int cur = stack.pop();
             max = Math.max(max, cur);
             aux.push(cur);
         }
-        <span class="hljs-keyword">while</span>(!aux.isEmpty()){
+        while(!aux.isEmpty()){
             stack.push(aux.pop());
         }
-        <span class="hljs-keyword">return</span> max;
+        return max;
     }
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">popMax</span><span class="hljs-params">()</span> </span>{
-        Stack&lt;Integer&gt; aux = <span class="hljs-keyword">new</span> Stack();
-        <span class="hljs-keyword">int</span> max = peekMax();
-        <span class="hljs-keyword">while</span>(!stack.isEmpty()){
-            <span class="hljs-keyword">if</span>(stack.peek() != max)
+    public int popMax() {
+        Stack<Integer> aux = new Stack();
+        int max = peekMax();
+        while(!stack.isEmpty()){
+            if(stack.peek() != max)
                 aux.push(stack.pop());
-            <span class="hljs-keyword">else</span>
-                <span class="hljs-keyword">break</span>;
+            else
+                break;
         }
         stack.pop();
-        <span class="hljs-keyword">while</span>(!aux.isEmpty()){
+        while(!aux.isEmpty()){
             stack.push(aux.pop());
         }
-        <span class="hljs-keyword">return</span> max;
+        return max;
     }
 }
-
-</code></pre>
-<h1 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h1>
-<p>Runtime: 5.05%<br />
-Memory: 91.67%</p>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h1><p>Runtime: 5.05%<br>Memory: 91.67%</p>
 
       </div>
       

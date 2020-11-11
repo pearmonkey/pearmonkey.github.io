@@ -317,36 +317,27 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接-httpsleetcodecomproblemsstrobogrammatic-number"><a class="markdownIt-Anchor" href="#题目链接-httpsleetcodecomproblemsstrobogrammatic-number"></a> 题目链接 <a href="https://leetcode.com/problems/strobogrammatic-number/" target="_blank" rel="noopener">https://leetcode.com/problems/strobogrammatic-number/</a></h2>
-<h2 id="题目难度-easy-439"><a class="markdownIt-Anchor" href="#题目难度-easy-439"></a> 题目难度 Easy 43.9%</h2>
-<a id="more"></a>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<p>A strobogrammatic number is a number that looks the same when rotated 180 degrees (looked at upside down).<br />
-Write a function to determine if a number is strobogrammatic. The number is represented as a string.</p>
+        <h2 id="题目链接-https-leetcode-com-problems-strobogrammatic-number"><a href="#题目链接-https-leetcode-com-problems-strobogrammatic-number" class="headerlink" title="题目链接 https://leetcode.com/problems/strobogrammatic-number/"></a>题目链接 <a href="https://leetcode.com/problems/strobogrammatic-number/" target="_blank" rel="noopener">https://leetcode.com/problems/strobogrammatic-number/</a></h2><h2 id="题目难度-Easy-43-9"><a href="#题目难度-Easy-43-9" class="headerlink" title="题目难度 Easy 43.9%"></a>题目难度 Easy 43.9%</h2><a id="more"></a>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>A strobogrammatic number is a number that looks the same when rotated 180 degrees (looked at upside down).<br>Write a function to determine if a number is strobogrammatic. The number is represented as a string.</p>
 <p>Example 1:</p>
-<pre class="highlight"><code class="">Input:  &quot;69&quot;
+<pre><code>Input:  &quot;69&quot;
 Output: true
-</code></pre>
-<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
-<p>这个题目要判断给定的string反转180度之后是否不变。所以就先储存那些不变的数，在遍历的时候碰到了不符合条件的就直接返回false，如果符合条件就和镜面对称的位置比较。一开始做这道题的时候我想的是把数字给求出来，最后返回是否相等就行。结果运行时间很差并且会溢出，后来一想只需要比较一半的strng就行。</p>
-<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
-<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isStrobogrammatic</span><span class="hljs-params">(String num)</span> </span>{
-        <span class="hljs-keyword">int</span> n = num.length();
-        Map&lt;Character, Character&gt; map = <span class="hljs-keyword">new</span> HashMap();
-        map.put(<span class="hljs-string">'0'</span>, <span class="hljs-string">'0'</span>); map.put(<span class="hljs-string">'1'</span>, <span class="hljs-string">'1'</span>); map.put(<span class="hljs-string">'6'</span>, <span class="hljs-string">'9'</span>);
-        map.put(<span class="hljs-string">'9'</span>, <span class="hljs-string">'6'</span>); map.put(<span class="hljs-string">'8'</span>, <span class="hljs-string">'8'</span>);
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt;= n / <span class="hljs-number">2</span>; i++){
-            <span class="hljs-keyword">if</span>(!map.containsKey(num.charAt(i)) || map.get(num.charAt(i)) != num.charAt(n - i - <span class="hljs-number">1</span>))
-                <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>这个题目要判断给定的string反转180度之后是否不变。所以就先储存那些不变的数，在遍历的时候碰到了不符合条件的就直接返回false，如果符合条件就和镜面对称的位置比较。一开始做这道题的时候我想的是把数字给求出来，最后返回是否相等就行。结果运行时间很差并且会溢出，后来一想只需要比较一半的strng就行。</p>
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre class="line-numbers language-lang-java"><code class="language-lang-java">class Solution {
+    public boolean isStrobogrammatic(String num) {
+        int n = num.length();
+        Map<Character, Character> map = new HashMap();
+        map.put('0', '0'); map.put('1', '1'); map.put('6', '9');
+        map.put('9', '6'); map.put('8', '8');
+        for(int i = 0; i <= n / 2; i++){
+            if(!map.containsKey(num.charAt(i)) || map.get(num.charAt(i)) != num.charAt(n - i - 1))
+                return false;
         }
-        <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+        return true;
     }
 }
-</code></pre>
-<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
-<p>Runtime: 100.00%<br />
-Memory: 8.00%</p>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 100.00%<br>Memory: 8.00%</p>
 
       </div>
       

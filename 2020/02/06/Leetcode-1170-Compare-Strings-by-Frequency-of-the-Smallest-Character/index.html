@@ -317,53 +317,43 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接-httpsleetcodecomproblemscompare-strings-by-frequency-of-the-smallest-character"><a class="markdownIt-Anchor" href="#题目链接-httpsleetcodecomproblemscompare-strings-by-frequency-of-the-smallest-character"></a> 题目链接 <a href="https://leetcode.com/problems/compare-strings-by-frequency-of-the-smallest-character/" target="_blank" rel="noopener">https://leetcode.com/problems/compare-strings-by-frequency-of-the-smallest-character/</a></h2>
-<h2 id="题目难度-easy-582"><a class="markdownIt-Anchor" href="#题目难度-easy-582"></a> 题目难度 Easy 58.2%</h2>
-<a id="more"></a>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<p>Let’s define a function f(s) over a non-empty string s, which calculates the frequency of the smallest character in s. For example, if s = “dcce” then f(s) = 2 because the smallest character is “c” and its frequency is 2.<br />
-Now, given string arrays queries and words, return an integer array answer, where each answer[i] is the number of words such that f(queries[i]) &lt; f(W), where W is a word in words.<br />
-Example 1:</p>
-<pre class="highlight"><code class="">Input: queries = [&quot;bbb&quot;,&quot;cc&quot;], words = [&quot;a&quot;,&quot;aa&quot;,&quot;aaa&quot;,&quot;aaaa&quot;]
+        <h2 id="题目链接-https-leetcode-com-problems-compare-strings-by-frequency-of-the-smallest-character"><a href="#题目链接-https-leetcode-com-problems-compare-strings-by-frequency-of-the-smallest-character" class="headerlink" title="题目链接 https://leetcode.com/problems/compare-strings-by-frequency-of-the-smallest-character/"></a>题目链接 <a href="https://leetcode.com/problems/compare-strings-by-frequency-of-the-smallest-character/" target="_blank" rel="noopener">https://leetcode.com/problems/compare-strings-by-frequency-of-the-smallest-character/</a></h2><h2 id="题目难度-Easy-58-2"><a href="#题目难度-Easy-58-2" class="headerlink" title="题目难度 Easy 58.2%"></a>题目难度 Easy 58.2%</h2><a id="more"></a>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Let’s define a function f(s) over a non-empty string s, which calculates the frequency of the smallest character in s. For example, if s = “dcce” then f(s) = 2 because the smallest character is “c” and its frequency is 2.<br>Now, given string arrays queries and words, return an integer array answer, where each answer[i] is the number of words such that f(queries[i]) &lt; f(W), where W is a word in words.<br>Example 1:</p>
+<pre><code>Input: queries = [&quot;bbb&quot;,&quot;cc&quot;], words = [&quot;a&quot;,&quot;aa&quot;,&quot;aaa&quot;,&quot;aaaa&quot;]
 Output: [1,2]
 Explanation: On the first query only f(&quot;bbb&quot;) &lt; f(&quot;aaaa&quot;). On the second query both f(&quot;aaa&quot;) and f(&quot;aaaa&quot;) are both &gt; f(&quot;cc&quot;).
-</code></pre>
-<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
-<p>题目评分很低。因为考的实质内容不多，多的是繁琐的count操作。首先要有一个function去实现题目中的f，实现了之后就是逐个比较的过程了。</p>
-<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
-<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span>[] numSmallerByFrequency(String[] q, String[] w) {
-        <span class="hljs-keyword">int</span>[] res = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[q.length];
-        <span class="hljs-keyword">int</span>[] count = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">11</span>];
-        <span class="hljs-keyword">for</span>(String s : w)
+</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>题目评分很低。因为考的实质内容不多，多的是繁琐的count操作。首先要有一个function去实现题目中的f，实现了之后就是逐个比较的过程了。</p>
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre class="line-numbers language-lang-java"><code class="language-lang-java">class Solution {
+    public int[] numSmallerByFrequency(String[] q, String[] w) {
+        int[] res = new int[q.length];
+        int[] count = new int[11];
+        for(String s : w)
             count[helper(s)]++;
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; q.length; i++){
-            <span class="hljs-keyword">int</span> tmp = helper(q[i]);
-            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = tmp + <span class="hljs-number">1</span>; j &lt; <span class="hljs-number">11</span>; j++)
+        for(int i = 0; i < q.length; i++){
+            int tmp = helper(q[i]);
+            for(int j = tmp + 1; j < 11; j++)
                 res[i] += count[j];
         }
-        <span class="hljs-keyword">return</span> res;
+        return res;
     }
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">helper</span><span class="hljs-params">(String s)</span></span>{
-        Map&lt;Character, Integer&gt; map = <span class="hljs-keyword">new</span> HashMap();
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">char</span> c : s.toCharArray())
-            map.put(c, map.getOrDefault(c, <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>);
-        <span class="hljs-keyword">char</span> min_c = s.charAt(<span class="hljs-number">0</span>);
-        <span class="hljs-keyword">int</span> min = map.get(min_c);
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">char</span> c : map.keySet()){
-            <span class="hljs-keyword">if</span>(c &lt; min_c){
+    public int helper(String s){
+        Map<Character, Integer> map = new HashMap();
+        for(char c : s.toCharArray())
+            map.put(c, map.getOrDefault(c, 0) + 1);
+        char min_c = s.charAt(0);
+        int min = map.get(min_c);
+        for(char c : map.keySet()){
+            if(c < min_c){
                 min_c = c;
                 min = map.get(c);
             }
         }
-        <span class="hljs-keyword">return</span> min;
+        return min;
     }
 }
-</code></pre>
-<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
-<p>Runtime: 47.28%<br />
-Memory: 100.00%</p>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 47.28%<br>Memory: 100.00%</p>
 
       </div>
       

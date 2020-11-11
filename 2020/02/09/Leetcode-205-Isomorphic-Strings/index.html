@@ -317,44 +317,35 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接"><a class="markdownIt-Anchor" href="#题目链接"></a> 题目链接</h2>
-<p><a href="https://leetcode.com/problems/isomorphic-strings/" target="_blank" rel="noopener">https://leetcode.com/problems/isomorphic-strings/</a></p>
-<h2 id="题目难度"><a class="markdownIt-Anchor" href="#题目难度"></a> 题目难度</h2>
-<p>38.9%</p>
-<a id="more"></a>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<p>Given two strings s and t, determine if they are isomorphic.</p>
+        <h2 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h2><p><a href="https://leetcode.com/problems/isomorphic-strings/" target="_blank" rel="noopener">https://leetcode.com/problems/isomorphic-strings/</a></p>
+<h2 id="题目难度"><a href="#题目难度" class="headerlink" title="题目难度"></a>题目难度</h2><p>38.9%<br><a id="more"></a></p>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Given two strings s and t, determine if they are isomorphic.</p>
 <p>Two strings are isomorphic if the characters in s can be replaced to get t.</p>
 <p>All occurrences of a character must be replaced with another character while preserving the order of characters. No two characters may map to the same character but a character may map to itself.</p>
 <p>Example 1:</p>
-<pre class="highlight"><code class="">Input: s = &quot;paper&quot;, t = &quot;title&quot;
+<pre><code>Input: s = &quot;paper&quot;, t = &quot;title&quot;
 Output: true
-</code></pre>
-<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
-<p>读完题目知道是用hashmap建立一个映射，然后遍历所有位置，如果映射包含了s到t的这两个字符映射，就继续，如果没有包含s的字符却包含了t的字符，说明t的字符已经被映射了，返回false，如果包含了s的字符，映射却不是t的字符，也返回false。这里难点在于这句话“No two characters may map to the same character”</p>
-<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
-<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isIsomorphic</span><span class="hljs-params">(String s, String t)</span> </span>{
-        Map&lt;Character, Character&gt; map = <span class="hljs-keyword">new</span> HashMap();
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; s.length(); i++){
-            <span class="hljs-keyword">char</span> a = s.charAt(i);
-            <span class="hljs-keyword">char</span> b = t.charAt(i);
-            <span class="hljs-keyword">if</span>(map.containsKey(a)){
-                <span class="hljs-keyword">if</span>(map.get(a) != b)
-                    <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
-            } <span class="hljs-keyword">else</span> {
-                <span class="hljs-keyword">if</span>(map.containsValue(b))
-                    <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>读完题目知道是用hashmap建立一个映射，然后遍历所有位置，如果映射包含了s到t的这两个字符映射，就继续，如果没有包含s的字符却包含了t的字符，说明t的字符已经被映射了，返回false，如果包含了s的字符，映射却不是t的字符，也返回false。这里难点在于这句话“No two characters may map to the same character”</p>
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre class="line-numbers language-lang-java"><code class="language-lang-java">class Solution {
+    public boolean isIsomorphic(String s, String t) {
+        Map<Character, Character> map = new HashMap();
+        for(int i = 0; i < s.length(); i++){
+            char a = s.charAt(i);
+            char b = t.charAt(i);
+            if(map.containsKey(a)){
+                if(map.get(a) != b)
+                    return false;
+            } else {
+                if(map.containsValue(b))
+                    return false;
                 map.put(a, b);
             }
         }
-        <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+        return true;
     }
 }
-</code></pre>
-<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
-<p>Runtime: 75.46%<br />
-Memory: 45.61%</p>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 75.46%<br>Memory: 45.61%</p>
 
       </div>
       

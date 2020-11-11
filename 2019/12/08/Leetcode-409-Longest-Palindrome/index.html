@@ -317,16 +317,9 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接httpsleetcodecomproblemslongest-palindrome"><a class="markdownIt-Anchor" href="#题目链接httpsleetcodecomproblemslongest-palindrome"></a> 题目链接https://leetcode.com/problems/longest-palindrome/</h2>
-<h2 id="题目难度easy-491"><a class="markdownIt-Anchor" href="#题目难度easy-491"></a> 题目难度Easy 49.1%</h2>
-<a id="more"></a>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<p>Given a string which consists of lowercase or uppercase letters, find the length of the longest palindromes that can be built with those letters.<br />
-This is case sensitive, for example “Aa” is not considered a palindrome here.<br />
-Note:<br />
-Assume the length of given string will not exceed 1,010.<br />
-Example:</p>
-<pre class="highlight"><code class="">Input:
+        <h2 id="题目链接https-leetcode-com-problems-longest-palindrome"><a href="#题目链接https-leetcode-com-problems-longest-palindrome" class="headerlink" title="题目链接https://leetcode.com/problems/longest-palindrome/"></a>题目链接<a href="https://leetcode.com/problems/longest-palindrome/" target="_blank" rel="noopener">https://leetcode.com/problems/longest-palindrome/</a></h2><h2 id="题目难度Easy-49-1"><a href="#题目难度Easy-49-1" class="headerlink" title="题目难度Easy 49.1%"></a>题目难度Easy 49.1%</h2><a id="more"></a>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Given a string which consists of lowercase or uppercase letters, find the length of the longest palindromes that can be built with those letters.<br>This is case sensitive, for example “Aa” is not considered a palindrome here.<br>Note:<br>Assume the length of given string will not exceed 1,010.<br>Example:</p>
+<pre><code>Input:
 &quot;abccccdd&quot;
 
 Output:
@@ -334,44 +327,38 @@ Output:
 
 Explanation:
 One longest palindrome that can be built is &quot;dccaccd&quot;, whose length is 7.
-</code></pre>
-<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
-<p>题目的目的是，由给定的string的字符，能组成的回文串最长是多长。关键点如下：</p>
+</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>题目的目的是，由给定的string的字符，能组成的回文串最长是多长。关键点如下：</p>
 <ol>
 <li>这里是问回文串的长度，那么就需要count字符数。</li>
 <li>回文串的可能性：偶回文和奇回文。</li>
 <li>字符串中只包含大写或小写字符。</li>
 <li>字符串长度不会超过1010.</li>
 </ol>
-<p>在开始写code之前，要把整个过程先过一遍，这是一个需要养成的好习惯，因为很有可能自己的第一直觉想法是错误的，如果还没在脑子里过一遍就开始写，等到真的碰到问题了时间就浪费了一大半了。所以，写code应该是最后完成的事情才对，在面试过程中，先将自己的想法提出来与面试官沟通，不仅会大大加分，还有可能在和面试官讨论的过程中发现自己的错误。<br />
-以这道题为例，题目问最长能组成的回文串是多长。回文由奇和偶，如果由奇数的字符，那肯定奇回文会更长。所以步骤为：</p>
+<p>在开始写code之前，要把整个过程先过一遍，这是一个需要养成的好习惯，因为很有可能自己的第一直觉想法是错误的，如果还没在脑子里过一遍就开始写，等到真的碰到问题了时间就浪费了一大半了。所以，写code应该是最后完成的事情才对，在面试过程中，先将自己的想法提出来与面试官沟通，不仅会大大加分，还有可能在和面试官讨论的过程中发现自己的错误。<br>以这道题为例，题目问最长能组成的回文串是多长。回文由奇和偶，如果由奇数的字符，那肯定奇回文会更长。所以步骤为：</p>
 <ol>
 <li>count每个字符。</li>
 <li>遍历每个count，若出现奇数记录下来。</li>
 <li>对于每一个出现的字符，一定可以用个数是最大的偶数。</li>
 <li>最后结果之前记录的奇数来返回结果。</li>
 </ol>
-<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
-<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">longestPalindrome</span><span class="hljs-params">(String s)</span> </span>{
-        <span class="hljs-keyword">int</span>[] count = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">128</span>];
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">char</span> c : s.toCharArray())
-            count[(<span class="hljs-keyword">int</span>)c]++;
-        <span class="hljs-keyword">boolean</span> flag = <span class="hljs-keyword">false</span>;
-        <span class="hljs-keyword">int</span> res = <span class="hljs-number">0</span>;
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> n : count){
-            <span class="hljs-comment">//取最大的偶数</span>
-            res += (n / <span class="hljs-number">2</span>) * <span class="hljs-number">2</span>;
-            <span class="hljs-keyword">if</span>(n % <span class="hljs-number">2</span> == <span class="hljs-number">1</span>)
-                flag = <span class="hljs-keyword">true</span>;
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre class="line-numbers language-lang-java"><code class="language-lang-java">class Solution {
+    public int longestPalindrome(String s) {
+        int[] count = new int[128];
+        for(char c : s.toCharArray())
+            count[(int)c]++;
+        boolean flag = false;
+        int res = 0;
+        for(int n : count){
+            //取最大的偶数
+            res += (n / 2) * 2;
+            if(n % 2 == 1)
+                flag = true;
         }
-        <span class="hljs-keyword">return</span> flag ? res + <span class="hljs-number">1</span> : res;
+        return flag ? res + 1 : res;
     }
 }
-</code></pre>
-<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
-<p>Runtime: 100%<br />
-Memory: 100%</p>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 100%<br>Memory: 100%</p>
 
       </div>
       
