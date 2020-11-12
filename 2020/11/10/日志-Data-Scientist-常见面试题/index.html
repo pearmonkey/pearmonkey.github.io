@@ -374,20 +374,108 @@
 L(\theta | y; x) &= Pr(Y|X;\theta) \\
  &= \prod_i Pr(y_i|x_i;\theta)\\
  &= \prod_i p_\theta (x_i)^{y_i} (1 - p_\theta (x_i))^{1 - y_i}
-\end{align*}</script><p>Objective function:<br>\[J(\theta) = -\frac{1}{m} \sum<em>i [y_i \log p</em>\theta (x<em>i) + (1 - y_i) \log (1 - p</em>\theta (x_i))]\]</p>
-<h2 id="3-Support-Vector-Machine"><a href="#3-Support-Vector-Machine" class="headerlink" title="3. Support Vector Machine"></a>3. Support Vector Machine</h2><p><strong>What is Support Vector Machine (SVM)?</strong><br>A SVM constructs a hyperplane or set of hyperplanes in a high- or infinite-dimensional space, which can be used for classification, regression, or ther tasks like outliers detection.<br>SVM是一种二类分类模型。它的基本模型是在特征空间中寻找间隔最大化的分离超平面的线性分类器。</p>
+\end{align*}</script><p>Objective function:</p>
+<script type="math/tex; mode=display">J(\theta) = -\frac{1}{m} \sum_i [y_i \log p_{\theta} (x_i) + (1 - y_i) \log (1 - p_{\theta} (x_i))]</script><h2 id="3-Support-Vector-Machine"><a href="#3-Support-Vector-Machine" class="headerlink" title="3. Support Vector Machine"></a>3. Support Vector Machine</h2><p><strong>What is Support Vector Machine (SVM)?</strong><br>A SVM constructs a hyperplane or set of hyperplanes in a high- or infinite-dimensional space, which can be used for classification, regression, or ther tasks like outliers detection.<br>SVM是一种二类分类模型。它的基本模型是在特征空间中寻找间隔最大化的分离超平面的线性分类器。</p>
 <ul>
 <li>当训练样本线性可分时，通过硬间隔最大化，学习一个线性分类器，即线性可分支持向量机；</li>
 <li>当训练样本近似线性可分时，引入松弛变量，通过软间隔最大化，学习一个线性分类器，即线性支持向量机；</li>
 <li>当训练样本线性不可分时，通过使用核技巧及软间隔最大化，学习非线性支持向量机。</li>
 </ul>
-<h2 id="4-Decision-Tree"><a href="#4-Decision-Tree" class="headerlink" title="4. Decision Tree"></a>4. Decision Tree</h2><p><strong>What is Decision Tree? What kinds of?</strong><br>A flowchart-like tree structure, where each internal node (non-leaf node) denotes a test on an attribute, each branch represents an outcome of the test, and each leaf node holds a value for the target variable.</p>
-<p>A type of supervised learning algorithm that is mostly used for classification problem</p>
-<p><strong>How do we train a decision tree</strong></p>
-<ol>
-<li>Start at the root node;</li>
-<li>For each variable X, find the </li>
-</ol>
+<h2 id="4-Decision-Tree"><a href="#4-Decision-Tree" class="headerlink" title="4. Decision Tree"></a>4. Decision Tree</h2><p><strong>What is Decision Tree?</strong><br>A flowchart-like tree structure, where each internal node (non-leaf node) denotes a test on an attribute, each branch represents an outcome of the test, and each leaf node holds a value for the target variable.</p>
+<p><strong>决策树的优缺点</strong></p>
+<ul>
+<li>优点<ul>
+<li>计算简单，速度快；</li>
+<li>可解释性强；</li>
+<li>比较适合处理由缺失属性的样本。</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>容易发生过拟合（随机森林可以解决）；</li>
+<li>忽略了特征之间的相关性。</li>
+</ul>
+</li>
+</ul>
+<p><strong>决策树的种类以及各类的特点</strong><br>决策树算法，无论哪种，目的都是为了让模型的不确定性（熵）降低的越快越好，不同的算法基于的指标不同。<br>熵 (Entropy \(H(S)\) is a measure of the amount of uncertainty in the data \(S\)):<br>\[H(S) = \sum_{x \in X} -p(x) \log_2 p(x)\]</p>
+<ul>
+<li>\(S\): the current dataset</li>
+<li>\(X\): the set of classes in \(S\)</li>
+<li>\(p(x)\): the proportion of the number of elements in class \(x\) to the number of elements in set \(S\)</li>
+</ul>
+<p>为了让熵尽快降低，尽量选择区分度更大的特征进行分裂：</p>
+<ul>
+<li><p>ID3算法：基于信息增益 (Information Gain)</p>
+<ul>
+<li>\(IG(S, A) = H(S) - H(S|A)\)。</li>
+<li>\(IG\) can be calculated for each remaining attrubute.</li>
+<li>The attribute with the largest \(IG\) is used to split \(S\).</li>
+<li>缺点：信息增益准则对那些取值比较多的特征有所偏好，因为取值越多，分的越开，熵就越小。但是这样就会产生一些没有意义的分类，比如每个人都有身份证号码，如果单单看信息增益，那么就会按照每个身份证为一类，一类也只有一个人，这样每个子集的熵是0，但是没有任何意义。</li>
+</ul>
+</li>
+<li><p>C4.5算法：信息增益率 (Information Gain Ratio)</p>
+<ul>
+<li>\(IGR(S, A) = \frac{IG(S, A)}{IV(A)}\), \(IV(A) = -\sum^n_{i=1} \frac{|S_i|}{|S|} \log_2 \frac{|S_i|}{|S|}\), n是特征A的取值个数，A的取值少的话，那么A的纯度比较高，\(IV(A)\)就比较小；相反，如果A的取值比较多，A的纯度就低，\(IV(A)\)就比较大。这样就中和了ID3算法的问题了。</li>
+</ul>
+</li>
+<li><p>CART(classification and regression tree)算法：基尼系数 (Gini)</p>
+<ul>
+<li>\(Gini(A) = 1 - \sum_i^C p_i^2\), 其中\(p_i\)表示属于\(i\)类的概率，当\(Gini(A)=0\)时，所有样本属于同类，所有类在节点中以等概率出现时，最大化\(Gini(A) = C(C - 1) / 2\).</li>
+</ul>
+</li>
+</ul>
+<p><strong>决策树出现过拟合的原因和解决方法</strong></p>
+<ul>
+<li>原因：<ul>
+<li>在决策树的构建过程中，对决策树的生长没有进行合理的剪枝；</li>
+<li>构建过程中使用了取值较多的特征。</li>
+</ul>
+</li>
+<li>解决办法：<ul>
+<li>选择合理的参数进行剪枝，可以分为预剪枝和后剪枝，一般采用后剪枝的方法；</li>
+<li>用K-folds交叉验证；</li>
+<li>降维或者加正则化。</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-Bagging-v-s-Boosting"><a href="#5-Bagging-v-s-Boosting" class="headerlink" title="5. Bagging v.s. Boosting"></a>5. Bagging v.s. Boosting</h2><p><strong>Bagging</strong><br>Bagging means <strong>B</strong>ootstrap <strong>agg</strong>regat<strong>ing</strong>. It is a machine learning ensemble meta-algorithm designed to improve the stability and accuracy in classification and regression. It also reduces variance and helps to avoid overfitting. Although it is usually applied to decision tree methods, it can be used with any type of method.</p>
+<p><strong>Boosting</strong><br>Boosting is an ensemble meta-algorithm for reducing bias, and also variance in supervised learning.</p>
+<p><strong>比较</strong></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Bagging</th>
+<th>Boosting</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>reduce variance</td>
+<td>reduce both variance and bias</td>
+</tr>
+<tr>
+<td>majority vote for output</td>
+<td>weighted sum of weak learners for output</td>
+</tr>
+<tr>
+<td>resampling subset for training</td>
+<td>whole dataset but different weight for samples</td>
+</tr>
+<tr>
+<td>equal-weight weak learners</td>
+<td>weighted by accuracy</td>
+</tr>
+<tr>
+<td>easy parallelization</td>
+<td>hard parallelization</td>
+</tr>
+<tr>
+<td>Random Forest</td>
+<td>Adaboosting, Gradient Boosting</td>
+</tr>
+</tbody>
+</table>
+</div>
 
       </div>
       
