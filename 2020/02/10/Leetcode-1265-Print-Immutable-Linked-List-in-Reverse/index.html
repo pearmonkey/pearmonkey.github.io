@@ -321,39 +321,51 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接-https-leetcode-com-problems-print-immutable-linked-list-in-reverse"><a href="#题目链接-https-leetcode-com-problems-print-immutable-linked-list-in-reverse" class="headerlink" title="题目链接 https://leetcode.com/problems/print-immutable-linked-list-in-reverse/"></a>题目链接 <a href="https://leetcode.com/problems/print-immutable-linked-list-in-reverse/" target="_blank" rel="noopener">https://leetcode.com/problems/print-immutable-linked-list-in-reverse/</a></h2><h2 id="题目难度-Medium-92-5"><a href="#题目难度-Medium-92-5" class="headerlink" title="题目难度 Medium 92.5%"></a>题目难度 Medium 92.5%</h2><a id="more"></a>
-<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>You are given an immutable linked list, print out all values of each node in reverse with the help of the following interface:</p>
-<p>ImmutableListNode: An interface of immutable linked list, you are given the head of the list.<br>You need to use the following functions to access the linked list (you can’t access the ImmutableListNode directly):</p>
-<p>ImmutableListNode.printValue(): Print value of the current node.<br>ImmutableListNode.getNext(): Return the next node.<br>The input is only given to initialize the linked list internally. You must solve this problem without modifying the linked list. In other words, you must operate the linked list using only the mentioned APIs.</p>
+        <h2 id="题目链接-httpsleetcodecomproblemsprint-immutable-linked-list-in-reverse"><a class="markdownIt-Anchor" href="#题目链接-httpsleetcodecomproblemsprint-immutable-linked-list-in-reverse"></a> 题目链接 <a href="https://leetcode.com/problems/print-immutable-linked-list-in-reverse/" target="_blank" rel="noopener">https://leetcode.com/problems/print-immutable-linked-list-in-reverse/</a></h2>
+<h2 id="题目难度-medium-925"><a class="markdownIt-Anchor" href="#题目难度-medium-925"></a> 题目难度 Medium 92.5%</h2>
+<a id="more"></a>
+<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
+<p>You are given an immutable linked list, print out all values of each node in reverse with the help of the following interface:</p>
+<p>ImmutableListNode: An interface of immutable linked list, you are given the head of the list.<br />
+You need to use the following functions to access the linked list (you can’t access the ImmutableListNode directly):</p>
+<p>ImmutableListNode.printValue(): Print value of the current node.<br />
+ImmutableListNode.getNext(): Return the next node.<br />
+The input is only given to initialize the linked list internally. You must solve this problem without modifying the linked list. In other words, you must operate the linked list using only the mentioned APIs.</p>
 <p>Follow up:</p>
 <p>Could you solve this problem in:</p>
-<p>Constant space complexity?<br>Linear time complexity and less than linear space complexity?</p>
+<p>Constant space complexity?<br />
+Linear time complexity and less than linear space complexity?</p>
 <p>Example 1:</p>
-<pre><code>Input: head = [1,2,3,4]
+<pre class="highlight"><code class="">Input: head = [1,2,3,4]
 Output: [4,3,2,1]
-</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>这道题接受率92.5%…为什么是道medium呢？</p>
-<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre class="line-numbers language-lang-java"><code class="language-lang-java">/**
+</code></pre>
+<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
+<p>这道题接受率92.5%…为什么是道medium呢？</p>
+<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
+<pre class="highlight"><code class="java"><span class="hljs-comment">/**
  * // This is the ImmutableListNode's API interface.
  * // You should not implement it, or speculate about its implementation.
  * interface ImmutableListNode {
  *     public void printValue(); // print the value of this node.
  *     public ImmutableListNode getNext(); // return the next node.
  * };
- */
+ */</span>
 
-class Solution {
-    public void printLinkedListInReverse(ImmutableListNode head) {
-        if(head == null) return;
-        if(head.getNext() == null)
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">printLinkedListInReverse</span><span class="hljs-params">(ImmutableListNode head)</span> </span>{
+        <span class="hljs-keyword">if</span>(head == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span>;
+        <span class="hljs-keyword">if</span>(head.getNext() == <span class="hljs-keyword">null</span>)
             head.printValue();
-        else{
+        <span class="hljs-keyword">else</span>{
             printLinkedListInReverse(head.getNext());
             head.printValue();
         }
     }
 }
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 88.73%<br>Memory: 100.00%</p>
+</code></pre>
+<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
+<p>Runtime: 88.73%<br />
+Memory: 100.00%</p>
 
       </div>
       

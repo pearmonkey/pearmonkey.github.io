@@ -317,30 +317,35 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接https-leetcode-com-problems-longest-word-in-dictionary"><a href="#题目链接https-leetcode-com-problems-longest-word-in-dictionary" class="headerlink" title="题目链接https://leetcode.com/problems/longest-word-in-dictionary/"></a>题目链接<a href="https://leetcode.com/problems/longest-word-in-dictionary/" target="_blank" rel="noopener">https://leetcode.com/problems/longest-word-in-dictionary/</a></h2><h2 id="题目难度Easy-47-0"><a href="#题目难度Easy-47-0" class="headerlink" title="题目难度Easy 47.0%"></a>题目难度Easy 47.0%</h2><a id="more"></a>
-<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Given a list of strings words representing an English Dictionary, find the longest word in words that can be built one character at a time by other words in words. If there is more than one possible answer, return the longest word with the smallest lexicographical order.</p>
+        <h2 id="题目链接httpsleetcodecomproblemslongest-word-in-dictionary"><a class="markdownIt-Anchor" href="#题目链接httpsleetcodecomproblemslongest-word-in-dictionary"></a> 题目链接https://leetcode.com/problems/longest-word-in-dictionary/</h2>
+<h2 id="题目难度easy-470"><a class="markdownIt-Anchor" href="#题目难度easy-470"></a> 题目难度Easy 47.0%</h2>
+<a id="more"></a>
+<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
+<p>Given a list of strings words representing an English Dictionary, find the longest word in words that can be built one character at a time by other words in words. If there is more than one possible answer, return the longest word with the smallest lexicographical order.</p>
 <p>If there is no answer, return the empty string.</p>
 <p>Example 1:</p>
-<pre class="line-numbers language-lang-language-markup"><code class="language-lang-language-markup">Input:
-words = ["w","wo","wor","worl", "world"]
-Output: "world"
+<pre class="highlight"><code class="language-markup">Input:
+words = [&quot;w&quot;,&quot;wo&quot;,&quot;wor&quot;,&quot;worl&quot;, &quot;world&quot;]
+Output: &quot;world&quot;
 Explanation:
-The word "world" can be built one character at a time by "w", "wo", "wor", and "worl".
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre class="line-numbers language-lang-language-java"><code class="language-lang-language-java">class Solution {
+The word &quot;world&quot; can be built one character at a time by &quot;w&quot;, &quot;wo&quot;, &quot;wor&quot;, and &quot;worl&quot;.
+</code></pre>
+<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
+<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
+<pre class="highlight"><code class="language-java">class Solution {
     public String longestWord(String[] words) {
-        Set<String> set = new HashSet();
-        String res = "";
+        Set&lt;String&gt; set = new HashSet();
+        String res = &quot;&quot;;
         for(String s : words)
             set.add(s);
         for(String s : words){
             int i = 1;
-            for(; i < s.length(); i++){
+            for(; i &lt; s.length(); i++){
                 if(!set.contains(s.substring(0, i))) break;
 
             }
             if(i == s.length()){
-                if(res.length() < s.length())
+                if(res.length() &lt; s.length())
                     res = s;
                 else if(res.length() == s.length())
                     res = helper(s, res);
@@ -351,9 +356,9 @@ The word "world" can be built one character at a time by "w", "wo", "wor", and "
 
     public String helper(String s, String t){
         boolean flag = true;
-        for(int i = 0; i < s.length(); i++){
+        for(int i = 0; i &lt; s.length(); i++){
             if(s.charAt(i) == t.charAt(i)) continue;
-            if(s.charAt(i) > t.charAt(i)){
+            if(s.charAt(i) &gt; t.charAt(i)){
                 flag = false;
                 break;
             } else break;
@@ -361,8 +366,10 @@ The word "world" can be built one character at a time by "w", "wo", "wor", and "
         return flag ? s : t;
     }
 }
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 16.75%<br>Memory: 6.25%</p>
+</code></pre>
+<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
+<p>Runtime: 16.75%<br />
+Memory: 6.25%</p>
 
       </div>
       

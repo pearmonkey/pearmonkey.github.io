@@ -325,28 +325,36 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接-https-leetcode-com-problems-delete-leaves-with-a-given-value"><a href="#题目链接-https-leetcode-com-problems-delete-leaves-with-a-given-value" class="headerlink" title="题目链接 https://leetcode.com/problems/delete-leaves-with-a-given-value/"></a>题目链接 <a href="https://leetcode.com/problems/delete-leaves-with-a-given-value/" target="_blank" rel="noopener">https://leetcode.com/problems/delete-leaves-with-a-given-value/</a></h2><h2 id="题目难度-Medium-73-3"><a href="#题目难度-Medium-73-3" class="headerlink" title="题目难度 Medium 73.3%"></a>题目难度 Medium 73.3%</h2><a id="more"></a>
-<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Given a binary tree root and an integer target, delete all the leaf nodes with value target.</p>
+        <h2 id="题目链接-httpsleetcodecomproblemsdelete-leaves-with-a-given-value"><a class="markdownIt-Anchor" href="#题目链接-httpsleetcodecomproblemsdelete-leaves-with-a-given-value"></a> 题目链接 <a href="https://leetcode.com/problems/delete-leaves-with-a-given-value/" target="_blank" rel="noopener">https://leetcode.com/problems/delete-leaves-with-a-given-value/</a></h2>
+<h2 id="题目难度-medium-733"><a class="markdownIt-Anchor" href="#题目难度-medium-733"></a> 题目难度 Medium 73.3%</h2>
+<a id="more"></a>
+<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
+<p>Given a binary tree root and an integer target, delete all the leaf nodes with value target.</p>
 <p>Note that once you delete a leaf node with value target, if it’s parent node becomes a leaf node and has the value target, it should also be deleted (you need to continue doing that until you can’t).</p>
 <p>Example 1:</p>
-<pre><code>Input: root = [1,2,3,2,null,2,4], target = 2
+<pre class="highlight"><code class="">Input: root = [1,2,3,2,null,2,4], target = 2
 Output: [1,null,3,null,4]
 Explanation: Leaf nodes in green with value (target = 2) are removed (Picture in left).
 After removing, new nodes become leaf nodes with value (target = 2) (Picture in center).
-</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>这道题和814一样都是postorder。两者的共同点是，先动左右子树，root的去留是根据左右子树的状态来决定。</p>
-<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre class="line-numbers language-lang-java"><code class="language-lang-java">class Solution {
-    public TreeNode removeLeafNodes(TreeNode root, int target) {
-        if(root == null) return null;
+</code></pre>
+<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
+<p>这道题和814一样都是postorder。两者的共同点是，先动左右子树，root的去留是根据左右子树的状态来决定。</p>
+<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
+<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> TreeNode <span class="hljs-title">removeLeafNodes</span><span class="hljs-params">(TreeNode root, <span class="hljs-keyword">int</span> target)</span> </span>{
+        <span class="hljs-keyword">if</span>(root == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
         root.left = removeLeafNodes(root.left, target);
         root.right = removeLeafNodes(root.right, target);
-        if(root.val == target && root.left == null && root.right == null)
-            return null;
-        return root;
+        <span class="hljs-keyword">if</span>(root.val == target &amp;&amp; root.left == <span class="hljs-keyword">null</span> &amp;&amp; root.right == <span class="hljs-keyword">null</span>)
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+        <span class="hljs-keyword">return</span> root;
     }
 
 }
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 100.00%<br>Memory: 100.00%</p>
+</code></pre>
+<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
+<p>Runtime: 100.00%<br />
+Memory: 100.00%</p>
 
       </div>
       

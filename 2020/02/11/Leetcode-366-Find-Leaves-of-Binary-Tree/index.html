@@ -321,10 +321,13 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接https-leetcode-com-problems-find-leaves-of-binary-tree"><a href="#题目链接https-leetcode-com-problems-find-leaves-of-binary-tree" class="headerlink" title="题目链接https://leetcode.com/problems/find-leaves-of-binary-tree/"></a>题目链接<a href="https://leetcode.com/problems/find-leaves-of-binary-tree/" target="_blank" rel="noopener">https://leetcode.com/problems/find-leaves-of-binary-tree/</a></h2><h2 id="题目难度Medium-69"><a href="#题目难度Medium-69" class="headerlink" title="题目难度Medium 69%"></a>题目难度Medium 69%</h2><a id="more"></a>
-<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Given a binary tree, collect a tree’s nodes as if you were doing this: Collect and remove all leaves, repeat until the tree is empty.</p>
+        <h2 id="题目链接httpsleetcodecomproblemsfind-leaves-of-binary-tree"><a class="markdownIt-Anchor" href="#题目链接httpsleetcodecomproblemsfind-leaves-of-binary-tree"></a> 题目链接https://leetcode.com/problems/find-leaves-of-binary-tree/</h2>
+<h2 id="题目难度medium-69"><a class="markdownIt-Anchor" href="#题目难度medium-69"></a> 题目难度Medium 69%</h2>
+<a id="more"></a>
+<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
+<p>Given a binary tree, collect a tree’s nodes as if you were doing this: Collect and remove all leaves, repeat until the tree is empty.</p>
 <p>Example 1:</p>
-<pre><code>Input: [1,2,3,4,5]
+<pre class="highlight"><code class="">Input: [1,2,3,4,5]
 
           1
          / \
@@ -333,31 +336,36 @@
       4   5
 
 Output: [[4,5,3],[2],[1]]
-</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>这道题是要将叶子节点一层一层去掉直到root为空。一开始拿到这个题没有太多思路，想到的是dfs，但是不知道什么时候停止把out加入res。看了其他人的答案后，发现root是每完全去掉一次就更新的，所以需要一个while loop到root为空，所以helper的return就是root，input就是root和out，因为要把叶子节点存到out再删掉，然后更新了root之后就把out给res。recursive更新左右子树。</p>
-<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre class="line-numbers language-lang-java"><code class="language-lang-java">class Solution {
-    public List<List<Integer>> findLeaves(TreeNode root) {
-        List<List<Integer>> res = new ArrayList();
-        while(root != null){
-            List<Integer> out = new ArrayList();
+</code></pre>
+<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
+<p>这道题是要将叶子节点一层一层去掉直到root为空。一开始拿到这个题没有太多思路，想到的是dfs，但是不知道什么时候停止把out加入res。看了其他人的答案后，发现root是每完全去掉一次就更新的，所以需要一个while loop到root为空，所以helper的return就是root，input就是root和out，因为要把叶子节点存到out再删掉，然后更新了root之后就把out给res。recursive更新左右子树。</p>
+<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
+<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
+    <span class="hljs-keyword">public</span> List&lt;List&lt;Integer&gt;&gt; findLeaves(TreeNode root) {
+        List&lt;List&lt;Integer&gt;&gt; res = <span class="hljs-keyword">new</span> ArrayList();
+        <span class="hljs-keyword">while</span>(root != <span class="hljs-keyword">null</span>){
+            List&lt;Integer&gt; out = <span class="hljs-keyword">new</span> ArrayList();
             root = helper(root, out);
-            res.add(new ArrayList(out));
+            res.add(<span class="hljs-keyword">new</span> ArrayList(out));
         }
-        return res;
+        <span class="hljs-keyword">return</span> res;
     }
 
-    public TreeNode helper(TreeNode root, List<Integer> out){
-        if(root == null) return null;
-        if(root.left == null && root.right == null) {
+    <span class="hljs-function"><span class="hljs-keyword">public</span> TreeNode <span class="hljs-title">helper</span><span class="hljs-params">(TreeNode root, List&lt;Integer&gt; out)</span></span>{
+        <span class="hljs-keyword">if</span>(root == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+        <span class="hljs-keyword">if</span>(root.left == <span class="hljs-keyword">null</span> &amp;&amp; root.right == <span class="hljs-keyword">null</span>) {
             out.add(root.val);
-            return null;
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
         }
         root.left = helper(root.left, out);
         root.right = helper(root.right, out);
-        return root;
+        <span class="hljs-keyword">return</span> root;
     }
 }
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 100.00%<br>Memory: 6.82%</p>
+</code></pre>
+<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
+<p>Runtime: 100.00%<br />
+Memory: 6.82%</p>
 
       </div>
       

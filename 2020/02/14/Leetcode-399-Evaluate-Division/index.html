@@ -321,10 +321,13 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接https-leetcode-com-problems-evaluate-division"><a href="#题目链接https-leetcode-com-problems-evaluate-division" class="headerlink" title="题目链接https://leetcode.com/problems/evaluate-division/"></a>题目链接<a href="https://leetcode.com/problems/evaluate-division/" target="_blank" rel="noopener">https://leetcode.com/problems/evaluate-division/</a></h2><h2 id="题目难度Medium-49-9"><a href="#题目难度Medium-49-9" class="headerlink" title="题目难度Medium 49.9%"></a>题目难度Medium 49.9%</h2><a id="more"></a>
-<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Equations are given in the format A / B = k, where A and B are variables represented as strings, and k is a real number (floating point number). Given some queries, return the answers. If the answer does not exist, return -1.0.</p>
+        <h2 id="题目链接httpsleetcodecomproblemsevaluate-division"><a class="markdownIt-Anchor" href="#题目链接httpsleetcodecomproblemsevaluate-division"></a> 题目链接https://leetcode.com/problems/evaluate-division/</h2>
+<h2 id="题目难度medium-499"><a class="markdownIt-Anchor" href="#题目难度medium-499"></a> 题目难度Medium 49.9%</h2>
+<a id="more"></a>
+<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
+<p>Equations are given in the format A / B = k, where A and B are variables represented as strings, and k is a real number (floating point number). Given some queries, return the answers. If the answer does not exist, return -1.0.</p>
 <p>Example 1:</p>
-<pre><code>Given a / b = 2.0, b / c = 3.0.
+<pre class="highlight"><code class="">Given a / b = 2.0, b / c = 3.0.
 queries are: a / c = ?, b / a = ?, a / e = ?, a / a = ?, x / x = ? .
 return [6.0, 0.5, -1.0, 1.0, -1.0 ].
 
@@ -335,35 +338,38 @@ According to the example above:
 equations = [ [&quot;a&quot;, &quot;b&quot;], [&quot;b&quot;, &quot;c&quot;] ],
 values = [2.0, 3.0],
 queries = [ [&quot;a&quot;, &quot;c&quot;], [&quot;b&quot;, &quot;a&quot;], [&quot;a&quot;, &quot;e&quot;], [&quot;a&quot;, &quot;a&quot;], [&quot;x&quot;, &quot;x&quot;] ].
-</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre class="line-numbers language-lang-java"><code class="language-lang-java">class Solution {
+</code></pre>
+<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
+<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
+<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
 
-    class UnionFind{
-        Map<String, String> parent; // <node, parent of node>
-        Map<String, Double> ratio; // <node, parent / node>
+    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UnionFind</span></span>{
+        Map&lt;String, String&gt; parent; <span class="hljs-comment">// &lt;node, parent of node&gt;</span>
+        Map&lt;String, Double&gt; ratio; <span class="hljs-comment">// &lt;node, parent / node&gt;</span>
 
-        public UnionFind(){
-            parent = new HashMap();
-            ratio = new HashMap();
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">UnionFind</span><span class="hljs-params">()</span></span>{
+            parent = <span class="hljs-keyword">new</span> HashMap();
+            ratio = <span class="hljs-keyword">new</span> HashMap();
         }
 
-        public String find(String p){
-            if(p.equals(parent.get(p)))
-                return p;
+        <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">find</span><span class="hljs-params">(String p)</span></span>{
+            <span class="hljs-keyword">if</span>(p.equals(parent.get(p)))
+                <span class="hljs-keyword">return</span> p;
             String father = parent.get(p);
             String grandfather = parent.get(father);
             parent.put(p, grandfather);
             ratio.put(p, ratio.get(p) * ratio.get(father));
-            return parent.get(p);
+            <span class="hljs-keyword">return</span> parent.get(p);
         }
 
-        public void union(String p, String q, double val){
-            if(!parent.containsKey(p)){
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">union</span><span class="hljs-params">(String p, String q, <span class="hljs-keyword">double</span> val)</span></span>{
+            <span class="hljs-keyword">if</span>(!parent.containsKey(p)){
                 parent.put(p, p);
-                ratio.put(p, 1.0);
+                ratio.put(p, <span class="hljs-number">1.0</span>);
             }
-            if(!parent.containsKey(q)){
+            <span class="hljs-keyword">if</span>(!parent.containsKey(q)){
                 parent.put(q, q);
-                ratio.put(q, 1.0);
+                ratio.put(q, <span class="hljs-number">1.0</span>);
             }
             String rootp = find(p);
             String rootq = find(q);
@@ -372,31 +378,33 @@ queries = [ [&quot;a&quot;, &quot;c&quot;], [&quot;b&quot;, &quot;a&quot;], [&qu
         }
     }
 
-    public double[] calcEquation(List<List<String>> equations, double[] values, List<List<String>> queries) {
-        int n = queries.size();
-        double[] res = new double[n];
-        UnionFind uf = new UnionFind();
-        for(int i = 0; i < equations.size(); i++){
-            List<String> list = equations.get(i);
-            String p = list.get(0);
-            String q = list.get(1);
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">double</span>[] calcEquation(List&lt;List&lt;String&gt;&gt; equations, <span class="hljs-keyword">double</span>[] values, List&lt;List&lt;String&gt;&gt; queries) {
+        <span class="hljs-keyword">int</span> n = queries.size();
+        <span class="hljs-keyword">double</span>[] res = <span class="hljs-keyword">new</span> <span class="hljs-keyword">double</span>[n];
+        UnionFind uf = <span class="hljs-keyword">new</span> UnionFind();
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; equations.size(); i++){
+            List&lt;String&gt; list = equations.get(i);
+            String p = list.get(<span class="hljs-number">0</span>);
+            String q = list.get(<span class="hljs-number">1</span>);
             uf.union(p, q, values[i]);
         }
-        for(int i = 0; i < n; i++){
-            List<String> query = queries.get(i);
-            String p = query.get(0);
-            String q = query.get(1);
-            if(!uf.parent.containsKey(p) || !uf.parent.containsKey(q) || !uf.find(p).equals(uf.find(q)))
-                res[i] = -1.0;
-            else{
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++){
+            List&lt;String&gt; query = queries.get(i);
+            String p = query.get(<span class="hljs-number">0</span>);
+            String q = query.get(<span class="hljs-number">1</span>);
+            <span class="hljs-keyword">if</span>(!uf.parent.containsKey(p) || !uf.parent.containsKey(q) || !uf.find(p).equals(uf.find(q)))
+                res[i] = -<span class="hljs-number">1.0</span>;
+            <span class="hljs-keyword">else</span>{
                 res[i] = uf.ratio.get(q) / uf.ratio.get(p);
             }
         }
-        return res;
+        <span class="hljs-keyword">return</span> res;
     }
 }
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 100.00%<br>Memory: 7.84%</p>
+</code></pre>
+<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
+<p>Runtime: 100.00%<br />
+Memory: 7.84%</p>
 
       </div>
       

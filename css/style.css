@@ -340,7 +340,7 @@ a {
   position: relative;
 }
 .posts .post .post-main .post-title {
-  font-size: 1.2em;
+  font-size: 1.1em;
   margin-top: 10px;
 }
 .posts .post .post-main .post-title .post-title-link {
@@ -357,6 +357,7 @@ a {
   color: rgba(0,0,0,0.66);
   margin-top: 10px;
   margin-bottom: 10px;
+  font-size: 0.8em;
   line-height: 27px;
   display: -webkit-box;
   -webkit-box-orient: vertical;

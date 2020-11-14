@@ -317,30 +317,42 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接-https-leetcode-com-problems-binary-prefix-divisible-by-5"><a href="#题目链接-https-leetcode-com-problems-binary-prefix-divisible-by-5" class="headerlink" title="题目链接 https://leetcode.com/problems/binary-prefix-divisible-by-5/"></a>题目链接 <a href="https://leetcode.com/problems/binary-prefix-divisible-by-5/" target="_blank" rel="noopener">https://leetcode.com/problems/binary-prefix-divisible-by-5/</a></h2><h2 id="题目难度-Easy-47-0"><a href="#题目难度-Easy-47-0" class="headerlink" title="题目难度 Easy 47.0%"></a>题目难度 Easy 47.0%</h2><a id="more"></a>
-<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Given an array A of 0s and 1s, consider N_i: the i-th subarray from A[0] to A[i] interpreted as a binary number (from most-significant-bit to least-significant-bit.)<br>Return a list of booleans answer, where answer[i] is true if and only if N_i is divisible by 5.<br>Example 1:</p>
-<pre><code>Input: [0,1,1]
+        <h2 id="题目链接-httpsleetcodecomproblemsbinary-prefix-divisible-by-5"><a class="markdownIt-Anchor" href="#题目链接-httpsleetcodecomproblemsbinary-prefix-divisible-by-5"></a> 题目链接 <a href="https://leetcode.com/problems/binary-prefix-divisible-by-5/" target="_blank" rel="noopener">https://leetcode.com/problems/binary-prefix-divisible-by-5/</a></h2>
+<h2 id="题目难度-easy-470"><a class="markdownIt-Anchor" href="#题目难度-easy-470"></a> 题目难度 Easy 47.0%</h2>
+<a id="more"></a>
+<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
+<p>Given an array A of 0s and 1s, consider N_i: the i-th subarray from A[0] to A[i] interpreted as a binary number (from most-significant-bit to least-significant-bit.)<br />
+Return a list of booleans answer, where answer[i] is true if and only if N_i is divisible by 5.<br />
+Example 1:</p>
+<pre class="highlight"><code class="">Input: [0,1,1]
 Output: [true,false,false]
 Explanation:
 The input numbers in binary are 0, 01, 011; which are 0, 1, and 3 in base-10.  Only the first number is divisible by 5, so answer[0] is true.
-</code></pre><p>Example 2:</p>
-<pre><code>Input: [0,1,1,1,1,1]
+</code></pre>
+<p>Example 2:</p>
+<pre class="highlight"><code class="">Input: [0,1,1,1,1,1]
 Output: [true,false,false,false,true,false]
-</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>题目的意思很简单，就是给定一个数组，里面只有0和1，看看从左到右形成的所有二进制的数能否被5整除。<br>那么就是每添加一个右边的数，就相当于当前的数向左移一位再加上右边这个数。再判断一下是否被5整除。</p>
-<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre class="line-numbers language-lang-java"><code class="language-lang-java">class Solution {
-    public List<Boolean> prefixesDivBy5(int[] A) {
-        List<Boolean> res = new ArrayList<>();
-        int curr = 0;
-        for(int i : A){
-            curr = 2*curr+i;
-            curr %= 5;
-            res.add(curr == 0);
+</code></pre>
+<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
+<p>题目的意思很简单，就是给定一个数组，里面只有0和1，看看从左到右形成的所有二进制的数能否被5整除。<br />
+那么就是每添加一个右边的数，就相当于当前的数向左移一位再加上右边这个数。再判断一下是否被5整除。</p>
+<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
+<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> List&lt;Boolean&gt; <span class="hljs-title">prefixesDivBy5</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] A)</span> </span>{
+        List&lt;Boolean&gt; res = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+        <span class="hljs-keyword">int</span> curr = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i : A){
+            curr = <span class="hljs-number">2</span>*curr+i;
+            curr %= <span class="hljs-number">5</span>;
+            res.add(curr == <span class="hljs-number">0</span>);
         }
-        return res;
+        <span class="hljs-keyword">return</span> res;
     }
 }
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 86.29%<br>Memory: 9.09%</p>
+</code></pre>
+<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
+<p>Runtime: 86.29%<br />
+Memory: 9.09%</p>
 
       </div>
       

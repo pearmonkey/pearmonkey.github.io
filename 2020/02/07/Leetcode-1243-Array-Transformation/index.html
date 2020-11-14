@@ -321,48 +321,58 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接-https-leetcode-com-problems-array-transformation"><a href="#题目链接-https-leetcode-com-problems-array-transformation" class="headerlink" title="题目链接 https://leetcode.com/problems/array-transformation/"></a>题目链接 <a href="https://leetcode.com/problems/array-transformation/" target="_blank" rel="noopener">https://leetcode.com/problems/array-transformation/</a></h2><h2 id="题目难度-Easy-52-5"><a href="#题目难度-Easy-52-5" class="headerlink" title="题目难度 Easy 52.5%"></a>题目难度 Easy 52.5%</h2><a id="more"></a>
-<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Given an initial array arr, every day you produce a new array using the array of the previous day.<br>On the i-th day, you do the following operations on the array of day i-1 to produce the array of day i:</p>
+        <h2 id="题目链接-httpsleetcodecomproblemsarray-transformation"><a class="markdownIt-Anchor" href="#题目链接-httpsleetcodecomproblemsarray-transformation"></a> 题目链接 <a href="https://leetcode.com/problems/array-transformation/" target="_blank" rel="noopener">https://leetcode.com/problems/array-transformation/</a></h2>
+<h2 id="题目难度-easy-525"><a class="markdownIt-Anchor" href="#题目难度-easy-525"></a> 题目难度 Easy 52.5%</h2>
+<a id="more"></a>
+<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
+<p>Given an initial array arr, every day you produce a new array using the array of the previous day.<br />
+On the i-th day, you do the following operations on the array of day i-1 to produce the array of day i:</p>
 <ul>
 <li>If an element is smaller than both its left neighbor and its right neighbor, then this element is incremented.</li>
 <li>If an element is bigger than both its left neighbor and its right neighbor, then this element is decremented.</li>
-<li>The first and last elements never change.<br>After some days, the array does not change. Return that final array.</li>
+<li>The first and last elements never change.<br />
+After some days, the array does not change. Return that final array.</li>
 </ul>
 <p>Example 1:</p>
-<pre><code>Input: arr = [1,6,3,4,3,5]
+<pre class="highlight"><code class="">Input: arr = [1,6,3,4,3,5]
 Output: [1,4,4,4,4,5]
 Explanation:
 On the first day, the array is changed from [1,6,3,4,3,5] to [1,5,4,3,4,5].
 On the second day, the array is changed from [1,5,4,3,4,5] to [1,4,4,4,4,5].
 No more operations can be done to this array.
-</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>这个题目就是认真按照题目的描述写code就行，一天一天变化，记录是否又变化，没有变化了就结束了。</p>
-<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre class="line-numbers language-lang-java"><code class="language-lang-java">class Solution {
-    public List<Integer> transformArray(int[] arr) {
-        List<Integer> res = new ArrayList();
-        int[] b = arr.clone();
-        boolean flag = true;
-        while(flag){
-            flag = false;
-            for(int i = 1; i < arr.length - 1; i++){
-                if(arr[i] > arr[i-1] && arr[i] > arr[i+1]){
-                    flag = true;
-                    b[i] = arr[i] - 1;
-                } else if(arr[i] < arr[i-1] && arr[i] < arr[i+1]){
-                    flag = true;
-                    b[i] = arr[i] + 1;
-                } else{
+</code></pre>
+<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
+<p>这个题目就是认真按照题目的描述写code就行，一天一天变化，记录是否又变化，没有变化了就结束了。</p>
+<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
+<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title">transformArray</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] arr)</span> </span>{
+        List&lt;Integer&gt; res = <span class="hljs-keyword">new</span> ArrayList();
+        <span class="hljs-keyword">int</span>[] b = arr.clone();
+        <span class="hljs-keyword">boolean</span> flag = <span class="hljs-keyword">true</span>;
+        <span class="hljs-keyword">while</span>(flag){
+            flag = <span class="hljs-keyword">false</span>;
+            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; arr.length - <span class="hljs-number">1</span>; i++){
+                <span class="hljs-keyword">if</span>(arr[i] &gt; arr[i-<span class="hljs-number">1</span>] &amp;&amp; arr[i] &gt; arr[i+<span class="hljs-number">1</span>]){
+                    flag = <span class="hljs-keyword">true</span>;
+                    b[i] = arr[i] - <span class="hljs-number">1</span>;
+                } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(arr[i] &lt; arr[i-<span class="hljs-number">1</span>] &amp;&amp; arr[i] &lt; arr[i+<span class="hljs-number">1</span>]){
+                    flag = <span class="hljs-keyword">true</span>;
+                    b[i] = arr[i] + <span class="hljs-number">1</span>;
+                } <span class="hljs-keyword">else</span>{
                     b[i] = arr[i];
                 }
             }
             arr = b.clone();
         }
-        for(int n : arr)
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> n : arr)
             res.add(n);
-        return res;
+        <span class="hljs-keyword">return</span> res;
     }
 }
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 95.24%<br>Memory: 100.00%</p>
+</code></pre>
+<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
+<p>Runtime: 95.24%<br />
+Memory: 100.00%</p>
 
       </div>
       

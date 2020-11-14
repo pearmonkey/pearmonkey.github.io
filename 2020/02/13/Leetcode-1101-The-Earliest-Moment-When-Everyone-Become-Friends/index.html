@@ -321,15 +321,19 @@
         
       </div>
       <div class="post-content">
-        <h4 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h4><p><a href="https://leetcode.com/problems/the-earliest-moment-when-everyone-become-friends/" target="_blank" rel="noopener">https://leetcode.com/problems/the-earliest-moment-when-everyone-become-friends/</a><br><a id="more"></a></p>
-<h4 id="题目难度"><a href="#题目难度" class="headerlink" title="题目难度"></a>题目难度</h4><p>Medium 64.9%</p>
-<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>In a social group, there are N people, with unique integer ids from 0 to N-1.</p>
+        <h4 id="题目链接"><a class="markdownIt-Anchor" href="#题目链接"></a> 题目链接</h4>
+<p><a href="https://leetcode.com/problems/the-earliest-moment-when-everyone-become-friends/" target="_blank" rel="noopener">https://leetcode.com/problems/the-earliest-moment-when-everyone-become-friends/</a></p>
+<a id="more"></a>
+<h4 id="题目难度"><a class="markdownIt-Anchor" href="#题目难度"></a> 题目难度</h4>
+<p>Medium 64.9%</p>
+<h4 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h4>
+<p>In a social group, there are N people, with unique integer ids from 0 to N-1.</p>
 <p>We have a list of logs, where each logs[i] = [timestamp, id_A, id_B] contains a non-negative integer timestamp, and the ids of two different people.</p>
 <p>Each log represents the time in which two different people became friends.  Friendship is symmetric: if A is friends with B, then B is friends with A.</p>
 <p>Let’s say that person A is acquainted with person B if A is friends with B, or A is a friend of someone acquainted with B.</p>
 <p>Return the earliest time for which every person became acquainted with every other person. Return -1 if there is no such earliest time.</p>
 <p>Example 1:</p>
-<pre><code>Input: logs = [[20190101,0,1],[20190104,3,4],[20190107,2,3],[20190211,1,5],[20190224,2,4],[20190301,0,3],[20190312,1,2],[20190322,4,5]], N = 6
+<pre class="highlight"><code class="">Input: logs = [[20190101,0,1],[20190104,3,4],[20190107,2,3],[20190211,1,5],[20190224,2,4],[20190301,0,3],[20190312,1,2],[20190322,4,5]], N = 6
 Output: 20190301
 Explanation:
 The first event occurs at timestamp = 20190101 and after 0 and 1 become friends we have the following friendship groups [0,1], [2], [3], [4], [5].
@@ -338,48 +342,54 @@ The third event occurs at timestamp = 20190107 and after 2 and 3 become friends 
 The fourth event occurs at timestamp = 20190211 and after 1 and 5 become friends we have the following friendship groups [0,1,5], [2,3,4].
 The fifth event occurs at timestamp = 20190224 and as 2 and 4 are already friend anything happens.
 The sixth event occurs at timestamp = 20190301 and after 0 and 3 become friends we have that all become friends.
-</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>等做完union find了再来写。</p>
-<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre class="line-numbers language-lang-java"><code class="language-lang-java">class Solution {
-    class UnionFind{
-        public int count;
-        public int[] parent;
+</code></pre>
+<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
+<p>等做完union find了再来写。</p>
+<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
+<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
+    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UnionFind</span></span>{
+        <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> count;
+        <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span>[] parent;
 
-        public UnionFind(int n){
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">UnionFind</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span></span>{
             count = n;
-            parent = new int[n];
-            for(int i = 0; i < n; i++)
+            parent = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[n];
+            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)
                 parent[i] = i;
         }
 
-        public int find(int p){
-            if(p == parent[p])
-                return p;
-            return parent[p] = find(parent[p]);
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">find</span><span class="hljs-params">(<span class="hljs-keyword">int</span> p)</span></span>{
+            <span class="hljs-keyword">if</span>(p == parent[p])
+                <span class="hljs-keyword">return</span> p;
+            <span class="hljs-keyword">return</span> parent[p] = find(parent[p]);
         }
 
-        public void union(int p, int q){
-            int rootp = find(p);
-            int rootq = find(q);
-            if(rootp != rootq){
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">union</span><span class="hljs-params">(<span class="hljs-keyword">int</span> p, <span class="hljs-keyword">int</span> q)</span></span>{
+            <span class="hljs-keyword">int</span> rootp = find(p);
+            <span class="hljs-keyword">int</span> rootq = find(q);
+            <span class="hljs-keyword">if</span>(rootp != rootq){
                 parent[rootp] = rootq;
                 count--;
             }
         }
     }
-    public int earliestAcq(int[][] logs, int N) {
-        Arrays.sort(logs, (l1, l2) -> l1[0] - l2[0]);
-        UnionFind uf = new UnionFind(N);
-        for(int i = 0; i < logs.length; i++){
-            int time = logs[i][0];
-            if(uf.find(logs[i][1]) != uf.find(logs[i][2]))
-                uf.union(logs[i][1], logs[i][2]);
-            if(uf.count == 1) return time;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">earliestAcq</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[][] logs, <span class="hljs-keyword">int</span> N)</span> </span>{
+        Arrays.sort(logs, (l1, l2) -&gt; l1[<span class="hljs-number">0</span>] - l2[<span class="hljs-number">0</span>]);
+        UnionFind uf = <span class="hljs-keyword">new</span> UnionFind(N);
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; logs.length; i++){
+            <span class="hljs-keyword">int</span> time = logs[i][<span class="hljs-number">0</span>];
+            <span class="hljs-keyword">if</span>(uf.find(logs[i][<span class="hljs-number">1</span>]) != uf.find(logs[i][<span class="hljs-number">2</span>]))
+                uf.union(logs[i][<span class="hljs-number">1</span>], logs[i][<span class="hljs-number">2</span>]);
+            <span class="hljs-keyword">if</span>(uf.count == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> time;
         }
-        return -1;
+        <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;
     }
 }
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 98.01%<br>Memory: 50.00%</p>
+
+</code></pre>
+<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
+<p>Runtime: 98.01%<br />
+Memory: 50.00%</p>
 
       </div>
       

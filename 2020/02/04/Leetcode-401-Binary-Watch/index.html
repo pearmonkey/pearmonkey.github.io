@@ -321,59 +321,69 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接-https-leetcode-com-problems-binary-watch"><a href="#题目链接-https-leetcode-com-problems-binary-watch" class="headerlink" title="题目链接 https://leetcode.com/problems/binary-watch/"></a>题目链接 <a href="https://leetcode.com/problems/binary-watch/" target="_blank" rel="noopener">https://leetcode.com/problems/binary-watch/</a></h2><h2 id="题目难度-Easy-46-3"><a href="#题目难度-Easy-46-3" class="headerlink" title="题目难度 Easy 46.3%"></a>题目难度 Easy 46.3%</h2><a id="more"></a>
-<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>A binary watch has 4 LEDs on the top which represent the hours (0-11), and the 6 LEDs on the bottom represent the minutes (0-59).<br>Each LED represents a zero or one, with the least significant bit on the right.<br>Given a non-negative integer n which represents the number of LEDs that are currently on, return all possible times the watch could represent.</p>
+        <h2 id="题目链接-httpsleetcodecomproblemsbinary-watch"><a class="markdownIt-Anchor" href="#题目链接-httpsleetcodecomproblemsbinary-watch"></a> 题目链接 <a href="https://leetcode.com/problems/binary-watch/" target="_blank" rel="noopener">https://leetcode.com/problems/binary-watch/</a></h2>
+<h2 id="题目难度-easy-463"><a class="markdownIt-Anchor" href="#题目难度-easy-463"></a> 题目难度 Easy 46.3%</h2>
+<a id="more"></a>
+<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
+<p>A binary watch has 4 LEDs on the top which represent the hours (0-11), and the 6 LEDs on the bottom represent the minutes (0-59).<br />
+Each LED represents a zero or one, with the least significant bit on the right.<br />
+Given a non-negative integer n which represents the number of LEDs that are currently on, return all possible times the watch could represent.</p>
 <p>Example 1:</p>
-<pre><code>Input: n = 1
+<pre class="highlight"><code class="">Input: n = 1
 Return: [&quot;1:00&quot;, &quot;2:00&quot;, &quot;4:00&quot;, &quot;8:00&quot;, &quot;0:01&quot;, &quot;0:02&quot;, &quot;0:04&quot;, &quot;0:08&quot;, &quot;0:16&quot;, &quot;0:32&quot;]
-</code></pre><p>Note:</p>
+</code></pre>
+<p>Note:</p>
 <ul>
 <li>The order of output does not matter.</li>
 <li>The hour must not contain a leading zero, for example “01:00” is not valid, it should be “1:00”.</li>
 <li>The minute must be consist of two digits and may contain a leading zero, for example “10:2” is not valid, it should be “10:02”.</li>
 </ul>
-<h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>这道题是个高频题。并且我认为它的难度应该在medium。读完题就能感受到是个排列组合问题，1bit放在哪个位置的问题。 这里有几个难点：</p>
+<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
+<p>这道题是个高频题。并且我认为它的难度应该在medium。读完题就能感受到是个排列组合问题，1bit放在哪个位置的问题。 这里有几个难点：</p>
 <ol>
 <li>有hour和minute两个集合，所以首先一个loop是分多少个1在hour，剩下的在minute；</li>
 <li>分好了1的个数之后，就开始排列组合形成二进制数，这里很容易想到是dfs遍历所有情况。一开始我还考虑到了hour是4位，minute是6位。后来发现其实可以先不用管，在最后合并的时候判断一下数值大小就行了。</li>
 </ol>
-<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre class="line-numbers language-lang-java"><code class="language-lang-java">class Solution {
-    public List<String> readBinaryWatch(int num) {
-        List<String> res = new ArrayList();
-        int[] hours = {8, 4, 2, 1};
-        int[] mins = {32, 16, 8, 4, 2, 1};
-        for(int i = 0; i <= Math.min(4, num); i++){ // 有i个1在hour
-            List<Integer> hour = helper(hours, i);
-            List<Integer> min = helper(mins, num - i);
-            for(Integer h : hour){
-                if(h > 11) continue;
-                for(Integer m : min){
-                    if(m > 59) continue;
-                    res.add(String.valueOf(h) + (m < 10 ? ":0" : ":") + String.valueOf(m));
+<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
+<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> List&lt;String&gt; <span class="hljs-title">readBinaryWatch</span><span class="hljs-params">(<span class="hljs-keyword">int</span> num)</span> </span>{
+        List&lt;String&gt; res = <span class="hljs-keyword">new</span> ArrayList();
+        <span class="hljs-keyword">int</span>[] hours = {<span class="hljs-number">8</span>, <span class="hljs-number">4</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>};
+        <span class="hljs-keyword">int</span>[] mins = {<span class="hljs-number">32</span>, <span class="hljs-number">16</span>, <span class="hljs-number">8</span>, <span class="hljs-number">4</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>};
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt;= Math.min(<span class="hljs-number">4</span>, num); i++){ <span class="hljs-comment">// 有i个1在hour</span>
+            List&lt;Integer&gt; hour = helper(hours, i);
+            List&lt;Integer&gt; min = helper(mins, num - i);
+            <span class="hljs-keyword">for</span>(Integer h : hour){
+                <span class="hljs-keyword">if</span>(h &gt; <span class="hljs-number">11</span>) <span class="hljs-keyword">continue</span>;
+                <span class="hljs-keyword">for</span>(Integer m : min){
+                    <span class="hljs-keyword">if</span>(m &gt; <span class="hljs-number">59</span>) <span class="hljs-keyword">continue</span>;
+                    res.add(String.valueOf(h) + (m &lt; <span class="hljs-number">10</span> ? <span class="hljs-string">":0"</span> : <span class="hljs-string">":"</span>) + String.valueOf(m));
                 }
             }
         }
-        return res;
+        <span class="hljs-keyword">return</span> res;
     }
 
-    public List<Integer> helper(int[] input, int n){
-        List<Integer> res = new ArrayList();
-        dfs(input, 0, n, 0, res);
-        return res;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title">helper</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] input, <span class="hljs-keyword">int</span> n)</span></span>{
+        List&lt;Integer&gt; res = <span class="hljs-keyword">new</span> ArrayList();
+        dfs(input, <span class="hljs-number">0</span>, n, <span class="hljs-number">0</span>, res);
+        <span class="hljs-keyword">return</span> res;
     }
 
-    public void dfs(int[] input, int start, int n, int out, List<Integer> res){
-        if(n == 0){ // 没有1了
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] input, <span class="hljs-keyword">int</span> start, <span class="hljs-keyword">int</span> n, <span class="hljs-keyword">int</span> out, List&lt;Integer&gt; res)</span></span>{
+        <span class="hljs-keyword">if</span>(n == <span class="hljs-number">0</span>){ <span class="hljs-comment">// 没有1了</span>
             res.add(out);
-            return;
+            <span class="hljs-keyword">return</span>;
             }
-        for(int i = start; i < input.length; i++){ //这里不是很好理解，需要记一下
-            dfs(input, i + 1, n - 1, out + input[i], res);
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = start; i &lt; input.length; i++){ <span class="hljs-comment">//这里不是很好理解，需要记一下</span>
+            dfs(input, i + <span class="hljs-number">1</span>, n - <span class="hljs-number">1</span>, out + input[i], res);
         }
     }
 }
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime:  48.76%<br>Memory:  33.33%</p>
+</code></pre>
+<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
+<p>Runtime:  48.76%<br />
+Memory:  33.33%</p>
 
       </div>
       

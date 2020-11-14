@@ -317,13 +317,16 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接-https-leetcode-com-problems-sentence-similarity"><a href="#题目链接-https-leetcode-com-problems-sentence-similarity" class="headerlink" title="题目链接 https://leetcode.com/problems/sentence-similarity/"></a>题目链接 <a href="https://leetcode.com/problems/sentence-similarity/" target="_blank" rel="noopener">https://leetcode.com/problems/sentence-similarity/</a></h2><h2 id="题目难度-Easy-41-6"><a href="#题目难度-Easy-41-6" class="headerlink" title="题目难度 Easy 41.6%"></a>题目难度 Easy 41.6%</h2><a id="more"></a>
-<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Given two sentences words1, words2 (each represented as an array of strings), and a list of similar word pairs pairs, determine if two sentences are similar.</p>
-<p>For example, “great acting skills” and “fine drama talent” are similar, if the similar word pairs are pairs = [[“great”, “fine”], [“acting”,”drama”], [“skills”,”talent”]].</p>
+        <h2 id="题目链接-httpsleetcodecomproblemssentence-similarity"><a class="markdownIt-Anchor" href="#题目链接-httpsleetcodecomproblemssentence-similarity"></a> 题目链接 <a href="https://leetcode.com/problems/sentence-similarity/" target="_blank" rel="noopener">https://leetcode.com/problems/sentence-similarity/</a></h2>
+<h2 id="题目难度-easy-416"><a class="markdownIt-Anchor" href="#题目难度-easy-416"></a> 题目难度 Easy 41.6%</h2>
+<a id="more"></a>
+<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
+<p>Given two sentences words1, words2 (each represented as an array of strings), and a list of similar word pairs pairs, determine if two sentences are similar.</p>
+<p>For example, “great acting skills” and “fine drama talent” are similar, if the similar word pairs are pairs = [[“great”, “fine”], [“acting”,“drama”], [“skills”,“talent”]].</p>
 <p>Note that the similarity relation is not transitive. For example, if “great” and “fine” are similar, and “fine” and “good” are similar, “great” and “good” are not necessarily similar.</p>
 <p>However, similarity is symmetric. For example, “great” and “fine” being similar is the same as “fine” and “great” being similar.</p>
 <p>Also, a word is always similar with itself. For example, the sentences words1 = [“great”], words2 = [“great”], pairs = [] are similar, even though there are no specified similar word pairs.</p>
-<p>Finally, sentences can only be similar if they have the same number of words. So a sentence like words1 = [“great”] can never be similar to words2 = [“doubleplus”,”good”].</p>
+<p>Finally, sentences can only be similar if they have the same number of words. So a sentence like words1 = [“great”] can never be similar to words2 = [“doubleplus”,“good”].</p>
 <p>Note:</p>
 <ul>
 <li>The length of words1 and words2 will not exceed 1000.</li>
@@ -331,26 +334,30 @@
 <li>The length of each pairs[i] will be 2.</li>
 <li>The length of each words[i] and pairs[i][j] will be in the range [1, 20].</li>
 </ul>
-<h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>这个题目没有将太清楚，看了答案才知道是只需要比较相对的位置的word是否similar。不过看完题大概就知道是用hashset或者hashmap储存pair，再去比较两个sentence。</p>
-<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre class="line-numbers language-lang-java"><code class="language-lang-java">class Solution {
-    public boolean areSentencesSimilar(String[] words1, String[] words2, List<List<String>> pairs) {
-        if(words1.length != words2.length)
-            return false;
-        Set<String> set = new HashSet();
-        for(List<String> list : pairs)
-            set.add(list.get(0) + "_" + list.get(1));
+<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
+<p>这个题目没有将太清楚，看了答案才知道是只需要比较相对的位置的word是否similar。不过看完题大概就知道是用hashset或者hashmap储存pair，再去比较两个sentence。</p>
+<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
+<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">areSentencesSimilar</span><span class="hljs-params">(String[] words1, String[] words2, List&lt;List&lt;String&gt;&gt; pairs)</span> </span>{
+        <span class="hljs-keyword">if</span>(words1.length != words2.length)
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+        Set&lt;String&gt; set = <span class="hljs-keyword">new</span> HashSet();
+        <span class="hljs-keyword">for</span>(List&lt;String&gt; list : pairs)
+            set.add(list.get(<span class="hljs-number">0</span>) + <span class="hljs-string">"_"</span> + list.get(<span class="hljs-number">1</span>));
 
-        for(int i = 0; i < words1.length; i++){
-            if(!words1[i].equals(words2[i]) &&
-                !set.contains(words1[i] + "_" + words2[i]) &&
-                !set.contains(words2[i] + "_" + words1[i]))
-                return false;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; words1.length; i++){
+            <span class="hljs-keyword">if</span>(!words1[i].equals(words2[i]) &amp;&amp;
+                !set.contains(words1[i] + <span class="hljs-string">"_"</span> + words2[i]) &amp;&amp;
+                !set.contains(words2[i] + <span class="hljs-string">"_"</span> + words1[i]))
+                <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
         }
-        return true;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
     }
 }
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 9.73%<br>Memory: 25.00%</p>
+</code></pre>
+<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
+<p>Runtime: 9.73%<br />
+Memory: 25.00%</p>
 
       </div>
       

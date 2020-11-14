@@ -321,54 +321,65 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接https-leetcode-com-problems-lexicographically-smallest-equivalent-string"><a href="#题目链接https-leetcode-com-problems-lexicographically-smallest-equivalent-string" class="headerlink" title="题目链接https://leetcode.com/problems/lexicographically-smallest-equivalent-string/"></a>题目链接<a href="https://leetcode.com/problems/lexicographically-smallest-equivalent-string/" target="_blank" rel="noopener">https://leetcode.com/problems/lexicographically-smallest-equivalent-string/</a></h2><h2 id="题目难度Medium-64-1"><a href="#题目难度Medium-64-1" class="headerlink" title="题目难度Medium 64.1%"></a>题目难度Medium 64.1%</h2><a id="more"></a>
-<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Given strings A and B of the same length, we say A[i] and B[i] are equivalent characters. For example, if A = “abc” and B = “cde”, then we have ‘a’ == ‘c’, ‘b’ == ‘d’, ‘c’ == ‘e’.</p>
+        <h2 id="题目链接httpsleetcodecomproblemslexicographically-smallest-equivalent-string"><a class="markdownIt-Anchor" href="#题目链接httpsleetcodecomproblemslexicographically-smallest-equivalent-string"></a> 题目链接https://leetcode.com/problems/lexicographically-smallest-equivalent-string/</h2>
+<h2 id="题目难度medium-641"><a class="markdownIt-Anchor" href="#题目难度medium-641"></a> 题目难度Medium 64.1%</h2>
+<a id="more"></a>
+<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
+<p>Given strings A and B of the same length, we say A[i] and B[i] are equivalent characters. For example, if A = “abc” and B = “cde”, then we have ‘a’ == ‘c’, ‘b’ == ‘d’, ‘c’ == ‘e’.</p>
 <p>Equivalent characters follow the usual rules of any equivalence relation:</p>
-<p>Reflexivity: ‘a’ == ‘a’<br>Symmetry: ‘a’ == ‘b’ implies ‘b’ == ‘a’<br>Transitivity: ‘a’ == ‘b’ and ‘b’ == ‘c’ implies ‘a’ == ‘c’<br>For example, given the equivalency information from A and B above, S = “eed”, “acd”, and “aab” are equivalent strings, and “aab” is the lexicographically smallest equivalent string of S.</p>
+<p>Reflexivity: ‘a’ == ‘a’<br />
+Symmetry: ‘a’ == ‘b’ implies ‘b’ == ‘a’<br />
+Transitivity: ‘a’ == ‘b’ and ‘b’ == ‘c’ implies ‘a’ == ‘c’<br />
+For example, given the equivalency information from A and B above, S = “eed”, “acd”, and “aab” are equivalent strings, and “aab” is the lexicographically smallest equivalent string of S.</p>
 <p>Return the lexicographically smallest equivalent string of S by using the equivalency information from A and B.</p>
 <p>Example 1:</p>
-<pre><code>Input: A = &quot;parker&quot;, B = &quot;morris&quot;, S = &quot;parser&quot;
+<pre class="highlight"><code class="">Input: A = &quot;parker&quot;, B = &quot;morris&quot;, S = &quot;parser&quot;
 Output: &quot;makkek&quot;
 Explanation: Based on the equivalency information in A and B, we can group their characters as [m,p], [a,o], [k,r,s], [e,i]. The characters in each group are equivalent and sorted in lexicographical order. So the answer is &quot;makkek&quot;.
-</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>等做完union find了再来写。</p>
-<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre class="line-numbers language-lang-java"><code class="language-lang-java">class Solution {
-    class UnionFind{
-        public int[] parent;
-        public UnionFind(int n){
-            parent = new int[n];
-            for(int i = 0; i < n; i++)
+</code></pre>
+<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
+<p>等做完union find了再来写。</p>
+<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
+<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
+    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UnionFind</span></span>{
+        <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span>[] parent;
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">UnionFind</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span></span>{
+            parent = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[n];
+            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)
                 parent[i] = i;
         }
 
-        public int find(int p){
-            if(p == parent[p])
-                return p;
-            return parent[p] = find(parent[p]);
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">find</span><span class="hljs-params">(<span class="hljs-keyword">int</span> p)</span></span>{
+            <span class="hljs-keyword">if</span>(p == parent[p])
+                <span class="hljs-keyword">return</span> p;
+            <span class="hljs-keyword">return</span> parent[p] = find(parent[p]);
         }
 
-        public void union(int p, int q){
-            int rootp = find(p);
-            int rootq = find(q);
-            int min = Math.min(rootp, rootq); // 一直选择最小的当root
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">union</span><span class="hljs-params">(<span class="hljs-keyword">int</span> p, <span class="hljs-keyword">int</span> q)</span></span>{
+            <span class="hljs-keyword">int</span> rootp = find(p);
+            <span class="hljs-keyword">int</span> rootq = find(q);
+            <span class="hljs-keyword">int</span> min = Math.min(rootp, rootq); <span class="hljs-comment">// 一直选择最小的当root</span>
             parent[rootp] = min;
             parent[rootq] = min;
         }
     }
 
-    public String smallestEquivalentString(String A, String B, String S) {
-        int n = A.length();
-        UnionFind uf = new UnionFind(26);
-        for(int i = 0; i < n; i++){
-            uf.union(A.charAt(i) - 'a', B.charAt(i) - 'a');
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">smallestEquivalentString</span><span class="hljs-params">(String A, String B, String S)</span> </span>{
+        <span class="hljs-keyword">int</span> n = A.length();
+        UnionFind uf = <span class="hljs-keyword">new</span> UnionFind(<span class="hljs-number">26</span>);
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++){
+            uf.union(A.charAt(i) - <span class="hljs-string">'a'</span>, B.charAt(i) - <span class="hljs-string">'a'</span>);
         }
-        StringBuilder res = new StringBuilder();
-        for(char c : S.toCharArray())
-            res.append((char)('a' + uf.find(c - 'a')));
-        return res.toString();
+        StringBuilder res = <span class="hljs-keyword">new</span> StringBuilder();
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">char</span> c : S.toCharArray())
+            res.append((<span class="hljs-keyword">char</span>)(<span class="hljs-string">'a'</span> + uf.find(c - <span class="hljs-string">'a'</span>)));
+        <span class="hljs-keyword">return</span> res.toString();
     }
 }
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 100.00%<br>Memory: 100.00%</p>
+</code></pre>
+<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
+<p>Runtime: 100.00%<br />
+Memory: 100.00%</p>
 
       </div>
       
