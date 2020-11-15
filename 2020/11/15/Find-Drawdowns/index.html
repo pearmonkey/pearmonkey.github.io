@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html>
+  
+
+
+
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <link rel="stylesheet" href="/css/tomorrow-night.css" media="screen" type="text/css">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+  <title>Find Drawdowns | 雪梨猴的小站</title>
+  
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
+  <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/css/animate.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+
+  
+    <link rel="stylesheet" href="/js/fancybox/jquery.fancybox.min.css">
+  
+  
+  <style>
+        @media (max-width: 992px) {
+            #waifu {
+                display: none;
+            }
+        }
+    </style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+  <script src="/js/jquery3.5.1.js"></script>
+  <script src="/js/vue2.6.11.js"></script>
+  <body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="header bg-color"
+  style="position: fixed; 
+  left: 0; top: 0; z-index: 10;width: 100%;"
+>
+  <div class="header-content">
+    <div class="bars">
+      <div id="appDrawer" class="sidebar-image">
+  <i class="fa fa-bars" aria-hidden="true" @click="showDialogDrawer"></i>
+  <div class="drawer-box_mask" v-cloak style="display: none;" v-show="visible" @click.self="cancelDialogDrawer">
+  </div>
+  <div class="drawer-box" :class="{'active': visible}">
+    <div class="drawer-box-head bg-color">
+      <h3 class="drawer-box-head_title">雪梨猴的小站</h3>
+      <h5 class="drawer-box-head_desc"></h5>
+    </div>
+    <div class="drawer-box-content">
+      <ul class="drawer-box-content_menu">
+        
+          <li class="drawer-box-content_item">
+            <a href="/" class="menu-item-link">
+              
+                <i class="fa fa-home" aria-hidden="true"></i>
+              
+              <span>首页</span>
+            </a>
+          </li>
+        
+          <li class="drawer-box-content_item">
+            <a href="/archives" class="menu-item-link">
+              
+                <i class="fa fa-home" aria-hidden="true"></i>
+              
+              <span>归档</span>
+            </a>
+          </li>
+        
+          <li class="drawer-box-content_item">
+            <a href="/tags" class="menu-item-link">
+              
+                <i class="fa fa-tags" aria-hidden="true"></i>
+              
+              <span>标签</span>
+            </a>
+          </li>
+        
+          <li class="drawer-box-content_item">
+            <a href="/categories" class="menu-item-link">
+              
+                <i class="fa fa-bookmark" aria-hidden="true"></i>
+              
+              <span>分类</span>
+            </a>
+          </li>
+        
+          <li class="drawer-box-content_item">
+            <a href="/about" class="menu-item-link">
+              
+                <i class="fa fa-user" aria-hidden="true"></i>
+              
+              <span>关于</span>
+            </a>
+          </li>
+        
+          <li class="drawer-box-content_item">
+            <a href="/link" class="menu-item-link">
+              
+                <i class="fa fa-link" aria-hidden="true"></i>
+              
+              <span>常用链接</span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+  var body = document.body || document.documentElement || window;
+  var vm = new Vue({
+    el: '#appDrawer',
+    data: {
+      visible: false,
+      top: 0,
+    },
+    computed: {
+    },
+    mounted() {
+    },
+    methods: {
+      showDialogDrawer() {
+        this.visible = true;
+        // 防止页面滚动，只能让弹框滚动
+        this.top = $(document).scrollTop()
+        body.style.cssText = 'width: 100%; height: 100%; position: fixed; top: -' + this.top  + 'px; left: 0; overflow: hidden;';
+      },
+      cancelDialogDrawer() {
+        this.visible = false;
+        body.removeAttribute('style');
+        $(document).scrollTop(this.top)
+      }
+    },
+    created() {}
+  })
+</script>
+
+    </div>
+    <div class="blog-title" id="author-avatar">
+      <a href="/" class="logo">雪梨猴的小站</a>
+    </div>
+    <nav class="navbar">
+      <ul class="menu">
+        
+          <li class="menu-item">
+            <a href="/" class="menu-item-link">
+              
+                <i class="fa fa-home" aria-hidden="true"></i>
+              
+              <span>首页</span>
+            </a>
+          </li>
+        
+          <li class="menu-item">
+            <a href="/archives" class="menu-item-link">
+              
+                <i class="fa fa-archive" aria-hidden="true"></i>
+              
+              <span>归档</span>
+            </a>
+          </li>
+        
+          <li class="menu-item">
+            <a href="/tags" class="menu-item-link">
+              
+                <i class="fa fa-tags" aria-hidden="true"></i>
+              
+              <span>标签</span>
+            </a>
+          </li>
+        
+          <li class="menu-item">
+            <a href="/categories" class="menu-item-link">
+              
+                <i class="fa fa-bookmark" aria-hidden="true"></i>
+              
+              <span>分类</span>
+            </a>
+          </li>
+        
+          <li class="menu-item">
+            <a href="/about" class="menu-item-link">
+              
+                <i class="fa fa-user" aria-hidden="true"></i>
+              
+              <span>关于</span>
+            </a>
+          </li>
+        
+          <li class="menu-item">
+            <a href="/link" class="menu-item-link">
+              
+                <i class="fa fa-link" aria-hidden="true"></i>
+              
+              <span>常用链接</span>
+            </a>
+          </li>
+        
+      </ul>
+      
+        <div id="appSearch">
+  <div class="search"  @click="showDialog()"><i class="fa fa-search" aria-hidden="true"></i></div>
+  <div class="message-box_wrapper" style="display: none;" v-cloak v-show="dialogVisible" @click.self="cancelDialogVisible()">
+    <div class="message-box">
+      <h2>
+        <i class="fa fa-search" aria-hidden="true"></i>
+        <span class="title">搜索</span>
+      </h2>
+      <form class="site-search-form">
+        <input type="text"
+          placeholder="请输入关键字"
+          id="local-search-input" 
+          @click="getSearchFile()"
+          class="st-search-input"
+          v-model="searchInput"
+        />
+      </form>
+      <div class="result-wrapper">
+        <div id="local-search-result" class="local-search-result-cls"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/js/local_search.js"></script>
+<script>
+  var body = document.body || document.documentElement || window;
+  var vm = new Vue({
+    el: '#appSearch',
+    data: {
+      dialogVisible: false,
+      searchInput: '',
+      top: 0,
+    },
+    computed: {
+    },
+    mounted() {
+    },
+    methods: {
+      showDialog() {
+        this.dialogVisible = true;
+        // 防止页面滚动，只能让弹框滚动
+        this.top = $(document).scrollTop()
+        body.style.cssText = 'width: 100%; height: 100%; position: fixed; top: -' + this.top  + 'px; left: 0; overflow: hidden;';
+      },
+      getSearchFile() {
+        if (!this.searchInput) {
+          getSearchFile();
+        }
+      },
+      cancelDialogVisible() {
+        this.dialogVisible = false;
+        body.removeAttribute('style');
+        $(document).scrollTop(this.top)
+      },
+    },
+    created() {}
+  })
+</script>
+<!-- 解决刷新页面闪烁问题，可以在元素上添加display: none, 或者用vue.extend方法，详情：https://blog.csdn.net/qq_31393401/article/details/81017912 -->
+<!-- 下面是搜索基本写法 -->
+<!-- <script type="text/javascript" id="local.search.active">
+  var inputArea = document.querySelector("#local-search-input");
+  inputArea.onclick   = function(){ getSearchFile(); this.onclick = null }
+  inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
+</script> -->
+
+      
+    </nav>
+  </div>
+</header>
+
+    <main class="main" style="margin-top: 60px;">
+      
+
+<div class="row justify-center">
+  <div class="main-content">
+    <article class="post post-detail">
+      
+        <div class="post-title">
+          Find Drawdowns
+        </div>
+      
+
+      <div class="post-meta">
+
+      
+        Kai Wang
+        <h>|</h>
+      
+
+      
+        <span class="post-time">2020-11-15</span>
+        <h>|</h>
+      
+
+        
+          
+            <a href="/categories/%E9%87%91%E8%9E%8D/" class="">
+              金融
+            </a>
+          
+          <h>|</h>
+        
+
+        
+          
+            <a href="/tags/Stock-Market/" class="">
+              Stock Market
+            </a>
+          
+
+        
+      </div>
+      <div class="post-content">
+        <p>I improve the algorithm of functions table.Drawdowns() and findDrawdowns() from package (PerformanceAnalytics).</p>
+<a id="more"></a>
+<h2 id="description-of-the-algorithm"><a class="markdownIt-Anchor" href="#description-of-the-algorithm"></a> Description of the algorithm</h2>
+<ol>
+<li>Use Fama-French market factor to calculate the cumulative return (as variable <strong>CumRET</strong>) assuming an investor put $1 in the market portfolio in 1926-07-01.</li>
+<li>Calculate the cumulative maximum of <strong>CumRET</strong> (call it <strong>CumMax.CumRET</strong>).</li>
+<li>Identify the dates where its <strong>CumRET</strong> is less than its <strong>CumMax.CumRET</strong>.</li>
+<li>Put the different identified dates into a same group if they are consecutive and give each group a unique ID. Each group represents a drawdown period.</li>
+<li>For each drawdown period, find the following items:<br />
+a. Lowest <strong>CumRET</strong>,<br />
+b. The date with the lowest <strong>CumRET</strong>,<br />
+c. Starting date,<br />
+d. End date.<br />
+Then the depth of a drawdown is given by<br />
+(Lowest <strong>CumRET</strong> - <strong>CumMax.CumRET</strong>)/ <strong>CumMax.CumRET</strong></li>
+</ol>
+<h2 id="r-code"><a class="markdownIt-Anchor" href="#r-code"></a> R Code</h2>
+<pre class="highlight"><code class="">#######################################
+# I improve the algorithm of functions table.Drawdowns()
+# and findDrawdowns() from package (PerformanceAnalytics).
+# Example: market portfolio returns from Kenneth French's library
+
+# Import the dataset
+FF &lt;- read.csv(&quot;C:/Users/kerwi/Dropbox/Empirics/Data/FF_Others/FF_3_Factors_Daily.CSV&quot;)
+# Market return = market excess return + risk-free return
+FF$Mkt &lt;- FF$Mkt.RF+FF$RF
+# Only need two columns: &quot;Date&quot; &quot;Mkt&quot;
+FF &lt;- FF[,c(1,ncol(FF))]
+# FF use percentage
+FF$Mkt &lt;- FF$Mkt/100
+# Transform FF-Date into R-Date format
+FF$Date &lt;- as.Date(as.character(FF$Date), &quot;%Y%m%d&quot;)
+# Calculate the cumulative return
+FF$CumRET &lt;- cumprod(FF$Mkt+1)
+# Calculate the cumulative maximum cumulative return
+FF$CumMax.CumRET &lt;- cummax(FF$CumRET)
+# Find the drawdowns -- the places where black line is under red line
+# These are the platforms of the red line
+# Varibale 'Up':
+#             it is 1 if CumRET is equal to CumMax.CumRET
+#             it is 0 if CumRET is less than CumMax.CumRET
+FF$Up &lt;- ifelse(FF$CumRET==FF$CumMax.CumRET, 1, 0)
+# The following two commands give each platform a unique index
+FF$index &lt;- cumsum(FF$Up)
+FF$index[FF$Up==1] &lt;- NA
+# For each platform, find (1) the start and end dates,
+#                         (2) the bottom return and date,
+#                         (3) length between the dates.
+library(dplyr)
+res &lt;- FF %&gt;%
+  arrange(Date) %&gt;%
+  group_by(index) %&gt;%
+  summarise(Peak=CumMax.CumRET[1],
+            Bottom=min(CumRET),
+            Depth=(Bottom-Peak)/Peak,
+            From=Date[1],
+            To=Date[n()],
+            Trough=Date[CumRET==Bottom],
+            Length=n()+1,
+            To.Trough=sum(Date&lt;=Trough),
+            Recovery=sum(Date&gt;Trough)+1,
+            .groups='drop')
+# Re-order the result based on the depths of the drawdowns
+Drawdowns &lt;- res[order(res$Depth),
+                 c(&quot;From&quot;,&quot;To&quot;,&quot;Trough&quot;,&quot;Depth&quot;,&quot;Length&quot;,
+                   &quot;To.Trough&quot;,&quot;Recovery&quot;)]
+
+</code></pre>
+<pre class="highlight"><code class="">#################################
+# Use some figures to illustrate the algorithm
+# Take a sample after 2018
+tmp &lt;- FF[FF$Date&gt;='2019-06-01',]
+library(ggplot2)
+# Plot 1: the black line is the cumulative return
+ggplot(tmp, aes(Date)) +
+  geom_line(aes(y=CumRET), colour=&quot;black&quot;) +
+  scale_x_date(date_breaks = &quot;6 month&quot;, date_labels = &quot;%m-%Y&quot;)
+</code></pre>
+<p><img src="/images/find_drawdowns/find_drawdowns_plot1.png" alt="Alt text" /></p>
+<pre class="highlight"><code class="">#################################
+# Plot 2: the added red line is the cumulative maximum cumulative return
+ggplot(tmp, aes(Date)) +
+  geom_line(aes(y=CumRET), colour=&quot;black&quot;) +
+  geom_line(aes(y=CumMax.CumRET), colour=&quot;red&quot;) +
+  scale_x_date(date_breaks = &quot;6 month&quot;, date_labels = &quot;%m-%Y&quot;)
+</code></pre>
+<p><img src="/images/find_drawdowns/find_drawdowns_plot2.png" alt="Alt text" /></p>
+<pre class="highlight"><code class="">#################################
+# Plot 3: we identify each drawdown period with an unique index
+tmp$index[is.na(tmp$index)] &lt;- 0
+ggplot() +
+  geom_line(data=tmp, aes(x=Date, y=CumRET, color=as.factor(index))) +
+  scale_x_date(date_breaks = &quot;3 month&quot;, date_labels = &quot;%m-%Y&quot;)
+</code></pre>
+<p><img src="/images/find_drawdowns/find_drawdowns_plot3.png" alt="Alt text" /></p>
+<pre class="highlight"><code class="">#################################
+# Plot 4:
+colnames(res)
+tmp.res &lt;- res[res$From&gt;='2019-06-01',]
+
+ggplot() +
+  geom_point(data=tmp.res, aes(x=From, y=Peak), size=2, alpha=0.5, shape='triangle') +
+  geom_point(data=tmp.res, aes(x=Trough, y=Bottom), size=2, alpha=0.5, color='blue') +
+  scale_x_date(date_breaks = &quot;3 month&quot;, date_labels = &quot;%m-%Y&quot;) +
+  geom_line(data=tmp, aes(x=Date, y=CumRET)) +
+  geom_line(data=tmp, aes(x=Date, y=CumMax.CumRET), color='red')
+</code></pre>
+<p><img src="/images/find_drawdowns/find_drawdowns_plot4.png" alt="Alt text" /></p>
+
+      </div>
+      
+    </article>
+    <!-- 上一篇文章和下一篇文章 -->
+    
+      <div class="post-nav">
+
+
+
+  <div class="post-nav-next post-nav-item">
+    <a href="/2020/11/13/Leetcode-DFS-%E6%80%BB%E7%BB%93/">
+      <span>
+        下一篇:    Leetcode|DFS 总结 
+      </span>
+    </a>
+  </div>
+
+</div>
+
+    
+
+
+    <!-- 打赏 -->
+    
+
+    <!-- 分享 -->
+    
+
+    <!-- 评论 -->
+      
+        
+          <section id="comments" style="padding: 1em; background: rgba(255, 255, 255, 0.5); margin: 15px auto;" data-aos="fade-up">
+	<div id="vcomment" class="comment"></div>
+	<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js"></script>
+	<script>
+		new Valine({
+			el: '#vcomment',
+			notify: false,
+			verify: false,
+			app_id: "JeKrrf8cKxqcE2RM1Prfurdo-gzGzoHsz",
+			app_key: "49yq63vrEbnLYo5MwEG2Ktao",
+			placeholder: "",
+			avatar: ""
+		});
+	</script>
+</section>
+
+        
+      
+  </div>
+
+
+
+  
+    <div class="toc-aside">
+      <div class="toc-main">
+        <div class="toc-aside-title">
+          <i class="fa fa-list-ul" aria-hidden="true"></i><span>目录</span>
+        </div>
+        <div class="toc-content">
+          <link href="/js/tocbot/tocbot.css" rel="stylesheet">
+<script src="/js/tocbot/tocbot.min.js"></script>
+<div class="toc"></div>
+
+<script>
+  if ($('.toc').length > 0) {
+    var headerEl = 'h2, h3, h4',  //headers 
+      content = '.post-detail',//文章容器
+      idArr = {};  //标题数组以确定是否增加索引id
+      //add #id
+
+    $(content).children(headerEl).each(function () {
+      //去除空格以及多余标点
+      var headerId = $(this).text().replace(/[\s|\~|`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\_|\+|\=|\||\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?|\：|\，|\。]/g, '');
+
+      headerId = headerId.toLowerCase();
+      if (idArr[headerId]) {
+        //id已经存在
+        $(this).attr('id', headerId + '-' + idArr[headerId]);
+        idArr[headerId]++;
+      }
+      else {
+        //id未存在
+        idArr[headerId] = 1;
+        $(this).attr('id', headerId);
+      }
+    });
+
+    tocbot.init({
+      // Where to render the table of contents.
+      tocSelector: '.toc',
+      // Where to grab the headings to build the table of contents.
+      contentSelector: content,
+      // Which headings to grab inside of the contentSelector element.
+      headingSelector: headerEl,
+      scrollSmooth: true,
+      scrollSmoothOffset: -80,
+      headingsOffset: 130,
+      positionFixedSelector: '.toc-main',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  }
+
+</script>
+
+<style>
+.is-position-fixed {
+  position:fixed !important;
+  top: 64px;
+}
+
+</style>
+        </div>
+      </div>
+    </div>
+  
+</div>
+
+    </main>
+    <script src="/js/prettify.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+ $('pre').addClass('prettyprint linenums');
+ $('code').addClass('prettyprint');
+ prettyPrint();
+ })
+</script>
+
+<div class="footer bg-color">
+  <div class="footer-main">
+    <div class="link">
+      <a href="mailto:pearmonkeyhou@gmail.com" target="_blank" rel="noopener">
+        <i class="fa fa-envelope-o" aria-hidden="true"></i>
+      </a>
+      <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=270052740" target="_blank" rel="noopener">
+        <i class="fa fa-qq" aria-hidden="true"></i>
+      </a>
+      <a href="/atom.xml" target="_blank">
+        <i class="fa fa-rss" aria-hidden="true"></i>
+      </a>
+    </div>
+    <div class="footer-copyright">
+      Copyright © 2019 - 2021 | 雪梨猴 | Powered by <a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">Hexo</a>
+    </div>
+    
+  </div>
+</div>
+
+
+    
+      <div class="goTop bg-color">
+  <i class="fa fa-arrow-up" aria-hidden="true"></i>
+</div>
+<script src="/js/goTop.js"></script>
+    
+
+    
+
+    <!-- 图片放大 -->
+    
+      <script src="/js/fancybox/jquery.fancybox.min.js"></script>
+<script src="/js/wrapImage.js"></script>
+    
+
+    <!-- 爱心点击 -->
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script type="text/javascript" size="100" alpha='0.4' zIndex="-1" src="/js/ribbon.min.js"></script>
+    
+
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/v-plugs-ayu/lib/ayu.css">
+<script src="https://cdn.jsdelivr.net/npm/v-plugs-ayu/lib/ayu.umd.min.js"></script>
+<div id="appCopy">
+</div>
+<script>
+  var vm = new Vue({
+    el: '#appCopy',
+    data: {
+    },
+    computed: {
+    },
+    mounted() {
+      const that = this;
+      //  监听 ctrl + c事件  
+      $(document).unbind('keypress').bind('keypress', function (e) {
+        if (e.ctrlKey && e.keyCode == 67) {
+          doSomething();
+          // 返回false, 防止重复触发copy事件  
+          return false;
+        }
+      })
+
+      // 鼠标右键的复制事件  
+      $(document).unbind('copy').bind('copy', function (e) {
+        doSomething();
+        // console.log('右键复制 监听成功');
+      });
+
+      function doSomething() {
+        that.$notify({
+          title: '成功',
+          content: '复制成功了哦',
+          type: 'success'
+        })
+        // console.log('ctrl + c 监听成功');  
+      }
+    },
+    methods: {
+    },
+    created() { }
+  })
+</script>
+    
+
+    <!-- 输入框打字特效 -->
+    
+      <script src="/js/activate-power-mode.js"></script>
+      <script>
+          POWERMODE.colorful = true;  // 打开随机颜色特效
+          POWERMODE.shake = false;    // 关闭输入框抖动
+          document.body.addEventListener('input', POWERMODE);//监听打字事件
+      </script>
+    
+
+    <!-- markdown代码一键复制功能 -->
+    <script src="/js/clipboard/clipboard.min.js"></script>
+    <script>
+      !function (e, t, a) {
+        var copy = '复制';
+        /* code */
+        var initCopyCode = function(){
+          var copyHtml = '';
+          copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+          copyHtml += '<i class="fa fa-globe"></i><span>' + copy + '</span>';
+          copyHtml += '</button>';
+          $(".post-detail pre code").before(copyHtml);
+          new ClipboardJS('.btn-copy', {
+              target: function(trigger) {
+                  return trigger.nextElementSibling;
+              }
+          });
+        }
+        initCopyCode();
+      }(window, document);
+    </script>
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</body>
+</html>

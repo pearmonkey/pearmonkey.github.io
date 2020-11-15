@@ -11,7 +11,7 @@
 
 /* Specify class=linenums on a pre to get line numbering */
 ol.linenums {
-  margin-left: 10px;
+  margin-left: 10px !important;
   margin-top: 0;
   margin-bottom: 0;
   color: #969896;
