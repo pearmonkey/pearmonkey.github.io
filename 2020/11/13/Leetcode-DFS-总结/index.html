@@ -319,10 +319,15 @@
         
       </div>
       <div class="post-content">
-        <p>DFS（深度优先搜索），是算法题中比掌握的一门武艺。我在一开始刷题时，总是不确定dfs的input该写什么，里面for loop又该写什么，但是看别人答案又看得懂，觉得很简单，自己写就不行了。尝试着总结了很多遍，每一遍都有新的体会，现在觉得有点开窍，所以想把整个思路整理记录下来。<br><a id="more"></a></p>
-<p>其实掌握dfs的写法，还是要追溯到最开始的步骤，先抛开编程语言的写法，用大白话叙述出来。如果能用大白话叙述出来了，再尝试着写成伪代码，最后再对应题目用编程语言实现。<br>深度优先搜索是用在图中的一种搜索算法，搜索的对象是满足条件的路径，要么是个数，要么是记录全部路径。<br>其实只需要理清三个概念：<strong>状态</strong>、<strong>路径</strong>、<strong>选择</strong>，就能讲好这个故事。</p>
-<h2 id="一、大白话描述"><a href="#一、大白话描述" class="headerlink" title="一、大白话描述"></a>一、大白话描述</h2><p>【状态】站在图的一个节点上，【选择】在所有没有访问过的邻居节点中选择一个节点，【路径】更新状态并加入路径，以这个节点重新开始一轮dfs，直到没有可往下走的邻居节点，就判断是否满足条件，如果满足，将路径记录下来，然后返回。如果在想解决方案的时候，能想到可以先一条路走到底，再往回走一步换个方向再走到底，就是要用dfs了。</p>
-<h2 id="二、伪代码"><a href="#二、伪代码" class="headerlink" title="二、伪代码"></a>二、伪代码</h2><pre><code>//调用
+        <p>DFS（深度优先搜索），是算法题中比掌握的一门武艺。我在一开始刷题时，总是不确定dfs的input该写什么，里面for loop又该写什么，但是看别人答案又看得懂，觉得很简单，自己写就不行了。尝试着总结了很多遍，每一遍都有新的体会，现在觉得有点开窍，所以想把整个思路整理记录下来。</p>
+<a id="more"></a>
+<p>其实掌握dfs的写法，还是要追溯到最开始的步骤，先抛开编程语言的写法，用大白话叙述出来。如果能用大白话叙述出来了，再尝试着写成伪代码，最后再对应题目用编程语言实现。<br />
+深度优先搜索是用在图中的一种搜索算法，搜索的对象是满足条件的路径，要么是个数，要么是记录全部路径。<br />
+其实只需要理清三个概念：<strong>状态</strong>、<strong>路径</strong>、<strong>选择</strong>，就能讲好这个故事。</p>
+<h2 id="一-大白话描述"><a class="markdownIt-Anchor" href="#一-大白话描述"></a> 一、大白话描述</h2>
+<p>【状态】站在图的一个节点上，【选择】在所有没有访问过的邻居节点中选择一个节点，【路径】更新状态并加入路径，以这个节点重新开始一轮dfs，直到没有可往下走的邻居节点，就判断是否满足条件，如果满足，将路径记录下来，然后返回。如果在想解决方案的时候，能想到可以先一条路走到底，再往回走一步换个方向再走到底，就是要用dfs了。</p>
+<h2 id="二-伪代码"><a class="markdownIt-Anchor" href="#二-伪代码"></a> 二、伪代码</h2>
+<pre class="highlight"><code class="">//调用
 dfs(【起始状态】，【空路径】);
 
 //定义
@@ -340,8 +345,15 @@ dfs(【状态】，【路径】){
     去除标记，恢复状态，恢复路径;
   }
 }
-</code></pre><h2 id="三、干题"><a href="#三、干题" class="headerlink" title="三、干题"></a>三、干题</h2><h3 id="46-Permutations"><a href="#46-Permutations" class="headerlink" title="46. Permutations"></a>46. Permutations</h3><p>Medium: <a href="https://leetcode.com/problems/permutations/" target="_blank" rel="noopener">https://leetcode.com/problems/permutations/</a><br>要记录所有的排列，那么先搞清楚三个概念分别对应什么。<br><strong>状态</strong>：哪些数字已经被访问了 （boolean[] visited）以及现在填到第几个空格了；<br><strong>路径</strong>：已经排好的数字（List&lt;Integer&gt;out）；<br><strong>选择</strong>：没有被访问的数字；</p>
-<pre><code>List&lt;List&lt;Integer&gt;&gt; res;
+</code></pre>
+<h2 id="三-干题"><a class="markdownIt-Anchor" href="#三-干题"></a> 三、干题</h2>
+<h3 id="46-permutations"><a class="markdownIt-Anchor" href="#46-permutations"></a> 46. Permutations</h3>
+<p>Medium: <a href="https://leetcode.com/problems/permutations/" target="_blank" rel="noopener">https://leetcode.com/problems/permutations/</a><br />
+要记录所有的排列，那么先搞清楚三个概念分别对应什么。<br />
+<strong>状态</strong>：哪些数字已经被访问了 （boolean[] visited）以及现在填到第几个空格了；<br />
+<strong>路径</strong>：已经排好的数字（List&lt;Integer&gt;out）；<br />
+<strong>选择</strong>：没有被访问的数字；</p>
+<pre class="highlight"><code class="">List&lt;List&lt;Integer&gt;&gt; res;
 boolean[] visited;
 
 public List&lt;List&lt;Integer&gt;&gt; permute(int[] nums){
@@ -366,8 +378,15 @@ public void dfs(int[] nums, int index, List&lt;Integer&gt; out){
     }
   }
 }
-</code></pre><h3 id="679-24-Game"><a href="#679-24-Game" class="headerlink" title="679. 24 Game"></a>679. 24 Game</h3><p>Hard: <a href="https://leetcode.com/problems/24-game/" target="_blank" rel="noopener">https://leetcode.com/problems/24-game/</a><br>再来一道Hard题体会体会。<br>给四张牌，每张牌的数字可能是1到9的其中一个，判断这四个数能否通过 <strong>*</strong>, <strong>/</strong>, <strong>+</strong>, <strong>-</strong>, <strong>(</strong>, <strong>)</strong> 这些符号去得到24.<br><strong>状态</strong>：现在的结果是多少，哪些数字已经用过了；但是现在的结果也会作为一个数字参与计算，所以不能用普通的记录方法。用List把数字记录，把中间的结果也放进去；<br><strong>路径</strong>：因为是判断是否存在，所以不需要记录过程，需要dfs返回true or false；<br><strong>选择</strong>：剩下的没用过的数字；</p>
-<pre><code>class Solution {
+</code></pre>
+<h3 id="679-24-game"><a class="markdownIt-Anchor" href="#679-24-game"></a> 679. 24 Game</h3>
+<p>Hard: <a href="https://leetcode.com/problems/24-game/" target="_blank" rel="noopener">https://leetcode.com/problems/24-game/</a><br />
+再来一道Hard题体会体会。<br />
+给四张牌，每张牌的数字可能是1到9的其中一个，判断这四个数能否通过 <strong>*</strong>, <strong>/</strong>, <strong>+</strong>, <strong>-</strong>, <strong>(</strong>, <strong>)</strong> 这些符号去得到24.<br />
+<strong>状态</strong>：现在的结果是多少，哪些数字已经用过了；但是现在的结果也会作为一个数字参与计算，所以不能用普通的记录方法。用List把数字记录，把中间的结果也放进去；<br />
+<strong>路径</strong>：因为是判断是否存在，所以不需要记录过程，需要dfs返回true or false；<br />
+<strong>选择</strong>：剩下的没用过的数字；</p>
+<pre class="highlight"><code class="">class Solution {
     public boolean judgePoint24(int[] nums) {
         List&lt;Double&gt; list = new ArrayList();
         for(int n : nums)
@@ -404,36 +423,47 @@ public void dfs(int[] nums, int index, List&lt;Integer&gt; out){
         return new double[]{n1 + n2, n1 - n2, n2 - n1, n1 * n2, n1 / n2, n2 / n1};
     }
 }
-</code></pre><h3 id="489-Robot-Room-Cleaner"><a href="#489-Robot-Room-Cleaner" class="headerlink" title="489. Robot Room Cleaner"></a>489. Robot Room Cleaner</h3><p>Hard: [<a href="https://leetcode.com/problems/robot-room-cleaner/" target="_blank" rel="noopener">https://leetcode.com/problems/robot-room-cleaner/</a>]<br>题目不给绝对坐标，那么就用相对坐标，因为目的是把所有地方都打扫到，那么任意一个地方相对起始位置都是唯一且固定的。打扫的思路就是，顺着当前方向打扫下去，如果走不通了或者前方已经打扫过了，就转个方向继续前进，这里转方向可以规定为一直向右转或者向左转，如果是向右转，那么int[][] dirs这个数组就要是上、右、下、左的顺序。<br><strong>状态</strong>：当前的位置（相对于起始位置）和方向（相对于起始方向），哪些地方已经打扫过了；<br><strong>路径</strong>：不需要返回路径；<br><strong>选择</strong>：能走得通并且没有打扫过的相邻格子；</p>
-<pre><code class="lang-java">    int[][] dirs = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}}; // 上，右，下，左
+</code></pre>
+<h3 id="489-robot-room-cleaner"><a class="markdownIt-Anchor" href="#489-robot-room-cleaner"></a> 489. Robot Room Cleaner</h3>
+<p>Hard: [<a href="https://leetcode.com/problems/robot-room-cleaner/" target="_blank" rel="noopener">https://leetcode.com/problems/robot-room-cleaner/</a>]<br />
+题目不给绝对坐标，那么就用相对坐标，因为目的是把所有地方都打扫到，那么任意一个地方相对起始位置都是唯一且固定的。打扫的思路就是，顺着当前方向打扫下去，如果走不通了或者前方已经打扫过了，就转个方向继续前进，这里转方向可以规定为一直向右转或者向左转，如果是向右转，那么int[][] dirs这个数组就要是上、右、下、左的顺序。<br />
+<strong>状态</strong>：当前的位置（相对于起始位置）和方向（相对于起始方向），哪些地方已经打扫过了；<br />
+<strong>路径</strong>：不需要返回路径；<br />
+<strong>选择</strong>：能走得通并且没有打扫过的相邻格子；</p>
+<pre class="highlight"><code class="java">    <span class="hljs-keyword">int</span>[][] dirs = &lt;!--￼<span class="hljs-number">0</span>--&gt;; <span class="hljs-comment">// 上，右，下，左</span>
     Robot robot;
-    Set&lt;String&gt; set = new HashSet();
-    public void cleanRoom(Robot robot) {
-        this.robot = robot;
-        dfs(0, 0, 0); // 起始位置和方向
+    Set&lt;String&gt; set = <span class="hljs-keyword">new</span> HashSet();
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">cleanRoom</span><span class="hljs-params">(Robot robot)</span> </span>{
+        <span class="hljs-keyword">this</span>.robot = robot;
+        dfs(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>); <span class="hljs-comment">// 起始位置和方向</span>
     }
 
-    public void dfs(int i, int j, int d){
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i, <span class="hljs-keyword">int</span> j, <span class="hljs-keyword">int</span> d)</span></span>{
         robot.clean();
-        set.add(i + &quot;,&quot; + j); // 记录（凡是不需要恢复标记的题，标记选择都是在for loop之上）
-        for(int k = 0; k &lt; 4; k++){ // 四种可能的选择
-            int new_d = (d + k) % 4;
-            int x = i + dirs[new_d][0];
-            int y = j + dirs[new_d][1];
-            if(!set.contains(x + &quot;,&quot; + y) &amp;&amp; robot.move()){ // 没有打扫过且可以走得通
+        set.add(i + <span class="hljs-string">","</span> + j); <span class="hljs-comment">// 记录（凡是不需要恢复标记的题，标记选择都是在for loop之上）</span>
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> k = <span class="hljs-number">0</span>; k &lt; <span class="hljs-number">4</span>; k++){ <span class="hljs-comment">// 四种可能的选择</span>
+            <span class="hljs-keyword">int</span> new_d = (d + k) % <span class="hljs-number">4</span>;
+            <span class="hljs-keyword">int</span> x = i + dirs[new_d][<span class="hljs-number">0</span>];
+            <span class="hljs-keyword">int</span> y = j + dirs[new_d][<span class="hljs-number">1</span>];
+            <span class="hljs-keyword">if</span>(!set.contains(x + <span class="hljs-string">","</span> + y) &amp;&amp; robot.move()){ <span class="hljs-comment">// 没有打扫过且可以走得通</span>
                 dfs(x, y, new_d);
-                robot.turnRight(); // 恢复状态
+                robot.turnRight(); <span class="hljs-comment">// 恢复状态</span>
                 robot.turnRight();
                 robot.move();
                 robot.turnRight();
                 robot.turnRight();
             }
-            robot.turnRight(); // 下一个方向是上一个方向向右转
+            robot.turnRight(); <span class="hljs-comment">// 下一个方向是上一个方向向右转</span>
         }
     }
 </code></pre>
-<h3 id="797-All-Paths-From-Source-to-Target"><a href="#797-All-Paths-From-Source-to-Target" class="headerlink" title="797. All Paths From Source to Target"></a>797. All Paths From Source to Target</h3><p>Medium: <a href="https://leetcode.com/problems/all-paths-from-source-to-target/" target="_blank" rel="noopener">https://leetcode.com/problems/all-paths-from-source-to-target/</a><br>找出从0到n-1的所有路径。这就是一道几乎最典型的dfs的题了，一条道走到黑，再返回换个方向再走到黑。。。<br><strong>状态</strong>：当前位置和已经走过的点；<br><strong>路径</strong>：一路走来的路径；<br><strong>选择</strong>：邻居中还没有走过的点；</p>
-<pre><code>    List&lt;List&lt;Integer&gt;&gt; res;
+<h3 id="797-all-paths-from-source-to-target"><a class="markdownIt-Anchor" href="#797-all-paths-from-source-to-target"></a> 797. All Paths From Source to Target</h3>
+<p>Medium: <a href="https://leetcode.com/problems/all-paths-from-source-to-target/" target="_blank" rel="noopener">https://leetcode.com/problems/all-paths-from-source-to-target/</a><br />
+找出从0到n-1的所有路径。这就是一道几乎最典型的dfs的题了，一条道走到黑，再返回换个方向再走到黑。。。<br />
+<strong>状态</strong>：当前位置和已经走过的点；<br />
+<strong>路径</strong>：一路走来的路径；<br />
+<strong>选择</strong>：邻居中还没有走过的点；</p>
+<pre class="highlight"><code class="">    List&lt;List&lt;Integer&gt;&gt; res;
     boolean[] visited;
     int n;
     int[][] graph;
@@ -467,6 +497,7 @@ public void dfs(int[] nums, int index, List&lt;Integer&gt; out){
         }
     }
 </code></pre>
+
       </div>
       
     </article>

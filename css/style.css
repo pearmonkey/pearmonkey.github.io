@@ -1143,9 +1143,7 @@ a {
   margin-bottom: 20px;
 }
 .archive .post-archive .post-item .post-date {
-  padding: 5px;
-  background-color: #42b983;
-  color: #fff;
+  color: #555;
   border-radius: 5px;
 }
 .archive .post-archive .post-item .post-title {
