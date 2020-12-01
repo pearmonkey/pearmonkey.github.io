@@ -105,16 +105,7 @@
               
                 <i class="fa fa-link" aria-hidden="true"></i>
               
-              <span>常用链接</span>
-            </a>
-          </li>
-        
-          <li class="drawer-box-content_item">
-            <a href="/data" class="menu-item-link">
-              
-                <i class="fa fa-database" aria-hidden="true"></i>
-              
-              <span>有趣数据</span>
+              <span>常用</span>
             </a>
           </li>
         
@@ -209,16 +200,7 @@
               
                 <i class="fa fa-link" aria-hidden="true"></i>
               
-              <span>常用链接</span>
-            </a>
-          </li>
-        
-          <li class="menu-item">
-            <a href="/data" class="menu-item-link">
-              
-                <i class="fa fa-database" aria-hidden="true"></i>
-              
-              <span>有趣数据</span>
+              <span>常用</span>
             </a>
           </li>
         
@@ -339,38 +321,29 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接-httpsleetcodecomproblemspalindromic-substrings"><a class="markdownIt-Anchor" href="#题目链接-httpsleetcodecomproblemspalindromic-substrings"></a> 题目链接 <a href="https://leetcode.com/problems/palindromic-substrings/" target="_blank" rel="noopener">https://leetcode.com/problems/palindromic-substrings/</a></h2>
-<h2 id="题目难度-medium-585"><a class="markdownIt-Anchor" href="#题目难度-medium-585"></a> 题目难度 Medium 58.5%</h2>
-<a id="more"></a>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<p>Given a string, your task is to count how many palindromic substrings in this string.<br />
-The substrings with different start indexes or end indexes are counted as different substrings even they consist of same characters.<br />
-Example 1:</p>
-<pre class="highlight"><code class="">Input: &quot;abc&quot;
+        <h2 id="题目链接-https-leetcode-com-problems-palindromic-substrings"><a href="#题目链接-https-leetcode-com-problems-palindromic-substrings" class="headerlink" title="题目链接 https://leetcode.com/problems/palindromic-substrings/"></a>题目链接 <a href="https://leetcode.com/problems/palindromic-substrings/" target="_blank" rel="noopener">https://leetcode.com/problems/palindromic-substrings/</a></h2><h2 id="题目难度-Medium-58-5"><a href="#题目难度-Medium-58-5" class="headerlink" title="题目难度 Medium 58.5%"></a>题目难度 Medium 58.5%</h2><a id="more"></a>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Given a string, your task is to count how many palindromic substrings in this string.<br>The substrings with different start indexes or end indexes are counted as different substrings even they consist of same characters.<br>Example 1:</p>
+<pre><code>Input: &quot;abc&quot;
 Output: 3
 Explanation: Three palindromic strings: &quot;a&quot;, &quot;b&quot;, &quot;c&quot;.
-</code></pre>
-<p>Example 2:</p>
-<pre class="highlight"><code class="">Input: &quot;aaa&quot;
+</code></pre><p>Example 2:</p>
+<pre><code>Input: &quot;aaa&quot;
 Output: 6
 Explanation: Six palindromic strings: &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;aa&quot;, &quot;aa&quot;, &quot;aaa&quot;.
-</code></pre>
-<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
-<p>题目要求给定字符串的所有为回文串的子串。从最简单的开始，不管字符串是什么，每一个字符一定是它的子串，并且也是回文串，例如“abc”中的“a”，“b”，“c”，然后，我们要找是否有更长的子串为回文串。最直接的想法是，从第一个元素（i = 0 : len - 1, O(n)）开始作为子串的开始端，然后以i以及之后的位置作为结束端（j = i : len - 1, O(n)）,这样形成的每一个子串都送去判断一下（O(n)），若为回文，则加入结果集中。这样做的时间复杂度是O(n^3)。我们选择仔细想一想，这个过程中有没有重复的地方，其实所谓的算法的改进，就是将那些重复做的地方识别出来然后剔除，以降低时间复杂度。在刚刚的问题中，如果我们的字符串为“abcba”，当i = 0, j = 4, 子串“abcba”被检查为回文（这一检查的时间复杂度是O(n)）, 这里也就意味着里面的“bcb”和“c”也都是回文。所以，当后面i = 1, j = 3时，我们再次判断“bcb”是否为回文的这一操作就是重复的了。所以，如果从两端开始往中间判断的办法会有重复的，那我们就从中间往两边判断。也就是让每一个字符都当一回 回文串 的中间字符（奇数回文）和中间偏左的字符（偶数回文），时间复杂度为O(2n)，然后向两边延伸判断，时间复杂度为O(n)。整体复杂度为O(2 * n^2)。</p>
-<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
-<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
-    <span class="hljs-keyword">int</span> res;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">countSubstrings</span><span class="hljs-params">(String s)</span> </span>{
-        res = <span class="hljs-number">0</span>;
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; s.length(); i++){
+</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>题目要求给定字符串的所有为回文串的子串。从最简单的开始，不管字符串是什么，每一个字符一定是它的子串，并且也是回文串，例如“abc”中的“a”，“b”，“c”，然后，我们要找是否有更长的子串为回文串。最直接的想法是，从第一个元素（i = 0 : len - 1, O(n)）开始作为子串的开始端，然后以i以及之后的位置作为结束端（j = i : len - 1, O(n)）,这样形成的每一个子串都送去判断一下（O(n)），若为回文，则加入结果集中。这样做的时间复杂度是O(n^3)。我们选择仔细想一想，这个过程中有没有重复的地方，其实所谓的算法的改进，就是将那些重复做的地方识别出来然后剔除，以降低时间复杂度。在刚刚的问题中，如果我们的字符串为“abcba”，当i = 0, j = 4, 子串“abcba”被检查为回文（这一检查的时间复杂度是O(n)）, 这里也就意味着里面的“bcb”和“c”也都是回文。所以，当后面i = 1, j = 3时，我们再次判断“bcb”是否为回文的这一操作就是重复的了。所以，如果从两端开始往中间判断的办法会有重复的，那我们就从中间往两边判断。也就是让每一个字符都当一回 回文串 的中间字符（奇数回文）和中间偏左的字符（偶数回文），时间复杂度为O(2n)，然后向两边延伸判断，时间复杂度为O(n)。整体复杂度为O(2 * n^2)。</p>
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre><code class="lang-java">class Solution {
+    int res;
+    public int countSubstrings(String s) {
+        res = 0;
+        for(int i = 0; i &lt; s.length(); i++){
             helper(s, i, i);
-            helper(s, i, i+<span class="hljs-number">1</span>);
+            helper(s, i, i+1);
         }
-        <span class="hljs-keyword">return</span> res;
+        return res;
     }
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">helper</span><span class="hljs-params">(String s, <span class="hljs-keyword">int</span> i, <span class="hljs-keyword">int</span> j)</span></span>{
-        <span class="hljs-keyword">while</span>(i &gt;= <span class="hljs-number">0</span> &amp;&amp; j &lt; s.length() &amp;&amp; s.charAt(i) == s.charAt(j)){
+    public void helper(String s, int i, int j){
+        while(i &gt;= 0 &amp;&amp; j &lt; s.length() &amp;&amp; s.charAt(i) == s.charAt(j)){
             res++;
             i--;
             j++;
@@ -378,9 +351,7 @@ Explanation: Six palindromic strings: &quot;a&quot;, &quot;a&quot;, &quot;a&quot
     }
 }
 </code></pre>
-<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
-<p>Runtime: 99.97%<br />
-Memory: 100%</p>
+<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 99.97%<br>Memory: 100%</p>
 
       </div>
       

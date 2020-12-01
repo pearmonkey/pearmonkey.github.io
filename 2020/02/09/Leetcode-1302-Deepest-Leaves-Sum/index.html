@@ -105,16 +105,7 @@
               
                 <i class="fa fa-link" aria-hidden="true"></i>
               
-              <span>常用链接</span>
-            </a>
-          </li>
-        
-          <li class="drawer-box-content_item">
-            <a href="/data" class="menu-item-link">
-              
-                <i class="fa fa-database" aria-hidden="true"></i>
-              
-              <span>有趣数据</span>
+              <span>常用</span>
             </a>
           </li>
         
@@ -209,16 +200,7 @@
               
                 <i class="fa fa-link" aria-hidden="true"></i>
               
-              <span>常用链接</span>
-            </a>
-          </li>
-        
-          <li class="menu-item">
-            <a href="/data" class="menu-item-link">
-              
-                <i class="fa fa-database" aria-hidden="true"></i>
-              
-              <span>有趣数据</span>
+              <span>常用</span>
             </a>
           </li>
         
@@ -339,45 +321,37 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接-httpsleetcodecomproblemsdeepest-leaves-sum"><a class="markdownIt-Anchor" href="#题目链接-httpsleetcodecomproblemsdeepest-leaves-sum"></a> 题目链接 <a href="https://leetcode.com/problems/deepest-leaves-sum/" target="_blank" rel="noopener">https://leetcode.com/problems/deepest-leaves-sum/</a></h2>
-<h2 id="题目难度-medium-837"><a class="markdownIt-Anchor" href="#题目难度-medium-837"></a> 题目难度 Medium 83.7%</h2>
-<a id="more"></a>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<p>Given a binary tree, return the sum of values of its deepest leaves.</p>
+        <h2 id="题目链接-https-leetcode-com-problems-deepest-leaves-sum"><a href="#题目链接-https-leetcode-com-problems-deepest-leaves-sum" class="headerlink" title="题目链接 https://leetcode.com/problems/deepest-leaves-sum/"></a>题目链接 <a href="https://leetcode.com/problems/deepest-leaves-sum/" target="_blank" rel="noopener">https://leetcode.com/problems/deepest-leaves-sum/</a></h2><h2 id="题目难度-Medium-83-7"><a href="#题目难度-Medium-83-7" class="headerlink" title="题目难度 Medium 83.7%"></a>题目难度 Medium 83.7%</h2><a id="more"></a>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Given a binary tree, return the sum of values of its deepest leaves.</p>
 <p>Example 1:</p>
-<pre class="highlight"><code class="">Input: root = [1,2,3,4,5,null,6,7,null,null,null,null,8]
+<pre><code>Input: root = [1,2,3,4,5,null,6,7,null,null,null,null,8]
 Output: 15
-</code></pre>
-<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
-<p>题目要求返回最深的根的和。这里有两点，深度和和。采用的是dfs，遇到leave随时更新最深的深度和结果和。这种需要在dfs时随时更新的variable就需要是static的全局变量。</p>
-<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
-<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
-    <span class="hljs-keyword">int</span> max_depth = <span class="hljs-number">0</span>;
-    <span class="hljs-keyword">int</span> sum = <span class="hljs-number">0</span>;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">deepestLeavesSum</span><span class="hljs-params">(TreeNode root)</span> </span>{
-        dfs(root, <span class="hljs-number">0</span>);
-        <span class="hljs-keyword">return</span> sum;
+</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>题目要求返回最深的根的和。这里有两点，深度和和。采用的是dfs，遇到leave随时更新最深的深度和结果和。这种需要在dfs时随时更新的variable就需要是static的全局变量。</p>
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre><code class="lang-java">class Solution {
+    int max_depth = 0;
+    int sum = 0;
+    public int deepestLeavesSum(TreeNode root) {
+        dfs(root, 0);
+        return sum;
     }
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">dfs</span><span class="hljs-params">(TreeNode root, <span class="hljs-keyword">int</span> depth)</span></span>{
-        <span class="hljs-keyword">if</span>(root == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span>;
-        <span class="hljs-keyword">if</span>(root.left == <span class="hljs-keyword">null</span> &amp;&amp; root.right == <span class="hljs-keyword">null</span>) {
-            <span class="hljs-keyword">if</span>(depth == max_depth)
+    public void dfs(TreeNode root, int depth){
+        if(root == null) return;
+        if(root.left == null &amp;&amp; root.right == null) {
+            if(depth == max_depth)
                 sum += root.val;
-            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(depth &gt; max_depth){
+            else if(depth &gt; max_depth){
                 max_depth = depth;
                 sum = root.val;
             }
-        } <span class="hljs-keyword">else</span> {
-            dfs(root.left, depth + <span class="hljs-number">1</span>);
-            dfs(root.right, depth + <span class="hljs-number">1</span>);
+        } else {
+            dfs(root.left, depth + 1);
+            dfs(root.right, depth + 1);
         }
     }
 }
 </code></pre>
-<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
-<p>Runtime: 100.00%<br />
-Memory: 100.00%</p>
+<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 100.00%<br>Memory: 100.00%</p>
 
       </div>
       

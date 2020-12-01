@@ -105,16 +105,7 @@
               
                 <i class="fa fa-link" aria-hidden="true"></i>
               
-              <span>常用链接</span>
-            </a>
-          </li>
-        
-          <li class="drawer-box-content_item">
-            <a href="/data" class="menu-item-link">
-              
-                <i class="fa fa-database" aria-hidden="true"></i>
-              
-              <span>有趣数据</span>
+              <span>常用</span>
             </a>
           </li>
         
@@ -209,16 +200,7 @@
               
                 <i class="fa fa-link" aria-hidden="true"></i>
               
-              <span>常用链接</span>
-            </a>
-          </li>
-        
-          <li class="menu-item">
-            <a href="/data" class="menu-item-link">
-              
-                <i class="fa fa-database" aria-hidden="true"></i>
-              
-              <span>有趣数据</span>
+              <span>常用</span>
             </a>
           </li>
         
@@ -335,51 +317,41 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接-httpsleetcodecomproblemsvalid-palindrome-ii"><a class="markdownIt-Anchor" href="#题目链接-httpsleetcodecomproblemsvalid-palindrome-ii"></a> 题目链接 <a href="https://leetcode.com/problems/valid-palindrome-ii/" target="_blank" rel="noopener">https://leetcode.com/problems/valid-palindrome-ii/</a></h2>
-<h2 id="题目难度-easy-354"><a class="markdownIt-Anchor" href="#题目难度-easy-354"></a> 题目难度 Easy 35.4%</h2>
-<a id="more"></a>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<p>Given a non-empty string s, you may delete at most one character. Judge whether you can make it a palindrome.<br />
-Example 1:</p>
-<pre class="highlight"><code class="">Input: &quot;aba&quot;
+        <h2 id="题目链接-https-leetcode-com-problems-valid-palindrome-ii"><a href="#题目链接-https-leetcode-com-problems-valid-palindrome-ii" class="headerlink" title="题目链接 https://leetcode.com/problems/valid-palindrome-ii/"></a>题目链接 <a href="https://leetcode.com/problems/valid-palindrome-ii/" target="_blank" rel="noopener">https://leetcode.com/problems/valid-palindrome-ii/</a></h2><h2 id="题目难度-Easy-35-4"><a href="#题目难度-Easy-35-4" class="headerlink" title="题目难度 Easy 35.4%"></a>题目难度 Easy 35.4%</h2><a id="more"></a>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Given a non-empty string s, you may delete at most one character. Judge whether you can make it a palindrome.<br>Example 1:</p>
+<pre><code>Input: &quot;aba&quot;
 Output: True
-</code></pre>
-<p>Example 2:</p>
-<pre class="highlight"><code class="">Input: &quot;abca&quot;
+</code></pre><p>Example 2:</p>
+<pre><code>Input: &quot;abca&quot;
 Output: True
-Explanation: You could delete the character 'c'.
-</code></pre>
-<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
-<p>给一个string，允许最多删除一个字符，问能否形成回文串。当面试碰到这样的题目的时候，一定要先问一下“能否形成回文串是可以打乱顺序还是不可以？”。因为两种情况的解法不一样，如果可以打乱顺序，那就是count每个字符的个数；如果不可以打乱，就是判断左半边和右半边是否一样。这里是不允许打乱顺序（问我怎么看出来的？我以为可以打乱顺序写完后提交没通过发现的，手动微笑脸）。所以我们用左右指针l和r来比较字符，如果不相同，就判断[l+1, r]和[l, r-1]。任何一个是回文串就返回true。这里需要一个最基本的判断回文串的函数。</p>
-<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
-<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">validPalindrome</span><span class="hljs-params">(String s)</span> </span>{
-        <span class="hljs-keyword">int</span> n = s.length();
-        <span class="hljs-keyword">char</span>[] ca = s.toCharArray();
-        <span class="hljs-keyword">int</span> l = <span class="hljs-number">0</span>, r = n - <span class="hljs-number">1</span>;
-        <span class="hljs-keyword">while</span>(l &lt; r){
-            <span class="hljs-keyword">if</span>(ca[l] != ca[r])
-                <span class="hljs-keyword">return</span> valid(ca, l + <span class="hljs-number">1</span>, r) || valid(ca, l, r - <span class="hljs-number">1</span>);
+Explanation: You could delete the character &#39;c&#39;.
+</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>给一个string，允许最多删除一个字符，问能否形成回文串。当面试碰到这样的题目的时候，一定要先问一下“能否形成回文串是可以打乱顺序还是不可以？”。因为两种情况的解法不一样，如果可以打乱顺序，那就是count每个字符的个数；如果不可以打乱，就是判断左半边和右半边是否一样。这里是不允许打乱顺序（问我怎么看出来的？我以为可以打乱顺序写完后提交没通过发现的，手动微笑脸）。所以我们用左右指针l和r来比较字符，如果不相同，就判断[l+1, r]和[l, r-1]。任何一个是回文串就返回true。这里需要一个最基本的判断回文串的函数。</p>
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre><code class="lang-java">class Solution {
+    public boolean validPalindrome(String s) {
+        int n = s.length();
+        char[] ca = s.toCharArray();
+        int l = 0, r = n - 1;
+        while(l &lt; r){
+            if(ca[l] != ca[r])
+                return valid(ca, l + 1, r) || valid(ca, l, r - 1);
             l++;
             r--;
         }
-        <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+        return true;
     }
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">valid</span><span class="hljs-params">(<span class="hljs-keyword">char</span>[] ca, <span class="hljs-keyword">int</span> l, <span class="hljs-keyword">int</span> r)</span></span>{
-        <span class="hljs-keyword">while</span>(l &lt; r){
-            <span class="hljs-keyword">if</span>(ca[l] != ca[r])
-                <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+    public boolean valid(char[] ca, int l, int r){
+        while(l &lt; r){
+            if(ca[l] != ca[r])
+                return false;
             l++;
             r--;
         }
-        <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+        return true;
     }
 }
 </code></pre>
-<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
-<p>Runtime: 99.48%<br />
-Memory: 97.22%</p>
+<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 99.48%<br>Memory: 97.22%</p>
 
       </div>
       

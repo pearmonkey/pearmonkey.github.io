@@ -105,16 +105,7 @@
               
                 <i class="fa fa-link" aria-hidden="true"></i>
               
-              <span>常用链接</span>
-            </a>
-          </li>
-        
-          <li class="drawer-box-content_item">
-            <a href="/data" class="menu-item-link">
-              
-                <i class="fa fa-database" aria-hidden="true"></i>
-              
-              <span>有趣数据</span>
+              <span>常用</span>
             </a>
           </li>
         
@@ -209,16 +200,7 @@
               
                 <i class="fa fa-link" aria-hidden="true"></i>
               
-              <span>常用链接</span>
-            </a>
-          </li>
-        
-          <li class="menu-item">
-            <a href="/data" class="menu-item-link">
-              
-                <i class="fa fa-database" aria-hidden="true"></i>
-              
-              <span>有趣数据</span>
+              <span>常用</span>
             </a>
           </li>
         
@@ -338,27 +320,18 @@
         
       </div>
       <div class="post-content">
-        <p>I improve the algorithm of functions table.Drawdowns() and findDrawdowns() from package (PerformanceAnalytics).</p>
-<a id="more"></a>
-<h2 id="description-of-the-algorithm"><a class="markdownIt-Anchor" href="#description-of-the-algorithm"></a> Description of the algorithm</h2>
-<ol>
+        <p>I improve the algorithm of functions table.Drawdowns() and findDrawdowns() from package (PerformanceAnalytics).<br><a id="more"></a></p>
+<h2 id="Description-of-the-algorithm"><a href="#Description-of-the-algorithm" class="headerlink" title="Description of the algorithm"></a>Description of the algorithm</h2><ol>
 <li>Use Fama-French market factor to calculate the cumulative return (as variable <strong>CumRET</strong>) assuming an investor put $1 in the market portfolio in 1926-07-01.</li>
 <li>Calculate the cumulative maximum of <strong>CumRET</strong> (call it <strong>CumMax.CumRET</strong>).</li>
 <li>Identify the dates where its <strong>CumRET</strong> is less than its <strong>CumMax.CumRET</strong>.</li>
 <li>Put the different identified dates into a same group if they are consecutive and give each group a unique ID. Each group represents a drawdown period.</li>
-<li>For each drawdown period, find the following items:<br />
-a. Lowest <strong>CumRET</strong>,<br />
-b. The date with the lowest <strong>CumRET</strong>,<br />
-c. Starting date,<br />
-d. End date.<br />
-Then the depth of a drawdown is given by<br />
-(Lowest <strong>CumRET</strong> - <strong>CumMax.CumRET</strong>)/ <strong>CumMax.CumRET</strong></li>
+<li>For each drawdown period, find the following items:<br>a. Lowest <strong>CumRET</strong>,<br>b. The date with the lowest <strong>CumRET</strong>,<br>c. Starting date,<br>d. End date.<br>Then the depth of a drawdown is given by<br>(Lowest <strong>CumRET</strong> - <strong>CumMax.CumRET</strong>)/ <strong>CumMax.CumRET</strong></li>
 </ol>
-<h2 id="r-code"><a class="markdownIt-Anchor" href="#r-code"></a> R Code</h2>
-<pre class="highlight"><code class="">#######################################
+<h2 id="R-Code"><a href="#R-Code" class="headerlink" title="R Code"></a>R Code</h2><pre><code>#######################################
 # I improve the algorithm of functions table.Drawdowns()
 # and findDrawdowns() from package (PerformanceAnalytics).
-# Example: market portfolio returns from Kenneth French's library
+# Example: market portfolio returns from Kenneth French&#39;s library
 
 # Import the dataset
 FF &lt;- read.csv(&quot;C:/Users/kerwi/Dropbox/Empirics/Data/FF_Others/FF_3_Factors_Daily.CSV&quot;)
@@ -376,7 +349,7 @@ FF$CumRET &lt;- cumprod(FF$Mkt+1)
 FF$CumMax.CumRET &lt;- cummax(FF$CumRET)
 # Find the drawdowns -- the places where black line is under red line
 # These are the platforms of the red line
-# Varibale 'Up':
+# Varibale &#39;Up&#39;:
 #             it is 1 if CumRET is equal to CumMax.CumRET
 #             it is 0 if CumRET is less than CumMax.CumRET
 FF$Up &lt;- ifelse(FF$CumRET==FF$CumMax.CumRET, 1, 0)
@@ -399,53 +372,47 @@ res &lt;- FF %&gt;%
             Length=n()+1,
             To.Trough=sum(Date&lt;=Trough),
             Recovery=sum(Date&gt;Trough)+1,
-            .groups='drop')
+            .groups=&#39;drop&#39;)
 # Re-order the result based on the depths of the drawdowns
 Drawdowns &lt;- res[order(res$Depth),
                  c(&quot;From&quot;,&quot;To&quot;,&quot;Trough&quot;,&quot;Depth&quot;,&quot;Length&quot;,
                    &quot;To.Trough&quot;,&quot;Recovery&quot;)]
-
-</code></pre>
-<pre class="highlight"><code class="">#################################
+</code></pre><pre><code>#################################
 # Use some figures to illustrate the algorithm
 # Take a sample after 2018
-tmp &lt;- FF[FF$Date&gt;='2019-06-01',]
+tmp &lt;- FF[FF$Date&gt;=&#39;2019-06-01&#39;,]
 library(ggplot2)
 # Plot 1: the black line is the cumulative return
 ggplot(tmp, aes(Date)) +
   geom_line(aes(y=CumRET), colour=&quot;black&quot;) +
   scale_x_date(date_breaks = &quot;6 month&quot;, date_labels = &quot;%m-%Y&quot;)
-</code></pre>
-<p><img src="/images/find_drawdowns/find_drawdowns_plot1.png" alt="Alt text" /></p>
-<pre class="highlight"><code class="">#################################
+</code></pre><p><img src="/images/find_drawdowns/find_drawdowns_plot1.png" alt="Alt text"></p>
+<pre><code>#################################
 # Plot 2: the added red line is the cumulative maximum cumulative return
 ggplot(tmp, aes(Date)) +
   geom_line(aes(y=CumRET), colour=&quot;black&quot;) +
   geom_line(aes(y=CumMax.CumRET), colour=&quot;red&quot;) +
   scale_x_date(date_breaks = &quot;6 month&quot;, date_labels = &quot;%m-%Y&quot;)
-</code></pre>
-<p><img src="/images/find_drawdowns/find_drawdowns_plot2.png" alt="Alt text" /></p>
-<pre class="highlight"><code class="">#################################
+</code></pre><p><img src="/images/find_drawdowns/find_drawdowns_plot2.png" alt="Alt text"></p>
+<pre><code>#################################
 # Plot 3: we identify each drawdown period with an unique index
 tmp$index[is.na(tmp$index)] &lt;- 0
 ggplot() +
   geom_line(data=tmp, aes(x=Date, y=CumRET, color=as.factor(index))) +
   scale_x_date(date_breaks = &quot;3 month&quot;, date_labels = &quot;%m-%Y&quot;)
-</code></pre>
-<p><img src="/images/find_drawdowns/find_drawdowns_plot3.png" alt="Alt text" /></p>
-<pre class="highlight"><code class="">#################################
+</code></pre><p><img src="/images/find_drawdowns/find_drawdowns_plot3.png" alt="Alt text"></p>
+<pre><code>#################################
 # Plot 4:
 colnames(res)
-tmp.res &lt;- res[res$From&gt;='2019-06-01',]
+tmp.res &lt;- res[res$From&gt;=&#39;2019-06-01&#39;,]
 
 ggplot() +
-  geom_point(data=tmp.res, aes(x=From, y=Peak), size=2, alpha=0.5, shape='triangle') +
-  geom_point(data=tmp.res, aes(x=Trough, y=Bottom), size=2, alpha=0.5, color='blue') +
+  geom_point(data=tmp.res, aes(x=From, y=Peak), size=2, alpha=0.5, shape=&#39;triangle&#39;) +
+  geom_point(data=tmp.res, aes(x=Trough, y=Bottom), size=2, alpha=0.5, color=&#39;blue&#39;) +
   scale_x_date(date_breaks = &quot;3 month&quot;, date_labels = &quot;%m-%Y&quot;) +
   geom_line(data=tmp, aes(x=Date, y=CumRET)) +
-  geom_line(data=tmp, aes(x=Date, y=CumMax.CumRET), color='red')
-</code></pre>
-<p><img src="/images/find_drawdowns/find_drawdowns_plot4.png" alt="Alt text" /></p>
+  geom_line(data=tmp, aes(x=Date, y=CumMax.CumRET), color=&#39;red&#39;)
+</code></pre><p><img src="/images/find_drawdowns/find_drawdowns_plot4.png" alt="Alt text"></p>
 
       </div>
       
@@ -453,6 +420,12 @@ ggplot() +
     <!-- 上一篇文章和下一篇文章 -->
     
       <div class="post-nav">
+
+  <div class="post-nav-prev post-nav-item">
+    <a href="/2020/12/01/Python%E5%9F%BA%E7%A1%80-%E5%AE%89%E8%A3%85Jupyter_Notebook/">
+      上一篇:    0. 安装Python和Jupyter Notebook
+    </a>
+  </div>
 
 
 

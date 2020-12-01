@@ -105,16 +105,7 @@
               
                 <i class="fa fa-link" aria-hidden="true"></i>
               
-              <span>常用链接</span>
-            </a>
-          </li>
-        
-          <li class="drawer-box-content_item">
-            <a href="/data" class="menu-item-link">
-              
-                <i class="fa fa-database" aria-hidden="true"></i>
-              
-              <span>有趣数据</span>
+              <span>常用</span>
             </a>
           </li>
         
@@ -209,16 +200,7 @@
               
                 <i class="fa fa-link" aria-hidden="true"></i>
               
-              <span>常用链接</span>
-            </a>
-          </li>
-        
-          <li class="menu-item">
-            <a href="/data" class="menu-item-link">
-              
-                <i class="fa fa-database" aria-hidden="true"></i>
-              
-              <span>有趣数据</span>
+              <span>常用</span>
             </a>
           </li>
         
@@ -339,113 +321,103 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接"><a class="markdownIt-Anchor" href="#题目链接"></a> 题目链接</h2>
-<p><a href="https://leetcode.com/problems/replace-words/" target="_blank" rel="noopener">https://leetcode.com/problems/replace-words/</a></p>
-<a id="more"></a>
-<h2 id="题目难度"><a class="markdownIt-Anchor" href="#题目难度"></a> 题目难度</h2>
-<p>Medium 54.7%</p>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<p>In English, we have a concept called root, which can be followed by some other words to form another longer word - let’s call this word successor. For example, the root an, followed by other, which can form another word another.</p>
+        <h2 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h2><p><a href="https://leetcode.com/problems/replace-words/" target="_blank" rel="noopener">https://leetcode.com/problems/replace-words/</a><br><a id="more"></a></p>
+<h2 id="题目难度"><a href="#题目难度" class="headerlink" title="题目难度"></a>题目难度</h2><p>Medium 54.7%</p>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>In English, we have a concept called root, which can be followed by some other words to form another longer word - let’s call this word successor. For example, the root an, followed by other, which can form another word another.</p>
 <p>Now, given a dictionary consisting of many roots and a sentence. You need to replace all the successor in the sentence with the root forming it. If a successor has many roots can form it, replace it with the root with the shortest length.</p>
 <p>You need to output the sentence after the replacement.</p>
 <p>Example 1:</p>
-<pre class="highlight"><code class="">Input: dict = [&quot;cat&quot;, &quot;bat&quot;, &quot;rat&quot;]
+<pre><code>Input: dict = [&quot;cat&quot;, &quot;bat&quot;, &quot;rat&quot;]
 sentence = &quot;the cattle was rattled by the battery&quot;
 Output: &quot;the cat was rat by the bat&quot;
-</code></pre>
-<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
-<p>这道题目给了一些词根，和一句话。要求用词根替换句子里面的词。所以是一道很明显用trie的题。<br />
-首先是把词根放入trie，因为是要做替换，所以在构建trienode的时候要记录string。然后trienode的function比较多，CPGSSI (containsChild, put, get, setString, setEnd, isEnd)。因为是trie作为prefix，所以在searchprefix的时候就要判断是否是end，否则就不属于这个prefix。</p>
-<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
-<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
-    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TrieNode</span></span>{
+</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>这道题目给了一些词根，和一句话。要求用词根替换句子里面的词。所以是一道很明显用trie的题。<br>首先是把词根放入trie，因为是要做替换，所以在构建trienode的时候要记录string。然后trienode的function比较多，CPGSSI (containsChild, put, get, setString, setEnd, isEnd)。因为是trie作为prefix，所以在searchprefix的时候就要判断是否是end，否则就不属于这个prefix。</p>
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre><code class="lang-java">class Solution {
+    class TrieNode{
         TrieNode[] children;
-        <span class="hljs-keyword">int</span> l = <span class="hljs-number">26</span>;
-        <span class="hljs-keyword">boolean</span> isEnd;
+        int l = 26;
+        boolean isEnd;
         String string;
 
-        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">TrieNode</span><span class="hljs-params">()</span></span>{
-            children = <span class="hljs-keyword">new</span> TrieNode[<span class="hljs-number">26</span>];
+        public TrieNode(){
+            children = new TrieNode[26];
         }
 
-        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">containsChild</span><span class="hljs-params">(<span class="hljs-keyword">char</span> c)</span></span>{
-            <span class="hljs-keyword">return</span> children[c - <span class="hljs-string">'a'</span>] != <span class="hljs-keyword">null</span>;
+        public boolean containsChild(char c){
+            return children[c - &#39;a&#39;] != null;
         }
 
-        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">put</span><span class="hljs-params">(<span class="hljs-keyword">char</span> c, TrieNode node)</span></span>{
-            children[c - <span class="hljs-string">'a'</span>] = node;
+        public void put(char c, TrieNode node){
+            children[c - &#39;a&#39;] = node;
         }
 
-        <span class="hljs-function"><span class="hljs-keyword">public</span> TrieNode <span class="hljs-title">get</span><span class="hljs-params">(<span class="hljs-keyword">char</span> c)</span></span>{
-            <span class="hljs-keyword">return</span> children[c - <span class="hljs-string">'a'</span>];
+        public TrieNode get(char c){
+            return children[c - &#39;a&#39;];
         }
 
-        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setString</span><span class="hljs-params">(String a)</span></span>{
+        public void setString(String a){
             string = a;
         }
 
-        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setEnd</span><span class="hljs-params">()</span></span>{
-            isEnd = <span class="hljs-keyword">true</span>;
+        public void setEnd(){
+            isEnd = true;
         }
 
-        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isEnd</span><span class="hljs-params">()</span></span>{
-            <span class="hljs-keyword">return</span> isEnd;
+        public boolean isEnd(){
+            return isEnd;
         }
     }
 
-    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Trie</span></span>{
+    class Trie{
         TrieNode root;
 
-        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Trie</span><span class="hljs-params">()</span></span>{
-            root = <span class="hljs-keyword">new</span> TrieNode();
+        public Trie(){
+            root = new TrieNode();
         }
 
-        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">insert</span><span class="hljs-params">(String s)</span></span>{
+        public void insert(String s){
             TrieNode node = root;
-            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; s.length(); i++){
-                <span class="hljs-keyword">char</span> cur = s.charAt(i);
-                <span class="hljs-keyword">if</span>(!node.containsChild(cur))
-                    node.put(cur, <span class="hljs-keyword">new</span> TrieNode());
+            for(int i = 0; i &lt; s.length(); i++){
+                char cur = s.charAt(i);
+                if(!node.containsChild(cur))
+                    node.put(cur, new TrieNode());
                 node = node.get(cur);
             }
             node.setEnd();
             node.setString(s);
         }
 
-        <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">searchPrefix</span><span class="hljs-params">(String s)</span></span>{
+        public String searchPrefix(String s){
             TrieNode node = root;
-            <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;
-            <span class="hljs-keyword">while</span>(!node.isEnd &amp;&amp; i &lt; s.length()){
-                <span class="hljs-keyword">char</span> cur = s.charAt(i++);
-                <span class="hljs-keyword">if</span>(!node.containsChild(cur)) <span class="hljs-keyword">break</span>;
+            int i = 0;
+            while(!node.isEnd &amp;&amp; i &lt; s.length()){
+                char cur = s.charAt(i++);
+                if(!node.containsChild(cur)) break;
                 node = node.get(cur);
             }
-            <span class="hljs-keyword">return</span> node.isEnd ? node.string : <span class="hljs-string">""</span>;
+            return node.isEnd ? node.string : &quot;&quot;;
         }
     }
 
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">replaceWords</span><span class="hljs-params">(List&lt;String&gt; dict, String sentence)</span> </span>{
-        StringBuilder sb = <span class="hljs-keyword">new</span> StringBuilder();
-        Trie trie = <span class="hljs-keyword">new</span> Trie();
-        <span class="hljs-keyword">for</span>(String s : dict)
+    public String replaceWords(List&lt;String&gt; dict, String sentence) {
+        StringBuilder sb = new StringBuilder();
+        Trie trie = new Trie();
+        for(String s : dict)
             trie.insert(s);
 
-        <span class="hljs-keyword">for</span>(String s : sentence.split(<span class="hljs-string">" "</span>)){
+        for(String s : sentence.split(&quot; &quot;)){
             String r = trie.searchPrefix(s);
-            <span class="hljs-keyword">if</span>(r.equals(<span class="hljs-string">""</span>))
+            if(r.equals(&quot;&quot;))
                 sb.append(s);
-            <span class="hljs-keyword">else</span>
+            else
                 sb.append(r);
-            sb.append(<span class="hljs-string">" "</span>);
+            sb.append(&quot; &quot;);
         }
-        <span class="hljs-keyword">return</span> sb.substring(<span class="hljs-number">0</span>, sb.length() - <span class="hljs-number">1</span>).toString();
+        return sb.substring(0, sb.length() - 1).toString();
     }
 }
 </code></pre>
-<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
-<p>Runtime: 99.14%<br />
-Memory: 75.00%</p>
+<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 99.14%<br>Memory: 75.00%</p>
 
       </div>
       

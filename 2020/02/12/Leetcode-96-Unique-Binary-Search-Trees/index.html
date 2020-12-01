@@ -105,16 +105,7 @@
               
                 <i class="fa fa-link" aria-hidden="true"></i>
               
-              <span>常用链接</span>
-            </a>
-          </li>
-        
-          <li class="drawer-box-content_item">
-            <a href="/data" class="menu-item-link">
-              
-                <i class="fa fa-database" aria-hidden="true"></i>
-              
-              <span>有趣数据</span>
+              <span>常用</span>
             </a>
           </li>
         
@@ -209,16 +200,7 @@
               
                 <i class="fa fa-link" aria-hidden="true"></i>
               
-              <span>常用链接</span>
-            </a>
-          </li>
-        
-          <li class="menu-item">
-            <a href="/data" class="menu-item-link">
-              
-                <i class="fa fa-database" aria-hidden="true"></i>
-              
-              <span>有趣数据</span>
+              <span>常用</span>
             </a>
           </li>
         
@@ -343,46 +325,36 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接"><a class="markdownIt-Anchor" href="#题目链接"></a> 题目链接</h2>
-<p><a href="https://leetcode.com/problems/unique-binary-search-trees/" target="_blank" rel="noopener">https://leetcode.com/problems/unique-binary-search-trees/</a></p>
-<a id="more"></a>
-<h2 id="题目难度"><a class="markdownIt-Anchor" href="#题目难度"></a> 题目难度</h2>
-<p>Medium 38.4%</p>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<p>Given n, how many structurally unique BST’s (binary search trees) that store values 1 … n?</p>
+        <h2 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h2><p><a href="https://leetcode.com/problems/unique-binary-search-trees/" target="_blank" rel="noopener">https://leetcode.com/problems/unique-binary-search-trees/</a><br><a id="more"></a></p>
+<h2 id="题目难度"><a href="#题目难度" class="headerlink" title="题目难度"></a>题目难度</h2><p>Medium 38.4%</p>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Given n, how many structurally unique BST’s (binary search trees) that store values 1 … n?</p>
 <p>Example 1:</p>
-<pre class="highlight"><code class="">Input: 3
+<pre><code>Input: 3
 Output: 5
 Explanation:
-Given n = 3, there are a total of 5 unique BST's:
+Given n = 3, there are a total of 5 unique BST&#39;s:
 
    1         3     3      2      1
     \       /     /      / \      \
      3     2     1      1   3      2
     /     /       \                 \
    2     1         2                 3
-</code></pre>
-<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
-<p>这道题的问题是，有多少种可能性？一般就会想到用dfs，但是结果dfs的时间复杂度很高。仔细想想，这个问题其实是存在子问题，如果用G(n)代表最终答案，也就是从1到n的所有BST的数量，F(i)表示i当root时所有BST的数量，那么G(n) = F(1) + F(2) + … + (n)。对于F(i)，既然是i当root，那么左边的就是左子树，右边的就是右子树，F(i) = G(i-1)*G(n-i)。所以G(n) = sum(i = 1…n, G(i-1)*G(n-i)).<br />
-所以整个程序先有一个for loop（i长度），再有一个for loop（j当root）去计算G(i)，直到计算G(n).</p>
-<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
-<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">numTrees</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>{
-        <span class="hljs-keyword">int</span>[] dp = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[n+<span class="hljs-number">1</span>];
-        dp[<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;
-        dp[<span class="hljs-number">1</span>] = <span class="hljs-number">1</span>;
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">2</span>; i &lt;= n; i++){
-            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = <span class="hljs-number">1</span>; j &lt;= i; j++){
-                dp[i] += dp[j-<span class="hljs-number">1</span>] * dp[i-j];
+</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>这道题的问题是，有多少种可能性？一般就会想到用dfs，但是结果dfs的时间复杂度很高。仔细想想，这个问题其实是存在子问题，如果用G(n)代表最终答案，也就是从1到n的所有BST的数量，F(i)表示i当root时所有BST的数量，那么G(n) = F(1) + F(2) + … + (n)。对于F(i)，既然是i当root，那么左边的就是左子树，右边的就是右子树，F(i) = G(i-1)<em>G(n-i)。所以G(n) = sum(i = 1…n, G(i-1)</em>G(n-i)).<br>所以整个程序先有一个for loop（i长度），再有一个for loop（j当root）去计算G(i)，直到计算G(n).</p>
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre><code class="lang-java">class Solution {
+    public int numTrees(int n) {
+        int[] dp = new int[n+1];
+        dp[0] = 1;
+        dp[1] = 1;
+        for(int i = 2; i &lt;= n; i++){
+            for(int j = 1; j &lt;= i; j++){
+                dp[i] += dp[j-1] * dp[i-j];
             }
         }
-        <span class="hljs-keyword">return</span> dp[n];
+        return dp[n];
     }
 }
 </code></pre>
-<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
-<p>Runtime: 100.00%<br />
-Memory: 5.55%</p>
+<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 100.00%<br>Memory: 5.55%</p>
 
       </div>
       

@@ -1272,8 +1272,10 @@ a {
   }
 }
 .data {
-  width: 98%;
+  width: 95%;
+  align-items: center;
   display: flex;
+  flex-direction: column;
 }
 .about .title {
   font-family: Microsoft YaHei;

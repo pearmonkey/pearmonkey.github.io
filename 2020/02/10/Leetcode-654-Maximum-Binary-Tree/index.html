@@ -105,16 +105,7 @@
               
                 <i class="fa fa-link" aria-hidden="true"></i>
               
-              <span>常用链接</span>
-            </a>
-          </li>
-        
-          <li class="drawer-box-content_item">
-            <a href="/data" class="menu-item-link">
-              
-                <i class="fa fa-database" aria-hidden="true"></i>
-              
-              <span>有趣数据</span>
+              <span>常用</span>
             </a>
           </li>
         
@@ -209,16 +200,7 @@
               
                 <i class="fa fa-link" aria-hidden="true"></i>
               
-              <span>常用链接</span>
-            </a>
-          </li>
-        
-          <li class="menu-item">
-            <a href="/data" class="menu-item-link">
-              
-                <i class="fa fa-database" aria-hidden="true"></i>
-              
-              <span>有趣数据</span>
+              <span>常用</span>
             </a>
           </li>
         
@@ -339,19 +321,15 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接httpsleetcodecomproblemsmaximum-binary-tree"><a class="markdownIt-Anchor" href="#题目链接httpsleetcodecomproblemsmaximum-binary-tree"></a> 题目链接https://leetcode.com/problems/maximum-binary-tree/</h2>
-<h2 id="题目难度medium-782"><a class="markdownIt-Anchor" href="#题目难度medium-782"></a> 题目难度Medium 78.2%</h2>
-<a id="more"></a>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<p>Given an integer array with no duplicates. A maximum tree building on this array is defined as follow:</p>
+        <h2 id="题目链接https-leetcode-com-problems-maximum-binary-tree"><a href="#题目链接https-leetcode-com-problems-maximum-binary-tree" class="headerlink" title="题目链接https://leetcode.com/problems/maximum-binary-tree/"></a>题目链接<a href="https://leetcode.com/problems/maximum-binary-tree/" target="_blank" rel="noopener">https://leetcode.com/problems/maximum-binary-tree/</a></h2><h2 id="题目难度Medium-78-2"><a href="#题目难度Medium-78-2" class="headerlink" title="题目难度Medium 78.2%"></a>题目难度Medium 78.2%</h2><a id="more"></a>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Given an integer array with no duplicates. A maximum tree building on this array is defined as follow:</p>
 <ol>
 <li>The root is the maximum number in the array.</li>
 <li>The left subtree is the maximum tree constructed from left part subarray divided by the maximum number.</li>
-<li>The right subtree is the maximum tree constructed from right part subarray divided by the maximum number.<br />
-Construct the maximum tree by the given array and output the root node of this tree.</li>
+<li>The right subtree is the maximum tree constructed from right part subarray divided by the maximum number.<br>Construct the maximum tree by the given array and output the root node of this tree.</li>
 </ol>
 <p>Example 1:</p>
-<pre class="highlight"><code class="">Input: [3,2,1,6,0,5]
+<pre><code>Input: [3,2,1,6,0,5]
 Output: return the tree root node representing the following tree:
 
       6
@@ -361,35 +339,30 @@ Output: return the tree root node representing the following tree:
      2  0
        \
         1
-</code></pre>
-<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
-<p>最大的数作为root，左边的形成左子树，右边的形成右子树。时间复杂度是O(n2)。因为找最大值是O(n),再形成是O(n)。</p>
-<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
-<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
-    <span class="hljs-function"><span class="hljs-keyword">public</span> TreeNode <span class="hljs-title">constructMaximumBinaryTree</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums)</span> </span>{
-        <span class="hljs-keyword">return</span> helper(nums, <span class="hljs-number">0</span>, nums.length - <span class="hljs-number">1</span>);
+</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>最大的数作为root，左边的形成左子树，右边的形成右子树。时间复杂度是O(n2)。因为找最大值是O(n),再形成是O(n)。</p>
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre><code class="lang-java">class Solution {
+    public TreeNode constructMaximumBinaryTree(int[] nums) {
+        return helper(nums, 0, nums.length - 1);
     }
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> TreeNode <span class="hljs-title">helper</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums, <span class="hljs-keyword">int</span> left, <span class="hljs-keyword">int</span> right)</span></span>{
-        <span class="hljs-keyword">if</span>(left &gt; right) <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
-        <span class="hljs-keyword">int</span> max = nums[left];
-        <span class="hljs-keyword">int</span> max_ind = left;
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = left; i &lt;= right; i++){
-            <span class="hljs-keyword">if</span>(nums[i] &gt; max){
+    public TreeNode helper(int[] nums, int left, int right){
+        if(left &gt; right) return null;
+        int max = nums[left];
+        int max_ind = left;
+        for(int i = left; i &lt;= right; i++){
+            if(nums[i] &gt; max){
                 max = nums[i];
                 max_ind = i;
             }
         }
-        TreeNode root = <span class="hljs-keyword">new</span> TreeNode(nums[max_ind]);
-        root.left = helper(nums, left, max_ind - <span class="hljs-number">1</span>);
-        root.right = helper(nums, max_ind + <span class="hljs-number">1</span>, right);
-        <span class="hljs-keyword">return</span> root;
+        TreeNode root = new TreeNode(nums[max_ind]);
+        root.left = helper(nums, left, max_ind - 1);
+        root.right = helper(nums, max_ind + 1, right);
+        return root;
     }
 }
 </code></pre>
-<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
-<p>Runtime: 37.50%<br />
-Memory: 6.52%</p>
+<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 37.50%<br>Memory: 6.52%</p>
 
       </div>
       

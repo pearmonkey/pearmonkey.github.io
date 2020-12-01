@@ -105,16 +105,7 @@
               
                 <i class="fa fa-link" aria-hidden="true"></i>
               
-              <span>常用链接</span>
-            </a>
-          </li>
-        
-          <li class="drawer-box-content_item">
-            <a href="/data" class="menu-item-link">
-              
-                <i class="fa fa-database" aria-hidden="true"></i>
-              
-              <span>有趣数据</span>
+              <span>常用</span>
             </a>
           </li>
         
@@ -209,16 +200,7 @@
               
                 <i class="fa fa-link" aria-hidden="true"></i>
               
-              <span>常用链接</span>
-            </a>
-          </li>
-        
-          <li class="menu-item">
-            <a href="/data" class="menu-item-link">
-              
-                <i class="fa fa-database" aria-hidden="true"></i>
-              
-              <span>有趣数据</span>
+              <span>常用</span>
             </a>
           </li>
         
@@ -335,55 +317,39 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接"><a class="markdownIt-Anchor" href="#题目链接"></a> 题目链接</h2>
-<p><a href="https://leetcode.com/problems/reverse-linked-list/" target="_blank" rel="noopener">https://leetcode.com/problems/reverse-linked-list/</a></p>
-<h2 id="题目难度"><a class="markdownIt-Anchor" href="#题目难度"></a> 题目难度</h2>
-<p>Easy 58.3%</p>
-<a id="more"></a>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<p>Reverse a singly linked list.<br />
-Example :</p>
-<pre class="highlight"><code class="">Input: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL
+        <h2 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h2><p><a href="https://leetcode.com/problems/reverse-linked-list/" target="_blank" rel="noopener">https://leetcode.com/problems/reverse-linked-list/</a></p>
+<h2 id="题目难度"><a href="#题目难度" class="headerlink" title="题目难度"></a>题目难度</h2><p>Easy 58.3%<br><a id="more"></a></p>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Reverse a singly linked list.<br>Example :</p>
+<pre><code>Input: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL
 Output: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL
-</code></pre>
-<p>Follow up:<br />
-A linked list can be reversed either iteratively or recursively. Could you implement both?</p>
-<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
-<p>将链表翻转，难点在于对于每一个点都只知道下一个。所以在处理的过程中，在改变next指针的仔细一点就没有问题。</p>
-<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
-<h4 id="a-iteratively"><a class="markdownIt-Anchor" href="#a-iteratively"></a> a. Iteratively</h4>
-<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
-    <span class="hljs-function"><span class="hljs-keyword">public</span> ListNode <span class="hljs-title">reverseList</span><span class="hljs-params">(ListNode head)</span> </span>{
-        ListNode dummy = <span class="hljs-keyword">new</span> ListNode(-<span class="hljs-number">1</span>);
+</code></pre><p>Follow up:<br>A linked list can be reversed either iteratively or recursively. Could you implement both?</p>
+<h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>将链表翻转，难点在于对于每一个点都只知道下一个。所以在处理的过程中，在改变next指针的仔细一点就没有问题。</p>
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><h4 id="a-Iteratively"><a href="#a-Iteratively" class="headerlink" title="a. Iteratively"></a>a. Iteratively</h4><pre><code class="lang-java">class Solution {
+    public ListNode reverseList(ListNode head) {
+        ListNode dummy = new ListNode(-1);
         ListNode cur = head;
-        <span class="hljs-keyword">while</span>(cur != <span class="hljs-keyword">null</span> &amp;&amp; cur.next != <span class="hljs-keyword">null</span>){
+        while(cur != null &amp;&amp; cur.next != null){
             dummy.next = cur.next;
             cur.next = dummy.next.next;
             dummy.next.next = head;
             head = dummy.next;
         }
-        <span class="hljs-keyword">return</span> head;
+        return head;
     }
 }
 </code></pre>
-<p>通过效率<br />
-Runtime: 100%<br />
-Memory: 98.56%</p>
-<h4 id="b-recursively"><a class="markdownIt-Anchor" href="#b-recursively"></a> b. Recursively</h4>
-<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
-    <span class="hljs-function"><span class="hljs-keyword">public</span> ListNode <span class="hljs-title">reverseList</span><span class="hljs-params">(ListNode head)</span> </span>{
-        <span class="hljs-keyword">if</span>(head == <span class="hljs-keyword">null</span> || head.next == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span> head;
+<p>通过效率<br>Runtime: 100%<br>Memory: 98.56%</p>
+<h4 id="b-Recursively"><a href="#b-Recursively" class="headerlink" title="b. Recursively"></a>b. Recursively</h4><pre><code class="lang-java">class Solution {
+    public ListNode reverseList(ListNode head) {
+        if(head == null || head.next == null) return head;
         ListNode prev = reverseList(head.next);
         head.next.next = head;
-        head.next = <span class="hljs-keyword">null</span>;
-        <span class="hljs-keyword">return</span> prev;
+        head.next = null;
+        return prev;
     }
 }
-
 </code></pre>
-<p>通过效率<br />
-Runtime: 100%<br />
-Memory: 98.20%</p>
+<p>通过效率<br>Runtime: 100%<br>Memory: 98.20%</p>
 
       </div>
       

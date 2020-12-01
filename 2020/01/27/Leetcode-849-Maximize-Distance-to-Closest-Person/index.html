@@ -105,16 +105,7 @@
               
                 <i class="fa fa-link" aria-hidden="true"></i>
               
-              <span>常用链接</span>
-            </a>
-          </li>
-        
-          <li class="drawer-box-content_item">
-            <a href="/data" class="menu-item-link">
-              
-                <i class="fa fa-database" aria-hidden="true"></i>
-              
-              <span>有趣数据</span>
+              <span>常用</span>
             </a>
           </li>
         
@@ -209,16 +200,7 @@
               
                 <i class="fa fa-link" aria-hidden="true"></i>
               
-              <span>常用链接</span>
-            </a>
-          </li>
-        
-          <li class="menu-item">
-            <a href="/data" class="menu-item-link">
-              
-                <i class="fa fa-database" aria-hidden="true"></i>
-              
-              <span>有趣数据</span>
+              <span>常用</span>
             </a>
           </li>
         
@@ -335,62 +317,48 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接-httpsleetcodecomproblemsmaximize-distance-to-closest-person"><a class="markdownIt-Anchor" href="#题目链接-httpsleetcodecomproblemsmaximize-distance-to-closest-person"></a> 题目链接 <a href="https://leetcode.com/problems/maximize-distance-to-closest-person/" target="_blank" rel="noopener">https://leetcode.com/problems/maximize-distance-to-closest-person/</a></h2>
-<h2 id="题目难度-easy-421"><a class="markdownIt-Anchor" href="#题目难度-easy-421"></a> 题目难度 Easy 42.1%</h2>
-<a id="more"></a>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<p>In a row of seats, 1 represents a person sitting in that seat, and 0 represents that the seat is empty.<br />
-There is at least one empty seat, and at least one person sitting.<br />
-Alex wants to sit in the seat such that the distance between him and the closest person to him is maximized.<br />
-Return that maximum distance to closest person.<br />
-Example 1:</p>
-<pre class="highlight"><code class="">Input: [1,0,0,0,1,0,1]
+        <h2 id="题目链接-https-leetcode-com-problems-maximize-distance-to-closest-person"><a href="#题目链接-https-leetcode-com-problems-maximize-distance-to-closest-person" class="headerlink" title="题目链接 https://leetcode.com/problems/maximize-distance-to-closest-person/"></a>题目链接 <a href="https://leetcode.com/problems/maximize-distance-to-closest-person/" target="_blank" rel="noopener">https://leetcode.com/problems/maximize-distance-to-closest-person/</a></h2><h2 id="题目难度-Easy-42-1"><a href="#题目难度-Easy-42-1" class="headerlink" title="题目难度 Easy 42.1%"></a>题目难度 Easy 42.1%</h2><a id="more"></a>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>In a row of seats, 1 represents a person sitting in that seat, and 0 represents that the seat is empty.<br>There is at least one empty seat, and at least one person sitting.<br>Alex wants to sit in the seat such that the distance between him and the closest person to him is maximized.<br>Return that maximum distance to closest person.<br>Example 1:</p>
+<pre><code>Input: [1,0,0,0,1,0,1]
 Output: 2
 Explanation:
 If Alex sits in the second open seat (seats[2]), then the closest person has distance 2.
 If Alex sits in any other open seat, the closest person has distance 1.
 Thus, the maximum distance to the closest person is 2.
-</code></pre>
-<p>Example 2:</p>
-<pre class="highlight"><code class="">Input: [1,0,0,0]
+</code></pre><p>Example 2:</p>
+<pre><code>Input: [1,0,0,0]
 Output: 3
 Explanation:
 If Alex sits in the last seat, the closest person is 3 seats away.
 This is the maximum distance possible, so the answer is 3.
-</code></pre>
-<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
-<p>给一排座位，要找一个离别人最远的座位。挺有趣的题目，和现实也挺符合。很容易想到的是用两个数组from_left和from_right，from_left[i]表示位置i到左边有人的距离为几，from_right[i]表示位置i到右边有人的距离为几。然后两个数组的对应位置的最小值就是该位置到有人位置的距离。这里难点是这两个数组的初始值应该怎么设置。</p>
-<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
-<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">maxDistToClosest</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] seats)</span> </span>{
-        <span class="hljs-keyword">int</span> n = seats.length;
-        <span class="hljs-keyword">int</span> max_dist = <span class="hljs-number">0</span>;
-        <span class="hljs-keyword">int</span>[] from_left = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[n];
-        <span class="hljs-keyword">int</span>[] from_right = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[n];
+</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>给一排座位，要找一个离别人最远的座位。挺有趣的题目，和现实也挺符合。很容易想到的是用两个数组from_left和from_right，from_left[i]表示位置i到左边有人的距离为几，from_right[i]表示位置i到右边有人的距离为几。然后两个数组的对应位置的最小值就是该位置到有人位置的距离。这里难点是这两个数组的初始值应该怎么设置。</p>
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre><code class="lang-java">class Solution {
+    public int maxDistToClosest(int[] seats) {
+        int n = seats.length;
+        int max_dist = 0;
+        int[] from_left = new int[n];
+        int[] from_right = new int[n];
         Arrays.fill(from_left, n);
         Arrays.fill(from_right, n);
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++){
-            <span class="hljs-keyword">if</span>(seats[i] == <span class="hljs-number">1</span>) from_left[i] = <span class="hljs-number">0</span>;
-            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(i &gt; <span class="hljs-number">0</span>) from_left[i] = from_left[i-<span class="hljs-number">1</span>] + <span class="hljs-number">1</span>;
+        for(int i = 0; i &lt; n; i++){
+            if(seats[i] == 1) from_left[i] = 0;
+            else if(i &gt; 0) from_left[i] = from_left[i-1] + 1;
         }
 
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = n - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--){
-            <span class="hljs-keyword">if</span>(seats[i] == <span class="hljs-number">1</span>) from_right[i] = <span class="hljs-number">0</span>;
-            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(i &lt; n-<span class="hljs-number">1</span>) from_right[i] = from_right[i+<span class="hljs-number">1</span>] + <span class="hljs-number">1</span>;
+        for(int i = n - 1; i &gt;= 0; i--){
+            if(seats[i] == 1) from_right[i] = 0;
+            else if(i &lt; n-1) from_right[i] = from_right[i+1] + 1;
         }
 
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++){
-            <span class="hljs-keyword">int</span> dist = Math.min(from_left[i], from_right[i]);
+        for(int i = 0; i &lt; n; i++){
+            int dist = Math.min(from_left[i], from_right[i]);
             max_dist = Math.max(dist, max_dist);
         }
-        <span class="hljs-keyword">return</span> max_dist;
+        return max_dist;
     }
 }
-
 </code></pre>
-<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
-<p>Runtime: 92.77%<br />
-Memory: 8.3%</p>
+<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 92.77%<br>Memory: 8.3%</p>
 
       </div>
       
