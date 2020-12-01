@@ -317,31 +317,40 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接-https-leetcode-com-problems-add-to-array-form-of-integer"><a href="#题目链接-https-leetcode-com-problems-add-to-array-form-of-integer" class="headerlink" title="题目链接 https://leetcode.com/problems/add-to-array-form-of-integer/"></a>题目链接 <a href="https://leetcode.com/problems/add-to-array-form-of-integer/" target="_blank" rel="noopener">https://leetcode.com/problems/add-to-array-form-of-integer/</a></h2><h2 id="题目难度-Easy-44-1"><a href="#题目难度-Easy-44-1" class="headerlink" title="题目难度 Easy 44.1%"></a>题目难度 Easy 44.1%</h2><a id="more"></a>
-<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>For a non-negative integer X, the array-form of X is an array of its digits in left to right order.  For example, if X = 1231, then the array form is [1,2,3,1].<br>Given the array-form A of a non-negative integer X, return the array-form of the integer X+K.</p>
+        <h2 id="题目链接-httpsleetcodecomproblemsadd-to-array-form-of-integer"><a class="markdownIt-Anchor" href="#题目链接-httpsleetcodecomproblemsadd-to-array-form-of-integer"></a> 题目链接 <a href="https://leetcode.com/problems/add-to-array-form-of-integer/" target="_blank" rel="noopener">https://leetcode.com/problems/add-to-array-form-of-integer/</a></h2>
+<h2 id="题目难度-easy-441"><a class="markdownIt-Anchor" href="#题目难度-easy-441"></a> 题目难度 Easy 44.1%</h2>
+<a id="more"></a>
+<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
+<p>For a non-negative integer X, the array-form of X is an array of its digits in left to right order.  For example, if X = 1231, then the array form is [1,2,3,1].<br />
+Given the array-form A of a non-negative integer X, return the array-form of the integer X+K.</p>
 <p>Example 1:</p>
-<pre><code>Input: A = [2,1,5], K = 806
+<pre class="highlight"><code class="">Input: A = [2,1,5], K = 806
 Output: [1,0,2,1]
 Explanation: 215 + 806 = 1021
-</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>题目给一个数组代表一个整数，在给一个整数，求这两个整数的和。这道题考的比较细，要同时考虑到carry，A，K不为0才会退出。重点是list的reverse。</p>
-<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre><code class="lang-java">class Solution {
-    public List&lt;Integer&gt; addToArrayForm(int[] A, int K) {
-        List&lt;Integer&gt; res = new ArrayList();
-        int carry = 0;
-        int i = A.length - 1;
-        while(i &gt;= 0 || (carry &gt; 0 || K &gt; 0)){
-            int cur = (i &gt;= 0 ? A[i] : 0) + K % 10 + carry;
-            res.add(cur % 10);
-            carry = cur / 10;
-            K = K / 10;
+</code></pre>
+<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
+<p>题目给一个数组代表一个整数，在给一个整数，求这两个整数的和。这道题考的比较细，要同时考虑到carry，A，K不为0才会退出。重点是list的reverse。</p>
+<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
+<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title">addToArrayForm</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] A, <span class="hljs-keyword">int</span> K)</span> </span>{
+        List&lt;Integer&gt; res = <span class="hljs-keyword">new</span> ArrayList();
+        <span class="hljs-keyword">int</span> carry = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">int</span> i = A.length - <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">while</span>(i &gt;= <span class="hljs-number">0</span> || (carry &gt; <span class="hljs-number">0</span> || K &gt; <span class="hljs-number">0</span>)){
+            <span class="hljs-keyword">int</span> cur = (i &gt;= <span class="hljs-number">0</span> ? A[i] : <span class="hljs-number">0</span>) + K % <span class="hljs-number">10</span> + carry;
+            res.add(cur % <span class="hljs-number">10</span>);
+            carry = cur / <span class="hljs-number">10</span>;
+            K = K / <span class="hljs-number">10</span>;
             i--;
         }
-        Collections.reverse(res); // 重点！！！
-        return res;
+        Collections.reverse(res); <span class="hljs-comment">// 重点！！！</span>
+        <span class="hljs-keyword">return</span> res;
     }
 }
 </code></pre>
-<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 90.07%<br>Memory: 19.05%</p>
+<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
+<p>Runtime: 90.07%<br />
+Memory: 19.05%</p>
 
       </div>
       

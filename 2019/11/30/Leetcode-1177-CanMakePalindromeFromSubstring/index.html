@@ -325,10 +325,17 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接-https-leetcode-com-problems-can-make-palindrome-from-substring"><a href="#题目链接-https-leetcode-com-problems-can-make-palindrome-from-substring" class="headerlink" title="题目链接 https://leetcode.com/problems/can-make-palindrome-from-substring/"></a>题目链接 <a href="https://leetcode.com/problems/can-make-palindrome-from-substring/" target="_blank" rel="noopener">https://leetcode.com/problems/can-make-palindrome-from-substring/</a></h2><h2 id="题目难度-Medium-32-5"><a href="#题目难度-Medium-32-5" class="headerlink" title="题目难度 Medium 32.5%"></a>题目难度 Medium 32.5%</h2><a id="more"></a>
-<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Given a string s, we make queries on substrings of s.<br>For each query <code>queries[i] = [left, right, k]</code>, we may rearrange the substring <code>s[left], ..., s[right]</code>, and then choose up to k of them to replace with any lowercase English letter.<br>If the substring is possible to be a palindrome string after the operations above, the result of the query is true. Otherwise, the result is false.<br>Return an array <code>answer[]</code>, where <code>answer[i]</code> is the result of the i-th query <code>queries[i]</code>.<br>Note that: Each letter is counted individually for replacement so if for example <code>s[left..right] = &quot;aaa&quot;</code>, and k = 2, we can only replace two of the letters.  (Also, note that the initial string s is never modified by any query.)</p>
+        <h2 id="题目链接-httpsleetcodecomproblemscan-make-palindrome-from-substring"><a class="markdownIt-Anchor" href="#题目链接-httpsleetcodecomproblemscan-make-palindrome-from-substring"></a> 题目链接 <a href="https://leetcode.com/problems/can-make-palindrome-from-substring/" target="_blank" rel="noopener">https://leetcode.com/problems/can-make-palindrome-from-substring/</a></h2>
+<h2 id="题目难度-medium-325"><a class="markdownIt-Anchor" href="#题目难度-medium-325"></a> 题目难度 Medium 32.5%</h2>
+<a id="more"></a>
+<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
+<p>Given a string s, we make queries on substrings of s.<br />
+For each query <code>queries[i] = [left, right, k]</code>, we may rearrange the substring <code>s[left], ..., s[right]</code>, and then choose up to k of them to replace with any lowercase English letter.<br />
+If the substring is possible to be a palindrome string after the operations above, the result of the query is true. Otherwise, the result is false.<br />
+Return an array <code>answer[]</code>, where <code>answer[i]</code> is the result of the i-th query <code>queries[i]</code>.<br />
+Note that: Each letter is counted individually for replacement so if for example <code>s[left..right] = &quot;aaa&quot;</code>, and k = 2, we can only replace two of the letters.  (Also, note that the initial string s is never modified by any query.)</p>
 <p>Example :</p>
-<pre><code>Input: s = &quot;abcda&quot;, queries = [[3,3,0],[1,2,0],[0,3,1],[0,3,2],[0,4,1]]
+<pre class="highlight"><code class="">Input: s = &quot;abcda&quot;, queries = [[3,3,0],[1,2,0],[0,3,1],[0,3,2],[0,4,1]]
 Output: [true,false,false,true,true]
 Explanation:
 queries[0] : substring = &quot;d&quot;, is palidrome.
@@ -336,34 +343,39 @@ queries[1] : substring = &quot;bc&quot;, is not palidrome.
 queries[2] : substring = &quot;abcd&quot;, is not palidrome after replacing only 1 character.
 queries[3] : substring = &quot;abcd&quot;, could be changed to &quot;abba&quot; which is palidrome. Also this can be changed to &quot;baab&quot; first rearrange it &quot;bacd&quot; then replace &quot;cd&quot; with &quot;ab&quot;.
 queries[4] : substring = &quot;abcda&quot;, could be changed to &quot;abcba&quot; which is palidrome.
-</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>题目给一个string，给一些query。问这些query出来的substring是否能在规定的改动条件内组成回文串。比如例子中的[3, 3, 0]，抽出来的子串是d，能替换0个字符，问是否能组成回文串。答案是能。<br>这个题目吧，一把泪。一开始没有认真读题，以为是固定位置的substring，实现完了提交才发现是可以换位置的substring。所以啊，认真审题是成功解题的必要条件之一。既然可以换位置，那么判断这个字符串能否组成回文串就是count每个字符的数量了。按照惯例，count字符个数要么用HashMap要么用int[]。我比较推荐int[]，因为操作简单。因为query的起始点和终点不定，所以我们事先要count每一个位置都有什么信息。这里是一个难点，粗略一想，我需要记录起始点，终点，以及每个字符的个数，这应该是个什么样的数组呢？其实我们就用一个二维数组<code>int[n][26]</code>记录到位置n位置，每个字符出现的总次数，那么中间某一段的字符次数就能相减而得出了，这一点确实比较难想到，那我们就暂时先背下来吧（手动捂脸）。<br>有了每个字符的数量之后，我们就能知道需要经过多少次替换才能变成回文串。这里要注意的是，根据给定的字符串的长度来判断，这个回文是偶数回文还是奇数回文（如果不太了解可以参考一下<a href="http://localhost:4000/2019/11/27/Leetcode-Palindromic/" target="_blank" rel="noopener">这篇文章</a>）。如果我们知道了频率为奇数的字符有n个，那么，偶数回文就需要至少$\frac{n}{2}$个替换，奇数回文就需要至少$\lceil{\frac{n-1}{2}}\rceil$个替换。</p>
-<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre><code class="lang-java">class Solution {
-    public List&lt;Boolean&gt; canMakePaliQueries(String s, int[][] queries) {
-        List&lt;Boolean&gt; res = new ArrayList&lt;&gt;();
-        int n = s.length();
-        int[][] dp = new int[n][26];
-        for(int i = 0; i &lt; n; i++){
-            if(i &gt; 0){
-                for(int j = 0; j &lt; 26; j++)
-                    dp[i][j] = dp[i-1][j]; //copy前一个位置的信息
+</code></pre>
+<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
+<p>题目给一个string，给一些query。问这些query出来的substring是否能在规定的改动条件内组成回文串。比如例子中的[3, 3, 0]，抽出来的子串是d，能替换0个字符，问是否能组成回文串。答案是能。<br />
+这个题目吧，一把泪。一开始没有认真读题，以为是固定位置的substring，实现完了提交才发现是可以换位置的substring。所以啊，认真审题是成功解题的必要条件之一。既然可以换位置，那么判断这个字符串能否组成回文串就是count每个字符的数量了。按照惯例，count字符个数要么用HashMap要么用int[]。我比较推荐int[]，因为操作简单。因为query的起始点和终点不定，所以我们事先要count每一个位置都有什么信息。这里是一个难点，粗略一想，我需要记录起始点，终点，以及每个字符的个数，这应该是个什么样的数组呢？其实我们就用一个二维数组<code>int[n][26]</code>记录到位置n位置，每个字符出现的总次数，那么中间某一段的字符次数就能相减而得出了，这一点确实比较难想到，那我们就暂时先背下来吧（手动捂脸）。<br />
+有了每个字符的数量之后，我们就能知道需要经过多少次替换才能变成回文串。这里要注意的是，根据给定的字符串的长度来判断，这个回文是偶数回文还是奇数回文（如果不太了解可以参考一下<a href="http://localhost:4000/2019/11/27/Leetcode-Palindromic/" target="_blank" rel="noopener">这篇文章</a>）。如果我们知道了频率为奇数的字符有n个，那么，偶数回文就需要至少<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mfrac><mi>n</mi><mn>2</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{n}{2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.040392em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.695392em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>个替换，奇数回文就需要至少<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">⌈</mo><mfrac><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><mn>2</mn></mfrac><mo stretchy="false">⌉</mo></mrow><annotation encoding="application/x-tex">\lceil{\frac{n-1}{2}}\rceil</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mopen">⌈</span><span class="mord"><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span><span class="mclose">⌉</span></span></span></span>个替换。</p>
+<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
+<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> List&lt;Boolean&gt; <span class="hljs-title">canMakePaliQueries</span><span class="hljs-params">(String s, <span class="hljs-keyword">int</span>[][] queries)</span> </span>{
+        List&lt;Boolean&gt; res = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+        <span class="hljs-keyword">int</span> n = s.length();
+        <span class="hljs-keyword">int</span>[][] dp = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[n][<span class="hljs-number">26</span>];
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++){
+            <span class="hljs-keyword">if</span>(i &gt; <span class="hljs-number">0</span>){
+                <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">26</span>; j++)
+                    dp[i][j] = dp[i-<span class="hljs-number">1</span>][j]; <span class="hljs-comment">//copy前一个位置的信息</span>
             }
-            dp[i][s.charAt(i) - &#39;a&#39;]++; //添加当前位置的信息
+            dp[i][s.charAt(i) - <span class="hljs-string">'a'</span>]++; <span class="hljs-comment">//添加当前位置的信息</span>
         }
-        for(int i = 0; i &lt; queries.length; i++){
-            int[] query = queries[i];
-            int odd_count = 0;
-            for(int j = 0; j &lt; 26; j++){
-                int count = dp[query[1]][j]; //count是字符j出现的次数
-                if(query[0] != 0)
-                    count -= dp[query[0] - 1][j];
-                odd_count += count % 2 == 1 ? 1 : 0; //如果count是奇数那么odd_count加一
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; queries.length; i++){
+            <span class="hljs-keyword">int</span>[] query = queries[i];
+            <span class="hljs-keyword">int</span> odd_count = <span class="hljs-number">0</span>;
+            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">26</span>; j++){
+                <span class="hljs-keyword">int</span> count = dp[query[<span class="hljs-number">1</span>]][j]; <span class="hljs-comment">//count是字符j出现的次数</span>
+                <span class="hljs-keyword">if</span>(query[<span class="hljs-number">0</span>] != <span class="hljs-number">0</span>)
+                    count -= dp[query[<span class="hljs-number">0</span>] - <span class="hljs-number">1</span>][j];
+                odd_count += count % <span class="hljs-number">2</span> == <span class="hljs-number">1</span> ? <span class="hljs-number">1</span> : <span class="hljs-number">0</span>; <span class="hljs-comment">//如果count是奇数那么odd_count加一</span>
             }
 
-            if((query[1] - query[0] + 1) % 2 == 1) //判断给定字符串长度是偶数还是奇数
+            <span class="hljs-keyword">if</span>((query[<span class="hljs-number">1</span>] - query[<span class="hljs-number">0</span>] + <span class="hljs-number">1</span>) % <span class="hljs-number">2</span> == <span class="hljs-number">1</span>) <span class="hljs-comment">//判断给定字符串长度是偶数还是奇数</span>
                 odd_count--;
-            res.add(query[2] * 2 &gt;= odd_count);
+            res.add(query[<span class="hljs-number">2</span>] * <span class="hljs-number">2</span> &gt;= odd_count);
         }
-        return res;
+        <span class="hljs-keyword">return</span> res;
 </code></pre>
 
       </div>
