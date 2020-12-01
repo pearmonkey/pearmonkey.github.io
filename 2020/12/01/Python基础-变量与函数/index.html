@@ -12,7 +12,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>109. Convert Sorted List to Binary Search Tree | 雪梨猴的小站</title>
+  <title>1. Python-变量与函数 | 雪梨猴的小站</title>
   
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -285,86 +285,166 @@
     <article class="post post-detail">
       
         <div class="post-title">
-          109. Convert Sorted List to Binary Search Tree
+          1. Python-变量与函数
         </div>
       
 
       <div class="post-meta">
 
       
+        Sherry
+        <h>|</h>
+      
 
       
-        <span class="post-time">2020-02-12</span>
+        <span class="post-time">2020-12-01</span>
         <h>|</h>
       
 
         
           
-            <a href="/categories/Leetcode/" class="">
-              Leetcode
+            <a href="/categories/Python%E5%9F%BA%E7%A1%80/" class="">
+              Python基础
             </a>
           
           <h>|</h>
         
 
         
-          
-            <a href="/tags/Leetcode/" class="">
-              Leetcode
-            </a>
-          
-            <a href="/tags/Tree/" class="">
-              Tree
-            </a>
-          
-
-        
       </div>
       <div class="post-content">
-        <h2 id="题目链接"><a class="markdownIt-Anchor" href="#题目链接"></a> 题目链接</h2>
-<p><a href="https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree/" target="_blank" rel="noopener">https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree/</a></p>
+        <p>如果把计算机想成一个可以进行计算的机器人，那么编程语言就是给这个机器人下达命令的规则。生活和工作中也会经常遇到不同类型的数据，理解Python的变量类型是做数据处理和分析的前提。</p>
 <a id="more"></a>
-<h2 id="题目难度"><a class="markdownIt-Anchor" href="#题目难度"></a> 题目难度</h2>
-<p>Medium 44.7%</p>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<p>Given a singly linked list where elements are sorted in ascending order, convert it to a height balanced BST.</p>
-<p>For this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of every node never differ by more than 1.</p>
-<p>Example 1:</p>
-<pre class="highlight"><code class="">Given the sorted linked list: [-10,-3,0,5,9],
-
-One possible answer is: [0,-3,9,-10,null,5], which represents the following height balanced BST:
-
-      0
-     / \
-   -3   9
-   /   /
- -10  5
+<h2 id="数据类型"><a class="markdownIt-Anchor" href="#数据类型"></a> 数据类型</h2>
+<p>变量是一个接收数值的容器，我们想要这么一个容器，就需要给它命个名，命名规则是：<strong>必须是大小写英文、数字和_的组合，且不能用数字开头</strong>。比如：<code>a, b, c, a1, a2, new_a, new_b</code>。</p>
+<p>有了容器之后，我们就可以往里面放数据了，Python中常见的数据类型有以下几种：</p>
+<ul>
+<li>整数（integer）:</li>
+</ul>
+<pre class="highlight"><code class="python">a = <span class="hljs-number">10</span>
+b = <span class="hljs-number">-1</span>
+print(type(a))
+print(a + b)
 </code></pre>
-<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
-<p>快慢指针找中点，再递归生成左右子树，这里要注意的是判断list是否只有一个元素，否则的话会是死循环。</p>
-<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
-<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
-    <span class="hljs-function"><span class="hljs-keyword">public</span> TreeNode <span class="hljs-title">sortedListToBST</span><span class="hljs-params">(ListNode head)</span> </span>{
-        <span class="hljs-keyword">if</span>(head == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
-        ListNode fast = head, slow = head, pre = <span class="hljs-keyword">null</span>;
-        <span class="hljs-keyword">while</span>(fast != <span class="hljs-keyword">null</span> &amp;&amp; fast.next != <span class="hljs-keyword">null</span>){
-            pre = slow;
-            slow = slow.next;
-            fast = fast.next.next;
-        }
-        <span class="hljs-keyword">if</span>(pre != <span class="hljs-keyword">null</span>)
-            pre.next = <span class="hljs-keyword">null</span>;
-        TreeNode root = <span class="hljs-keyword">new</span> TreeNode(slow.val);
-        <span class="hljs-keyword">if</span>(head == slow) <span class="hljs-keyword">return</span> root; <span class="hljs-comment">// 判断是否是有一个元素</span>
-        root.left = sortedListToBST(head);
-        root.right = sortedListToBST(slow.next);
-        <span class="hljs-keyword">return</span> root;
-    }
-}
+<ul>
+<li>浮点数（float number）:</li>
+</ul>
+<pre class="highlight"><code class="python">a = <span class="hljs-number">0.1</span>
+b = <span class="hljs-number">-0.001</span>
+print(type(a))
+print(a + b)
 </code></pre>
-<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
-<p>Runtime: 100.00%<br />
-Memory: 5.26%</p>
+<ul>
+<li>字符串（string）:</li>
+</ul>
+<pre class="highlight"><code class="python">a = <span class="hljs-string">"hello "</span>
+b = <span class="hljs-string">"world!"</span>
+print(a + b)
+</code></pre>
+<ul>
+<li>布尔值（boolean）:</li>
+</ul>
+<pre class="highlight"><code class="python">a = (<span class="hljs-number">1</span> == <span class="hljs-number">1</span>)
+b = (<span class="hljs-number">1</span> &gt; <span class="hljs-number">2</span>)
+print(a)
+print(b)
+print(a &amp; b)
+</code></pre>
+<ul>
+<li>空值（None）: 有时我们会遇到一些缺失的值，用0填充是不合适的，因为0是有含义的</li>
+</ul>
+<pre class="highlight"><code class="python">a = <span class="hljs-literal">None</span>
+</code></pre>
+<h2 id="数据结构"><a class="markdownIt-Anchor" href="#数据结构"></a> 数据结构</h2>
+<p>知道了python里面有哪些数据类型后，接下来了解一下这些数据可以存放的方式。</p>
+<h3 id="list数组"><a class="markdownIt-Anchor" href="#list数组"></a> List数组</h3>
+<p>这个容器不仅可以装一个数据，还可以装多个，在python叫list，index（坐标）从0开始。list可以装不同类型的数据，但是一般用法都是装类型一样的数据，因为便于后续的处理。</p>
+<pre class="highlight"><code class="python">a = [<span class="hljs-string">"Alice"</span>, <span class="hljs-string">"Bob"</span>, <span class="hljs-string">"Tom"</span>]
+print(type(a))
+print(a[<span class="hljs-number">0</span>])
+print(a[<span class="hljs-number">2</span>])
+print(a[<span class="hljs-number">-1</span>])
+</code></pre>
+<p>在已有的list后面添加新的元素：</p>
+<pre class="highlight"><code class="python">a = [<span class="hljs-string">"Alice"</span>, <span class="hljs-string">"Bob"</span>, <span class="hljs-string">"Tom"</span>]
+a.append(<span class="hljs-string">"Joe"</span>)
+print(a)
+print(len(a)) <span class="hljs-comment"># 查看list的长度</span>
+a.insert(<span class="hljs-number">1</span>, <span class="hljs-string">"Zoe"</span>)
+print(a)
+</code></pre>
+<p>上面是一维list，取值需要一个坐标，我们还可以定义多维list，比如：</p>
+<pre class="highlight"><code class="python">a = [[<span class="hljs-string">"a1"</span>, <span class="hljs-string">"a2"</span>, <span class="hljs-string">"a3"</span>], [<span class="hljs-string">"b1"</span>, <span class="hljs-string">"b2"</span>, <span class="hljs-string">"b3"</span>]]
+print(a[<span class="hljs-number">1</span>][<span class="hljs-number">2</span>])
+</code></pre>
+<h3 id="set集合"><a class="markdownIt-Anchor" href="#set集合"></a> Set集合</h3>
+<p>list是允许放重复的元素的，并且这些元素的顺序是保证的，可以被操作的。但是set集合里面的元素是没有重复的，存放的顺序也是不能规定的，用法可以以后碰到了在了解。基本操作：</p>
+<pre class="highlight"><code class="python">a = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">1</span>, <span class="hljs-number">4</span>]
+b = set(a)
+print(len(a))
+print(len(b))
+
+b.add(<span class="hljs-number">5</span>)
+print(len(b))
+
+b.remove(<span class="hljs-number">1</span>)
+print(len(b))
+</code></pre>
+<h3 id="dict字典"><a class="markdownIt-Anchor" href="#dict字典"></a> Dict字典</h3>
+<p>dict全称是dictionary，顾名思义，就是具有高效率的查找速度，其他语言中叫做map。是用键-值（key-value）储存。比如，如果要根据学生的姓名查找对应的成绩，如果用list实现，则需要两个list：</p>
+<pre class="highlight"><code class="python">names = [<span class="hljs-string">'Michael'</span>, <span class="hljs-string">'Bob'</span>, <span class="hljs-string">'Tracy'</span>]
+scores = [<span class="hljs-number">95</span>, <span class="hljs-number">75</span>, <span class="hljs-number">85</span>]
+</code></pre>
+<p>给定一个名字，想要知道他的成绩，就先要在names中找到对应的位置，再从scores里面取出对应的成绩，list越长，找的时间就越长。<br />
+如果能够把成绩和名字绑定起来，找到名字就找到成绩了，速度会快很多很多。</p>
+<pre class="highlight"><code class="python">d = {<span class="hljs-string">'Michael'</span>: <span class="hljs-number">95</span>, <span class="hljs-string">'Bob'</span>: <span class="hljs-number">75</span>, <span class="hljs-string">'Tracy'</span>: <span class="hljs-number">85</span>}
+print(d[<span class="hljs-string">'Michael'</span>])
+</code></pre>
+<p>所以啊，dict里面的key是不能重复的，如果添加的重复的，就会自动覆盖之前的value。如果key不存在，程序就会报错，所以在查找之前可以先检查一下key是否在dict里面：</p>
+<pre class="highlight"><code class="python">print(<span class="hljs-string">'Alice'</span> <span class="hljs-keyword">in</span> d)
+</code></pre>
+<h2 id="循环和条件判断"><a class="markdownIt-Anchor" href="#循环和条件判断"></a> 循环和条件判断</h2>
+<p>如果我们需要计算1+2+3+…+10，我们可以用code直接把所有数字写出来。但如果要算1+2+…+10000呢？写完全部的数字就不太愿意了。这时候我们就可以用循环来完成。首先需要生成循环所需的范围，也就是在什么范围里面循环。<code>range(start, end + 1)</code>函数可以生成从start到end的一组连续的数字，所以我们的代码可以这样写：</p>
+<pre class="highlight"><code class="python">sum = <span class="hljs-number">0</span>
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">1</span>, <span class="hljs-number">10001</span>):
+  sum = sum + i
+
+print(sum)
+</code></pre>
+<p>条件判断就是用if else语句完成，如果不是二分的条件，可以用elif来分出另外的条件，例如：</p>
+<pre class="highlight"><code class="python"><span class="hljs-comment"># 这段code不能执行，只是阐述结构</span>
+<span class="hljs-keyword">if</span> a <span class="hljs-keyword">is</span> blue:
+  ...
+<span class="hljs-keyword">elif</span> a <span class="hljs-keyword">is</span> red:
+  ...
+<span class="hljs-keyword">elif</span> a <span class="hljs-keyword">is</span> green:
+  ...
+<span class="hljs-keyword">else</span>:
+  ...
+</code></pre>
+<h2 id="函数定义与调用"><a class="markdownIt-Anchor" href="#函数定义与调用"></a> 函数定义与调用</h2>
+<p>我们在什么情况下需要用函数呢？<br />
+答：当某一段代码我们需要重复使用的时候。例如，当一个公司有少于1000个员工时，我们成它为小型公司（S）；如果超过1000不到5000，是中型公司（M）；如果超过5000人，是大型公司（L）。<br />
+也就是说，每次的input都是一个整数，表示着这个公司的员工数量，我们需要写一个程序来返回一个结果，S表示小公司，M表示中公司，L表示大公司。这时我们就需要定义一个函数来完成这些重复的工作。<br />
+函数定义的模板：</p>
+<pre class="highlight"><code class="python"><span class="hljs-comment"># func是函数的名字，尽量写得有含义一些，命名规则和变量命名规则一样，x和y是输入，数量不限</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">func</span><span class="hljs-params">(x, y)</span>:</span>
+  ...
+  <span class="hljs-keyword">return</span> ...
+</code></pre>
+<p>针对举的例子，我们的函数可以这样写：</p>
+<pre class="highlight"><code class="python"><span class="hljs-comment"># 定义函数</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">size_of_firm</span><span class="hljs-params">(num_employee)</span>:</span>
+  <span class="hljs-keyword">if</span> num_employee &lt;= <span class="hljs-number">1000</span>:
+    <span class="hljs-keyword">return</span> <span class="hljs-string">"S"</span>
+  <span class="hljs-keyword">elif</span> num_employee &lt;= <span class="hljs-number">5000</span>:
+    <span class="hljs-keyword">return</span> <span class="hljs-string">"M"</span>
+  <span class="hljs-keyword">else</span>:
+    <span class="hljs-keyword">return</span> <span class="hljs-string">"L"</span>
+
+<span class="hljs-comment"># 调用函数</span>
+print(size_of_firm(<span class="hljs-number">1500</span>))
+</code></pre>
 
       </div>
       
@@ -373,18 +453,12 @@ Memory: 5.26%</p>
     
       <div class="post-nav">
 
-  <div class="post-nav-prev post-nav-item">
-    <a href="/2020/02/13/Leetcode-1101-The-Earliest-Moment-When-Everyone-Become-Friends/">
-      上一篇:    1101. The Earliest Moment When Everyone Become Friends
-    </a>
-  </div>
-
 
 
   <div class="post-nav-next post-nav-item">
-    <a href="/2020/02/12/Leetcode-1120-Maximum-Average-Subtree/">
+    <a href="/2020/12/01/Python%E5%9F%BA%E7%A1%80-%E5%AE%89%E8%A3%85Jupyter_Notebook/">
       <span>
-        下一篇:    1120. Maximum Average Subtree 
+        下一篇:    0. 安装Python和Jupyter Notebook 
       </span>
     </a>
   </div>

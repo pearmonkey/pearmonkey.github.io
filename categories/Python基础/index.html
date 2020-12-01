@@ -290,6 +290,27 @@
     <article class="post" data-aos="fade-up">
       <div class="post-main">
           <div class="post-title">
+            <a class="post-title-link" href="/2020/12/01/Python%E5%9F%BA%E7%A1%80-%E5%8F%98%E9%87%8F%E4%B8%8E%E5%87%BD%E6%95%B0/">1. Python-变量与函数</a>
+          </div>
+          <div class="post-content">
+            <p>如果把计算机想成一个可以进行计算的机器人，那么编程语言就是给这个机器人下达命令的规则。生活和工作中也会经常遇到不同类型的数据，理解Python的变量类型是做数据处理和分析的前提。</p>
+          </div>
+      </div>
+
+      <div class="read-more">
+        <div class="post-time">
+          <i class="fa fa-clock-o" aria-hidden="true"></i>
+          <span>2020-12-01</span>
+        </div>
+        <a href="/2020/12/01/Python%E5%9F%BA%E7%A1%80-%E5%8F%98%E9%87%8F%E4%B8%8E%E5%87%BD%E6%95%B0/">
+          阅读更多
+        </a>
+      </div>
+    </article>
+    
+    <article class="post" data-aos="fade-up">
+      <div class="post-main">
+          <div class="post-title">
             <a class="post-title-link" href="/2020/12/01/Python%E5%9F%BA%E7%A1%80-%E5%AE%89%E8%A3%85Jupyter_Notebook/">0. 安装Python和Jupyter Notebook</a>
           </div>
           <div class="post-content">
@@ -380,53 +401,10 @@ $(document).ready(function(){
     })();
 </script>
 
-    
+
     <script type="text/javascript" size="100" alpha='0.4' zIndex="-1" src="/js/ribbon.min.js"></script>
     
 
-    
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/v-plugs-ayu/lib/ayu.css">
-<script src="https://cdn.jsdelivr.net/npm/v-plugs-ayu/lib/ayu.umd.min.js"></script>
-<div id="appCopy">
-</div>
-<script>
-  var vm = new Vue({
-    el: '#appCopy',
-    data: {
-    },
-    computed: {
-    },
-    mounted() {
-      const that = this;
-      //  监听 ctrl + c事件  
-      $(document).unbind('keypress').bind('keypress', function (e) {
-        if (e.ctrlKey && e.keyCode == 67) {
-          doSomething();
-          // 返回false, 防止重复触发copy事件  
-          return false;
-        }
-      })
-
-      // 鼠标右键的复制事件  
-      $(document).unbind('copy').bind('copy', function (e) {
-        doSomething();
-        // console.log('右键复制 监听成功');
-      });
-
-      function doSomething() {
-        that.$notify({
-          title: '成功',
-          content: '复制成功了哦',
-          type: 'success'
-        })
-        // console.log('ctrl + c 监听成功');  
-      }
-    },
-    methods: {
-    },
-    created() { }
-  })
-</script>
     
 
     <!-- 输入框打字特效 -->
@@ -439,7 +417,8 @@ $(document).ready(function(){
       </script>
     
 
-    <!-- markdown代码一键复制功能 -->
+    <!-- markdown代码一键复制功能
+    <!--
     <script src="/js/clipboard/clipboard.min.js"></script>
     <script>
       !function (e, t, a) {
@@ -460,7 +439,7 @@ $(document).ready(function(){
         initCopyCode();
       }(window, document);
     </script>
-  
+  -->
   <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
         tex2jax: {

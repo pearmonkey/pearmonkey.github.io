@@ -1,12 +1,12 @@
 /*! Color themes for Google Code Prettify | MIT License | github.com/jmblog/color-themes-for-google-code-prettify */
 .prettyprint {
-  background: #1d1f21;
+  background: #ebecef;
   font-family: Menlo, "Bitstream Vera Sans Mono", "DejaVu Sans Mono", Monaco, Consolas, monospace;
   border: 0 !important;
 }
 
 .pln {
-  color: #f6fcf1;
+  color: #000000;
 }
 
 /* Specify class=linenums on a pre to get line numbering */
@@ -14,7 +14,7 @@ ol.linenums {
   margin-left: 10px !important;
   margin-top: 0;
   margin-bottom: 0;
-  color: #969896;
+  color: #8c8c92;
 }
 
 li.L0,
@@ -27,7 +27,6 @@ li.L6,
 li.L7,
 li.L8,
 li.L9 {
-  background-color: #1d1f21;
   list-style-type: decimal;
 }
 
@@ -36,13 +35,13 @@ li.L9 {
   /* string content */
 
   .str {
-    color: #f7dd22;
+    color: #f30202;
   }
 
   /* keyword */
 
   .kwd {
-    color: #e33575;
+    color: #049508;
   }
 
   /* comment */
@@ -60,13 +59,13 @@ li.L9 {
   /* literal value */
 
   .lit {
-    color: #d755f7;
+    color: #049508;
   }
 
   /* punctuation */
 
   .pun {
-    color: #c5c8c6;
+    color: #000000;
   }
 
   /* lisp open bracket */

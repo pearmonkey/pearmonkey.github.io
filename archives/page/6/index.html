@@ -292,6 +292,12 @@
     
     <li class="post-item" data-aos="fade-left">
       <span class="post-date">2020-02-08</span>
+      <a class="post-title" href="/2020/02/08/Leetcode-231-Power-of-Two/">231. Power of Two</a>
+    </li>
+  
+    
+    <li class="post-item" data-aos="fade-left">
+      <span class="post-date">2020-02-08</span>
       <a class="post-title" href="/2020/02/08/Leetcode-671-Second-Minimum-Node-In-a-Binary-Tree/">671. Second Minimum Node In a Binary Tree</a>
     </li>
   
@@ -341,12 +347,6 @@
     <li class="post-item" data-aos="fade-left">
       <span class="post-date">2020-02-06</span>
       <a class="post-title" href="/2020/02/06/Leetcode-1170-Compare-Strings-by-Frequency-of-the-Smallest-Character/">1170. Compare Strings by Frequency of the Smallest Character</a>
-    </li>
-  
-    
-    <li class="post-item" data-aos="fade-left">
-      <span class="post-date">2020-02-06</span>
-      <a class="post-title" href="/2020/02/06/Leetcode-696-Count-Binary-Substrings/">696. Count Binary Substrings</a>
     </li>
   
 </ul>
@@ -426,53 +426,10 @@ $(document).ready(function(){
     })();
 </script>
 
-    
+
     <script type="text/javascript" size="100" alpha='0.4' zIndex="-1" src="/js/ribbon.min.js"></script>
     
 
-    
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/v-plugs-ayu/lib/ayu.css">
-<script src="https://cdn.jsdelivr.net/npm/v-plugs-ayu/lib/ayu.umd.min.js"></script>
-<div id="appCopy">
-</div>
-<script>
-  var vm = new Vue({
-    el: '#appCopy',
-    data: {
-    },
-    computed: {
-    },
-    mounted() {
-      const that = this;
-      //  监听 ctrl + c事件  
-      $(document).unbind('keypress').bind('keypress', function (e) {
-        if (e.ctrlKey && e.keyCode == 67) {
-          doSomething();
-          // 返回false, 防止重复触发copy事件  
-          return false;
-        }
-      })
-
-      // 鼠标右键的复制事件  
-      $(document).unbind('copy').bind('copy', function (e) {
-        doSomething();
-        // console.log('右键复制 监听成功');
-      });
-
-      function doSomething() {
-        that.$notify({
-          title: '成功',
-          content: '复制成功了哦',
-          type: 'success'
-        })
-        // console.log('ctrl + c 监听成功');  
-      }
-    },
-    methods: {
-    },
-    created() { }
-  })
-</script>
     
 
     <!-- 输入框打字特效 -->
@@ -485,7 +442,8 @@ $(document).ready(function(){
       </script>
     
 
-    <!-- markdown代码一键复制功能 -->
+    <!-- markdown代码一键复制功能
+    <!--
     <script src="/js/clipboard/clipboard.min.js"></script>
     <script>
       !function (e, t, a) {
@@ -506,7 +464,7 @@ $(document).ready(function(){
         initCopyCode();
       }(window, document);
     </script>
-  
+  -->
   <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
         tex2jax: {
