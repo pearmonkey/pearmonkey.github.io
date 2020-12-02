@@ -400,6 +400,10 @@ scores = [<span class="hljs-number">95</span>, <span class="hljs-number">75</spa
 <pre class="highlight"><code class="python">d = {<span class="hljs-string">'Michael'</span>: <span class="hljs-number">95</span>, <span class="hljs-string">'Bob'</span>: <span class="hljs-number">75</span>, <span class="hljs-string">'Tracy'</span>: <span class="hljs-number">85</span>}
 print(d[<span class="hljs-string">'Michael'</span>])
 </code></pre>
+<p>如果想要有更多的属性，可以继续嵌套：</p>
+<pre class="highlight"><code class="python">d = {<span class="hljs-string">'Michael'</span>: {<span class="hljs-string">'score'</span>: <span class="hljs-number">95</span>, <span class="hljs-string">'age'</span>: <span class="hljs-number">27</span>}, <span class="hljs-string">'Bob'</span>: {<span class="hljs-string">'score'</span>: <span class="hljs-number">85</span>, <span class="hljs-string">'age'</span>: <span class="hljs-number">25</span>}, <span class="hljs-string">'Tracy'</span>: {<span class="hljs-string">'score'</span>: <span class="hljs-number">75</span>}, <span class="hljs-string">'age'</span>: <span class="hljs-number">29</span>}
+print(d[<span class="hljs-string">'Michael'</span>][<span class="hljs-string">'score'</span>])
+</code></pre>
 <p>所以啊，dict里面的key是不能重复的，如果添加的重复的，就会自动覆盖之前的value。如果key不存在，程序就会报错，所以在查找之前可以先检查一下key是否在dict里面：</p>
 <pre class="highlight"><code class="python">print(<span class="hljs-string">'Alice'</span> <span class="hljs-keyword">in</span> d)
 </code></pre>
