@@ -398,10 +398,18 @@ print(b)
 a = [<span class="hljs-number">10</span>, <span class="hljs-number">12</span>, <span class="hljs-number">5</span>, <span class="hljs-number">7</span>]
 b = [x <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> a <span class="hljs-keyword">if</span> x % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>]
 print(b)
+
+<span class="hljs-comment"># 如果有else，if else需要在for前面，如果没有，if需要在for的后面</span>
+a = [<span class="hljs-number">10</span>, <span class="hljs-number">12</span>, <span class="hljs-number">5</span>, <span class="hljs-number">7</span>]
+b = [<span class="hljs-string">"even"</span> <span class="hljs-keyword">if</span> x % <span class="hljs-number">2</span> == <span class="hljs-number">0</span> <span class="hljs-keyword">else</span> <span class="hljs-string">"odd"</span> <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> a]
+print(a, b)
 </code></pre>
 <p><em>小测验：用一行for loop语句输出a和b的交集</em></p>
 <pre class="highlight"><code class="python">a = [<span class="hljs-number">1</span>, <span class="hljs-number">4</span>, <span class="hljs-number">2</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>]
 b = [<span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">7</span>, <span class="hljs-number">9</span>]
+
+<span class="hljs-comment"># 答案</span>
+print([x <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> a <span class="hljs-keyword">if</span> x <span class="hljs-keyword">in</span> b])
 </code></pre>
 <h2 id="循环语句"><a class="markdownIt-Anchor" href="#循环语句"></a> 循环语句</h2>
 <p>break和continue的使用</p>
@@ -436,8 +444,17 @@ print(a, b, <span class="hljs-string">"hello world!"</span>, sep = <span class="
 <span class="hljs-number">8</span>*<span class="hljs-number">8</span>=<span class="hljs-number">64</span>
 <span class="hljs-number">9</span>*<span class="hljs-number">9</span>=<span class="hljs-number">81</span>
 </code></pre>
+<p>答案</p>
+<pre class="highlight"><code class="python"><span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> range(<span class="hljs-number">1</span>, <span class="hljs-number">10</span>):
+    print(a, <span class="hljs-string">'*'</span>, a, <span class="hljs-string">'='</span>, a * a, sep = <span class="hljs-string">''</span>)
+</code></pre>
 <p><em>小测验2：用for loop和print打印出</em></p>
 <pre class="highlight"><code class="python"><span class="hljs-number">1</span>*<span class="hljs-number">1</span>=<span class="hljs-number">1</span>	<span class="hljs-number">1</span>*<span class="hljs-number">2</span>=<span class="hljs-number">2</span>	<span class="hljs-number">1</span>*<span class="hljs-number">3</span>=<span class="hljs-number">3</span>	<span class="hljs-number">1</span>*<span class="hljs-number">4</span>=<span class="hljs-number">4</span>	<span class="hljs-number">1</span>*<span class="hljs-number">5</span>=<span class="hljs-number">5</span>	<span class="hljs-number">1</span>*<span class="hljs-number">6</span>=<span class="hljs-number">6</span>	<span class="hljs-number">1</span>*<span class="hljs-number">7</span>=<span class="hljs-number">7</span>	<span class="hljs-number">1</span>*<span class="hljs-number">8</span>=<span class="hljs-number">8</span>	<span class="hljs-number">1</span>*<span class="hljs-number">9</span>=<span class="hljs-number">9</span>
+</code></pre>
+<p>答案</p>
+<pre class="highlight"><code class="python">a = <span class="hljs-number">1</span>
+<span class="hljs-keyword">for</span> b <span class="hljs-keyword">in</span> range(<span class="hljs-number">1</span>, <span class="hljs-number">10</span>):
+    print(a, <span class="hljs-string">'*'</span>, b, <span class="hljs-string">'='</span>, a * b, sep = <span class="hljs-string">''</span>, end = <span class="hljs-string">'\t'</span>)
 </code></pre>
 <p><em>小测验3：用for loop和print打印出</em></p>
 <pre class="highlight"><code class="python"><span class="hljs-number">1</span>*<span class="hljs-number">1</span>=<span class="hljs-number">1</span>	<span class="hljs-number">1</span>*<span class="hljs-number">2</span>=<span class="hljs-number">2</span>	<span class="hljs-number">1</span>*<span class="hljs-number">3</span>=<span class="hljs-number">3</span>	<span class="hljs-number">1</span>*<span class="hljs-number">4</span>=<span class="hljs-number">4</span>	<span class="hljs-number">1</span>*<span class="hljs-number">5</span>=<span class="hljs-number">5</span>	<span class="hljs-number">1</span>*<span class="hljs-number">6</span>=<span class="hljs-number">6</span>	<span class="hljs-number">1</span>*<span class="hljs-number">7</span>=<span class="hljs-number">7</span>	<span class="hljs-number">1</span>*<span class="hljs-number">8</span>=<span class="hljs-number">8</span>	<span class="hljs-number">1</span>*<span class="hljs-number">9</span>=<span class="hljs-number">9</span>
