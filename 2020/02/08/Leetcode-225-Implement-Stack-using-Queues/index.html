@@ -321,69 +321,78 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接-https-leetcode-com-problems-implement-stack-using-queues"><a href="#题目链接-https-leetcode-com-problems-implement-stack-using-queues" class="headerlink" title="题目链接 https://leetcode.com/problems/implement-stack-using-queues/"></a>题目链接 <a href="https://leetcode.com/problems/implement-stack-using-queues/" target="_blank" rel="noopener">https://leetcode.com/problems/implement-stack-using-queues/</a></h2><h2 id="题目难度-Easy-42-6"><a href="#题目难度-Easy-42-6" class="headerlink" title="题目难度 Easy 42.6%"></a>题目难度 Easy 42.6%</h2><a id="more"></a>
-<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Implement the following operations of a stack using queues.</p>
+        <h2 id="题目链接-httpsleetcodecomproblemsimplement-stack-using-queues"><a class="markdownIt-Anchor" href="#题目链接-httpsleetcodecomproblemsimplement-stack-using-queues"></a> 题目链接 <a href="https://leetcode.com/problems/implement-stack-using-queues/" target="_blank" rel="noopener">https://leetcode.com/problems/implement-stack-using-queues/</a></h2>
+<h2 id="题目难度-easy-426"><a class="markdownIt-Anchor" href="#题目难度-easy-426"></a> 题目难度 Easy 42.6%</h2>
+<a id="more"></a>
+<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
+<p>Implement the following operations of a stack using queues.</p>
 <ul>
-<li>push(x) — Push element x onto stack.</li>
-<li>pop() — Removes the element on top of the stack.</li>
-<li>top() — Get the top element.</li>
-<li>empty() — Return whether the stack is empty.</li>
+<li>push(x) – Push element x onto stack.</li>
+<li>pop() – Removes the element on top of the stack.</li>
+<li>top() – Get the top element.</li>
+<li>empty() – Return whether the stack is empty.</li>
 </ul>
 <p>Example 1:</p>
-<pre><code>MyStack stack = new MyStack();
+<pre class="highlight"><code class="">MyStack stack = new MyStack();
 
 stack.push(1);
 stack.push(2);
 stack.top();   // returns 2
 stack.pop();   // returns 2
 stack.empty(); // returns false
-</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>值得注意的地方是在导出来的时候不能用q.size()-1，因为在导的过程中q的size是在变化的。</p>
-<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre><code class="lang-java">class MyStack {
+</code></pre>
+<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
+<p>值得注意的地方是在导出来的时候不能用q.size()-1，因为在导的过程中q的size是在变化的。</p>
+<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
+<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyStack</span> </span>{
     Queue&lt;Integer&gt; q;
 
-    /** Initialize your data structure here. */
-    public MyStack() {
-        q = new LinkedList();
+    <span class="hljs-comment">/** Initialize your data structure here. */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MyStack</span><span class="hljs-params">()</span> </span>{
+        q = <span class="hljs-keyword">new</span> LinkedList();
     }
 
-    /** Push element x onto stack. */
-    public void push(int x) {
+    <span class="hljs-comment">/** Push element x onto stack. */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">push</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span> </span>{
         q.offer(x);
     }
 
-    /** Removes the element on top of the stack and returns that element. */
-    public int pop() {
-        Queue&lt;Integer&gt; aux = new LinkedList();
-        int size = q.size();
-        for(int i = 0; i &lt; size - 1; i++)
+    <span class="hljs-comment">/** Removes the element on top of the stack and returns that element. */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">pop</span><span class="hljs-params">()</span> </span>{
+        Queue&lt;Integer&gt; aux = <span class="hljs-keyword">new</span> LinkedList();
+        <span class="hljs-keyword">int</span> size = q.size();
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; size - <span class="hljs-number">1</span>; i++)
             aux.offer(q.poll());
-        int res = q.poll();
-        while(!aux.isEmpty())
+        <span class="hljs-keyword">int</span> res = q.poll();
+        <span class="hljs-keyword">while</span>(!aux.isEmpty())
             q.offer(aux.poll());
-        return res;
+        <span class="hljs-keyword">return</span> res;
     }
 
-    /** Get the top element. */
-    public int top() {
-        Queue&lt;Integer&gt; aux = new LinkedList();
-        int size = q.size();
-        for(int i = 0; i &lt; size - 1; i++){
+    <span class="hljs-comment">/** Get the top element. */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">top</span><span class="hljs-params">()</span> </span>{
+        Queue&lt;Integer&gt; aux = <span class="hljs-keyword">new</span> LinkedList();
+        <span class="hljs-keyword">int</span> size = q.size();
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; size - <span class="hljs-number">1</span>; i++){
             aux.offer(q.poll());
         }
-        int res = q.poll();
+        <span class="hljs-keyword">int</span> res = q.poll();
 
         aux.offer(res);
-        q = new LinkedList&lt;&gt;(aux);
-        return res;
+        q = <span class="hljs-keyword">new</span> LinkedList&lt;&gt;(aux);
+        <span class="hljs-keyword">return</span> res;
     }
 
-    /** Returns whether the stack is empty. */
-    public boolean empty() {
-        return q.size() == 0;
+    <span class="hljs-comment">/** Returns whether the stack is empty. */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">empty</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> q.size() == <span class="hljs-number">0</span>;
     }
 }
+
 </code></pre>
-<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 100.00%<br>Memory: 6.67%</p>
+<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
+<p>Runtime: 100.00%<br />
+Memory: 6.67%</p>
 
       </div>
       
