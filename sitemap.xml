@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://pearmonkey.com/2020/12/03/Python3-Numpy/</loc>
+    
+    <lastmod>2020-12-03T22:28:28.018Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://pearmonkey.com/2020/12/02/Python2-List-Loop/</loc>
     
     <lastmod>2020-12-03T03:20:35.797Z</lastmod>
