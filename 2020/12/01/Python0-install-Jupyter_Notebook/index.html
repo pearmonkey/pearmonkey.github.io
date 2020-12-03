@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html>
+  
+
+
+
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <link rel="stylesheet" href="/css/tomorrow-night.css" media="screen" type="text/css">
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+  <title>0. 安装Python和Jupyter Notebook | 雪梨猴的小站</title>
+  
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
+  <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/css/animate.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+
+  
+    <link rel="stylesheet" href="/js/fancybox/jquery.fancybox.min.css">
+  
+  
+  <style>
+        @media (max-width: 992px) {
+            #waifu {
+                display: none;
+            }
+        }
+    </style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+  <script src="/js/jquery3.5.1.js"></script>
+  <script src="/js/vue2.6.11.js"></script>
+  <body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="header bg-color"
+  style="position: fixed; 
+  left: 0; top: 0; z-index: 10;width: 100%;"
+>
+  <div class="header-content">
+    <div class="bars">
+      <div id="appDrawer" class="sidebar-image">
+  <i class="fa fa-bars" aria-hidden="true" @click="showDialogDrawer"></i>
+  <div class="drawer-box_mask" v-cloak style="display: none;" v-show="visible" @click.self="cancelDialogDrawer">
+  </div>
+  <div class="drawer-box" :class="{'active': visible}">
+    <div class="drawer-box-head bg-color">
+      <h3 class="drawer-box-head_title">雪梨猴的小站</h3>
+      <h5 class="drawer-box-head_desc"></h5>
+    </div>
+    <div class="drawer-box-content">
+      <ul class="drawer-box-content_menu">
+        
+          <li class="drawer-box-content_item">
+            <a href="/" class="menu-item-link">
+              
+                <i class="fa fa-home" aria-hidden="true"></i>
+              
+              <span>首页</span>
+            </a>
+          </li>
+        
+          <li class="drawer-box-content_item">
+            <a href="/archives" class="menu-item-link">
+              
+                <i class="fa fa-home" aria-hidden="true"></i>
+              
+              <span>归档</span>
+            </a>
+          </li>
+        
+          <li class="drawer-box-content_item">
+            <a href="/tags" class="menu-item-link">
+              
+                <i class="fa fa-tags" aria-hidden="true"></i>
+              
+              <span>标签</span>
+            </a>
+          </li>
+        
+          <li class="drawer-box-content_item">
+            <a href="/categories" class="menu-item-link">
+              
+                <i class="fa fa-bookmark" aria-hidden="true"></i>
+              
+              <span>分类</span>
+            </a>
+          </li>
+        
+          <li class="drawer-box-content_item">
+            <a href="/about" class="menu-item-link">
+              
+                <i class="fa fa-user" aria-hidden="true"></i>
+              
+              <span>关于</span>
+            </a>
+          </li>
+        
+          <li class="drawer-box-content_item">
+            <a href="/link" class="menu-item-link">
+              
+                <i class="fa fa-link" aria-hidden="true"></i>
+              
+              <span>常用</span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+  var body = document.body || document.documentElement || window;
+  var vm = new Vue({
+    el: '#appDrawer',
+    data: {
+      visible: false,
+      top: 0,
+    },
+    computed: {
+    },
+    mounted() {
+    },
+    methods: {
+      showDialogDrawer() {
+        this.visible = true;
+        // 防止页面滚动，只能让弹框滚动
+        this.top = $(document).scrollTop()
+        body.style.cssText = 'width: 100%; height: 100%; position: fixed; top: -' + this.top  + 'px; left: 0; overflow: hidden;';
+      },
+      cancelDialogDrawer() {
+        this.visible = false;
+        body.removeAttribute('style');
+        $(document).scrollTop(this.top)
+      }
+    },
+    created() {}
+  })
+</script>
+
+    </div>
+    <div class="blog-title" id="author-avatar">
+      <a href="/" class="logo">雪梨猴的小站</a>
+    </div>
+    <nav class="navbar">
+      <ul class="menu">
+        
+          <li class="menu-item">
+            <a href="/" class="menu-item-link">
+              
+                <i class="fa fa-home" aria-hidden="true"></i>
+              
+              <span>首页</span>
+            </a>
+          </li>
+        
+          <li class="menu-item">
+            <a href="/archives" class="menu-item-link">
+              
+                <i class="fa fa-archive" aria-hidden="true"></i>
+              
+              <span>归档</span>
+            </a>
+          </li>
+        
+          <li class="menu-item">
+            <a href="/tags" class="menu-item-link">
+              
+                <i class="fa fa-tags" aria-hidden="true"></i>
+              
+              <span>标签</span>
+            </a>
+          </li>
+        
+          <li class="menu-item">
+            <a href="/categories" class="menu-item-link">
+              
+                <i class="fa fa-bookmark" aria-hidden="true"></i>
+              
+              <span>分类</span>
+            </a>
+          </li>
+        
+          <li class="menu-item">
+            <a href="/about" class="menu-item-link">
+              
+                <i class="fa fa-user" aria-hidden="true"></i>
+              
+              <span>关于</span>
+            </a>
+          </li>
+        
+          <li class="menu-item">
+            <a href="/link" class="menu-item-link">
+              
+                <i class="fa fa-link" aria-hidden="true"></i>
+              
+              <span>常用</span>
+            </a>
+          </li>
+        
+      </ul>
+      
+        <div id="appSearch">
+  <div class="search"  @click="showDialog()"><i class="fa fa-search" aria-hidden="true"></i></div>
+  <div class="message-box_wrapper" style="display: none;" v-cloak v-show="dialogVisible" @click.self="cancelDialogVisible()">
+    <div class="message-box">
+      <h2>
+        <i class="fa fa-search" aria-hidden="true"></i>
+        <span class="title">搜索</span>
+      </h2>
+      <form class="site-search-form">
+        <input type="text"
+          placeholder="请输入关键字"
+          id="local-search-input" 
+          @click="getSearchFile()"
+          class="st-search-input"
+          v-model="searchInput"
+        />
+      </form>
+      <div class="result-wrapper">
+        <div id="local-search-result" class="local-search-result-cls"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/js/local_search.js"></script>
+<script>
+  var body = document.body || document.documentElement || window;
+  var vm = new Vue({
+    el: '#appSearch',
+    data: {
+      dialogVisible: false,
+      searchInput: '',
+      top: 0,
+    },
+    computed: {
+    },
+    mounted() {
+    },
+    methods: {
+      showDialog() {
+        this.dialogVisible = true;
+        // 防止页面滚动，只能让弹框滚动
+        this.top = $(document).scrollTop()
+        body.style.cssText = 'width: 100%; height: 100%; position: fixed; top: -' + this.top  + 'px; left: 0; overflow: hidden;';
+      },
+      getSearchFile() {
+        if (!this.searchInput) {
+          getSearchFile();
+        }
+      },
+      cancelDialogVisible() {
+        this.dialogVisible = false;
+        body.removeAttribute('style');
+        $(document).scrollTop(this.top)
+      },
+    },
+    created() {}
+  })
+</script>
+<!-- 解决刷新页面闪烁问题，可以在元素上添加display: none, 或者用vue.extend方法，详情：https://blog.csdn.net/qq_31393401/article/details/81017912 -->
+<!-- 下面是搜索基本写法 -->
+<!-- <script type="text/javascript" id="local.search.active">
+  var inputArea = document.querySelector("#local-search-input");
+  inputArea.onclick   = function(){ getSearchFile(); this.onclick = null }
+  inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
+</script> -->
+
+      
+    </nav>
+  </div>
+</header>
+
+    <main class="main" style="margin-top: 60px;">
+      
+
+<div class="row justify-center">
+  <div class="main-content">
+    <article class="post post-detail">
+      
+        <div class="post-title">
+          0. 安装Python和Jupyter Notebook
+        </div>
+      
+
+      <div class="post-meta">
+
+      
+        Sherry
+        <h>|</h>
+      
+
+      
+        <span class="post-time">2020-12-01</span>
+        <h>|</h>
+      
+
+        
+          
+            <a href="/categories/Python/" class="">
+              Python
+            </a>
+          
+          <h>|</h>
+        
+
+        
+      </div>
+      <div class="post-content">
+        <p>使用Python有两种方法，一种是把所有的code都写在一个后缀名为.py文件里面，然后统一运行，这种方式适用于提交已经debug好的code到远程服务器运行；另一种是用Jupyter Notebook写一行code运行一行，方便随时查看中间结果，有问题即使解决。所以在开始学习Python的时候，强烈推荐用第二种写一行运行一行的模式。在这里介绍一下如何安装Jupyter Notebook。<br><a id="more"></a><br>（不需要提前给电脑安装Python）</p>
+<h2 id="下载Miniconda"><a href="#下载Miniconda" class="headerlink" title="下载Miniconda"></a>下载Miniconda</h2><p>无论是Windows还是MaxOS，都推荐用Conda来安装Jupyter，所以先下载一个<a href="https://docs.conda.io/en/latest/miniconda.html" target="_blank" rel="noopener">Miniconda</a>。Python2已经停止Maintain了，所以我们统一用Python3.8吧。我选择下载的是<strong>Miniconda3 Windows 64-bit</strong>，下载到桌面就行，因为安装后可以删掉。安装Miniconda时就一直点continue就行，不用修改任何地方。安装大概需要一分钟。</p>
+<h2 id="安装Jupyter"><a href="#安装Jupyter" class="headerlink" title="安装Jupyter"></a>安装Jupyter</h2><p>如果你时Win10的系统，在左下角的搜索框里输入anaconda，点击<strong>Anaconda Prompt (miniconda3)</strong>，会弹出黑色的命令行框，输入<code>conda install -c conda-forge notebook</code>，按回车，等待安装，出现需要输入Y/N，输入Y再回车。安装完后，输入<code>jupyter notebook</code>再回车，这时候你会发现浏览器打开了一个网页，这就是安装成功啦~~~</p>
+<h2 id="运行Python"><a href="#运行Python" class="headerlink" title="运行Python"></a>运行Python</h2><p>黑色的命令行框，也叫cmd（全称时command），就是一个<strong>服务器</strong>；Jupyter自动打开的网页，相当于一个<strong>客户端</strong>，我们是通过这个网页来让服务器运行我们的代码。所以，在网页运行程序的时候，我们要保持服务器（cmd）开着，可以最小化。当我们结束了之后，就可以关闭cmd了。</p>
+<p>在Jupyter打开的网页中，能看到电脑的各个文件夹，我们可以先新建一个folder用于储存代码（在桌面或者文件夹里完成），再从网页中进入这个folder，然后点击右上角的new button，选择Python3，这样就建好了一个notebook，就可以开始写代码了。</p>
+<h2 id="安装package"><a href="#安装package" class="headerlink" title="安装package"></a>安装package</h2><p>如果需要安装package（我们会需要安装pandas和numpy），在左下角的搜索框里输入anaconda，点击<strong>Anaconda Prompt (miniconda3)</strong>，会弹出cmd，输入<code>conda install pandas</code>或者<code>conda install numpy</code>，按回车后等待安装。安装完后，在jupyter点击restart，就可以写<code>import pandas</code>导入刚刚安装的package啦~</p>
+
+      </div>
+      
+    </article>
+    <!-- 上一篇文章和下一篇文章 -->
+    
+      <div class="post-nav">
+
+  <div class="post-nav-prev post-nav-item">
+    <a href="/2020/12/01/Python1-variables-function/">
+      上一篇:    1. Python-变量与函数
+    </a>
+  </div>
+
+
+
+  <div class="post-nav-next post-nav-item">
+    <a href="/2020/11/15/Find-Drawdowns/">
+      <span>
+        下一篇:    R Code | Find Drawdowns 
+      </span>
+    </a>
+  </div>
+
+</div>
+
+    
+
+
+    <!-- 打赏 -->
+    
+
+    <!-- 分享 -->
+    
+
+    <!-- 评论 -->
+      
+        
+          <section id="comments" style="padding: 1em; background: rgba(255, 255, 255, 0.5); margin: 15px auto;" data-aos="fade-up">
+	<div id="vcomment" class="comment"></div>
+	<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js"></script>
+	<script>
+		new Valine({
+			el: '#vcomment',
+			notify: false,
+			verify: false,
+			app_id: "JeKrrf8cKxqcE2RM1Prfurdo-gzGzoHsz",
+			app_key: "49yq63vrEbnLYo5MwEG2Ktao",
+			placeholder: "",
+			avatar: ""
+		});
+	</script>
+</section>
+
+        
+      
+  </div>
+
+
+
+  
+    <div class="toc-aside">
+      <div class="toc-main">
+        <div class="toc-aside-title">
+          <i class="fa fa-list-ul" aria-hidden="true"></i><span>目录</span>
+        </div>
+        <div class="toc-content">
+          <link href="/js/tocbot/tocbot.css" rel="stylesheet">
+<script src="/js/tocbot/tocbot.min.js"></script>
+<div class="toc"></div>
+
+<script>
+  if ($('.toc').length > 0) {
+    var headerEl = 'h2, h3, h4',  //headers 
+      content = '.post-detail',//文章容器
+      idArr = {};  //标题数组以确定是否增加索引id
+      //add #id
+
+    $(content).children(headerEl).each(function () {
+      //去除空格以及多余标点
+      var headerId = $(this).text().replace(/[\s|\~|`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\_|\+|\=|\||\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?|\：|\，|\。]/g, '');
+
+      headerId = headerId.toLowerCase();
+      if (idArr[headerId]) {
+        //id已经存在
+        $(this).attr('id', headerId + '-' + idArr[headerId]);
+        idArr[headerId]++;
+      }
+      else {
+        //id未存在
+        idArr[headerId] = 1;
+        $(this).attr('id', headerId);
+      }
+    });
+
+    tocbot.init({
+      // Where to render the table of contents.
+      tocSelector: '.toc',
+      // Where to grab the headings to build the table of contents.
+      contentSelector: content,
+      // Which headings to grab inside of the contentSelector element.
+      headingSelector: headerEl,
+      scrollSmooth: true,
+      scrollSmoothOffset: -80,
+      headingsOffset: 130,
+      positionFixedSelector: '.toc-main',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  }
+
+</script>
+
+<style>
+.is-position-fixed {
+  position:fixed !important;
+  top: 64px;
+}
+
+</style>
+        </div>
+      </div>
+    </div>
+  
+</div>
+
+    </main>
+    <script src="/js/prettify.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+ $('pre').addClass('prettyprint linenums');
+ $('code').addClass('prettyprint');
+ prettyPrint();
+ })
+</script>
+
+<div class="footer bg-color">
+  <div class="footer-main">
+    <div class="link">
+      <a href="mailto:pearmonkeyhou@gmail.com" target="_blank" rel="noopener">
+        <i class="fa fa-envelope-o" aria-hidden="true"></i>
+      </a>
+      <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=270052740" target="_blank" rel="noopener">
+        <i class="fa fa-qq" aria-hidden="true"></i>
+      </a>
+      <a href="/atom.xml" target="_blank">
+        <i class="fa fa-rss" aria-hidden="true"></i>
+      </a>
+    </div>
+    <div class="footer-copyright">
+      Copyright © 2019 - 2021 | 雪梨猴 | Powered by <a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">Hexo</a>
+    </div>
+    
+  </div>
+</div>
+
+
+    
+      <div class="goTop bg-color">
+  <i class="fa fa-arrow-up" aria-hidden="true"></i>
+</div>
+<script src="/js/goTop.js"></script>
+    
+
+    
+
+    <!-- 图片放大 -->
+    
+      <script src="/js/fancybox/jquery.fancybox.min.js"></script>
+<script src="/js/wrapImage.js"></script>
+    
+
+    <!-- 爱心点击 -->
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+
+    <script type="text/javascript" size="100" alpha='0.4' zIndex="-1" src="/js/ribbon.min.js"></script>
+    
+
+    
+
+    <!-- 输入框打字特效 -->
+    
+      <script src="/js/activate-power-mode.js"></script>
+      <script>
+          POWERMODE.colorful = true;  // 打开随机颜色特效
+          POWERMODE.shake = false;    // 关闭输入框抖动
+          document.body.addEventListener('input', POWERMODE);//监听打字事件
+      </script>
+    
+
+    <!-- markdown代码一键复制功能
+    <!--
+    <script src="/js/clipboard/clipboard.min.js"></script>
+    <script>
+      !function (e, t, a) {
+        var copy = '复制';
+        /* code */
+        var initCopyCode = function(){
+          var copyHtml = '';
+          copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+          copyHtml += '<i class="fa fa-globe"></i><span>' + copy + '</span>';
+          copyHtml += '</button>';
+          $(".post-detail pre code").before(copyHtml);
+          new ClipboardJS('.btn-copy', {
+              target: function(trigger) {
+                  return trigger.nextElementSibling;
+              }
+          });
+        }
+        initCopyCode();
+      }(window, document);
+    </script>
+  -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</body>
+</html>

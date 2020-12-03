@@ -317,48 +317,37 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接-httpsleetcodecomproblemsbulls-and-cows"><a class="markdownIt-Anchor" href="#题目链接-httpsleetcodecomproblemsbulls-and-cows"></a> 题目链接 <a href="https://leetcode.com/problems/bulls-and-cows/" target="_blank" rel="noopener">https://leetcode.com/problems/bulls-and-cows/</a></h2>
-<h2 id="题目难度-easy-413"><a class="markdownIt-Anchor" href="#题目难度-easy-413"></a> 题目难度 Easy 41.3%</h2>
-<a id="more"></a>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<p>You are playing the following Bulls and Cows game with your friend: You write down a number and ask your friend to guess what the number is. Each time your friend makes a guess, you provide a hint that indicates how many digits in said guess match your secret number exactly in both digit and position (called “bulls”) and how many digits match the secret number but locate in the wrong position (called “cows”). Your friend will use successive guesses and hints to eventually derive the secret number.<br />
-Write a function to return a hint according to the secret number and friend’s guess, use A to indicate the bulls and B to indicate the cows.<br />
-Please note that both secret number and friend’s guess may contain duplicate digits.<br />
-Example 1:</p>
-<pre class="highlight"><code class="">Input: secret = &quot;1123&quot;, guess = &quot;0111&quot;
+        <h2 id="题目链接-https-leetcode-com-problems-bulls-and-cows"><a href="#题目链接-https-leetcode-com-problems-bulls-and-cows" class="headerlink" title="题目链接 https://leetcode.com/problems/bulls-and-cows/"></a>题目链接 <a href="https://leetcode.com/problems/bulls-and-cows/" target="_blank" rel="noopener">https://leetcode.com/problems/bulls-and-cows/</a></h2><h2 id="题目难度-Easy-41-3"><a href="#题目难度-Easy-41-3" class="headerlink" title="题目难度 Easy 41.3%"></a>题目难度 Easy 41.3%</h2><a id="more"></a>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>You are playing the following Bulls and Cows game with your friend: You write down a number and ask your friend to guess what the number is. Each time your friend makes a guess, you provide a hint that indicates how many digits in said guess match your secret number exactly in both digit and position (called “bulls”) and how many digits match the secret number but locate in the wrong position (called “cows”). Your friend will use successive guesses and hints to eventually derive the secret number.<br>Write a function to return a hint according to the secret number and friend’s guess, use A to indicate the bulls and B to indicate the cows.<br>Please note that both secret number and friend’s guess may contain duplicate digits.<br>Example 1:</p>
+<pre><code>Input: secret = &quot;1123&quot;, guess = &quot;0111&quot;
 
 Output: &quot;1A1B&quot;
 
-Explanation: The 1st 1 in friend's guess is a bull, the 2nd or 3rd 1 is a cow.
-</code></pre>
-<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
-<p>其实就是count每个字符的频率。如果对应着出现的，就直接增加A，否则就记录下来。然后再比较count。</p>
-<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
-<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
-    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getHint</span><span class="hljs-params">(String secret, String guess)</span> </span>{
-        <span class="hljs-keyword">int</span>[] s = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">10</span>];
-        <span class="hljs-keyword">int</span>[] g = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">10</span>];
-        <span class="hljs-keyword">int</span> A = <span class="hljs-number">0</span>, B = <span class="hljs-number">0</span>;
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; secret.length(); i++){
-            <span class="hljs-keyword">int</span> s_int = secret.charAt(i) - <span class="hljs-string">'0'</span>;
-            <span class="hljs-keyword">int</span> g_int = guess.charAt(i) - <span class="hljs-string">'0'</span>;
-            <span class="hljs-keyword">if</span>(s_int == g_int)
+Explanation: The 1st 1 in friend&#39;s guess is a bull, the 2nd or 3rd 1 is a cow.
+</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>其实就是count每个字符的频率。如果对应着出现的，就直接增加A，否则就记录下来。然后再比较count。</p>
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre><code class="lang-java">class Solution {
+    public String getHint(String secret, String guess) {
+        int[] s = new int[10];
+        int[] g = new int[10];
+        int A = 0, B = 0;
+        for(int i = 0; i &lt; secret.length(); i++){
+            int s_int = secret.charAt(i) - &#39;0&#39;;
+            int g_int = guess.charAt(i) - &#39;0&#39;;
+            if(s_int == g_int)
                 A++;
-            <span class="hljs-keyword">else</span>{
+            else{
                 s[s_int]++;
                 g[g_int]++;
             }
         }
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++){
+        for(int i = 0; i &lt; 10; i++){
             B += Math.min(s[i], g[i]);
         }
-        <span class="hljs-keyword">return</span> String.valueOf(A) + <span class="hljs-string">"A"</span> + String.valueOf(B) + <span class="hljs-string">"B"</span>;
+        return String.valueOf(A) + &quot;A&quot; + String.valueOf(B) + &quot;B&quot;;
     }
 }
 </code></pre>
-<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
-<p>Runtime: 51.43%<br />
-Memory: 55.26%</p>
+<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 51.43%<br>Memory: 55.26%</p>
 
       </div>
       

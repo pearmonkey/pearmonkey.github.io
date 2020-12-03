@@ -2,16 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://pearmonkey.com/2020/12/01/Python%E5%9F%BA%E7%A1%80-%E5%AE%89%E8%A3%85Jupyter_Notebook/</loc>
+    <loc>http://pearmonkey.com/2020/12/02/Python2-List-Loop/</loc>
     
-    <lastmod>2020-12-02T03:02:36.970Z</lastmod>
+    <lastmod>2020-12-02T23:56:41.637Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://pearmonkey.com/2020/12/01/Python%E5%9F%BA%E7%A1%80-%E5%8F%98%E9%87%8F%E4%B8%8E%E5%87%BD%E6%95%B0/</loc>
+    <loc>http://pearmonkey.com/2020/12/01/Python0-install-Jupyter_Notebook/</loc>
     
-    <lastmod>2020-12-02T02:58:30.451Z</lastmod>
+    <lastmod>2020-12-02T15:16:26.511Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://pearmonkey.com/2020/12/01/Python1-variables-function/</loc>
+    
+    <lastmod>2020-12-02T15:16:23.096Z</lastmod>
     
   </url>
   

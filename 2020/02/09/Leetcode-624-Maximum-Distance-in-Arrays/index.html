@@ -317,39 +317,31 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接-httpsleetcodecomproblemsmaximum-distance-in-arrays"><a class="markdownIt-Anchor" href="#题目链接-httpsleetcodecomproblemsmaximum-distance-in-arrays"></a> 题目链接 <a href="https://leetcode.com/problems/maximum-distance-in-arrays/" target="_blank" rel="noopener">https://leetcode.com/problems/maximum-distance-in-arrays/</a></h2>
-<h2 id="题目难度-easy-384"><a class="markdownIt-Anchor" href="#题目难度-easy-384"></a> 题目难度 Easy 38.4%</h2>
-<a id="more"></a>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<p>Given m arrays, and each array is sorted in ascending order. Now you can pick up two integers from two different arrays (each array picks one) and calculate the distance. We define the distance between two integers a and b to be their absolute difference |a-b|. Your task is to find the maximum distance.</p>
+        <h2 id="题目链接-https-leetcode-com-problems-maximum-distance-in-arrays"><a href="#题目链接-https-leetcode-com-problems-maximum-distance-in-arrays" class="headerlink" title="题目链接 https://leetcode.com/problems/maximum-distance-in-arrays/"></a>题目链接 <a href="https://leetcode.com/problems/maximum-distance-in-arrays/" target="_blank" rel="noopener">https://leetcode.com/problems/maximum-distance-in-arrays/</a></h2><h2 id="题目难度-Easy-38-4"><a href="#题目难度-Easy-38-4" class="headerlink" title="题目难度 Easy 38.4%"></a>题目难度 Easy 38.4%</h2><a id="more"></a>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Given m arrays, and each array is sorted in ascending order. Now you can pick up two integers from two different arrays (each array picks one) and calculate the distance. We define the distance between two integers a and b to be their absolute difference |a-b|. Your task is to find the maximum distance.</p>
 <p>Example 1:</p>
-<pre class="highlight"><code class="">Input:
+<pre><code>Input:
 [[1,2,3],
  [4,5],
  [1,2,3]]
 Output: 4
 Explanation:
 One way to reach the maximum distance 4 is to pick 1 in the first or third array and pick 5 in the second array.
-</code></pre>
-<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
-<p>题目给定一系列的sorted array，distance定义为来自两个不同array的元素最大的差的绝对值。一开始拿到这道题，竟然无从下手。看了答案之后，才知道其实就是按照逻辑想就行，既然是sorted array，与最大差值有关，就只需要每个array考虑开头和结尾，每轮到一个array，就更新results和最小值和最大值，这样就避免了同一个array的两个值组成结果。这里应该就是这道题的难点，不能从同一个array中取两个数。</p>
-<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
-<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">maxDistance</span><span class="hljs-params">(List&lt;List&lt;Integer&gt;&gt; arrays)</span> </span>{
-        <span class="hljs-keyword">int</span> res = <span class="hljs-number">0</span>, min_val = arrays.get(<span class="hljs-number">0</span>).get(<span class="hljs-number">0</span>), max_val = arrays.get(<span class="hljs-number">0</span>).get(arrays.get(<span class="hljs-number">0</span>).size() - <span class="hljs-number">1</span>);
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; arrays.size(); i++){
-            res = Math.max(res, Math.max(Math.abs(arrays.get(i).get(<span class="hljs-number">0</span>) - max_val),
-                  Math.abs(arrays.get(i).get(arrays.get(i).size() - <span class="hljs-number">1</span>) - min_val)));
-            min_val = Math.min(min_val, arrays.get(i).get(<span class="hljs-number">0</span>));
-            max_val = Math.max(max_val, arrays.get(i).get(arrays.get(i).size() - <span class="hljs-number">1</span>));
+</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>题目给定一系列的sorted array，distance定义为来自两个不同array的元素最大的差的绝对值。一开始拿到这道题，竟然无从下手。看了答案之后，才知道其实就是按照逻辑想就行，既然是sorted array，与最大差值有关，就只需要每个array考虑开头和结尾，每轮到一个array，就更新results和最小值和最大值，这样就避免了同一个array的两个值组成结果。这里应该就是这道题的难点，不能从同一个array中取两个数。</p>
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre><code class="lang-java">class Solution {
+    public int maxDistance(List&lt;List&lt;Integer&gt;&gt; arrays) {
+        int res = 0, min_val = arrays.get(0).get(0), max_val = arrays.get(0).get(arrays.get(0).size() - 1);
+        for(int i = 1; i &lt; arrays.size(); i++){
+            res = Math.max(res, Math.max(Math.abs(arrays.get(i).get(0) - max_val),
+                  Math.abs(arrays.get(i).get(arrays.get(i).size() - 1) - min_val)));
+            min_val = Math.min(min_val, arrays.get(i).get(0));
+            max_val = Math.max(max_val, arrays.get(i).get(arrays.get(i).size() - 1));
         }
-        <span class="hljs-keyword">return</span> res;
+        return res;
     }
 }
 </code></pre>
-<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
-<p>Runtime: 72.08%<br />
-Memory: 100.00%</p>
+<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 72.08%<br>Memory: 100.00%</p>
 
       </div>
       
