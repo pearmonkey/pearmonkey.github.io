@@ -12,7 +12,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>3. Python-Numpy包的介绍 | 雪梨猴的小站</title>
+  <title>4. Python-Pandas介绍 | 雪梨猴的小站</title>
   
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -279,50 +279,13 @@
 
     <main class="main" style="margin-top: 60px;">
       
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        "HTML-CSS": {
-            preferredFont: "TeX",
-            availableFonts: ["STIX","TeX"],
-            linebreaks: { automatic:true },
-            EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
-        },
-        tex2jax: {
-            inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
-            processEscapes: true,
-            ignoreClass: "tex2jax_ignore|dno",
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        },
-        TeX: {
-            equationNumbers: { autoNumber: "AMS" }, <!-- 2017.6.30，masikkk新增，MathJax公式添加编号支持 -->
-            noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
-            Macros: { href: "{}" }
-        },
-      messageStyle: "none"
-    });
-</script>
-<!-- 给MathJax元素添加has-jax class -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for(i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-<!-- 通过连接CDN加载MathJax的js代码 -->
-<script type="text/javascript" async
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
-
-
 
 <div class="row justify-center">
   <div class="main-content">
     <article class="post post-detail">
       
         <div class="post-title">
-          3. Python-Numpy包的介绍
+          4. Python-Pandas介绍
         </div>
       
 
@@ -334,7 +297,7 @@
       
 
       
-        <span class="post-time">2020-12-03</span>
+        <span class="post-time">2020-12-06</span>
         <h>|</h>
       
 
@@ -350,133 +313,181 @@
         
       </div>
       <div class="post-content">
-        <p>Numpy（Numerical Python的简称）是高性能科学计算和数据分析的基础包。Numpy本身没有提供多么高级的数据分析功能，但是理解Numpy数组和面向数组的计算将有助于高效的使用Pandas Dataframe。我们主要学习数据整理、子集构造和过滤、转换等矢量化数组运算。</p>
+        <p>终于来到了这次学习的重点——Pandas，之前的教程都是为使用Pandas而打下的基础。Pandas是基于Numpy构建的，让以Numpy为中心的应用变得更简单。</p>
 <a id="more"></a>
-<p><strong>矢量化计算</strong>：指使用高效、提前编译的低级语言代码对数据序列进行数学操作，去代替显性迭代代码，如Python中的for循环。这样做的前提是要保证数组的元素是<strong>同质</strong>的。用矢量化计算会比python for loop快超过50倍，因为for loop在迭代每个元素时需要一个个检查元素的数据类型（list是允许不同类型的数据在同一个list里面的）。</p>
-<p><strong>安装</strong>：使用Numpy之前需要安装，如果在Jupyter中执行<code>import numpy</code>报错，说明还没有安装，请参考<a href="https://pearmonkey.com/2020/12/01/Python0-install-Jupyter_Notebook/#%E5%AE%89%E8%A3%85package">这篇</a>进行安装Numpy。</p>
-<p><strong>ndarray</strong>：Numpy包应用的对象。一个通用的同构数据的多维容器，所有元素必须是相同类型的。每个数组都有两个属性，<code>shape</code>（各维度的大小）和<code>dtype</code>（数组数据的类型）。</p>
-<h2 id="生成数组"><a class="markdownIt-Anchor" href="#生成数组"></a> 生成数组</h2>
-<pre class="highlight"><code class="python"><span class="hljs-comment"># 所有的function的调用都是  package.func()，所以将numpy缩写成np</span>
+<p><strong>安装</strong>：使用Pandas之前需要安装，如果在Jupyter中执行<code>import pandas as pd</code>报错，说明还没有安装，请参考<a href="https://pearmonkey.com/2020/12/01/Python0-install-Jupyter_Notebook/#%E5%AE%89%E8%A3%85package">这篇</a>进行安装Pandas。</p>
+<p><strong>使用</strong>：由于Pandas是基于Numpy构建的，所以Numpy里的所有计算函数都可以给Pandas应用，一般情况下，将两个包都导入:</p>
+<pre class="highlight"><code class="python"><span class="hljs-comment"># 以后在其他code里，看到pd就是pandas，np就是numpy</span>
+<span class="hljs-comment"># 其实也可以把package里所有的function都import，from pandas import *，但是这不是一个好习惯</span>
+<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
-
-x = np.array([[<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>], [<span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>]]) <span class="hljs-comment"># 二维numpy数组</span>
-print(x)
-print(x.shape) <span class="hljs-comment"># 数组的dimension</span>
-print(x.dtype)
-x = np.array([[<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>], [<span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>]], dtype = np.float32) <span class="hljs-comment"># 生成二维numpy数组，声明dtype</span>
-print(x.dtype)
-x = x.astype(np.int32) <span class="hljs-comment"># 类型转换</span>
-print(x.dtype)
-print(np.zeros(<span class="hljs-number">10</span>)) <span class="hljs-comment"># zeros生成全零数组，换成ones可以生成全1数组</span>
-print(np.zeros((<span class="hljs-number">3</span>, <span class="hljs-number">6</span>))) <span class="hljs-comment"># 生成二维的全零数组</span>
-print(np.arange(<span class="hljs-number">0</span>, <span class="hljs-number">15</span>)) <span class="hljs-comment"># 生成序列，如果是从0开始的，可以只写end：np.arange(15)</span>
-print(np.identity(<span class="hljs-number">5</span>)) <span class="hljs-comment"># 生成5 * 5的identity矩阵</span>
-print(np.random.randn(<span class="hljs-number">3</span>, <span class="hljs-number">3</span>)) <span class="hljs-comment"># 生成3 * 3的正态分布随机小数数组</span>
-print(np.random.randint(<span class="hljs-number">0</span>, <span class="hljs-number">10</span>, size = [<span class="hljs-number">3</span>, <span class="hljs-number">3</span>])) <span class="hljs-comment">#生成3 * 3的随机整数数组，整数的范围是[0, 10)</span>
-
 </code></pre>
-<h2 id="基础运算"><a class="markdownIt-Anchor" href="#基础运算"></a> 基础运算</h2>
-<pre class="highlight"><code class="python">x = np.array([[ <span class="hljs-number">0.</span>,  <span class="hljs-number">1.</span>,  <span class="hljs-number">2.</span>],
-              [ <span class="hljs-number">3.</span>,  <span class="hljs-number">4.</span>,  <span class="hljs-number">5.</span>],
-              [ <span class="hljs-number">6.</span>,  <span class="hljs-number">7.</span>,  <span class="hljs-number">8.</span>]])
+<h2 id="pandas数据结构"><a class="markdownIt-Anchor" href="#pandas数据结构"></a> Pandas数据结构</h2>
+<h3 id="series"><a class="markdownIt-Anchor" href="#series"></a> Series</h3>
+<p>Series是一种类似于一维数组的对象，由一组数据（Numpy数组或者Python数组）和一组与之相关的数据标签（即索引）组成。</p>
+<pre class="highlight"><code class="python">a = pd.Series([<span class="hljs-number">4</span>, <span class="hljs-number">7</span>, <span class="hljs-number">-5</span>, <span class="hljs-number">3</span>])
+a
+</code></pre>
+<p>左边是索引，右边是值。默认索引是一个0到N-1（N为数据的长度）的整数型索引。Series有values和index两个属性。</p>
+<pre class="highlight"><code class="python">print(a.values)
+print(a.index)
+</code></pre>
+<p>可以传递定义好的索引，长度应和数组长度一致：</p>
+<pre class="highlight"><code class="python"><span class="hljs-comment"># 给现有的Series定义index</span>
+a.index = [<span class="hljs-string">'d'</span>, <span class="hljs-string">'b'</span>, <span class="hljs-string">'a'</span>, <span class="hljs-string">'c'</span>]
+print(a)
 
-print(x * <span class="hljs-number">2</span>) <span class="hljs-comment"># 每个数都乘以2</span>
-print(x ** <span class="hljs-number">2</span>) <span class="hljs-comment"># 每个数都平方</span>
-print(np.sqrt(x)) <span class="hljs-comment"># 每个数的平方根</span>
-print(<span class="hljs-number">0.5</span> + x[<span class="hljs-number">0</span>, :])
+a.index = [<span class="hljs-string">'d'</span>, <span class="hljs-string">'b'</span>, <span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>]
+print(a[<span class="hljs-string">'b'</span>])
 
-y = np.array([[<span class="hljs-number">-4.</span> , <span class="hljs-number">-3.5</span>, <span class="hljs-number">-3.</span> ],
-              [<span class="hljs-number">-2.5</span>, <span class="hljs-number">-2.</span> , <span class="hljs-number">-1.5</span>],
-              [<span class="hljs-number">-1.</span> , <span class="hljs-number">-0.5</span>, <span class="hljs-number">-0.</span> ]])
+<span class="hljs-comment"># 如果索引长度不一致，</span>
+
+<span class="hljs-comment"># 生成Series时定义index</span>
+b = pd.Series([<span class="hljs-number">4</span>, <span class="hljs-number">7</span>, <span class="hljs-number">-5</span>, <span class="hljs-number">3</span>], index = [<span class="hljs-string">'d'</span>, <span class="hljs-string">'b'</span>, <span class="hljs-string">'a'</span>, <span class="hljs-string">'c'</span>])
+print(b)
+print(b.index)
+print(b[<span class="hljs-string">'a'</span>]) <span class="hljs-comment"># 通过索引获取值</span>
+
+b[<span class="hljs-string">'a'</span>] = <span class="hljs-number">6</span> <span class="hljs-comment"># 通过索引修改值</span>
+print(b[[<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>, <span class="hljs-string">'c'</span>]])
+</code></pre>
+<p>Numpy数组的运算（根据条件语句筛选、矢量计算）都会保留索引和值之间的连接：</p>
+<pre class="highlight"><code class="python">print(b)
+print(b[b &gt; <span class="hljs-number">5</span>])
+print(b * <span class="hljs-number">2</span>)
+print(np.exp(b))
+</code></pre>
+<p>还可以通过字典Dict来创建Series，字典的key就是索引，value就是值：</p>
+<pre class="highlight"><code class="python">x = {<span class="hljs-string">'Jeo'</span>: <span class="hljs-number">95</span>, <span class="hljs-string">'Tom'</span>: <span class="hljs-number">85</span>, <span class="hljs-string">'Alice'</span>: <span class="hljs-number">100</span>}
+y = pd.Series(x)
+print(y)
+</code></pre>
+<p>在Pandas里，用NaN（np.nan）表示缺失值，可以用Pandas的isnull和notnull来检测缺失数据：</p>
+<pre class="highlight"><code class="python">y[<span class="hljs-string">'Bob'</span>] = np.nan
+print(y)
+print(pd.isnull(y))
+print(y.isnull()) <span class="hljs-comment"># Series也有同样的function</span>
+print(pd.notnull(y))
+</code></pre>
+<p>Series的索引最重要的作用是，在算术运算中会按照索引自动对齐：</p>
+<pre class="highlight"><code class="python">x = pd.Series({<span class="hljs-string">'Jeo'</span>: <span class="hljs-number">95</span>, <span class="hljs-string">'Tom'</span>: <span class="hljs-number">85</span>, <span class="hljs-string">'Alice'</span>: <span class="hljs-number">100</span>})
+y = pd.Series({<span class="hljs-string">'Jeo'</span>: <span class="hljs-number">95</span>, <span class="hljs-string">'Tom'</span>: <span class="hljs-number">85</span>, <span class="hljs-string">'Bob'</span>: <span class="hljs-number">100</span>})
 print(x + y)
 </code></pre>
-<h2 id="按轴进行运算"><a class="markdownIt-Anchor" href="#按轴进行运算"></a> 按轴进行运算</h2>
-<pre class="highlight"><code class="python">x = np.array([[ <span class="hljs-number">0.</span>,  <span class="hljs-number">1.</span>,  <span class="hljs-number">2.</span>],
-              [ <span class="hljs-number">3.</span>,  <span class="hljs-number">4.</span>,  <span class="hljs-number">5.</span>],
-              [ <span class="hljs-number">6.</span>,  <span class="hljs-number">7.</span>,  <span class="hljs-number">8.</span>]])
-print(np.sum(x))
-print(np.sum(x, axis = <span class="hljs-number">0</span>)) <span class="hljs-comment"># axis = 0 对每一列操作</span>
-print(np.sum(x, axis = <span class="hljs-number">1</span>)) <span class="hljs-comment"># axis = 1 对每一行操作</span>
-print(np.mean(x, axis = <span class="hljs-number">1</span>))
-print(np.max(x, axis = <span class="hljs-number">1</span>))
-print(np.std(x, axis = <span class="hljs-number">1</span>))
-print(np.argmax(x, axis = <span class="hljs-number">0</span>))
+<h3 id="dataframe"><a class="markdownIt-Anchor" href="#dataframe"></a> DataFrame</h3>
+<p>DataFrame是一个表格型的数据结构，含有一组有序的列，每列可以是不同的值类型（数组，字符串，布尔值等）。DataFrame既有列索引也有行索引，可以被看由Series组成的字典（共用同一个索引）。可以把DataFrame看作是一个二维结构来保存数据的容器。<br />
+构建DataFrame的方法：<br />
+传入由几个等长的Python数组或者Numpy数组组成的数组：</p>
+<pre class="highlight"><code class="python">data = {<span class="hljs-string">'state'</span>: [<span class="hljs-string">'Ohio'</span>, <span class="hljs-string">'Ohio'</span>, <span class="hljs-string">'Ohio'</span>, <span class="hljs-string">'Nevada'</span>, <span class="hljs-string">'Nevada'</span>],
+        <span class="hljs-string">'year'</span>: [<span class="hljs-number">2000</span>, <span class="hljs-number">2001</span>, <span class="hljs-number">2002</span>, <span class="hljs-number">2001</span>, <span class="hljs-number">2002</span>],
+        <span class="hljs-string">'pop'</span>: [<span class="hljs-number">1.5</span>, <span class="hljs-number">1.7</span>, <span class="hljs-number">3.6</span>, <span class="hljs-number">2.4</span>, <span class="hljs-number">2.9</span>]}
+df = pd.DataFrame(data)
+print(df)
+print(df.columns) <span class="hljs-comment"># 列名是字典的key</span>
+print(df.index) <span class="hljs-comment"># 被自动添加的索引</span>
+print(df.dtypes) <span class="hljs-comment"># object = str or mixed</span>
+print(df.shape)
+</code></pre>
+<p>可以指定列的顺序:</p>
+<pre class="highlight"><code class="python">df = pd.DataFrame(data, columns = [<span class="hljs-string">'year'</span>, <span class="hljs-string">'state'</span>, <span class="hljs-string">'pop'</span>])
+print(df)
+print(df.columns) <span class="hljs-comment"># 按给定的顺序</span>
 
-y = np.random.randint(<span class="hljs-number">0</span>, <span class="hljs-number">100</span>, size = [<span class="hljs-number">3</span>, <span class="hljs-number">3</span>])
-print(<span class="hljs-string">"原来的y："</span>)
-print(y)
-print(<span class="hljs-string">"按行sort后："</span>)
-print(np.sort(y))
-print(<span class="hljs-string">"按列sort后："</span>)
-print(np.sort(y, axis = <span class="hljs-number">0</span>))
+<span class="hljs-comment"># 可以指定行索引</span>
+df = pd.DataFrame(data, columns = [<span class="hljs-string">'year'</span>, <span class="hljs-string">'state'</span>, <span class="hljs-string">'pop'</span>],
+                        index = [<span class="hljs-string">'one'</span>, <span class="hljs-string">'two'</span>, <span class="hljs-string">'three'</span>, <span class="hljs-string">'four'</span>, <span class="hljs-string">'five'</span>])
+print(df)
+print(df.index)
 </code></pre>
-<h2 id="数组切片"><a class="markdownIt-Anchor" href="#数组切片"></a> 数组切片</h2>
-<p>对于连续的行或列切片，可以用Python的范围表示方法（冒号表示法）<br />
-<img src="/images/python3_slicing.jpg" alt="Alt text" /><br />
-对于非连续的行或列，可以用index list来挑取</p>
-<pre class="highlight"><code class="python">x = np.array([[ <span class="hljs-number">0.</span>,  <span class="hljs-number">1.</span>,  <span class="hljs-number">2.</span>],
-              [ <span class="hljs-number">3.</span>,  <span class="hljs-number">4.</span>,  <span class="hljs-number">5.</span>],
-              [ <span class="hljs-number">6.</span>,  <span class="hljs-number">7.</span>,  <span class="hljs-number">8.</span>]])
-print(x[:, [<span class="hljs-number">0</span>, <span class="hljs-number">2</span>]])
-</code></pre>
-<p><strong>重要笔记</strong><br />
-<span style="color:red">对Numpy数组的切片，不是对原始数组的复制，而是引用原数组，所以对切片里的元素进行修改，等于修改原数组！！</span>这样设计的原因是，由于Numpy的设计目的是处理大数据，假如默认是将数据复制，会大幅度消耗内存而降低性能。如果想要得到一份副本，需要显式地进行复制 <code>y = x[5:8].copy()</code>。</p>
-<pre class="highlight"><code class="python">x = np.arange(<span class="hljs-number">10</span>)
-print(<span class="hljs-string">'x: '</span>, x)
-y = x[<span class="hljs-number">3</span>:<span class="hljs-number">6</span>]
-print(<span class="hljs-string">'y: '</span>, y)
-y[<span class="hljs-number">1</span>] = <span class="hljs-number">1000</span>
-print(<span class="hljs-string">'new x: '</span>, x)
-</code></pre>
-<h2 id="数组布尔索引"><a class="markdownIt-Anchor" href="#数组布尔索引"></a> 数组布尔索引</h2>
-<p>布尔值就是<code>True</code>和<code>False</code>，布尔值可以控制所在位置的元素是否被挑选，所以这个布尔值数组的长度必须要和原数组的长度一样</p>
-<pre class="highlight"><code class="python">names = np.array([<span class="hljs-string">'Bob'</span>, <span class="hljs-string">'Joe'</span>, <span class="hljs-string">'Will'</span>, <span class="hljs-string">'Bob'</span>, <span class="hljs-string">'Will'</span>, <span class="hljs-string">'Joe'</span>, <span class="hljs-string">'Joe'</span>])
-print(names == <span class="hljs-string">'Bob'</span>)
+<p>通过列索引和行索引获取数据：</p>
+<pre class="highlight"><code class="python"><span class="hljs-comment"># 获取一列 (类型为Series)</span>
+print(df[<span class="hljs-string">'state'</span>]) <span class="hljs-comment"># 方式1</span>
+print(df[[<span class="hljs-string">'state'</span>, <span class="hljs-string">'year'</span>]])
+print(df.state) <span class="hljs-comment"># 方式2</span>
 
-print(names[names == <span class="hljs-string">'Bob'</span>])
-print(names[names != <span class="hljs-string">'Bob'</span>])
-
-<span class="hljs-comment"># 多个条件</span>
-mask = (names == <span class="hljs-string">'Bob'</span>) | (names == <span class="hljs-string">'Will'</span>)
-print(mask)
-print(names[mask])
-
-data = np.random.randn(<span class="hljs-number">7</span>, <span class="hljs-number">4</span>)
-print(data)
-data[data &lt; <span class="hljs-number">0</span>] = <span class="hljs-number">0</span>
-print(data)
+<span class="hljs-comment"># 获取一行 (类型为Series，需要用.loc来显示表示获取行)</span>
+print(df.loc[<span class="hljs-string">'three'</span>])
+print(type(df.loc[<span class="hljs-string">'three'</span>]))
 </code></pre>
-<h2 id="数组塑型"><a class="markdownIt-Anchor" href="#数组塑型"></a> 数组塑型</h2>
-<pre class="highlight"><code class="python">x = np.arange(<span class="hljs-number">32</span>)
-print(x)
-print(x.reshape((<span class="hljs-number">8</span>, <span class="hljs-number">4</span>)))
-</code></pre>
-<h2 id="常用计算函数"><a class="markdownIt-Anchor" href="#常用计算函数"></a> 常用计算函数</h2>
-<pre class="highlight"><code class="python">x = <span class="hljs-number">10</span> <span class="hljs-comment"># x可以是任意维的numpy数组</span>
-print(<span class="hljs-string">"绝对值："</span>, np.absolute(x))
-print(<span class="hljs-string">"平方根"</span>, np.sqrt(x))
-print(<span class="hljs-string">"sin："</span>, np.sin(x))
-print(<span class="hljs-string">"cos："</span>, np.cos(x))
-print(<span class="hljs-string">"tan："</span>, np.tan(x))
-print(<span class="hljs-string">"自然对数："</span>, np.log(x))
-print(<span class="hljs-string">"10为底的对数："</span>, np.log10(x))
-print(<span class="hljs-string">"2为底的对数："</span>, np.log2(x))
-print(<span class="hljs-string">"指数："</span>, np.exp(x))
-print(<span class="hljs-string">"次幂："</span>, x ** <span class="hljs-number">4</span>)
-</code></pre>
-<p>小测验1：将x的四个象限（比如说<code>[[0, 1], [4, 5]]</code>）相加，返回形状为(2, 2)的结果）<br />
-小测验2：求x的第三行的第一和第三个元素的自然对数以得到形状为(2,)的结果</p>
-<pre class="highlight"><code class="python">x = np.array([[ <span class="hljs-number">0</span>,  <span class="hljs-number">1</span>,  <span class="hljs-number">2</span>,  <span class="hljs-number">3</span>],
-              [ <span class="hljs-number">4</span>,  <span class="hljs-number">5</span>,  <span class="hljs-number">6</span>,  <span class="hljs-number">7</span>],
-              [ <span class="hljs-number">8</span>,  <span class="hljs-number">9</span>, <span class="hljs-number">10</span>, <span class="hljs-number">11</span>],
-              [<span class="hljs-number">12</span>, <span class="hljs-number">13</span>, <span class="hljs-number">14</span>, <span class="hljs-number">15</span>]])
+<h2 id="添加和删除列"><a class="markdownIt-Anchor" href="#添加和删除列"></a> 添加和删除列</h2>
+<p>可以给DataFrame添加列，长度要和原DataFrame的行数一样，如果添加的是一个Series，会精确对齐DataFrame的行索引（因为双方都有行索引），没有匹配上的被填上空缺值：</p>
+<pre class="highlight"><code class="python">df = pd.DataFrame(data, columns = [<span class="hljs-string">'year'</span>, <span class="hljs-string">'state'</span>, <span class="hljs-string">'pop'</span>],
+                        index = [<span class="hljs-string">'one'</span>, <span class="hljs-string">'two'</span>, <span class="hljs-string">'three'</span>, <span class="hljs-string">'four'</span>, <span class="hljs-string">'five'</span>])
+print(df)
 
-<span class="hljs-comment"># 答案1</span>
-b = x[<span class="hljs-number">0</span>:<span class="hljs-number">2</span>, <span class="hljs-number">0</span>:<span class="hljs-number">2</span>] + x[<span class="hljs-number">0</span>:<span class="hljs-number">2</span>, <span class="hljs-number">2</span>:<span class="hljs-number">4</span>] + x[<span class="hljs-number">2</span>:<span class="hljs-number">4</span>, <span class="hljs-number">0</span>:<span class="hljs-number">2</span>] + x[<span class="hljs-number">2</span>:<span class="hljs-number">4</span>, <span class="hljs-number">2</span>:<span class="hljs-number">4</span>]
+<span class="hljs-comment"># 添加列</span>
+new_col = pd.Series([<span class="hljs-number">-1.2</span>, <span class="hljs-number">-1.5</span>, <span class="hljs-number">-1.7</span>], index = [<span class="hljs-string">'two'</span>, <span class="hljs-string">'five'</span>, <span class="hljs-string">'four'</span>])
+df[<span class="hljs-string">'new_col'</span>] = new_col
 
-<span class="hljs-comment"># 答案2</span>
-b = np.log(x[<span class="hljs-number">2</span>, [<span class="hljs-number">0</span>, <span class="hljs-number">2</span>]])
+print(df)
+
+df[<span class="hljs-string">'eastern'</span>] = (df.state == <span class="hljs-string">'Ohio'</span>)
+print(df)
+
+<span class="hljs-comment"># 删除列</span>
+print(df.columns)
+df = df.drop([<span class="hljs-string">'new_col'</span>, <span class="hljs-string">'year'</span>], axis = <span class="hljs-number">1</span>) <span class="hljs-comment"># axis = 1 表示按列操作</span>
+print(df)
+
+<span class="hljs-comment"># 删除行</span>
+df = df.drop([<span class="hljs-string">'one'</span>, <span class="hljs-string">'two'</span>], axis = <span class="hljs-number">0</span>) <span class="hljs-comment"># axis = 0 表示按行操作</span>
+print(df)
+df = df.drop(df.index[df.eastern], axis = <span class="hljs-number">0</span>) <span class="hljs-comment"># 请问这句话是做了什么事情？</span>
+print(df)
 </code></pre>
+<h2 id="修改索引"><a class="markdownIt-Anchor" href="#修改索引"></a> 修改索引</h2>
+<p>行索引和列索引不能原地修改，可以用.rename()修改</p>
+<pre class="highlight"><code class="">print(df)
+
+print(df.rename(index = {'five': 'aaa'}))
+print(df.rename(columns = {'pop': 'population'}))
+</code></pre>
+<h2 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h2>
+<p>至此，一共学习三种数组：</p>
+<ul>
+<li><strong>Python数组（list）</strong>：e.g., <code>[1, 2, 2, 5]</code>. 需要用for loop去接触每一个元素，可以嵌套形成多维数组；</li>
+<li><strong>Numpy数组（ndarray）</strong>：e.g., <code>np.array([1, 2, 2, 5])</code>. 可以做快速的矢量化计算，是Python进行数据分析的基础，也可以嵌套形成多维数组；</li>
+<li><strong>Pandas Series</strong>：e.g., <code>pd.Series([1, 2, 2], index = [...])</code>. 可以由python数组或者Numpy数组作为内容生成，可以给每个值设置一个索引。可以是Pandas DataFrame的一行或者一列，矢量计算与Numpy数组一样。两个Series进行计算时，会自动先按照index对齐，再计算，没有对齐到的结果为<code>NaN</code>。</li>
+</ul>
+<p><strong>Pandas DataFrame</strong>:</p>
+<ul>
+<li>与R的dataframe类似，是一个二维的数据结构（底层是一个二维Numpy数组），列表示feature，行表示observation；</li>
+<li>每一列取出来都是Series，index为原DataFrame的行索引；</li>
+<li>每一行取出来都是Series，index为原DataFrame的列索引；</li>
+<li>按条件筛选的方式与Numpy数组一样。</li>
+</ul>
+<h1 id="小测验"><a class="markdownIt-Anchor" href="#小测验"></a> 小测验</h1>
+<ol>
+<li>创建内容如下的DataFrame命名为profile：<br />
+<img src="/images/python4/Q1.png" alt="Alt text" /></li>
+</ol>
+<!-- data = {'Age': [12, 16, 13, 13, 14],  -->
+<!-- 'Score': [82, 85, 90, 85, 78], -->
+<!-- 'Gender': ['M', 'M', 'M', 'F', 'F'], -->
+<!-- 'On_Campus': [True, False, True, True, False]} -->
+<!-- profile = pd.DataFrame(data, index = ['Michael', 'Joe', 'Bob', 'Alice', 'Tiffany']) -->
+<!-- profile -->
+<ol start="2">
+<li>打印出Alice和Bob的信息：<br />
+<img src="/images/python4/Q2.png" alt="Alt text" /></li>
+</ol>
+<!-- profile.loc[['Alice', 'Bob']] -->
+<ol start="3">
+<li>打印出On_Campus为True的行：<br />
+<img src="/images/python4/Q3.png" alt="Alt text" /></li>
+</ol>
+<!-- profile.loc[profile.On_Campus] -->
+<ol start="4">
+<li>打印列[‘Gender’, ‘Age’]:<br />
+<img src="/images/python4/Q4.png" alt="Alt text" /></li>
+</ol>
+<!-- profile[['Gender', 'Age']] -->
+<ol start="5">
+<li>创建一个新列名为&quot;Score_Plus&quot;，值为每个人的Score都加5：<br />
+<img src="/images/python4/Q5.png" alt="Alt text" /></li>
+</ol>
+<!-- profile['Score_Plus'] = profile.Score + 5 -->
+<!-- profile -->
 
       </div>
       
@@ -485,18 +496,12 @@ b = np.log(x[<span class="hljs-number">2</span>, [<span class="hljs-number">0</s
     
       <div class="post-nav">
 
-  <div class="post-nav-prev post-nav-item">
-    <a href="/2020/12/06/Python4-Pandas-Introduction/">
-      上一篇:    4. Python-Pandas介绍
-    </a>
-  </div>
-
 
 
   <div class="post-nav-next post-nav-item">
-    <a href="/2020/12/02/Python2-List-Loop/">
+    <a href="/2020/12/03/Python3-Numpy/">
       <span>
-        下一篇:    2. Python-基础知识的进阶 
+        下一篇:    3. Python-Numpy包的介绍 
       </span>
     </a>
   </div>
