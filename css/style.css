@@ -785,7 +785,7 @@ a {
 }
 @media (max-width: 992px) {
   .main-content {
-    width: 90%;
+    width: 100%;
   }
   .toc-aside {
     display: none;
