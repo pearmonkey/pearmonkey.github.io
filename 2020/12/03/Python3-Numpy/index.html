@@ -353,7 +353,7 @@
         <p>Numpy（Numerical Python的简称）是高性能科学计算和数据分析的基础包。Numpy本身没有提供多么高级的数据分析功能，但是理解Numpy数组和面向数组的计算将有助于高效的使用Pandas Dataframe。我们主要学习数据整理、子集构造和过滤、转换等矢量化数组运算。</p>
 <a id="more"></a>
 <p><strong>矢量化计算</strong>：指使用高效、提前编译的低级语言代码对数据序列进行数学操作，去代替显性迭代代码，如Python中的for循环。这样做的前提是要保证数组的元素是<strong>同质</strong>的。用矢量化计算会比python for loop快超过50倍，因为for loop在迭代每个元素时需要一个个检查元素的数据类型（list是允许不同类型的数据在同一个list里面的）。</p>
-<p><strong>安装</strong>：使用Numpy之前需要安装，如果在Jupyter中执行<code>import numpy</code>报错，说明还没有安装，请参考<a href="https://pearmonkey.com/2020/12/01/Python0-install-Jupyter_Notebook/#%E5%AE%89%E8%A3%85package">这篇</a>进行安装Numpy。</p>
+<p><strong>安装</strong>：使用Numpy之前需要安装，如果在Jupyter中执行<code>import numpy</code>报错，说明还没有安装，请参考<a href="https://pearmonkey.com/2020/12/01/Python0-install-Jupyter_Notebook/">这篇</a>进行安装Numpy。</p>
 <p><strong>ndarray</strong>：Numpy包应用的对象。一个通用的同构数据的多维容器，所有元素必须是相同类型的。每个数组都有两个属性，<code>shape</code>（各维度的大小）和<code>dtype</code>（数组数据的类型）。</p>
 <h2 id="生成数组"><a class="markdownIt-Anchor" href="#生成数组"></a> 生成数组</h2>
 <pre class="highlight"><code class="python"><span class="hljs-comment"># 所有的function的调用都是  package.func()，所以将numpy缩写成np</span>

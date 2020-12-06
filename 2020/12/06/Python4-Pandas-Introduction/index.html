@@ -315,7 +315,7 @@
       <div class="post-content">
         <p>终于来到了这次学习的重点——Pandas，之前的教程都是为使用Pandas而打下的基础。Pandas是基于Numpy构建的，让以Numpy为中心的应用变得更简单。</p>
 <a id="more"></a>
-<p><strong>安装</strong>：使用Pandas之前需要安装，如果在Jupyter中执行<code>import pandas as pd</code>报错，说明还没有安装，请参考<a href="https://pearmonkey.com/2020/12/01/Python0-install-Jupyter_Notebook/#%E5%AE%89%E8%A3%85package">这篇</a>进行安装Pandas。</p>
+<p><strong>安装</strong>：使用Pandas之前需要安装，如果在Jupyter中执行<code>import pandas as pd</code>报错，说明还没有安装，请参考<a href="https://pearmonkey.com/2020/12/01/Python0-install-Jupyter_Notebook/">这篇</a>进行安装Pandas。</p>
 <p><strong>使用</strong>：由于Pandas是基于Numpy构建的，所以Numpy里的所有计算函数都可以给Pandas应用，一般情况下，将两个包都导入:</p>
 <pre class="highlight"><code class="python"><span class="hljs-comment"># 以后在其他code里，看到pd就是pandas，np就是numpy</span>
 <span class="hljs-comment"># 其实也可以把package里所有的function都import，from pandas import *，但是这不是一个好习惯</span>
@@ -339,8 +339,6 @@ print(a)
 
 a.index = [<span class="hljs-string">'d'</span>, <span class="hljs-string">'b'</span>, <span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>]
 print(a[<span class="hljs-string">'b'</span>])
-
-<span class="hljs-comment"># 如果索引长度不一致，</span>
 
 <span class="hljs-comment"># 生成Series时定义index</span>
 b = pd.Series([<span class="hljs-number">4</span>, <span class="hljs-number">7</span>, <span class="hljs-number">-5</span>, <span class="hljs-number">3</span>], index = [<span class="hljs-string">'d'</span>, <span class="hljs-string">'b'</span>, <span class="hljs-string">'a'</span>, <span class="hljs-string">'c'</span>])
@@ -418,7 +416,6 @@ print(df)
 <span class="hljs-comment"># 添加列</span>
 new_col = pd.Series([<span class="hljs-number">-1.2</span>, <span class="hljs-number">-1.5</span>, <span class="hljs-number">-1.7</span>], index = [<span class="hljs-string">'two'</span>, <span class="hljs-string">'five'</span>, <span class="hljs-string">'four'</span>])
 df[<span class="hljs-string">'new_col'</span>] = new_col
-
 print(df)
 
 df[<span class="hljs-string">'eastern'</span>] = (df.state == <span class="hljs-string">'Ohio'</span>)
@@ -449,7 +446,7 @@ print(df.rename(columns = {'pop': 'population'}))
 <li><strong>Numpy数组（ndarray）</strong>：e.g., <code>np.array([1, 2, 2, 5])</code>. 可以做快速的矢量化计算，是Python进行数据分析的基础，也可以嵌套形成多维数组；</li>
 <li><strong>Pandas Series</strong>：e.g., <code>pd.Series([1, 2, 2], index = [...])</code>. 可以由python数组或者Numpy数组作为内容生成，可以给每个值设置一个索引。可以是Pandas DataFrame的一行或者一列，矢量计算与Numpy数组一样。两个Series进行计算时，会自动先按照index对齐，再计算，没有对齐到的结果为<code>NaN</code>。</li>
 </ul>
-<p><strong>Pandas DataFrame</strong>:</p>
+<p><strong>Pandas DataFrame</strong>: e.g., <code>pd.DataFrame({...}, columns = [], index = [])</code></p>
 <ul>
 <li>与R的dataframe类似，是一个二维的数据结构（底层是一个二维Numpy数组），列表示feature，行表示observation；</li>
 <li>每一列取出来都是Series，index为原DataFrame的行索引；</li>
