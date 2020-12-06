@@ -360,14 +360,14 @@ print(np.exp(b))
 y = pd.Series(x)
 print(y)
 </code></pre>
-<p>在Pandas里，用NaN（np.nan）表示缺失值，可以用Pandas的isnull和notnull来检测缺失数据：</p>
+<p>在Pandas里，用<code>NaN</code>（<code>np.nan</code>）表示缺失值，可以用Pandas的isnull和notnull来检测缺失数据：</p>
 <pre class="highlight"><code class="python">y[<span class="hljs-string">'Bob'</span>] = np.nan
 print(y)
 print(pd.isnull(y))
 print(y.isnull()) <span class="hljs-comment"># Series也有同样的function</span>
 print(pd.notnull(y))
 </code></pre>
-<p>Series的索引最重要的作用是，在算术运算中会按照索引自动对齐：</p>
+<p>Series的索引最重要的作用是，在算术运算中会按照索引自动对齐，没有对齐到的索引处用<code>NaN</code>：</p>
 <pre class="highlight"><code class="python">x = pd.Series({<span class="hljs-string">'Jeo'</span>: <span class="hljs-number">95</span>, <span class="hljs-string">'Tom'</span>: <span class="hljs-number">85</span>, <span class="hljs-string">'Alice'</span>: <span class="hljs-number">100</span>})
 y = pd.Series({<span class="hljs-string">'Jeo'</span>: <span class="hljs-number">95</span>, <span class="hljs-string">'Tom'</span>: <span class="hljs-number">85</span>, <span class="hljs-string">'Bob'</span>: <span class="hljs-number">100</span>})
 print(x + y)
@@ -397,15 +397,18 @@ df = pd.DataFrame(data, columns = [<span class="hljs-string">'year'</span>, <spa
 print(df)
 print(df.index)
 </code></pre>
-<p>通过列索引和行索引获取数据：</p>
+<p>通过列索引和行索引获取数据（.loc()）：</p>
 <pre class="highlight"><code class="python"><span class="hljs-comment"># 获取一列 (类型为Series)</span>
 print(df[<span class="hljs-string">'state'</span>]) <span class="hljs-comment"># 方式1</span>
 print(df[[<span class="hljs-string">'state'</span>, <span class="hljs-string">'year'</span>]])
 print(df.state) <span class="hljs-comment"># 方式2</span>
 
-<span class="hljs-comment"># 获取一行 (类型为Series，需要用.loc来显示表示获取行)</span>
+<span class="hljs-comment"># 获取一行 (类型为Series)</span>
 print(df.loc[<span class="hljs-string">'three'</span>])
 print(type(df.loc[<span class="hljs-string">'three'</span>]))
+</code></pre>
+<p>通过行列的的位置获取数据（.iloc()）：</p>
+<pre class="highlight"><code class="python">df.iloc[<span class="hljs-number">0</span>:<span class="hljs-number">2</span>, <span class="hljs-number">0</span>:<span class="hljs-number">2</span>] <span class="hljs-comment"># 取第一第二行，第一第二列</span>
 </code></pre>
 <h2 id="添加和删除列"><a class="markdownIt-Anchor" href="#添加和删除列"></a> 添加和删除列</h2>
 <p>可以给DataFrame添加列，长度要和原DataFrame的行数一样，如果添加的是一个Series，会精确对齐DataFrame的行索引（因为双方都有行索引），没有匹配上的被填上空缺值：</p>
@@ -498,7 +501,7 @@ print(df.rename(columns = {'pop': 'population'}))
   <div class="post-nav-next post-nav-item">
     <a href="/2020/12/03/Python3-Numpy/">
       <span>
-        下一篇:    3. Python-Numpy包的介绍 
+        下一篇:    3. Python-Numpy介绍 
       </span>
     </a>
   </div>
