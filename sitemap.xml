@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://pearmonkey.com/2020/12/07/Python6-Pandas-DataPreprocessing/</loc>
+    
+    <lastmod>2020-12-07T21:46:34.849Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://pearmonkey.com/2020/12/07/Python5-Pandas-ReadWriteFile/</loc>
+    
+    <lastmod>2020-12-07T16:49:53.136Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://pearmonkey.com/2020/12/06/Python4-Pandas-Introduction/</loc>
     
-    <lastmod>2020-12-07T01:49:33.926Z</lastmod>
+    <lastmod>2020-12-07T15:25:01.327Z</lastmod>
     
   </url>
   

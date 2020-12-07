@@ -313,137 +313,125 @@
         
       </div>
       <div class="post-content">
-        <p>终于来到了这次学习的重点——Pandas，之前的教程都是为使用Pandas而打下的基础。Pandas是基于Numpy构建的，让以Numpy为中心的应用变得更简单。</p>
-<a id="more"></a>
+        <p>终于来到了这次学习的重点——Pandas，之前的教程都是为使用Pandas而打下的基础。Pandas是基于Numpy构建的，让以Numpy为中心的应用变得更简单。<br><a id="more"></a></p>
 <p><strong>安装</strong>：使用Pandas之前需要安装，如果在Jupyter中执行<code>import pandas as pd</code>报错，说明还没有安装，请参考<a href="https://pearmonkey.com/2020/12/01/Python0-install-Jupyter_Notebook/">这篇</a>进行安装Pandas。</p>
 <p><strong>使用</strong>：由于Pandas是基于Numpy构建的，所以Numpy里的所有计算函数都可以给Pandas应用，一般情况下，将两个包都导入:</p>
-<pre class="highlight"><code class="python"><span class="hljs-comment"># 以后在其他code里，看到pd就是pandas，np就是numpy</span>
-<span class="hljs-comment"># 其实也可以把package里所有的function都import，from pandas import *，但是这不是一个好习惯</span>
-<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
-<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<pre><code class="lang-python"># 以后在其他code里，看到pd就是pandas，np就是numpy
+# 其实也可以把package里所有的function都import，from pandas import *，但是这不是一个好习惯
+import pandas as pd
+import numpy as np
 </code></pre>
-<h2 id="pandas数据结构"><a class="markdownIt-Anchor" href="#pandas数据结构"></a> Pandas数据结构</h2>
-<h3 id="series"><a class="markdownIt-Anchor" href="#series"></a> Series</h3>
-<p>Series是一种类似于一维数组的对象，由一组数据（Numpy数组或者Python数组）和一组与之相关的数据标签（即索引）组成。</p>
-<pre class="highlight"><code class="python">a = pd.Series([<span class="hljs-number">4</span>, <span class="hljs-number">7</span>, <span class="hljs-number">-5</span>, <span class="hljs-number">3</span>])
+<h2 id="Pandas数据结构"><a href="#Pandas数据结构" class="headerlink" title="Pandas数据结构"></a>Pandas数据结构</h2><h3 id="Series"><a href="#Series" class="headerlink" title="Series"></a>Series</h3><p>Series是一种类似于一维数组的对象，由一组数据（Numpy数组或者Python数组）和一组与之相关的数据标签（即索引）组成。</p>
+<pre><code class="lang-python">a = pd.Series([4, 7, -5, 3])
 a
 </code></pre>
 <p>左边是索引，右边是值。默认索引是一个0到N-1（N为数据的长度）的整数型索引。Series有values和index两个属性。</p>
-<pre class="highlight"><code class="python">print(a.values)
+<pre><code class="lang-python">print(a.values)
 print(a.index)
 </code></pre>
 <p>可以传递定义好的索引，长度应和数组长度一致：</p>
-<pre class="highlight"><code class="python"><span class="hljs-comment"># 给现有的Series定义index</span>
-a.index = [<span class="hljs-string">'d'</span>, <span class="hljs-string">'b'</span>, <span class="hljs-string">'a'</span>, <span class="hljs-string">'c'</span>]
+<pre><code class="lang-python"># 给现有的Series定义index
+a.index = [&#39;d&#39;, &#39;b&#39;, &#39;a&#39;, &#39;c&#39;]
 print(a)
 
-a.index = [<span class="hljs-string">'d'</span>, <span class="hljs-string">'b'</span>, <span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>]
-print(a[<span class="hljs-string">'b'</span>])
+a.index = [&#39;d&#39;, &#39;b&#39;, &#39;a&#39;, &#39;b&#39;]
+print(a[&#39;b&#39;])
 
-<span class="hljs-comment"># 生成Series时定义index</span>
-b = pd.Series([<span class="hljs-number">4</span>, <span class="hljs-number">7</span>, <span class="hljs-number">-5</span>, <span class="hljs-number">3</span>], index = [<span class="hljs-string">'d'</span>, <span class="hljs-string">'b'</span>, <span class="hljs-string">'a'</span>, <span class="hljs-string">'c'</span>])
+# 生成Series时定义index
+b = pd.Series([4, 7, -5, 3], index = [&#39;d&#39;, &#39;b&#39;, &#39;a&#39;, &#39;c&#39;])
 print(b)
 print(b.index)
-print(b[<span class="hljs-string">'a'</span>]) <span class="hljs-comment"># 通过索引获取值</span>
+print(b[&#39;a&#39;]) # 通过索引获取值
 
-b[<span class="hljs-string">'a'</span>] = <span class="hljs-number">6</span> <span class="hljs-comment"># 通过索引修改值</span>
-print(b[[<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>, <span class="hljs-string">'c'</span>]])
+b[&#39;a&#39;] = 6 # 通过索引修改值
+print(b[[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]])
 </code></pre>
 <p>Numpy数组的运算（根据条件语句筛选、矢量计算）都会保留索引和值之间的连接：</p>
-<pre class="highlight"><code class="python">print(b)
-print(b[b &gt; <span class="hljs-number">5</span>])
-print(b * <span class="hljs-number">2</span>)
+<pre><code class="lang-python">print(b)
+print(b[b &gt; 5])
+print(b * 2)
 print(np.exp(b))
 </code></pre>
 <p>还可以通过字典Dict来创建Series，字典的key就是索引，value就是值：</p>
-<pre class="highlight"><code class="python">x = {<span class="hljs-string">'Jeo'</span>: <span class="hljs-number">95</span>, <span class="hljs-string">'Tom'</span>: <span class="hljs-number">85</span>, <span class="hljs-string">'Alice'</span>: <span class="hljs-number">100</span>}
+<pre><code class="lang-python">x = {&#39;Jeo&#39;: 95, &#39;Tom&#39;: 85, &#39;Alice&#39;: 100}
 y = pd.Series(x)
 print(y)
 </code></pre>
 <p>在Pandas里，用<code>NaN</code>（<code>np.nan</code>）表示缺失值，可以用Pandas的isnull和notnull来检测缺失数据：</p>
-<pre class="highlight"><code class="python">y[<span class="hljs-string">'Bob'</span>] = np.nan
+<pre><code class="lang-python">y[&#39;Bob&#39;] = np.nan
 print(y)
 print(pd.isnull(y))
-print(y.isnull()) <span class="hljs-comment"># Series也有同样的function</span>
+print(y.isnull()) # Series也有同样的function
 print(pd.notnull(y))
 </code></pre>
 <p>Series的索引最重要的作用是，在算术运算中会按照索引自动对齐，没有对齐到的索引处用<code>NaN</code>填充：</p>
-<pre class="highlight"><code class="python">x = pd.Series({<span class="hljs-string">'Jeo'</span>: <span class="hljs-number">95</span>, <span class="hljs-string">'Tom'</span>: <span class="hljs-number">85</span>, <span class="hljs-string">'Alice'</span>: <span class="hljs-number">100</span>})
-y = pd.Series({<span class="hljs-string">'Jeo'</span>: <span class="hljs-number">95</span>, <span class="hljs-string">'Tom'</span>: <span class="hljs-number">85</span>, <span class="hljs-string">'Bob'</span>: <span class="hljs-number">100</span>})
+<pre><code class="lang-python">x = pd.Series({&#39;Jeo&#39;: 95, &#39;Tom&#39;: 85, &#39;Alice&#39;: 100})
+y = pd.Series({&#39;Jeo&#39;: 95, &#39;Tom&#39;: 85, &#39;Bob&#39;: 100})
 print(x + y)
 </code></pre>
-<h3 id="dataframe"><a class="markdownIt-Anchor" href="#dataframe"></a> DataFrame</h3>
-<p>DataFrame是一个表格型的数据结构，含有一组有序的列，每列可以是不同的值类型（数组，字符串，布尔值等）。DataFrame既有列索引也有行索引，可以被看由Series组成的字典（共用同一个索引）。可以把DataFrame看作是一个二维结构来保存数据的容器。<br />
-构建DataFrame的方法：<br />
-传入由几个等长的Python数组或者Numpy数组组成的数组：</p>
-<pre class="highlight"><code class="python">data = {<span class="hljs-string">'state'</span>: [<span class="hljs-string">'Ohio'</span>, <span class="hljs-string">'Ohio'</span>, <span class="hljs-string">'Ohio'</span>, <span class="hljs-string">'Nevada'</span>, <span class="hljs-string">'Nevada'</span>],
-        <span class="hljs-string">'year'</span>: [<span class="hljs-number">2000</span>, <span class="hljs-number">2001</span>, <span class="hljs-number">2002</span>, <span class="hljs-number">2001</span>, <span class="hljs-number">2002</span>],
-        <span class="hljs-string">'pop'</span>: [<span class="hljs-number">1.5</span>, <span class="hljs-number">1.7</span>, <span class="hljs-number">3.6</span>, <span class="hljs-number">2.4</span>, <span class="hljs-number">2.9</span>]}
+<h3 id="DataFrame"><a href="#DataFrame" class="headerlink" title="DataFrame"></a>DataFrame</h3><p>DataFrame是一个表格型的数据结构，含有一组有序的列，每列可以是不同的值类型（数值，字符串，布尔值等）。DataFrame既有列索引也有行索引，可以被看由Series组成的字典（共用同一个索引）。可以把DataFrame看作是一个二维结构来保存数据的容器。<br>构建DataFrame的方法：<br>传入由几个等长的Python数组或者Numpy数组组成的数组：</p>
+<pre><code class="lang-python">data = {&#39;state&#39;: [&#39;Ohio&#39;, &#39;Ohio&#39;, &#39;Ohio&#39;, &#39;Nevada&#39;, &#39;Nevada&#39;],
+        &#39;year&#39;: [2000, 2001, 2002, 2001, 2002],
+        &#39;pop&#39;: [1.5, 1.7, 3.6, 2.4, 2.9]}
 df = pd.DataFrame(data)
 print(df)
-print(df.columns) <span class="hljs-comment"># 列名是字典的key</span>
-print(df.index) <span class="hljs-comment"># 被自动添加的索引</span>
-print(df.dtypes) <span class="hljs-comment"># object = str or mixed</span>
+print(df.columns) # 列名是字典的key
+print(df.index) # 被自动添加的索引
+print(df.dtypes) # object = str or mixed
 print(df.shape)
 </code></pre>
 <p>可以指定列的顺序:</p>
-<pre class="highlight"><code class="python">df = pd.DataFrame(data, columns = [<span class="hljs-string">'year'</span>, <span class="hljs-string">'state'</span>, <span class="hljs-string">'pop'</span>])
+<pre><code class="lang-python">df = pd.DataFrame(data, columns = [&#39;year&#39;, &#39;state&#39;, &#39;pop&#39;])
 print(df)
-print(df.columns) <span class="hljs-comment"># 按给定的顺序</span>
+print(df.columns) # 按给定的顺序
 
-<span class="hljs-comment"># 可以指定行索引</span>
-df = pd.DataFrame(data, columns = [<span class="hljs-string">'year'</span>, <span class="hljs-string">'state'</span>, <span class="hljs-string">'pop'</span>],
-                        index = [<span class="hljs-string">'one'</span>, <span class="hljs-string">'two'</span>, <span class="hljs-string">'three'</span>, <span class="hljs-string">'four'</span>, <span class="hljs-string">'five'</span>])
+# 可以指定行索引
+df = pd.DataFrame(data, columns = [&#39;year&#39;, &#39;state&#39;, &#39;pop&#39;],
+                        index = [&#39;one&#39;, &#39;two&#39;, &#39;three&#39;, &#39;four&#39;, &#39;five&#39;])
 print(df)
 print(df.index)
 </code></pre>
 <p>通过列索引和行索引获取数据（.loc()）：</p>
-<pre class="highlight"><code class="python"><span class="hljs-comment"># 获取一列 (类型为Series)</span>
-print(df[<span class="hljs-string">'state'</span>]) <span class="hljs-comment"># 方式1</span>
-print(df[[<span class="hljs-string">'state'</span>, <span class="hljs-string">'year'</span>]])
-print(df.state) <span class="hljs-comment"># 方式2</span>
+<pre><code class="lang-python"># 获取一列 (类型为Series)
+print(df[&#39;state&#39;])
+print(df[[&#39;state&#39;, &#39;year&#39;]]) # 获取多列
 
-<span class="hljs-comment"># 获取一行 (类型为Series)</span>
-print(df.loc[<span class="hljs-string">'three'</span>])
-print(type(df.loc[<span class="hljs-string">'three'</span>]))
+# 获取一行 (类型为Series)
+print(df.loc[&#39;three&#39;])
+print(type(df.loc[&#39;three&#39;]))
 </code></pre>
 <p>通过行列的的位置获取数据（.iloc()）：</p>
-<pre class="highlight"><code class="python">df.iloc[<span class="hljs-number">0</span>:<span class="hljs-number">2</span>, <span class="hljs-number">0</span>:<span class="hljs-number">2</span>] <span class="hljs-comment"># 取第一第二行，第一第二列</span>
+<pre><code class="lang-python">df.iloc[0:2, 0:2] # 取第一第二行，第一第二列
 </code></pre>
-<h2 id="添加和删除列"><a class="markdownIt-Anchor" href="#添加和删除列"></a> 添加和删除列</h2>
-<p>可以给DataFrame添加列，长度要和原DataFrame的行数一样，如果添加的是一个Series，会精确对齐DataFrame的行索引（因为双方都有行索引），没有匹配上的被填上空缺值：</p>
-<pre class="highlight"><code class="python">df = pd.DataFrame(data, columns = [<span class="hljs-string">'year'</span>, <span class="hljs-string">'state'</span>, <span class="hljs-string">'pop'</span>],
-                        index = [<span class="hljs-string">'one'</span>, <span class="hljs-string">'two'</span>, <span class="hljs-string">'three'</span>, <span class="hljs-string">'four'</span>, <span class="hljs-string">'five'</span>])
+<h2 id="添加和删除列"><a href="#添加和删除列" class="headerlink" title="添加和删除列"></a>添加和删除列</h2><p>可以给DataFrame添加列，长度要和原DataFrame的行数一样，如果添加的是一个Series，会精确对齐DataFrame的行索引（因为双方都有行索引），没有匹配上的被填上空缺值：</p>
+<pre><code class="lang-python">df = pd.DataFrame(data, columns = [&#39;year&#39;, &#39;state&#39;, &#39;pop&#39;],
+                        index = [&#39;one&#39;, &#39;two&#39;, &#39;three&#39;, &#39;four&#39;, &#39;five&#39;])
 print(df)
 
-<span class="hljs-comment"># 添加列</span>
-new_col = pd.Series([<span class="hljs-number">-1.2</span>, <span class="hljs-number">-1.5</span>, <span class="hljs-number">-1.7</span>], index = [<span class="hljs-string">'two'</span>, <span class="hljs-string">'five'</span>, <span class="hljs-string">'four'</span>])
-df[<span class="hljs-string">'new_col'</span>] = new_col
+# 添加列
+new_col = pd.Series([-1.2, -1.5, -1.7], index = [&#39;two&#39;, &#39;five&#39;, &#39;four&#39;])
+df[&#39;new_col&#39;] = new_col
 print(df)
 
-df[<span class="hljs-string">'eastern'</span>] = (df.state == <span class="hljs-string">'Ohio'</span>)
+df[&#39;eastern&#39;] = (df.state == &#39;Ohio&#39;)
 print(df)
 
-<span class="hljs-comment"># 删除列</span>
+# 删除列
 print(df.columns)
-df = df.drop([<span class="hljs-string">'new_col'</span>, <span class="hljs-string">'year'</span>], axis = <span class="hljs-number">1</span>) <span class="hljs-comment"># axis = 1 表示按列操作</span>
+df = df.drop([&#39;new_col&#39;, &#39;year&#39;], axis = 1) # axis = 1 表示按列操作
 print(df)
 
-<span class="hljs-comment"># 删除行</span>
-df = df.drop([<span class="hljs-string">'one'</span>, <span class="hljs-string">'two'</span>], axis = <span class="hljs-number">0</span>) <span class="hljs-comment"># axis = 0 表示按行操作</span>
-print(df)
-df = df.drop(df.index[df.eastern], axis = <span class="hljs-number">0</span>) <span class="hljs-comment"># 请问这句话是做了什么事情？</span>
-print(df)
+# 删除行
+print(df.drop([&#39;one&#39;, &#39;two&#39;], axis = 0)) # axis = 0 表示按行操作
+print(df.drop(df.index[df.eastern], axis = 0)) # drop eastern为True的行
+print(df.drop(df.index[0:2], axis = 0)) # drop前两行
 </code></pre>
-<h2 id="修改索引"><a class="markdownIt-Anchor" href="#修改索引"></a> 修改索引</h2>
-<p>行索引和列索引不能原地修改，可以用.rename()修改</p>
-<pre class="highlight"><code class="">print(df)
+<h2 id="修改索引"><a href="#修改索引" class="headerlink" title="修改索引"></a>修改索引</h2><p>行索引和列索引不能原地修改，可以用.rename()修改</p>
+<pre><code>print(df)
 
-print(df.rename(index = {'five': 'aaa'}))
-print(df.rename(columns = {'pop': 'population'}))
-</code></pre>
-<h2 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h2>
-<p>至此，一共学习三种数组：</p>
+print(df.rename(index = {&#39;five&#39;: &#39;aaa&#39;}))
+print(df.rename(columns = {&#39;pop&#39;: &#39;population&#39;}))
+</code></pre><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>至此，一共学习三种数组：</p>
 <ul>
 <li><strong>Python数组（list）</strong>：e.g., <code>[1, 2, 2, 5]</code>. 需要用for loop去接触每一个元素，可以嵌套形成多维数组；</li>
 <li><strong>Numpy数组（ndarray）</strong>：e.g., <code>np.array([1, 2, 2, 5])</code>. 可以做快速的矢量化计算，是Python进行数据分析的基础，也可以嵌套形成多维数组；</li>
@@ -459,41 +447,32 @@ print(df.rename(columns = {'pop': 'population'}))
 <p><strong>Pandas筛选数据的三种方式</strong></p>
 <ol>
 <li>用位置选取：选行<code>df.iloc[0:2]</code>，选列<code>df.iloc[:, 0:2]</code>；</li>
-<li>用索引值选取：选行<code>df.loc[['row1', 'row3']]</code>，选列<code>df[['col1', 'col2']]</code>；</li>
+<li>用索引值选取：选行<code>df.loc[[&#39;row1&#39;, &#39;row3&#39;]]</code>，选列<code>df[[&#39;col1&#39;, &#39;col2&#39;]]</code>；</li>
 <li>用布尔条件选取：满足条件的所有的行<code>df.loc[df.col1 &gt; 0]</code>。</li>
 </ol>
-<h1 id="小测验"><a class="markdownIt-Anchor" href="#小测验"></a> 小测验</h1>
-<ol>
-<li>创建内容如下的DataFrame命名为profile：<br />
-<img src="/images/python4/Q1.png" alt="Alt text" /></li>
-</ol>
+<h1 id="小测验"><a href="#小测验" class="headerlink" title="小测验"></a>小测验</h1><ol>
+<li><p>创建内容如下的DataFrame命名为profile：<br><img src="/images/python4/Q1.png" alt="Alt text"></p>
 <!-- data = {'Age': [12, 16, 13, 13, 14],  -->
 <!-- 'Score': [82, 85, 90, 85, 78], -->
 <!-- 'Gender': ['M', 'M', 'M', 'F', 'F'], -->
 <!-- 'On_Campus': [True, False, True, True, False]} -->
 <!-- profile = pd.DataFrame(data, index = ['Michael', 'Joe', 'Bob', 'Alice', 'Tiffany']) -->
 <!-- profile -->
-<ol start="2">
-<li>打印出Alice和Bob的信息：<br />
-<img src="/images/python4/Q2.png" alt="Alt text" /></li>
-</ol>
+</li>
+<li><p>打印出Alice和Bob的信息：<br><img src="/images/python4/Q2.png" alt="Alt text"></p>
 <!-- profile.loc[['Alice', 'Bob']] -->
-<ol start="3">
-<li>打印出On_Campus为True的行：<br />
-<img src="/images/python4/Q3.png" alt="Alt text" /></li>
-</ol>
+</li>
+<li><p>打印出On_Campus为True的行：<br><img src="/images/python4/Q3.png" alt="Alt text"></p>
 <!-- profile.loc[profile.On_Campus] -->
-<ol start="4">
-<li>打印列[‘Gender’, ‘Age’]:<br />
-<img src="/images/python4/Q4.png" alt="Alt text" /></li>
-</ol>
+</li>
+<li><p>打印列[‘Gender’, ‘Age’]:<br><img src="/images/python4/Q4.png" alt="Alt text"></p>
 <!-- profile[['Gender', 'Age']] -->
-<ol start="5">
-<li>创建一个新列名为&quot;Score_Plus&quot;，值为每个人的Score都加5：<br />
-<img src="/images/python4/Q5.png" alt="Alt text" /></li>
-</ol>
+</li>
+<li><p>创建一个新列名为”Score_Plus”，值为每个人的Score都加5：<br><img src="/images/python4/Q5.png" alt="Alt text"></p>
 <!-- profile['Score_Plus'] = profile.Score + 5 -->
 <!-- profile -->
+</li>
+</ol>
 
       </div>
       
@@ -501,6 +480,12 @@ print(df.rename(columns = {'pop': 'population'}))
     <!-- 上一篇文章和下一篇文章 -->
     
       <div class="post-nav">
+
+  <div class="post-nav-prev post-nav-item">
+    <a href="/2020/12/07/Python5-Pandas-ReadWriteFile/">
+      上一篇:    5. Python-Pandas读写文件
+    </a>
+  </div>
 
 
 

@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html>
+  
+
+
+
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <link rel="stylesheet" href="/css/tomorrow-night.css" media="screen" type="text/css">
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+  <title>6. Python-Pandas数据前期处理 | 雪梨猴的小站</title>
+  
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
+  <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/css/animate.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+
+  
+    <link rel="stylesheet" href="/js/fancybox/jquery.fancybox.min.css">
+  
+  
+  <style>
+        @media (max-width: 992px) {
+            #waifu {
+                display: none;
+            }
+        }
+    </style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+  <script src="/js/jquery3.5.1.js"></script>
+  <script src="/js/vue2.6.11.js"></script>
+  <body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="header bg-color"
+  style="position: fixed; 
+  left: 0; top: 0; z-index: 10;width: 100%;"
+>
+  <div class="header-content">
+    <div class="bars">
+      <div id="appDrawer" class="sidebar-image">
+  <i class="fa fa-bars" aria-hidden="true" @click="showDialogDrawer"></i>
+  <div class="drawer-box_mask" v-cloak style="display: none;" v-show="visible" @click.self="cancelDialogDrawer">
+  </div>
+  <div class="drawer-box" :class="{'active': visible}">
+    <div class="drawer-box-head bg-color">
+      <h3 class="drawer-box-head_title">雪梨猴的小站</h3>
+      <h5 class="drawer-box-head_desc"></h5>
+    </div>
+    <div class="drawer-box-content">
+      <ul class="drawer-box-content_menu">
+        
+          <li class="drawer-box-content_item">
+            <a href="/" class="menu-item-link">
+              
+                <i class="fa fa-home" aria-hidden="true"></i>
+              
+              <span>首页</span>
+            </a>
+          </li>
+        
+          <li class="drawer-box-content_item">
+            <a href="/archives" class="menu-item-link">
+              
+                <i class="fa fa-home" aria-hidden="true"></i>
+              
+              <span>归档</span>
+            </a>
+          </li>
+        
+          <li class="drawer-box-content_item">
+            <a href="/tags" class="menu-item-link">
+              
+                <i class="fa fa-tags" aria-hidden="true"></i>
+              
+              <span>标签</span>
+            </a>
+          </li>
+        
+          <li class="drawer-box-content_item">
+            <a href="/categories" class="menu-item-link">
+              
+                <i class="fa fa-bookmark" aria-hidden="true"></i>
+              
+              <span>分类</span>
+            </a>
+          </li>
+        
+          <li class="drawer-box-content_item">
+            <a href="/about" class="menu-item-link">
+              
+                <i class="fa fa-user" aria-hidden="true"></i>
+              
+              <span>关于</span>
+            </a>
+          </li>
+        
+          <li class="drawer-box-content_item">
+            <a href="/link" class="menu-item-link">
+              
+                <i class="fa fa-link" aria-hidden="true"></i>
+              
+              <span>常用</span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+  var body = document.body || document.documentElement || window;
+  var vm = new Vue({
+    el: '#appDrawer',
+    data: {
+      visible: false,
+      top: 0,
+    },
+    computed: {
+    },
+    mounted() {
+    },
+    methods: {
+      showDialogDrawer() {
+        this.visible = true;
+        // 防止页面滚动，只能让弹框滚动
+        this.top = $(document).scrollTop()
+        body.style.cssText = 'width: 100%; height: 100%; position: fixed; top: -' + this.top  + 'px; left: 0; overflow: hidden;';
+      },
+      cancelDialogDrawer() {
+        this.visible = false;
+        body.removeAttribute('style');
+        $(document).scrollTop(this.top)
+      }
+    },
+    created() {}
+  })
+</script>
+
+    </div>
+    <div class="blog-title" id="author-avatar">
+      <a href="/" class="logo">雪梨猴的小站</a>
+    </div>
+    <nav class="navbar">
+      <ul class="menu">
+        
+          <li class="menu-item">
+            <a href="/" class="menu-item-link">
+              
+                <i class="fa fa-home" aria-hidden="true"></i>
+              
+              <span>首页</span>
+            </a>
+          </li>
+        
+          <li class="menu-item">
+            <a href="/archives" class="menu-item-link">
+              
+                <i class="fa fa-archive" aria-hidden="true"></i>
+              
+              <span>归档</span>
+            </a>
+          </li>
+        
+          <li class="menu-item">
+            <a href="/tags" class="menu-item-link">
+              
+                <i class="fa fa-tags" aria-hidden="true"></i>
+              
+              <span>标签</span>
+            </a>
+          </li>
+        
+          <li class="menu-item">
+            <a href="/categories" class="menu-item-link">
+              
+                <i class="fa fa-bookmark" aria-hidden="true"></i>
+              
+              <span>分类</span>
+            </a>
+          </li>
+        
+          <li class="menu-item">
+            <a href="/about" class="menu-item-link">
+              
+                <i class="fa fa-user" aria-hidden="true"></i>
+              
+              <span>关于</span>
+            </a>
+          </li>
+        
+          <li class="menu-item">
+            <a href="/link" class="menu-item-link">
+              
+                <i class="fa fa-link" aria-hidden="true"></i>
+              
+              <span>常用</span>
+            </a>
+          </li>
+        
+      </ul>
+      
+        <div id="appSearch">
+  <div class="search"  @click="showDialog()"><i class="fa fa-search" aria-hidden="true"></i></div>
+  <div class="message-box_wrapper" style="display: none;" v-cloak v-show="dialogVisible" @click.self="cancelDialogVisible()">
+    <div class="message-box">
+      <h2>
+        <i class="fa fa-search" aria-hidden="true"></i>
+        <span class="title">搜索</span>
+      </h2>
+      <form class="site-search-form">
+        <input type="text"
+          placeholder="请输入关键字"
+          id="local-search-input" 
+          @click="getSearchFile()"
+          class="st-search-input"
+          v-model="searchInput"
+        />
+      </form>
+      <div class="result-wrapper">
+        <div id="local-search-result" class="local-search-result-cls"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/js/local_search.js"></script>
+<script>
+  var body = document.body || document.documentElement || window;
+  var vm = new Vue({
+    el: '#appSearch',
+    data: {
+      dialogVisible: false,
+      searchInput: '',
+      top: 0,
+    },
+    computed: {
+    },
+    mounted() {
+    },
+    methods: {
+      showDialog() {
+        this.dialogVisible = true;
+        // 防止页面滚动，只能让弹框滚动
+        this.top = $(document).scrollTop()
+        body.style.cssText = 'width: 100%; height: 100%; position: fixed; top: -' + this.top  + 'px; left: 0; overflow: hidden;';
+      },
+      getSearchFile() {
+        if (!this.searchInput) {
+          getSearchFile();
+        }
+      },
+      cancelDialogVisible() {
+        this.dialogVisible = false;
+        body.removeAttribute('style');
+        $(document).scrollTop(this.top)
+      },
+    },
+    created() {}
+  })
+</script>
+<!-- 解决刷新页面闪烁问题，可以在元素上添加display: none, 或者用vue.extend方法，详情：https://blog.csdn.net/qq_31393401/article/details/81017912 -->
+<!-- 下面是搜索基本写法 -->
+<!-- <script type="text/javascript" id="local.search.active">
+  var inputArea = document.querySelector("#local-search-input");
+  inputArea.onclick   = function(){ getSearchFile(); this.onclick = null }
+  inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
+</script> -->
+
+      
+    </nav>
+  </div>
+</header>
+
+    <main class="main" style="margin-top: 60px;">
+      
+
+<div class="row justify-center">
+  <div class="main-content">
+    <article class="post post-detail">
+      
+        <div class="post-title">
+          6. Python-Pandas数据前期处理
+        </div>
+      
+
+      <div class="post-meta">
+
+      
+        Sherry
+        <h>|</h>
+      
+
+      
+        <span class="post-time">2020-12-07</span>
+        <h>|</h>
+      
+
+        
+          
+            <a href="/categories/Python/" class="">
+              Python
+            </a>
+          
+          <h>|</h>
+        
+
+        
+      </div>
+      <div class="post-content">
+        <p>在进入分析之前，我们通常要对获取的数据进行清理和处理，也就是大家常说的Data Cleaning。也是数据的前期处理，处理成我们所需要的数据，这个处理步骤需要非常细心，因为处理得当与否直接决定后续的分析是否准确，所以要多加检查，尽量没做完一步都检查一下自己的目的是否正确达到。<br><a id="more"></a></p>
+<h2 id="数据选取"><a href="#数据选取" class="headerlink" title="数据选取"></a>数据选取</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>代码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>用列名选取一些列</td>
+<td><code>df[[&#39;col1&#39;, &#39;col2&#39;]]</code></td>
+</tr>
+<tr>
+<td>用列的位置选取一些列</td>
+<td><code>df.iloc[:, 0:2]</code></td>
+</tr>
+<tr>
+<td>用index名选取一些行</td>
+<td><code>df.loc[[&#39;row1&#39;, &#39;row2&#39;]]</code></td>
+</tr>
+<tr>
+<td>用index的位置选取一些行</td>
+<td><code>df.iloc[0:2, :]</code>或者<code>df[0:2]</code></td>
+</tr>
+<tr>
+<td>选择符合条件的行</td>
+<td><code>df[df.col1 != 0]</code></td>
+</tr>
+<tr>
+<td>将DataFrame按照某一列或多列排序</td>
+<td><code>df.sort_values(by = &#39;col1&#39;)</code></td>
+</tr>
+<tr>
+<td>按列名去掉一些列</td>
+<td><code>df.drop([&#39;col1&#39;, &#39;col2&#39;], axis = 1)</code></td>
+</tr>
+<tr>
+<td>按列位置去掉一些列</td>
+<td><code>df.drop(df.columns[0:2], axis = 1)</code></td>
+</tr>
+<tr>
+<td>按index名去掉一些行</td>
+<td><code>df.drop([&#39;row1&#39;, &#39;row2&#39;], axis = 0)</code></td>
+</tr>
+<tr>
+<td>按index位置去掉一些列</td>
+<td><code>df.drop(df.index[0:5], axis = 0)</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="转换类型"><a href="#转换类型" class="headerlink" title="转换类型"></a>转换类型</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>代码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>string to int</td>
+<td><code>df.col.astype(int)</code></td>
+</tr>
+<tr>
+<td>int to string</td>
+<td><code>df.col.astype(str)</code></td>
+</tr>
+<tr>
+<td>string to float</td>
+<td><code>df.col.astype(float)</code></td>
+</tr>
+<tr>
+<td>float to string</td>
+<td><code>df.col.astype(str)</code></td>
+</tr>
+<tr>
+<td>string to date</td>
+<td><code>pd.to_datetime(df.col, ...) #参数参考官方文档</code></td>
+</tr>
+<tr>
+<td>int to date</td>
+<td><code>pd.to_datetime(df.col, ...) #参数参考官方文档</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="数据合并"><a href="#数据合并" class="headerlink" title="数据合并"></a>数据合并</h2><h3 id="Merge"><a href="#Merge" class="headerlink" title="Merge"></a>Merge</h3><pre><code class="lang-python">import pandas as pd
+
+df1 = pd.DataFrame({&#39;key&#39;: [&#39;b&#39;, &#39;b&#39;, &#39;a&#39;, &#39;c&#39;, &#39;a&#39;, &#39;a&#39;, &#39;b&#39;],
+                    &#39;data1&#39;: range(0, 7)})
+df2 = pd.DataFrame({&#39;key&#39;: [&#39;a&#39;, &#39;b&#39;, &#39;d&#39;],
+                   &#39;data2&#39;: range(0, 3)})
+
+pd.merge(df1, df2, on = &#39;key&#39;) # 默认是inner join，取键的交集，默认把重叠的列名当作键
+pd.merge(df1, df2, on = &#39;key&#39;, how = &#39;outer&#39;) # outer join，取键的并集
+pd.merge(df1, df2, on = &#39;key&#39;, how = &#39;left&#39;) # left join，保留左边DataFrame的全部键
+pd.merge(df1, df2, on = &#39;key&#39;, how = &#39;right&#39;) # right join，保留右边DataFrame的全部键
+
+# 如果两个DataFrame没有相同的列名当作键，可分别指定
+df3 = pd.DataFrame({&#39;key1&#39;: [&#39;b&#39;, &#39;b&#39;, &#39;a&#39;, &#39;c&#39;, &#39;a&#39;, &#39;a&#39;, &#39;b&#39;],
+                    &#39;data1&#39;: range(0, 7)})
+df4 = pd.DataFrame({&#39;key2&#39;: [&#39;a&#39;, &#39;b&#39;, &#39;d&#39;],
+                   &#39;data2&#39;: range(0, 3)})
+pd.merge(df3, df4, left_on = &#39;key1&#39;, right_on = &#39;key2&#39;, how = &#39;outer&#39;)
+
+# 如果两个DataFrame有重叠的列名，但不是当作键使用，需要分别保留下来，可添加后缀
+df5 = pd.DataFrame({&#39;key1&#39;: [&#39;foo&#39;, &#39;foo&#39;, &#39;bar&#39;],
+                    &#39;key2&#39;: [&#39;one&#39;, &#39;two&#39;, &#39;one&#39;],
+                    &#39;data1&#39;: [1, 2, 3]})
+df6 = pd.DataFrame({&#39;key1&#39;: [&#39;foo&#39;, &#39;foo&#39;, &#39;bar&#39;, &#39;bar&#39;],
+                    &#39;key2&#39;: [&#39;one&#39;, &#39;two&#39;, &#39;one&#39;, &#39;one&#39;],
+                    &#39;data2&#39;: [4, 5, 6, 7]})
+pd.merge(df5, df6, on = &#39;key1&#39;, suffixes = [&#39;_left&#39;, &#39;_right&#39;])
+
+# 按照index进行merge
+pd.merge(df5, df6, left_index = True, right_index = True, how = &#39;outer&#39;)
+</code></pre>
+<h3 id="Concat"><a href="#Concat" class="headerlink" title="Concat"></a>Concat</h3><p>行堆积</p>
+<pre><code class="lang-python">df1 = pd.DataFrame({&#39;A&#39;: [&#39;A0&#39;, &#39;A1&#39;, &#39;A2&#39;, &#39;A3&#39;],
+                    &#39;B&#39;: [&#39;B0&#39;, &#39;B1&#39;, &#39;B2&#39;, &#39;B3&#39;],
+                    &#39;C&#39;: [&#39;C0&#39;, &#39;C1&#39;, &#39;C2&#39;, &#39;C3&#39;],
+                    &#39;D&#39;: [&#39;D0&#39;, &#39;D1&#39;, &#39;D2&#39;, &#39;D3&#39;]},
+                    index=[0, 1, 2, 3])
+
+
+df2 = pd.DataFrame({&#39;A&#39;: [&#39;A4&#39;, &#39;A5&#39;, &#39;A6&#39;, &#39;A7&#39;],
+                    &#39;B&#39;: [&#39;B4&#39;, &#39;B5&#39;, &#39;B6&#39;, &#39;B7&#39;],
+                    &#39;C&#39;: [&#39;C4&#39;, &#39;C5&#39;, &#39;C6&#39;, &#39;C7&#39;],
+                    &#39;D&#39;: [&#39;D4&#39;, &#39;D5&#39;, &#39;D6&#39;, &#39;D7&#39;]},
+                    index=[0, 1, 2, 3])
+
+
+df3 = pd.DataFrame({&#39;A&#39;: [&#39;A8&#39;, &#39;A9&#39;, &#39;A10&#39;, &#39;A11&#39;],
+                    &#39;B&#39;: [&#39;B8&#39;, &#39;B9&#39;, &#39;B10&#39;, &#39;B11&#39;],
+                    &#39;C&#39;: [&#39;C8&#39;, &#39;C9&#39;, &#39;C10&#39;, &#39;C11&#39;],
+                    &#39;D&#39;: [&#39;D8&#39;, &#39;D9&#39;, &#39;D10&#39;, &#39;D11&#39;]},
+                    index=[2, 3, 4, 5])
+pd.concat([df1, df2, df3]) # 方式一，添加参数 ignore_index=True 使index重新生成
+df1.append(df2).append(df3) # 方式二
+</code></pre>
+<p><img src="/images/python6/merge_concat.png" alt="Alt text"></p>
+<hr>
+<p>列堆积</p>
+<pre><code class="lang-python">df4 = pd.DataFrame({&#39;B&#39;: [&#39;B2&#39;, &#39;B3&#39;, &#39;B6&#39;, &#39;B7&#39;],
+                    &#39;D&#39;: [&#39;D2&#39;, &#39;D3&#39;, &#39;D6&#39;, &#39;D7&#39;],
+                    &#39;F&#39;: [&#39;F2&#39;, &#39;F3&#39;, &#39;F6&#39;, &#39;F7&#39;]},
+                    index=[2, 3, 6, 7])
+pd.concat([df1, df4], axis = 1)
+</code></pre>
+<p><img src="/images/python6/merge_concat_col.png" alt="Alt text"></p>
+<h2 id="填充缺失"><a href="#填充缺失" class="headerlink" title="填充缺失"></a>填充缺失</h2><pre><code class="lang-python">df = pd.DataFrame([[np.nan, 2, np.nan, 0],
+                   [3, 4, np.nan, 1],
+                   [np.nan, np.nan, np.nan, 5],
+                   [np.nan, 3, np.nan, 4]],
+                  columns = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;])
+# 寻找缺失的行和列
+df.isnull() # 查看每个值
+df.isnull().any(axis = 0) # 哪些列含有至少一个空值，可作为筛选的条件
+df.isnull().any(axis = 1) # 哪些行含有至少一个空值，可作为筛选的条件
+df.isnull().all(axis = 0) # 哪些列全部都是空值，可作为筛选的条件
+df.isnull().all(axis = 1) # 哪些行全部都是空值，可作为筛选的条件
+df.loc[:, df.isnull().all(axis = 0)]
+
+# 填充
+df.fillna(0) # 用0填充
+df.fillna(method = &#39;ffill&#39;) # 用前一个值填充
+df.fillna(value = {&#39;A&#39;: 0, &#39;B&#39;: 1, &#39;C&#39;: 2, &#39;D&#39;: 3}) # 不同列的NaN值用不同的值填充
+df.fillna(value = {&#39;A&#39;: 0, &#39;B&#39;: 1, &#39;C&#39;: 2, &#39;D&#39;: 3}, limit = 1) # 每列只填充第一个NaN值
+
+# 丢掉含有缺失的行，不声明axis就是默认对行进行操作
+df.dropna(how = &#39;any&#39;) # 只要含有NaN的行就去掉
+df.dropna(how = &#39;all&#39;) # 要全是NaN的行才去掉
+df.dropna(thresh = 2)  # 留下至少2个非空的的行
+df.dropna(how = &#39;any&#39;, subset = [&#39;A&#39;, &#39;B&#39;]) # 只在乎其中几列的空缺情况
+</code></pre>
+<h2 id="描述统计"><a href="#描述统计" class="headerlink" title="描述统计"></a>描述统计</h2><pre><code class="lang-python">df = pd.read_csv(&#39;https://raw.githubusercontent.com/justmarkham/DAT8/master/data/u.user&#39;,
+                  sep = &#39;|&#39;,
+                  index_col = &#39;user_id&#39;)
+df.sort_values(by = &#39;zip_code&#39;) # 将整个DataFrame按照某一列排序，查看tail，找到分界点
+new_df = df.loc[df.zip_code &lt;= &#39;99835&#39;].copy() # 将正常的部分截取
+new_df.zip_code = new_df.zip_code.astype(int) # 将zip_code转化为integer
+
+new_df.describe() # 整个DataFrame的数值型列的统计
+new_df.gender.describe() # 单列的统计
+new_df.gender.nunique() # 这一列就多少个unique的值，一般用于类型为字符串的列
+new_df.gender.value_counts() # 每个unique值的出现频率，一般用于类型为字符串的列
+</code></pre>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明 （基本都是对列进行操作）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>count</td>
+<td>非空值的数量</td>
+</tr>
+<tr>
+<td>min, max</td>
+<td>计算最小值和最大值</td>
+</tr>
+<tr>
+<td>argmin, argmax</td>
+<td>最小值和最大值的索引位置</td>
+</tr>
+<tr>
+<td>idxmin, idxmax</td>
+<td>最小值和最大值的索引值</td>
+</tr>
+<tr>
+<td>quantile</td>
+<td>分位数</td>
+</tr>
+<tr>
+<td>sum</td>
+<td>求和</td>
+</tr>
+<tr>
+<td>mean</td>
+<td>求mean</td>
+</tr>
+<tr>
+<td>median</td>
+<td>求median</td>
+</tr>
+<tr>
+<td>var</td>
+<td>求方差</td>
+</tr>
+<tr>
+<td>std</td>
+<td>求标准差</td>
+</tr>
+<tr>
+<td>skew</td>
+<td>求偏度</td>
+</tr>
+<tr>
+<td>kurt</td>
+<td>求峰度</td>
+</tr>
+<tr>
+<td>cumsum</td>
+<td>求累计和</td>
+</tr>
+<tr>
+<td>cummin，cummax</td>
+<td>累计最小值和累计最大值</td>
+</tr>
+<tr>
+<td>cumprod</td>
+<td>累计积</td>
+</tr>
+<tr>
+<td>diff</td>
+<td>一阶差分（对时间序列很有用）</td>
+</tr>
+<tr>
+<td>pct_change</td>
+<td>百分数变化（自动用前一个数填充空值）</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+      </div>
+      
+    </article>
+    <!-- 上一篇文章和下一篇文章 -->
+    
+      <div class="post-nav">
+
+
+
+  <div class="post-nav-next post-nav-item">
+    <a href="/2020/12/07/Python5-Pandas-ReadWriteFile/">
+      <span>
+        下一篇:    5. Python-Pandas读写文件 
+      </span>
+    </a>
+  </div>
+
+</div>
+
+    
+
+
+    <!-- 打赏 -->
+    
+
+    <!-- 分享 -->
+    
+
+    <!-- 评论 -->
+      
+        
+          <section id="comments" style="padding: 1em; background: rgba(255, 255, 255, 0.5); margin: 15px auto;" data-aos="fade-up">
+	<div id="vcomment" class="comment"></div>
+	<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js"></script>
+	<script>
+		new Valine({
+			el: '#vcomment',
+			notify: false,
+			verify: false,
+			app_id: "JeKrrf8cKxqcE2RM1Prfurdo-gzGzoHsz",
+			app_key: "49yq63vrEbnLYo5MwEG2Ktao",
+			placeholder: "",
+			avatar: ""
+		});
+	</script>
+</section>
+
+        
+      
+  </div>
+
+
+
+  
+    <div class="toc-aside">
+      <div class="toc-main">
+        <div class="toc-aside-title">
+          <i class="fa fa-list-ul" aria-hidden="true"></i><span>目录</span>
+        </div>
+        <div class="toc-content">
+          <link href="/js/tocbot/tocbot.css" rel="stylesheet">
+<script src="/js/tocbot/tocbot.min.js"></script>
+<div class="toc"></div>
+
+<script>
+  if ($('.toc').length > 0) {
+    var headerEl = 'h2, h3, h4',  //headers 
+      content = '.post-detail',//文章容器
+      idArr = {};  //标题数组以确定是否增加索引id
+      //add #id
+
+    $(content).children(headerEl).each(function () {
+      //去除空格以及多余标点
+      var headerId = $(this).text().replace(/[\s|\~|`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\_|\+|\=|\||\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?|\：|\，|\。]/g, '');
+
+      headerId = headerId.toLowerCase();
+      if (idArr[headerId]) {
+        //id已经存在
+        $(this).attr('id', headerId + '-' + idArr[headerId]);
+        idArr[headerId]++;
+      }
+      else {
+        //id未存在
+        idArr[headerId] = 1;
+        $(this).attr('id', headerId);
+      }
+    });
+
+    tocbot.init({
+      // Where to render the table of contents.
+      tocSelector: '.toc',
+      // Where to grab the headings to build the table of contents.
+      contentSelector: content,
+      // Which headings to grab inside of the contentSelector element.
+      headingSelector: headerEl,
+      scrollSmooth: true,
+      scrollSmoothOffset: -80,
+      headingsOffset: 130,
+      positionFixedSelector: '.toc-main',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  }
+
+</script>
+
+<style>
+.is-position-fixed {
+  position:fixed !important;
+  top: 64px;
+}
+
+</style>
+        </div>
+      </div>
+    </div>
+  
+</div>
+
+    </main>
+    <script src="/js/prettify.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+ $('pre').addClass('prettyprint linenums');
+ $('code').addClass('prettyprint');
+ prettyPrint();
+ })
+</script>
+
+<div class="footer bg-color">
+  <div class="footer-main">
+    <div class="link">
+      <a href="mailto:pearmonkeyhou@gmail.com" target="_blank" rel="noopener">
+        <i class="fa fa-envelope-o" aria-hidden="true"></i>
+      </a>
+      <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=270052740" target="_blank" rel="noopener">
+        <i class="fa fa-qq" aria-hidden="true"></i>
+      </a>
+      <a href="/atom.xml" target="_blank">
+        <i class="fa fa-rss" aria-hidden="true"></i>
+      </a>
+    </div>
+    <div class="footer-copyright">
+      Copyright © 2019 - 2021 | 雪梨猴 | Powered by <a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">Hexo</a>
+    </div>
+    
+  </div>
+</div>
+
+
+    
+      <div class="goTop bg-color">
+  <i class="fa fa-arrow-up" aria-hidden="true"></i>
+</div>
+<script src="/js/goTop.js"></script>
+    
+
+    
+
+    <!-- 图片放大 -->
+    
+      <script src="/js/fancybox/jquery.fancybox.min.js"></script>
+<script src="/js/wrapImage.js"></script>
+    
+
+    <!-- 爱心点击 -->
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+
+    <script type="text/javascript" size="100" alpha='0.4' zIndex="-1" src="/js/ribbon.min.js"></script>
+    
+
+    
+
+    <!-- 输入框打字特效 -->
+    
+      <script src="/js/activate-power-mode.js"></script>
+      <script>
+          POWERMODE.colorful = true;  // 打开随机颜色特效
+          POWERMODE.shake = false;    // 关闭输入框抖动
+          document.body.addEventListener('input', POWERMODE);//监听打字事件
+      </script>
+    
+
+    <!-- markdown代码一键复制功能
+    <!--
+    <script src="/js/clipboard/clipboard.min.js"></script>
+    <script>
+      !function (e, t, a) {
+        var copy = '复制';
+        /* code */
+        var initCopyCode = function(){
+          var copyHtml = '';
+          copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+          copyHtml += '<i class="fa fa-globe"></i><span>' + copy + '</span>';
+          copyHtml += '</button>';
+          $(".post-detail pre code").before(copyHtml);
+          new ClipboardJS('.btn-copy', {
+              target: function(trigger) {
+                  return trigger.nextElementSibling;
+              }
+          });
+        }
+        initCopyCode();
+      }(window, document);
+    </script>
+  -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</body>
+</html>

@@ -313,18 +313,12 @@
         
       </div>
       <div class="post-content">
-        <p>使用Python有两种方法，一种是把所有的code都写在一个后缀名为.py文件里面，然后统一运行，这种方式适用于提交已经debug好的code到远程服务器运行；另一种是用Jupyter Notebook写一行code运行一行，方便随时查看中间结果，有问题即使解决。所以在开始学习Python的时候，强烈推荐用第二种写一行运行一行的模式。在这里介绍一下如何安装Jupyter Notebook。</p>
-<a id="more"></a>
-<p>（不需要提前给电脑安装Python）</p>
-<h2 id="下载miniconda"><a class="markdownIt-Anchor" href="#下载miniconda"></a> 下载Miniconda</h2>
-<p>无论是Windows还是MaxOS，都推荐用Conda来安装Jupyter，所以先下载一个<a href="https://docs.conda.io/en/latest/miniconda.html" target="_blank" rel="noopener">Miniconda</a>。Python2已经停止Maintain了，所以我们统一用Python3.8吧。我选择下载的是<strong>Miniconda3 Windows 64-bit</strong>，下载到桌面就行，因为安装后可以删掉。安装Miniconda时就一直点continue就行，不用修改任何地方。安装大概需要一分钟。</p>
-<h2 id="安装jupyter"><a class="markdownIt-Anchor" href="#安装jupyter"></a> 安装Jupyter</h2>
-<p>如果你时Win10的系统，在左下角的搜索框里输入anaconda，点击<strong>Anaconda Prompt (miniconda3)</strong>，会弹出黑色的命令行框，输入<code>conda install -c conda-forge notebook</code>，按回车，等待安装，出现需要输入Y/N，输入Y再回车。安装完后，输入<code>jupyter notebook</code>再回车，这时候你会发现浏览器打开了一个网页，这就是安装成功啦~~~</p>
-<h2 id="运行python"><a class="markdownIt-Anchor" href="#运行python"></a> 运行Python</h2>
-<p>黑色的命令行框，也叫cmd（全称时command），就是一个<strong>服务器</strong>；Jupyter自动打开的网页，相当于一个<strong>客户端</strong>，我们是通过这个网页来让服务器运行我们的代码。所以，在网页运行程序的时候，我们要保持服务器（cmd）开着，可以最小化。当我们结束了之后，就可以关闭cmd了。</p>
+        <p>使用Python有两种方法，一种是把所有的code都写在一个后缀名为.py文件里面，然后统一运行，这种方式适用于提交已经debug好的code到远程服务器运行；另一种是用Jupyter Notebook写一行code运行一行，方便随时查看中间结果，有问题即使解决。所以在开始学习Python的时候，强烈推荐用第二种写一行运行一行的模式。在这里介绍一下如何安装Jupyter Notebook。<br><a id="more"></a><br>（不需要提前给电脑安装Python）</p>
+<h2 id="下载Miniconda"><a href="#下载Miniconda" class="headerlink" title="下载Miniconda"></a>下载Miniconda</h2><p>无论是Windows还是MaxOS，都推荐用Conda来安装Jupyter，所以先下载一个<a href="https://docs.conda.io/en/latest/miniconda.html" target="_blank" rel="noopener">Miniconda</a>。Python2已经停止Maintain了，所以我们统一用Python3.8吧。我选择下载的是<strong>Miniconda3 Windows 64-bit</strong>，下载到桌面就行，因为安装后可以删掉。安装Miniconda时就一直点continue就行，不用修改任何地方。安装大概需要一分钟。</p>
+<h2 id="安装Jupyter"><a href="#安装Jupyter" class="headerlink" title="安装Jupyter"></a>安装Jupyter</h2><p>如果你时Win10的系统，在左下角的搜索框里输入anaconda，点击<strong>Anaconda Prompt (miniconda3)</strong>，会弹出黑色的命令行框，输入<code>conda install -c conda-forge notebook</code>，按回车，等待安装，出现需要输入Y/N，输入Y再回车。安装完后，输入<code>jupyter notebook</code>再回车，这时候你会发现浏览器打开了一个网页，这就是安装成功啦~~~</p>
+<h2 id="运行Python"><a href="#运行Python" class="headerlink" title="运行Python"></a>运行Python</h2><p>黑色的命令行框，也叫cmd（全称时command），就是一个<strong>服务器</strong>；Jupyter自动打开的网页，相当于一个<strong>客户端</strong>，我们是通过这个网页来让服务器运行我们的代码。所以，在网页运行程序的时候，我们要保持服务器（cmd）开着，可以最小化。当我们结束了之后，就可以关闭cmd了。</p>
 <p>在Jupyter打开的网页中，能看到电脑的各个文件夹，我们可以先新建一个folder用于储存代码（在桌面或者文件夹里完成），再从网页中进入这个folder，然后点击右上角的new button，选择Python3，这样就建好了一个notebook，就可以开始写代码了。</p>
-<h2 id="安装package"><a class="markdownIt-Anchor" href="#安装package"></a> 安装package</h2>
-<p>如果需要安装package（我们会需要安装pandas和numpy），在左下角的搜索框里输入anaconda，点击<strong>Anaconda Prompt (miniconda3)</strong>，会弹出cmd，输入<code>conda install pandas</code>或者<code>conda install numpy</code>，按回车后等待安装。安装完后，在jupyter点击restart，就可以写<code>import pandas</code>导入刚刚安装的package啦~</p>
+<h2 id="安装package"><a href="#安装package" class="headerlink" title="安装package"></a>安装package</h2><p>如果需要安装package（我们会需要安装pandas和numpy），在左下角的搜索框里输入anaconda，点击<strong>Anaconda Prompt (miniconda3)</strong>，会弹出cmd，输入<code>conda install pandas</code>或者<code>conda install numpy</code>，按回车后等待安装。安装完后，在jupyter点击restart，就可以写<code>import pandas</code>导入刚刚安装的package啦~</p>
 
       </div>
       

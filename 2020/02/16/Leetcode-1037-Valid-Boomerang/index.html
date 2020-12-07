@@ -317,34 +317,26 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接httpsleetcodecomproblemsvalid-boomerang"><a class="markdownIt-Anchor" href="#题目链接httpsleetcodecomproblemsvalid-boomerang"></a> 题目链接https://leetcode.com/problems/valid-boomerang/</h2>
-<h2 id="题目难度easy-376"><a class="markdownIt-Anchor" href="#题目难度easy-376"></a> 题目难度Easy 37.6%</h2>
-<a id="more"></a>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<p>A boomerang is a set of 3 points that are all distinct and not in a straight line.</p>
+        <h2 id="题目链接https-leetcode-com-problems-valid-boomerang"><a href="#题目链接https-leetcode-com-problems-valid-boomerang" class="headerlink" title="题目链接https://leetcode.com/problems/valid-boomerang/"></a>题目链接<a href="https://leetcode.com/problems/valid-boomerang/" target="_blank" rel="noopener">https://leetcode.com/problems/valid-boomerang/</a></h2><h2 id="题目难度Easy-37-6"><a href="#题目难度Easy-37-6" class="headerlink" title="题目难度Easy 37.6%"></a>题目难度Easy 37.6%</h2><a id="more"></a>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>A boomerang is a set of 3 points that are all distinct and not in a straight line.</p>
 <p>Given a list of three points in the plane, return whether these points are a boomerang.</p>
 <p>Example 1:</p>
-<pre class="highlight"><code class="">Input: [[1,1],[2,3],[3,2]]
+<pre><code>Input: [[1,1],[2,3],[3,2]]
 Output: true
-</code></pre>
-<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
-<p>比较垃圾的题。</p>
-<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
-<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isBoomerang</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[][] points)</span> </span>{
-        <span class="hljs-keyword">int</span>[] p1 = points[<span class="hljs-number">0</span>], p2 = points[<span class="hljs-number">1</span>], p3 = points[<span class="hljs-number">2</span>];
-        <span class="hljs-keyword">if</span>(p1[<span class="hljs-number">0</span>] == p2[<span class="hljs-number">0</span>] &amp;&amp; p1[<span class="hljs-number">1</span>] == p2[<span class="hljs-number">1</span>] || p1[<span class="hljs-number">0</span>] == p3[<span class="hljs-number">0</span>] &amp;&amp; p1[<span class="hljs-number">1</span>] == p3[<span class="hljs-number">1</span>] || p2[<span class="hljs-number">0</span>] == p3[<span class="hljs-number">0</span>] &amp;&amp; p2[<span class="hljs-number">1</span>] == p3[<span class="hljs-number">1</span>]) <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
-        <span class="hljs-keyword">if</span>(p1[<span class="hljs-number">0</span>] == p2[<span class="hljs-number">0</span>] &amp;&amp; p1[<span class="hljs-number">0</span>] == p3[<span class="hljs-number">0</span>]) <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
-        <span class="hljs-keyword">if</span>(p1[<span class="hljs-number">1</span>] == p2[<span class="hljs-number">1</span>] &amp;&amp; p1[<span class="hljs-number">1</span>] == p3[<span class="hljs-number">1</span>]) <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
-        <span class="hljs-keyword">if</span>(p1[<span class="hljs-number">0</span>] == p2[<span class="hljs-number">0</span>] || p1[<span class="hljs-number">0</span>] == p3[<span class="hljs-number">0</span>] || p2[<span class="hljs-number">0</span>] == p3[<span class="hljs-number">0</span>]) <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
-        <span class="hljs-keyword">if</span>(p1[<span class="hljs-number">1</span>] == p2[<span class="hljs-number">1</span>] || p1[<span class="hljs-number">1</span>] == p3[<span class="hljs-number">1</span>] || p2[<span class="hljs-number">1</span>] == p3[<span class="hljs-number">1</span>]) <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
-        <span class="hljs-keyword">return</span> (<span class="hljs-keyword">double</span>)(p1[<span class="hljs-number">1</span>] - p2[<span class="hljs-number">1</span>]) / (p1[<span class="hljs-number">0</span>] - p2[<span class="hljs-number">0</span>]) != (<span class="hljs-keyword">double</span>)(p1[<span class="hljs-number">1</span>] - p3[<span class="hljs-number">1</span>]) / (p1[<span class="hljs-number">0</span>] - p3[<span class="hljs-number">0</span>]);
+</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>比较垃圾的题。</p>
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre><code class="lang-java">class Solution {
+    public boolean isBoomerang(int[][] points) {
+        int[] p1 = points[0], p2 = points[1], p3 = points[2];
+        if(p1[0] == p2[0] &amp;&amp; p1[1] == p2[1] || p1[0] == p3[0] &amp;&amp; p1[1] == p3[1] || p2[0] == p3[0] &amp;&amp; p2[1] == p3[1]) return false;
+        if(p1[0] == p2[0] &amp;&amp; p1[0] == p3[0]) return false;
+        if(p1[1] == p2[1] &amp;&amp; p1[1] == p3[1]) return false;
+        if(p1[0] == p2[0] || p1[0] == p3[0] || p2[0] == p3[0]) return true;
+        if(p1[1] == p2[1] || p1[1] == p3[1] || p2[1] == p3[1]) return true;
+        return (double)(p1[1] - p2[1]) / (p1[0] - p2[0]) != (double)(p1[1] - p3[1]) / (p1[0] - p3[0]);
     }
 }
 </code></pre>
-<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
-<p>Runtime: 100.00%<br />
-Memory: 100.00%</p>
+<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 100.00%<br>Memory: 100.00%</p>
 
       </div>
       
