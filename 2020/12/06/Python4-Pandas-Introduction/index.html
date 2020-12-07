@@ -367,7 +367,7 @@ print(pd.isnull(y))
 print(y.isnull()) <span class="hljs-comment"># Series也有同样的function</span>
 print(pd.notnull(y))
 </code></pre>
-<p>Series的索引最重要的作用是，在算术运算中会按照索引自动对齐，没有对齐到的索引处用<code>NaN</code>：</p>
+<p>Series的索引最重要的作用是，在算术运算中会按照索引自动对齐，没有对齐到的索引处用<code>NaN</code>填充：</p>
 <pre class="highlight"><code class="python">x = pd.Series({<span class="hljs-string">'Jeo'</span>: <span class="hljs-number">95</span>, <span class="hljs-string">'Tom'</span>: <span class="hljs-number">85</span>, <span class="hljs-string">'Alice'</span>: <span class="hljs-number">100</span>})
 y = pd.Series({<span class="hljs-string">'Jeo'</span>: <span class="hljs-number">95</span>, <span class="hljs-string">'Tom'</span>: <span class="hljs-number">85</span>, <span class="hljs-string">'Bob'</span>: <span class="hljs-number">100</span>})
 print(x + y)
@@ -456,6 +456,12 @@ print(df.rename(columns = {'pop': 'population'}))
 <li>每一行取出来都是Series，index为原DataFrame的列索引；</li>
 <li>按条件筛选的方式与Numpy数组一样。</li>
 </ul>
+<p><strong>Pandas筛选数据的三种方式</strong></p>
+<ol>
+<li>用位置选取：选行<code>df.iloc[0:2]</code>，选列<code>df.iloc[:, 0:2]</code>；</li>
+<li>用索引值选取：选行<code>df.loc[['row1', 'row3']]</code>，选列<code>df[['col1', 'col2']]</code>；</li>
+<li>用布尔条件选取：满足条件的所有的行<code>df.loc[df.col1 &gt; 0]</code>。</li>
+</ol>
 <h1 id="小测验"><a class="markdownIt-Anchor" href="#小测验"></a> 小测验</h1>
 <ol>
 <li>创建内容如下的DataFrame命名为profile：<br />
