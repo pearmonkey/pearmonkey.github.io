@@ -317,45 +317,36 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接-httpsleetcodecomproblemsreverse-string-ii"><a class="markdownIt-Anchor" href="#题目链接-httpsleetcodecomproblemsreverse-string-ii"></a> 题目链接 <a href="https://leetcode.com/problems/reverse-string-ii/" target="_blank" rel="noopener">https://leetcode.com/problems/reverse-string-ii/</a></h2>
-<h2 id="题目难度-easy-471"><a class="markdownIt-Anchor" href="#题目难度-easy-471"></a> 题目难度 Easy 47.1%</h2>
-<a id="more"></a>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<p>Given a string and an integer k, you need to reverse the first k characters for every 2k characters counting from the start of the string. If there are less than k characters left, reverse all of them. If there are less than 2k but greater than or equal to k characters, then reverse the first k characters and left the other as original.</p>
+        <h2 id="题目链接-https-leetcode-com-problems-reverse-string-ii"><a href="#题目链接-https-leetcode-com-problems-reverse-string-ii" class="headerlink" title="题目链接 https://leetcode.com/problems/reverse-string-ii/"></a>题目链接 <a href="https://leetcode.com/problems/reverse-string-ii/" target="_blank" rel="noopener">https://leetcode.com/problems/reverse-string-ii/</a></h2><h2 id="题目难度-Easy-47-1"><a href="#题目难度-Easy-47-1" class="headerlink" title="题目难度 Easy 47.1%"></a>题目难度 Easy 47.1%</h2><a id="more"></a>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Given a string and an integer k, you need to reverse the first k characters for every 2k characters counting from the start of the string. If there are less than k characters left, reverse all of them. If there are less than 2k but greater than or equal to k characters, then reverse the first k characters and left the other as original.</p>
 <p>Example 1:</p>
-<pre class="highlight"><code class="">Input: s = &quot;abcdefg&quot;, k = 2
+<pre><code>Input: s = &quot;abcdefg&quot;, k = 2
 Output: &quot;bacdfeg&quot;
-</code></pre>
-<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
-<p>这个题目的意思是给定一个字符串s和一个整数k，把s中每2k长度的子串反转前k个字符。如果最后剩下的不足k个就全部反转，否组还是反转前k个。<br />
-这个题目收到的赞是341，踩是997，说明这道题不是一个很好考验算法的题目。我的答案是按照最简单的逻辑写的，比官方答案繁琐，但是更直接。</p>
-<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
-<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
-    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">reverseStr</span><span class="hljs-params">(String s, <span class="hljs-keyword">int</span> k)</span> </span>{
-        <span class="hljs-keyword">int</span> n = s.length();
-        StringBuilder sb = <span class="hljs-keyword">new</span> StringBuilder();
-        <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;
-        <span class="hljs-keyword">while</span>(i + <span class="hljs-number">2</span> * k &lt; n){
-            StringBuilder tmp = <span class="hljs-keyword">new</span> StringBuilder(s.substring(i, i + k));
+</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>这个题目的意思是给定一个字符串s和一个整数k，把s中每2k长度的子串反转前k个字符。如果最后剩下的不足k个就全部反转，否组还是反转前k个。<br>这个题目收到的赞是341，踩是997，说明这道题不是一个很好考验算法的题目。我的答案是按照最简单的逻辑写的，比官方答案繁琐，但是更直接。</p>
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre><code class="lang-java">class Solution {
+    public String reverseStr(String s, int k) {
+        int n = s.length();
+        StringBuilder sb = new StringBuilder();
+        int i = 0;
+        while(i + 2 * k &lt; n){
+            StringBuilder tmp = new StringBuilder(s.substring(i, i + k));
             sb.append(tmp.reverse());
-            sb.append(s.substring(i + k, i + <span class="hljs-number">2</span> * k));
-            i += <span class="hljs-number">2</span> * k;
+            sb.append(s.substring(i + k, i + 2 * k));
+            i += 2 * k;
         }
-        <span class="hljs-keyword">if</span>(i &gt; n - k){
-            StringBuilder tmp = <span class="hljs-keyword">new</span> StringBuilder(s.substring(i));
+        if(i &gt; n - k){
+            StringBuilder tmp = new StringBuilder(s.substring(i));
             sb.append(tmp.reverse());
-        } <span class="hljs-keyword">else</span> {
-            StringBuilder tmp = <span class="hljs-keyword">new</span> StringBuilder(s.substring(i, i + k));
+        } else {
+            StringBuilder tmp = new StringBuilder(s.substring(i, i + k));
             sb.append(tmp.reverse());
             sb.append(s.substring(i + k));
         }
-        <span class="hljs-keyword">return</span> sb.toString();
+        return sb.toString();
     }
 }
 </code></pre>
-<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
-<p>Runtime: 77.19%<br />
-Memory: 7.41%</p>
+<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 77.19%<br>Memory: 7.41%</p>
 
       </div>
       

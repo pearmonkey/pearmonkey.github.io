@@ -293,84 +293,7 @@
             <a class="post-title-link" href="/2020/12/09/Python7-Pandas-Grouping/">7. Python-Pandas分组和聚合</a>
           </div>
           <div class="post-content">
-            
- GroupBy
-“Split-Apply-Combine”（拆分-应用-合并），这三个词描述了整个GroupBy的过程：
-
-Splitting the data into groups based on some criteria
-Applying a function to each group independently
-Combining the results into a data structure
-
-
-In the apply step, we might wish to do one of the following:
-
-Aggregation: 为每个group计算统计量，例如，group sums/group means/group sizes/group counts
-Transformation: 每个group中的每一行都会有个计算值，例如，standardize data within a group
-Filtration: 用于去掉一些group，例如，只想留下平均分大于60的班级
-
-import pandas as pd
-df = pd.read_csv('https://raw.githubusercontent.com/yeayee/joyful-pandas/master/data/table.csv')
-df.head() # 查看前5行
-df.shape # 查看shape
-df.dtypes # 查看数据类型
-
-# 按照School分组
-df.School.value_counts() # 统计School列不同值的count
-df_single_group = df.groupby('School') # 按照School分组
-df_single_group.size() # 查看分组情况
-df_single_group.get_group('S_2') # 分别查看group的DataFrame
-
-# 按照School和Class分组
-df_multi_group = df.groupby(['School', 'Class'], dropna = True) # School为第一level，Class为第二level
-df_multi_group.size() # 查看分组情况
-df_multi_group.get_group(('S_2', 'C_1')) # 查看具体的一个分组，注意是圆括号
-
- Aggregation
-生成的结果会比原DataFrame的行数少。与R里面的dplyr的summarize类似。
-# 用Series自带的function，单个function
-df.groupby('School')['Math'].mean() # 选择感兴趣的列，进行计算，得到结果
-df.groupby('School')['Math'].std() # mean函数可以替换成任何统计描述: nth()/min()/max()
-df.groupby('School')['Math'].nlargest(3) # 每个学校的数学前三名，可替换nsmallest
-df.groupby(['School', 'Class'])['Height'].mean() # 选择感兴趣的列，进行计算，得到结果
-df.groupby(['School', 'Class'])['Height'].std() # mean函数可以替换成任何统计描述
-df.groupby(['School', 'Class'])['Height'].mean().reset_index() # 规范成DataFrame
-
-# 同时计算多个Numpy function
-df.groupby('School')['Math'].agg([np.sum, np.mean, np.std])
-df.groupby('School')['Math', 'Height'].agg([np.sum, np.mean, np.std])
-
-# 同时计算多个自定义的function
-df.groupby('School')['Math'].agg([lambda x : x.max() - x.min(),
-                                  lambda x : x.median() - x.mean()]) # 同一列使用不同的function
-df.groupby('School').agg({'Math': lambda x : x.median() - x.mean(),
-                          'Height': lambda x : x.max() - x.min()}) # 不同列使用不同的function
-
- Transformation
-生成的结果和原DataFrame的行数一样。与R里面的dplyr的mutate类似。
-import pandas as pd
-import numpy as np
-
-index = pd.date_range('10/1/1999', periods=1100)
-df = pd.DataFrame({'data': np.random.normal(0.5, 2, 1100)}, index = index)
-
-# 用存在的function
-ts.groupby(ts.index.year).transform('mean')
-ts.groupby(ts.index.year).transform('std')
-
-# 自己定义function
-ts.groupby(ts.index.year)['data'].transform(lambda x : (x - x.mean()) / x.std()) # 按年来standardize
-
- Filtration
-选择符合条件的group
-df = pd.read_csv('https://raw.githubusercontent.com/yeayee/joyful-pandas/master/data/table.csv')
-df.groupby(['School', 'Class'])['Math'].mean()
-df.groupby(['School', 'Class'])['Math'].filter(mean(x) &gt;= 60) # 只留下班级平均分大于等于60的record
-
-df = pd.DataFrame({'A': np.arange(8),
-                   'B': ['a', 'a', 'b', 'b', 'b', 'b', 'c', 'c']})
-dff.groupby('B').filter(lambda x: len(x) &gt; 2)
-
-
+            <p>GroupBy是数据处理最常用的形式之一。整个GroupBy的过程可以分为”Split-Apply-Combine”（拆分-应用-合并）三个阶段。<br>
           </div>
       </div>
 
@@ -391,7 +314,7 @@ dff.groupby('B').filter(lambda x: len(x) &gt; 2)
             <a class="post-title-link" href="/2020/12/07/Python6-Pandas-DataPreprocessing/">6. Python-Pandas数据前期处理</a>
           </div>
           <div class="post-content">
-            <p>在进入分析之前，我们通常要对获取的数据进行清理和处理，也就是大家常说的Data Cleaning。也是数据的前期处理，处理成我们所需要的数据，这个处理步骤需要非常细心，因为处理得当与否直接决定后续的分析是否准确，所以要多加检查，尽量没做完一步都检查一下自己的目的是否正确达到。</p>
+            <p>在进入分析之前，我们通常要对获取的数据进行清理和处理，也就是大家常说的Data Cleaning。也是数据的前期处理，处理成我们所需要的数据，这个处理步骤需要非常细心，因为处理得当与否直接决定后续的分析是否准确，所以要多加检查，尽量没做完一步都检查一下自己的目的是否正确达到。<br>
           </div>
       </div>
 
@@ -412,7 +335,7 @@ dff.groupby('B').filter(lambda x: len(x) &gt; 2)
             <a class="post-title-link" href="/2020/12/07/Python5-Pandas-ReadWriteFile/">5. Python-Pandas读写文件</a>
           </div>
           <div class="post-content">
-            <p>如果不能将数据导入导出Python，那学习Numpy和Pandas也就没什么意义了。所以本教程将着重介绍Pandas的输入输出函数，这些函数将表格型数据直接读取为DataFrame。</p>
+            <p>如果不能将数据导入导出Python，那学习Numpy和Pandas也就没什么意义了。所以本教程将着重介绍Pandas的输入输出函数，这些函数将表格型数据直接读取为DataFrame。<br>
           </div>
       </div>
 
@@ -433,7 +356,7 @@ dff.groupby('B').filter(lambda x: len(x) &gt; 2)
             <a class="post-title-link" href="/2020/12/06/Python4-Pandas-Introduction/">4. Python-Pandas介绍</a>
           </div>
           <div class="post-content">
-            <p>终于来到了这次学习的重点——Pandas，之前的教程都是为使用Pandas而打下的基础。Pandas是基于Numpy构建的，让以Numpy为中心的应用变得更简单。</p>
+            <p>终于来到了这次学习的重点——Pandas，之前的教程都是为使用Pandas而打下的基础。Pandas是基于Numpy构建的，让以Numpy为中心的应用变得更简单。<br>
           </div>
       </div>
 
@@ -454,7 +377,7 @@ dff.groupby('B').filter(lambda x: len(x) &gt; 2)
             <a class="post-title-link" href="/2020/12/03/Python3-Numpy/">3. Python-Numpy介绍</a>
           </div>
           <div class="post-content">
-            <p>Numpy（Numerical Python的简称）是高性能科学计算和数据分析的基础包。Numpy本身没有提供多么高级的数据分析功能，但是理解Numpy数组和面向数组的计算将有助于高效的使用Pandas Dataframe。我们主要学习数据整理、子集构造和过滤、转换等矢量化数组运算。</p>
+            <p>Numpy（Numerical Python的简称）是高性能科学计算和数据分析的基础包。Numpy本身没有提供多么高级的数据分析功能，但是理解Numpy数组和面向数组的计算将有助于高效的使用Pandas Dataframe。我们主要学习数据整理、子集构造和过滤、转换等矢量化数组运算。<br>
           </div>
       </div>
 
@@ -475,7 +398,7 @@ dff.groupby('B').filter(lambda x: len(x) &gt; 2)
             <a class="post-title-link" href="/2020/12/02/Python2-List-Loop/">2. Python-基础知识进阶</a>
           </div>
           <div class="post-content">
-            <p>如果用Python作为数据处理和分析的工具，很多功能就不用立马掌握了，例如：面向对象编程，进程和线程。这些功能对于一个Data Scientist可以说是几乎用不到（虽然很多网上的教程都会讲这些，但是就个人经验而言，这些知识并不是必须的，如果遇到可以再学）。</p>
+            <p>如果用Python作为数据处理和分析的工具，很多功能就不用立马掌握了，例如：面向对象编程，进程和线程。这些功能对于一个Data Scientist可以说是几乎用不到（虽然很多网上的教程都会讲这些，但是就个人经验而言，这些知识并不是必须的，如果遇到可以再学）。<br>
           </div>
       </div>
 
@@ -496,7 +419,7 @@ dff.groupby('B').filter(lambda x: len(x) &gt; 2)
             <a class="post-title-link" href="/2020/12/01/Python1-variables-function/">1. Python-变量与函数</a>
           </div>
           <div class="post-content">
-            <p>如果把计算机想成一个可以进行计算的机器人，那么编程语言就是给这个机器人下达命令的规则。生活和工作中也会经常遇到不同类型的数据，理解Python的变量类型是做数据处理和分析的前提。</p>
+            <p>如果把计算机想成一个可以进行计算的机器人，那么编程语言就是给这个机器人下达命令的规则。生活和工作中也会经常遇到不同类型的数据，理解Python的变量类型是做数据处理和分析的前提。<br>
           </div>
       </div>
 
@@ -517,7 +440,7 @@ dff.groupby('B').filter(lambda x: len(x) &gt; 2)
             <a class="post-title-link" href="/2020/12/01/Python0-install-Jupyter_Notebook/">0. 安装Python和Jupyter Notebook</a>
           </div>
           <div class="post-content">
-            <p>使用Python有两种方法，一种是把所有的code都写在一个后缀名为.py文件里面，然后统一运行，这种方式适用于提交已经debug好的code到远程服务器运行；另一种是用Jupyter Notebook写一行code运行一行，方便随时查看中间结果，有问题即使解决。所以在开始学习Python的时候，强烈推荐用第二种写一行运行一行的模式。在这里介绍一下如何安装Jupyter Notebook。</p>
+            <p>使用Python有两种方法，一种是把所有的code都写在一个后缀名为.py文件里面，然后统一运行，这种方式适用于提交已经debug好的code到远程服务器运行；另一种是用Jupyter Notebook写一行code运行一行，方便随时查看中间结果，有问题即使解决。所以在开始学习Python的时候，强烈推荐用第二种写一行运行一行的模式。在这里介绍一下如何安装Jupyter Notebook。<br>
           </div>
       </div>
 
