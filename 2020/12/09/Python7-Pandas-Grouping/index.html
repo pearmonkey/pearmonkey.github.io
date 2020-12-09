@@ -12,7 +12,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>109. Convert Sorted List to Binary Search Tree | 雪梨猴的小站</title>
+  <title>7. Python-Pandas分组和聚合 | 雪梨猴的小站</title>
   
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -285,86 +285,111 @@
     <article class="post post-detail">
       
         <div class="post-title">
-          109. Convert Sorted List to Binary Search Tree
+          7. Python-Pandas分组和聚合
         </div>
       
 
       <div class="post-meta">
 
       
+        Sherry
+        <h>|</h>
+      
 
       
-        <span class="post-time">2020-02-12</span>
+        <span class="post-time">2020-12-09</span>
         <h>|</h>
       
 
         
           
-            <a href="/categories/Leetcode/" class="">
-              Leetcode
+            <a href="/categories/Python/" class="">
+              Python
             </a>
           
           <h>|</h>
         
 
         
-          
-            <a href="/tags/Leetcode/" class="">
-              Leetcode
-            </a>
-          
-            <a href="/tags/Tree/" class="">
-              Tree
-            </a>
-          
-
-        
       </div>
       <div class="post-content">
-        <h2 id="题目链接"><a class="markdownIt-Anchor" href="#题目链接"></a> 题目链接</h2>
-<p><a href="https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree/" target="_blank" rel="noopener">https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree/</a></p>
-<a id="more"></a>
-<h2 id="题目难度"><a class="markdownIt-Anchor" href="#题目难度"></a> 题目难度</h2>
-<p>Medium 44.7%</p>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<p>Given a singly linked list where elements are sorted in ascending order, convert it to a height balanced BST.</p>
-<p>For this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of every node never differ by more than 1.</p>
-<p>Example 1:</p>
-<pre class="highlight"><code class="">Given the sorted linked list: [-10,-3,0,5,9],
+        <a id="more"></a>
+<h2 id="groupby"><a class="markdownIt-Anchor" href="#groupby"></a> GroupBy</h2>
+<p>“Split-Apply-Combine”（拆分-应用-合并），这三个词描述了整个GroupBy的过程：</p>
+<ul>
+<li><strong>Splitting</strong> the data into groups based on some criteria</li>
+<li><strong>Applying</strong> a function to each group independently</li>
+<li><strong>Combining</strong> the results into a data structure<br />
+<img src="/images/python7/SAC.jpg" alt="Alt text" /></li>
+</ul>
+<p>In the <strong>apply</strong> step, we might wish to do one of the following:</p>
+<ul>
+<li><strong>Aggregation</strong>: 为每个group计算统计量，例如，group sums/group means/group sizes/group counts</li>
+<li><strong>Transformation</strong>: 每个group中的每一行都会有个计算值，例如，standardize data within a group</li>
+<li><strong>Filtration</strong>: 用于去掉一些group，例如，只想留下平均分大于60的班级</li>
+</ul>
+<pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+df = pd.read_csv(<span class="hljs-string">'https://raw.githubusercontent.com/yeayee/joyful-pandas/master/data/table.csv'</span>)
+df.head() <span class="hljs-comment"># 查看前5行</span>
+df.shape <span class="hljs-comment"># 查看shape</span>
+df.dtypes <span class="hljs-comment"># 查看数据类型</span>
 
-One possible answer is: [0,-3,9,-10,null,5], which represents the following height balanced BST:
+<span class="hljs-comment"># 按照School分组</span>
+df.School.value_counts() <span class="hljs-comment"># 统计School列不同值的count</span>
+df_single_group = df.groupby(<span class="hljs-string">'School'</span>) <span class="hljs-comment"># 按照School分组</span>
+df_single_group.size() <span class="hljs-comment"># 查看分组情况</span>
+df_single_group.get_group(<span class="hljs-string">'S_2'</span>) <span class="hljs-comment"># 分别查看group的DataFrame</span>
 
-      0
-     / \
-   -3   9
-   /   /
- -10  5
+<span class="hljs-comment"># 按照School和Class分组</span>
+df_multi_group = df.groupby([<span class="hljs-string">'School'</span>, <span class="hljs-string">'Class'</span>], dropna = <span class="hljs-literal">True</span>) <span class="hljs-comment"># School为第一level，Class为第二level</span>
+df_multi_group.size() <span class="hljs-comment"># 查看分组情况</span>
+df_multi_group.get_group((<span class="hljs-string">'S_2'</span>, <span class="hljs-string">'C_1'</span>)) <span class="hljs-comment"># 查看具体的一个分组，注意是圆括号</span>
 </code></pre>
-<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
-<p>快慢指针找中点，再递归生成左右子树，这里要注意的是判断list是否只有一个元素，否则的话会是死循环。</p>
-<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
-<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
-    <span class="hljs-function"><span class="hljs-keyword">public</span> TreeNode <span class="hljs-title">sortedListToBST</span><span class="hljs-params">(ListNode head)</span> </span>{
-        <span class="hljs-keyword">if</span>(head == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
-        ListNode fast = head, slow = head, pre = <span class="hljs-keyword">null</span>;
-        <span class="hljs-keyword">while</span>(fast != <span class="hljs-keyword">null</span> &amp;&amp; fast.next != <span class="hljs-keyword">null</span>){
-            pre = slow;
-            slow = slow.next;
-            fast = fast.next.next;
-        }
-        <span class="hljs-keyword">if</span>(pre != <span class="hljs-keyword">null</span>)
-            pre.next = <span class="hljs-keyword">null</span>;
-        TreeNode root = <span class="hljs-keyword">new</span> TreeNode(slow.val);
-        <span class="hljs-keyword">if</span>(head == slow) <span class="hljs-keyword">return</span> root; <span class="hljs-comment">// 判断是否是有一个元素</span>
-        root.left = sortedListToBST(head);
-        root.right = sortedListToBST(slow.next);
-        <span class="hljs-keyword">return</span> root;
-    }
-}
+<h2 id="aggregation"><a class="markdownIt-Anchor" href="#aggregation"></a> Aggregation</h2>
+<p>生成的结果会比原DataFrame的行数少。与R里面的dplyr的summarize类似。</p>
+<pre class="highlight"><code class="python"><span class="hljs-comment"># 用Series自带的function，单个function</span>
+df.groupby(<span class="hljs-string">'School'</span>)[<span class="hljs-string">'Math'</span>].mean() <span class="hljs-comment"># 选择感兴趣的列，进行计算，得到结果</span>
+df.groupby(<span class="hljs-string">'School'</span>)[<span class="hljs-string">'Math'</span>].std() <span class="hljs-comment"># mean函数可以替换成任何统计描述: nth()/min()/max()</span>
+df.groupby(<span class="hljs-string">'School'</span>)[<span class="hljs-string">'Math'</span>].nlargest(<span class="hljs-number">3</span>) <span class="hljs-comment"># 每个学校的数学前三名，可替换nsmallest</span>
+df.groupby([<span class="hljs-string">'School'</span>, <span class="hljs-string">'Class'</span>])[<span class="hljs-string">'Height'</span>].mean() <span class="hljs-comment"># 选择感兴趣的列，进行计算，得到结果</span>
+df.groupby([<span class="hljs-string">'School'</span>, <span class="hljs-string">'Class'</span>])[<span class="hljs-string">'Height'</span>].std() <span class="hljs-comment"># mean函数可以替换成任何统计描述</span>
+df.groupby([<span class="hljs-string">'School'</span>, <span class="hljs-string">'Class'</span>])[<span class="hljs-string">'Height'</span>].mean().reset_index() <span class="hljs-comment"># 规范成DataFrame</span>
+
+<span class="hljs-comment"># 同时计算多个Numpy function</span>
+df.groupby(<span class="hljs-string">'School'</span>)[<span class="hljs-string">'Math'</span>].agg([np.sum, np.mean, np.std])
+df.groupby(<span class="hljs-string">'School'</span>)[<span class="hljs-string">'Math'</span>, <span class="hljs-string">'Height'</span>].agg([np.sum, np.mean, np.std])
+
+<span class="hljs-comment"># 同时计算多个自定义的function</span>
+df.groupby(<span class="hljs-string">'School'</span>)[<span class="hljs-string">'Math'</span>].agg([<span class="hljs-keyword">lambda</span> x : x.max() - x.min(),
+                                  <span class="hljs-keyword">lambda</span> x : x.median() - x.mean()]) <span class="hljs-comment"># 同一列使用不同的function</span>
+df.groupby(<span class="hljs-string">'School'</span>).agg({<span class="hljs-string">'Math'</span>: <span class="hljs-keyword">lambda</span> x : x.median() - x.mean(),
+                          <span class="hljs-string">'Height'</span>: <span class="hljs-keyword">lambda</span> x : x.max() - x.min()}) <span class="hljs-comment"># 不同列使用不同的function</span>
 </code></pre>
-<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
-<p>Runtime: 100.00%<br />
-Memory: 5.26%</p>
+<h2 id="transformation"><a class="markdownIt-Anchor" href="#transformation"></a> Transformation</h2>
+<p>生成的结果和原DataFrame的行数一样。与R里面的dplyr的mutate类似。</p>
+<pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+
+index = pd.date_range(<span class="hljs-string">'10/1/1999'</span>, periods=<span class="hljs-number">1100</span>)
+df = pd.DataFrame({<span class="hljs-string">'data'</span>: np.random.normal(<span class="hljs-number">0.5</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1100</span>)}, index = index)
+
+<span class="hljs-comment"># 用存在的function</span>
+ts.groupby(ts.index.year).transform(<span class="hljs-string">'mean'</span>)
+ts.groupby(ts.index.year).transform(<span class="hljs-string">'std'</span>)
+
+<span class="hljs-comment"># 自己定义function</span>
+ts.groupby(ts.index.year)[<span class="hljs-string">'data'</span>].transform(<span class="hljs-keyword">lambda</span> x : (x - x.mean()) / x.std()) <span class="hljs-comment"># 按年来standardize</span>
+</code></pre>
+<h2 id="filtration"><a class="markdownIt-Anchor" href="#filtration"></a> Filtration</h2>
+<p>选择符合条件的group</p>
+<pre class="highlight"><code class="python">df = pd.read_csv(<span class="hljs-string">'https://raw.githubusercontent.com/yeayee/joyful-pandas/master/data/table.csv'</span>)
+df.groupby([<span class="hljs-string">'School'</span>, <span class="hljs-string">'Class'</span>])[<span class="hljs-string">'Math'</span>].mean()
+df.groupby([<span class="hljs-string">'School'</span>, <span class="hljs-string">'Class'</span>])[<span class="hljs-string">'Math'</span>].filter(mean(x) &gt;= <span class="hljs-number">60</span>) <span class="hljs-comment"># 只留下班级平均分大于等于60的record</span>
+
+df = pd.DataFrame({<span class="hljs-string">'A'</span>: np.arange(<span class="hljs-number">8</span>),
+                   <span class="hljs-string">'B'</span>: [<span class="hljs-string">'a'</span>, <span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>, <span class="hljs-string">'b'</span>, <span class="hljs-string">'b'</span>, <span class="hljs-string">'b'</span>, <span class="hljs-string">'c'</span>, <span class="hljs-string">'c'</span>]})
+dff.groupby(<span class="hljs-string">'B'</span>).filter(<span class="hljs-keyword">lambda</span> x: len(x) &gt; <span class="hljs-number">2</span>)
+</code></pre>
 
       </div>
       
@@ -373,18 +398,12 @@ Memory: 5.26%</p>
     
       <div class="post-nav">
 
-  <div class="post-nav-prev post-nav-item">
-    <a href="/2020/02/13/Leetcode-1101-The-Earliest-Moment-When-Everyone-Become-Friends/">
-      上一篇:    1101. The Earliest Moment When Everyone Become Friends
-    </a>
-  </div>
-
 
 
   <div class="post-nav-next post-nav-item">
-    <a href="/2020/02/12/Leetcode-1120-Maximum-Average-Subtree/">
+    <a href="/2020/12/07/Python6-Pandas-DataPreprocessing/">
       <span>
-        下一篇:    1120. Maximum Average Subtree 
+        下一篇:    6. Python-Pandas数据前期处理 
       </span>
     </a>
   </div>

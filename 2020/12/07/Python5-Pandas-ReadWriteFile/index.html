@@ -313,94 +313,103 @@
         
       </div>
       <div class="post-content">
-        <p>如果不能将数据导入导出Python，那学习Numpy和Pandas也就没什么意义了。所以本教程将着重介绍Pandas的输入输出函数，这些函数将表格型数据直接读取为DataFrame。<br><a id="more"></a><br>本文主要介绍两组函数，<code>pd.read_csv()</code>和<code>pd.to_csv()</code>，用来导入和导出csv文件；<code>pd.read_excel()</code>和<code>pd.to_excel()</code>，用来导入和导出excel文件。但是Pandas还有其他的文件读写函数，如果这两组不能解决问题，大家可以再去学习其他的。一般只会用到这两组。</p>
-<h2 id="读写csv"><a href="#读写csv" class="headerlink" title="读写csv"></a>读写csv</h2><p>csv（<strong>C</strong>omma-<strong>S</strong>eparated <strong>V</strong>alues）文件是一个由逗号隔开数值的文本文件。每一行是一个observation，由多个feature值组成，用逗号隔开。</p>
-<h3 id="read-csv"><a href="#read-csv" class="headerlink" title="read_csv"></a>read_csv</h3><p><a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_csv.html" target="_blank" rel="noopener">官方文档</a></p>
-<pre><code class="lang-python">import pandas as pd
+        <p>如果不能将数据导入导出Python，那学习Numpy和Pandas也就没什么意义了。所以本教程将着重介绍Pandas的输入输出函数，这些函数将表格型数据直接读取为DataFrame。</p>
+<a id="more"></a>
+<p>本文主要介绍两组函数，<code>pd.read_csv()</code>和<code>pd.to_csv()</code>，用来导入和导出csv文件；<code>pd.read_excel()</code>和<code>pd.to_excel()</code>，用来导入和导出excel文件。但是Pandas还有其他的文件读写函数，如果这两组不能解决问题，大家可以再去学习其他的。一般只会用到这两组。</p>
+<h2 id="读写csv"><a class="markdownIt-Anchor" href="#读写csv"></a> 读写csv</h2>
+<p>csv（<strong>C</strong>omma-<strong>S</strong>eparated <strong>V</strong>alues）文件是一个由逗号隔开数值的文本文件。每一行是一个observation，由多个feature值组成，用逗号隔开。</p>
+<h3 id="read_csv"><a class="markdownIt-Anchor" href="#read_csv"></a> read_csv</h3>
+<p><a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_csv.html" target="_blank" rel="noopener">官方文档</a></p>
+<pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 
-pd.read_csv(filepath_or_buffer, # 文件的路径或者url
-            sep = &#39;,&#39;, # 隔开符默认是逗号，可以读取非逗号隔开的文件，如果是tab隔开的，替换为&#39;\t&#39;
-            header = 0, # 列名默认为第一行
-            names = None, # 如果需要传入指定的列名，header = None, names = [&#39;col1&#39;, &#39;col2&#39;,...]
-            index_col = None, # 指定行的index，默认是系统生成0到N-1
-            usecols = None, # 读取指定列，默认是读取全部列
-            nrows = None, # 读取前几行，默认是读取全部行
+pd.read_csv(filepath_or_buffer, <span class="hljs-comment"># 文件的路径或者url</span>
+            sep = <span class="hljs-string">','</span>, <span class="hljs-comment"># 隔开符默认是逗号，可以读取非逗号隔开的文件，如果是tab隔开的，替换为'\t'</span>
+            header = <span class="hljs-number">0</span>, <span class="hljs-comment"># 列名默认为第一行</span>
+            names = <span class="hljs-literal">None</span>, <span class="hljs-comment"># 如果需要传入指定的列名，header = None, names = ['col1', 'col2',...]</span>
+            index_col = <span class="hljs-literal">None</span>, <span class="hljs-comment"># 指定行的index，默认是系统生成0到N-1</span>
+            usecols = <span class="hljs-literal">None</span>, <span class="hljs-comment"># 读取指定列，默认是读取全部列</span>
+            nrows = <span class="hljs-literal">None</span>, <span class="hljs-comment"># 读取前几行，默认是读取全部行</span>
             )
 </code></pre>
-<h3 id="to-csv"><a href="#to-csv" class="headerlink" title="to_csv"></a>to_csv</h3><p><a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_csv.html#pandas.DataFrame.to_csv" target="_blank" rel="noopener">官方文档</a></p>
-<pre><code class="lang-python">DataFrame.to_csv(path_or_buf, # 输出文件的路径
-                 sep = &#39;,&#39;, # 指定输出的分隔符，默认是逗号
-                 columns = None, # 指定输出的列，默认是全部列
-                 header = True, # 是否输出列名，默认是输出
-                 index = True # 是否输出行index，默认是输出
+<h3 id="to_csv"><a class="markdownIt-Anchor" href="#to_csv"></a> to_csv</h3>
+<p><a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_csv.html#pandas.DataFrame.to_csv" target="_blank" rel="noopener">官方文档</a></p>
+<pre class="highlight"><code class="python">DataFrame.to_csv(path_or_buf, <span class="hljs-comment"># 输出文件的路径</span>
+                 sep = <span class="hljs-string">','</span>, <span class="hljs-comment"># 指定输出的分隔符，默认是逗号</span>
+                 columns = <span class="hljs-literal">None</span>, <span class="hljs-comment"># 指定输出的列，默认是全部列</span>
+                 header = <span class="hljs-literal">True</span>, <span class="hljs-comment"># 是否输出列名，默认是输出</span>
+                 index = <span class="hljs-literal">True</span> <span class="hljs-comment"># 是否输出行index，默认是输出</span>
                  )
 </code></pre>
-<h2 id="读写excel"><a href="#读写excel" class="headerlink" title="读写excel"></a>读写excel</h2><h3 id="read-excel"><a href="#read-excel" class="headerlink" title="read_excel"></a>read_excel</h3><p><a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_excel.html" target="_blank" rel="noopener">官方文档</a></p>
-<pre><code class="lang-python">import pandas as pd
+<h2 id="读写excel"><a class="markdownIt-Anchor" href="#读写excel"></a> 读写excel</h2>
+<h3 id="read_excel"><a class="markdownIt-Anchor" href="#read_excel"></a> read_excel</h3>
+<p><a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_excel.html" target="_blank" rel="noopener">官方文档</a></p>
+<pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 
-pd.read_excel(io, # excel文件的路径
-              sheet_name = 0, # 默认是读取第一个sheet，可以按位置指定，也可以按sheet名指定
-              header = 0, # 列名默认为第一行
-              names = None, # 如果需要传入指定的列名，header = None, names = [&#39;col1&#39;, &#39;col2&#39;,...]
-              index_col = None, # 指定行的index，默认是系统生成0到N-1
-              usecols = None, # 读取指定列，默认是读取全部列
-              nrows = None, # 读取前几行，默认是读取全部行
+pd.read_excel(io, <span class="hljs-comment"># excel文件的路径</span>
+              sheet_name = <span class="hljs-number">0</span>, <span class="hljs-comment"># 默认是读取第一个sheet，可以按位置指定，也可以按sheet名指定</span>
+              header = <span class="hljs-number">0</span>, <span class="hljs-comment"># 列名默认为第一行</span>
+              names = <span class="hljs-literal">None</span>, <span class="hljs-comment"># 如果需要传入指定的列名，header = None, names = ['col1', 'col2',...]</span>
+              index_col = <span class="hljs-literal">None</span>, <span class="hljs-comment"># 指定行的index，默认是系统生成0到N-1</span>
+              usecols = <span class="hljs-literal">None</span>, <span class="hljs-comment"># 读取指定列，默认是读取全部列</span>
+              nrows = <span class="hljs-literal">None</span>, <span class="hljs-comment"># 读取前几行，默认是读取全部行</span>
               )
 </code></pre>
-<h3 id="to-excel"><a href="#to-excel" class="headerlink" title="to_excel"></a>to_excel</h3><p><a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_excel.html#pandas.DataFrame.to_excel" target="_blank" rel="noopener">官方文档</a></p>
-<pre><code class="lang-python">DataFrame.to_excel(excel_writer, # 输出文件的路径
-                   sheet_name = &#39;Sheet1&#39;, # 输出的sheet名，默认是&quot;Sheet1&quot;
-                   columns = None, # 指定输出的列，默认是全部列
-                   header = True, # 是否输出列名，默认是输出
-                   index = True # 是否输出行index，默认是输出
+<h3 id="to_excel"><a class="markdownIt-Anchor" href="#to_excel"></a> to_excel</h3>
+<p><a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_excel.html#pandas.DataFrame.to_excel" target="_blank" rel="noopener">官方文档</a></p>
+<pre class="highlight"><code class="python">DataFrame.to_excel(excel_writer, <span class="hljs-comment"># 输出文件的路径</span>
+                   sheet_name = <span class="hljs-string">'Sheet1'</span>, <span class="hljs-comment"># 输出的sheet名，默认是"Sheet1"</span>
+                   columns = <span class="hljs-literal">None</span>, <span class="hljs-comment"># 指定输出的列，默认是全部列</span>
+                   header = <span class="hljs-literal">True</span>, <span class="hljs-comment"># 是否输出列名，默认是输出</span>
+                   index = <span class="hljs-literal">True</span> <span class="hljs-comment"># 是否输出行index，默认是输出</span>
                    )
 </code></pre>
-<h2 id="演练"><a href="#演练" class="headerlink" title="演练"></a>演练</h2><pre><code class="lang-python">import pandas as pd
+<h2 id="演练"><a class="markdownIt-Anchor" href="#演练"></a> 演练</h2>
+<pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 
-# 按照默认的逗号隔开导入
-df = pd.read_csv(&#39;https://raw.githubusercontent.com/justmarkham/DAT8/master/data/u.user&#39;)
-# 指定分隔符
-df = pd.read_csv(&#39;https://raw.githubusercontent.com/justmarkham/DAT8/master/data/u.user&#39;,
-                  sep = &#39;|&#39;)
-# 指定index列
-df = pd.read_csv(&#39;https://raw.githubusercontent.com/justmarkham/DAT8/master/data/u.user&#39;,
-                  sep = &#39;|&#39;,
-                  index_col = &#39;user_id&#39;)
-# 查看前15行
-df.head(15) # 可查看任意数量的行数，替换15，不写的话默认是前5行
-# 查看最后10行
-df.tail(10) # 可查看任意数量的行数，替换10，不写的话默认是尾5行
+<span class="hljs-comment"># 按照默认的逗号隔开导入</span>
+df = pd.read_csv(<span class="hljs-string">'https://raw.githubusercontent.com/justmarkham/DAT8/master/data/u.user'</span>)
+<span class="hljs-comment"># 指定分隔符</span>
+df = pd.read_csv(<span class="hljs-string">'https://raw.githubusercontent.com/justmarkham/DAT8/master/data/u.user'</span>,
+                  sep = <span class="hljs-string">'|'</span>)
+<span class="hljs-comment"># 指定index列</span>
+df = pd.read_csv(<span class="hljs-string">'https://raw.githubusercontent.com/justmarkham/DAT8/master/data/u.user'</span>,
+                  sep = <span class="hljs-string">'|'</span>,
+                  index_col = <span class="hljs-string">'user_id'</span>)
+<span class="hljs-comment"># 查看前15行</span>
+df.head(<span class="hljs-number">15</span>) <span class="hljs-comment"># 可查看任意数量的行数，替换15，不写的话默认是前5行</span>
+<span class="hljs-comment"># 查看最后10行</span>
+df.tail(<span class="hljs-number">10</span>) <span class="hljs-comment"># 可查看任意数量的行数，替换10，不写的话默认是尾5行</span>
 
-# 没有print语句的打印行要运行在一个Jupyter的单独cell
+<span class="hljs-comment"># 没有print语句的打印行要运行在一个Jupyter的单独cell</span>
 df.shape
 df.columns
 df.index
-df.dtypes # zip_code应该是int，但是是object，说明不是所有的值都是数字，需要查看不正常值
+df.dtypes <span class="hljs-comment"># zip_code应该是int，但是是object，说明不是所有的值都是数字，需要查看不正常值</span>
 
-df.sort_values(by = &#39;zip_code&#39;) # 将整个DataFrame按照某一列排序，查看tail，找到分界点
-new_df = df.loc[df.zip_code &lt;= &#39;99835&#39;].copy() # 将正常的部分截取
-new_df.zip_code = new_df.zip_code.astype(int) # 将zip_code转化为integer
-new_df.dtypes # 再次查看类型
+df.sort_values(by = <span class="hljs-string">'zip_code'</span>) <span class="hljs-comment"># 将整个DataFrame按照某一列排序，查看tail，找到分界点</span>
+new_df = df.loc[df.zip_code &lt;= <span class="hljs-string">'99835'</span>].copy() <span class="hljs-comment"># 将正常的部分截取</span>
+new_df.zip_code = new_df.zip_code.astype(int) <span class="hljs-comment"># 将zip_code转化为integer</span>
+new_df.dtypes <span class="hljs-comment"># 再次查看类型</span>
 
-# 有多少unique的occupation
-new_df.occupation.value_counts() # 返回一个Series，统计每一个unique的值有多少个重复
-len(new_df.occupation.value_counts()) # 这个Series的长度就是unique值的个数
+<span class="hljs-comment"># 有多少unique的occupation</span>
+new_df.occupation.value_counts() <span class="hljs-comment"># 返回一个Series，统计每一个unique的值有多少个重复</span>
+len(new_df.occupation.value_counts()) <span class="hljs-comment"># 这个Series的长度就是unique值的个数</span>
 
-# summarize DataFrame
-new_df.describe() # generate numerical descriptive statistics
+<span class="hljs-comment"># summarize DataFrame</span>
+new_df.describe() <span class="hljs-comment"># generate numerical descriptive statistics</span>
 
-# summarize Series
+<span class="hljs-comment"># summarize Series</span>
 new_df.occupation.describe()
 
-# 求平均年龄
+<span class="hljs-comment"># 求平均年龄</span>
 new_df.age.mean()
 
-# 每个年龄出现的次数
+<span class="hljs-comment"># 每个年龄出现的次数</span>
 new_df.age.value_counts()
 
-# 输出csv文件
-new_df.to_csv(&#39;new_file.csv&#39;) # 如果没有指定路径，输出的文件会和Jupyter Notebook在一个文件夹下
-new_df.to_csv(&#39;new_file.csv&#39;, index = False) # 去掉index
+<span class="hljs-comment"># 输出csv文件</span>
+new_df.to_csv(<span class="hljs-string">'new_file.csv'</span>) <span class="hljs-comment"># 如果没有指定路径，输出的文件会和Jupyter Notebook在一个文件夹下</span>
+new_df.to_csv(<span class="hljs-string">'new_file.csv'</span>, index = <span class="hljs-literal">False</span>) <span class="hljs-comment"># 去掉index</span>
 </code></pre>
 <!-- 本教程练习所用数据从[这里](https://github.com/guipsamora/pandas_exercises)下载。 -->
 
