@@ -362,10 +362,8 @@ df.groupby(&#39;School&#39;)[&#39;Math&#39;].agg([np.sum, np.mean, np.std])
 df.groupby(&#39;School&#39;)[&#39;Math&#39;, &#39;Height&#39;].agg([np.sum, np.mean, np.std])
 
 # 同时计算多个自定义的function
-df.groupby(&#39;School&#39;)[&#39;Math&#39;].agg([lambda x : x.max() - x.min(),
-                                  lambda x : x.median() - x.mean()]) # 同一列使用不同的function
 df.groupby(&#39;School&#39;)[&#39;Math&#39;].agg(max_min = (lambda y : y.max() - y.min()),
-                                 median_mean = (lambda y : y.median() - y.mean())) # 不同列使用不同的function
+                                 median_mean = (lambda y : y.median() - y.mean())) # 同一列使用不同的function
 </code></pre>
 <h2 id="Transformation"><a href="#Transformation" class="headerlink" title="Transformation"></a>Transformation</h2><p>生成的结果和原DataFrame的行数一样。与R里面的dplyr的mutate类似。</p>
 <pre><code class="lang-python">import pandas as pd
