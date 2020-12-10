@@ -313,9 +313,8 @@
         
       </div>
       <div class="post-content">
-        <p>在进入分析之前，我们通常要对获取的数据进行清理和处理，也就是大家常说的Data Cleaning。也是数据的前期处理，处理成我们所需要的数据，这个处理步骤需要非常细心，因为处理得当与否直接决定后续的分析是否准确，所以要多加检查，尽量没做完一步都检查一下自己的目的是否正确达到。</p>
-<a id="more"></a>
-<h2 id="数据选取"><a class="markdownIt-Anchor" href="#数据选取"></a> 数据选取</h2>
+        <p>在进入分析之前，我们通常要对获取的数据进行清理和处理，也就是大家常说的Data Cleaning。也是数据的前期处理，处理成我们所需要的数据，这个处理步骤需要非常细心，因为处理得当与否直接决定后续的分析是否准确，所以要多加检查，尽量没做完一步都检查一下自己的目的是否正确达到。<br><a id="more"></a></p>
+<h2 id="数据选取"><a href="#数据选取" class="headerlink" title="数据选取"></a>数据选取</h2><div class="table-container">
 <table>
 <thead>
 <tr>
@@ -326,7 +325,7 @@
 <tbody>
 <tr>
 <td>用列名选取一些列</td>
-<td><code>df[['col1', 'col2']]</code></td>
+<td><code>df[[&#39;col1&#39;, &#39;col2&#39;]]</code></td>
 </tr>
 <tr>
 <td>用列的位置选取一些列</td>
@@ -334,7 +333,7 @@
 </tr>
 <tr>
 <td>用index名选取一些行</td>
-<td><code>df.loc[['row1', 'row2']]</code></td>
+<td><code>df.loc[[&#39;row1&#39;, &#39;row2&#39;]]</code></td>
 </tr>
 <tr>
 <td>用index的位置选取一些行</td>
@@ -346,11 +345,11 @@
 </tr>
 <tr>
 <td>将DataFrame按照某一列或多列排序</td>
-<td><code>df.sort_values(by = 'col1')</code></td>
+<td><code>df.sort_values(by = &#39;col1&#39;)</code></td>
 </tr>
 <tr>
 <td>按列名去掉一些列</td>
-<td><code>df.drop(['col1', 'col2'], axis = 1)</code></td>
+<td><code>df.drop([&#39;col1&#39;, &#39;col2&#39;], axis = 1)</code></td>
 </tr>
 <tr>
 <td>按列位置去掉一些列</td>
@@ -358,7 +357,7 @@
 </tr>
 <tr>
 <td>按index名去掉一些行</td>
-<td><code>df.drop(['row1', 'row2'], axis = 0)</code></td>
+<td><code>df.drop([&#39;row1&#39;, &#39;row2&#39;], axis = 0)</code></td>
 </tr>
 <tr>
 <td>按index位置去掉一些列</td>
@@ -370,7 +369,8 @@
 </tr>
 </tbody>
 </table>
-<h2 id="转换类型"><a class="markdownIt-Anchor" href="#转换类型"></a> 转换类型</h2>
+</div>
+<h2 id="转换类型"><a href="#转换类型" class="headerlink" title="转换类型"></a>转换类型</h2><div class="table-container">
 <table>
 <thead>
 <tr>
@@ -405,113 +405,110 @@
 </tr>
 </tbody>
 </table>
-<h2 id="数据合并"><a class="markdownIt-Anchor" href="#数据合并"></a> 数据合并</h2>
-<h3 id="merge"><a class="markdownIt-Anchor" href="#merge"></a> Merge</h3>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+</div>
+<h2 id="数据合并"><a href="#数据合并" class="headerlink" title="数据合并"></a>数据合并</h2><h3 id="Merge"><a href="#Merge" class="headerlink" title="Merge"></a>Merge</h3><pre><code class="lang-python">import pandas as pd
 
-df1 = pd.DataFrame({<span class="hljs-string">'key'</span>: [<span class="hljs-string">'b'</span>, <span class="hljs-string">'b'</span>, <span class="hljs-string">'a'</span>, <span class="hljs-string">'c'</span>, <span class="hljs-string">'a'</span>, <span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>],
-                    <span class="hljs-string">'data1'</span>: range(<span class="hljs-number">0</span>, <span class="hljs-number">7</span>)})
-df2 = pd.DataFrame({<span class="hljs-string">'key'</span>: [<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>, <span class="hljs-string">'d'</span>],
-                   <span class="hljs-string">'data2'</span>: range(<span class="hljs-number">0</span>, <span class="hljs-number">3</span>)})
+df1 = pd.DataFrame({&#39;key&#39;: [&#39;b&#39;, &#39;b&#39;, &#39;a&#39;, &#39;c&#39;, &#39;a&#39;, &#39;a&#39;, &#39;b&#39;],
+                    &#39;data1&#39;: range(0, 7)})
+df2 = pd.DataFrame({&#39;key&#39;: [&#39;a&#39;, &#39;b&#39;, &#39;d&#39;],
+                   &#39;data2&#39;: range(0, 3)})
 
-pd.merge(df1, df2, on = <span class="hljs-string">'key'</span>) <span class="hljs-comment"># 默认是inner join，取键的交集，默认把重叠的列名当作键</span>
-pd.merge(df1, df2, on = <span class="hljs-string">'key'</span>, how = <span class="hljs-string">'outer'</span>) <span class="hljs-comment"># outer join，取键的并集</span>
-pd.merge(df1, df2, on = <span class="hljs-string">'key'</span>, how = <span class="hljs-string">'left'</span>) <span class="hljs-comment"># left join，保留左边DataFrame的全部键</span>
-pd.merge(df1, df2, on = <span class="hljs-string">'key'</span>, how = <span class="hljs-string">'right'</span>) <span class="hljs-comment"># right join，保留右边DataFrame的全部键</span>
+pd.merge(df1, df2, on = &#39;key&#39;) # 默认是inner join，取键的交集，默认把重叠的列名当作键
+pd.merge(df1, df2, on = &#39;key&#39;, how = &#39;outer&#39;) # outer join，取键的并集
+pd.merge(df1, df2, on = &#39;key&#39;, how = &#39;left&#39;) # left join，保留左边DataFrame的全部键
+pd.merge(df1, df2, on = &#39;key&#39;, how = &#39;right&#39;) # right join，保留右边DataFrame的全部键
 
-<span class="hljs-comment"># 如果两个DataFrame没有相同的列名当作键，可分别指定</span>
-df3 = pd.DataFrame({<span class="hljs-string">'key1'</span>: [<span class="hljs-string">'b'</span>, <span class="hljs-string">'b'</span>, <span class="hljs-string">'a'</span>, <span class="hljs-string">'c'</span>, <span class="hljs-string">'a'</span>, <span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>],
-                    <span class="hljs-string">'data1'</span>: range(<span class="hljs-number">0</span>, <span class="hljs-number">7</span>)})
-df4 = pd.DataFrame({<span class="hljs-string">'key2'</span>: [<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>, <span class="hljs-string">'d'</span>],
-                   <span class="hljs-string">'data2'</span>: range(<span class="hljs-number">0</span>, <span class="hljs-number">3</span>)})
-pd.merge(df3, df4, left_on = <span class="hljs-string">'key1'</span>, right_on = <span class="hljs-string">'key2'</span>, how = <span class="hljs-string">'outer'</span>)
+# 如果两个DataFrame没有相同的列名当作键，可分别指定
+df3 = pd.DataFrame({&#39;key1&#39;: [&#39;b&#39;, &#39;b&#39;, &#39;a&#39;, &#39;c&#39;, &#39;a&#39;, &#39;a&#39;, &#39;b&#39;],
+                    &#39;data1&#39;: range(0, 7)})
+df4 = pd.DataFrame({&#39;key2&#39;: [&#39;a&#39;, &#39;b&#39;, &#39;d&#39;],
+                   &#39;data2&#39;: range(0, 3)})
+pd.merge(df3, df4, left_on = &#39;key1&#39;, right_on = &#39;key2&#39;, how = &#39;outer&#39;)
 
-<span class="hljs-comment"># 如果两个DataFrame有重叠的列名，但不是当作键使用，需要分别保留下来，可添加后缀</span>
-df5 = pd.DataFrame({<span class="hljs-string">'key1'</span>: [<span class="hljs-string">'foo'</span>, <span class="hljs-string">'foo'</span>, <span class="hljs-string">'bar'</span>],
-                    <span class="hljs-string">'key2'</span>: [<span class="hljs-string">'one'</span>, <span class="hljs-string">'two'</span>, <span class="hljs-string">'one'</span>],
-                    <span class="hljs-string">'data1'</span>: [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]})
-df6 = pd.DataFrame({<span class="hljs-string">'key1'</span>: [<span class="hljs-string">'foo'</span>, <span class="hljs-string">'foo'</span>, <span class="hljs-string">'bar'</span>, <span class="hljs-string">'bar'</span>],
-                    <span class="hljs-string">'key2'</span>: [<span class="hljs-string">'one'</span>, <span class="hljs-string">'two'</span>, <span class="hljs-string">'one'</span>, <span class="hljs-string">'one'</span>],
-                    <span class="hljs-string">'data2'</span>: [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>]})
-pd.merge(df5, df6, on = <span class="hljs-string">'key1'</span>, suffixes = [<span class="hljs-string">'_left'</span>, <span class="hljs-string">'_right'</span>])
+# 如果两个DataFrame有重叠的列名，但不是当作键使用，需要分别保留下来，可添加后缀
+df5 = pd.DataFrame({&#39;key1&#39;: [&#39;foo&#39;, &#39;foo&#39;, &#39;bar&#39;],
+                    &#39;key2&#39;: [&#39;one&#39;, &#39;two&#39;, &#39;one&#39;],
+                    &#39;data1&#39;: [1, 2, 3]})
+df6 = pd.DataFrame({&#39;key1&#39;: [&#39;foo&#39;, &#39;foo&#39;, &#39;bar&#39;, &#39;bar&#39;],
+                    &#39;key2&#39;: [&#39;one&#39;, &#39;two&#39;, &#39;one&#39;, &#39;one&#39;],
+                    &#39;data2&#39;: [4, 5, 6, 7]})
+pd.merge(df5, df6, on = &#39;key1&#39;, suffixes = [&#39;_left&#39;, &#39;_right&#39;])
 
-<span class="hljs-comment"># 按照index进行merge</span>
-pd.merge(df5, df6, left_index = <span class="hljs-literal">True</span>, right_index = <span class="hljs-literal">True</span>, how = <span class="hljs-string">'outer'</span>)
+# 按照index进行merge
+pd.merge(df5, df6, left_index = True, right_index = True, how = &#39;outer&#39;)
 </code></pre>
-<h3 id="concat"><a class="markdownIt-Anchor" href="#concat"></a> Concat</h3>
-<p>行堆积</p>
-<pre class="highlight"><code class="python">df1 = pd.DataFrame({<span class="hljs-string">'A'</span>: [<span class="hljs-string">'A0'</span>, <span class="hljs-string">'A1'</span>, <span class="hljs-string">'A2'</span>, <span class="hljs-string">'A3'</span>],
-                    <span class="hljs-string">'B'</span>: [<span class="hljs-string">'B0'</span>, <span class="hljs-string">'B1'</span>, <span class="hljs-string">'B2'</span>, <span class="hljs-string">'B3'</span>],
-                    <span class="hljs-string">'C'</span>: [<span class="hljs-string">'C0'</span>, <span class="hljs-string">'C1'</span>, <span class="hljs-string">'C2'</span>, <span class="hljs-string">'C3'</span>],
-                    <span class="hljs-string">'D'</span>: [<span class="hljs-string">'D0'</span>, <span class="hljs-string">'D1'</span>, <span class="hljs-string">'D2'</span>, <span class="hljs-string">'D3'</span>]},
-                    index=[<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>])
+<h3 id="Concat"><a href="#Concat" class="headerlink" title="Concat"></a>Concat</h3><p>行堆积</p>
+<pre><code class="lang-python">df1 = pd.DataFrame({&#39;A&#39;: [&#39;A0&#39;, &#39;A1&#39;, &#39;A2&#39;, &#39;A3&#39;],
+                    &#39;B&#39;: [&#39;B0&#39;, &#39;B1&#39;, &#39;B2&#39;, &#39;B3&#39;],
+                    &#39;C&#39;: [&#39;C0&#39;, &#39;C1&#39;, &#39;C2&#39;, &#39;C3&#39;],
+                    &#39;D&#39;: [&#39;D0&#39;, &#39;D1&#39;, &#39;D2&#39;, &#39;D3&#39;]},
+                    index=[0, 1, 2, 3])
 
 
-df2 = pd.DataFrame({<span class="hljs-string">'A'</span>: [<span class="hljs-string">'A4'</span>, <span class="hljs-string">'A5'</span>, <span class="hljs-string">'A6'</span>, <span class="hljs-string">'A7'</span>],
-                    <span class="hljs-string">'B'</span>: [<span class="hljs-string">'B4'</span>, <span class="hljs-string">'B5'</span>, <span class="hljs-string">'B6'</span>, <span class="hljs-string">'B7'</span>],
-                    <span class="hljs-string">'C'</span>: [<span class="hljs-string">'C4'</span>, <span class="hljs-string">'C5'</span>, <span class="hljs-string">'C6'</span>, <span class="hljs-string">'C7'</span>],
-                    <span class="hljs-string">'D'</span>: [<span class="hljs-string">'D4'</span>, <span class="hljs-string">'D5'</span>, <span class="hljs-string">'D6'</span>, <span class="hljs-string">'D7'</span>]},
-                    index=[<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>])
+df2 = pd.DataFrame({&#39;A&#39;: [&#39;A4&#39;, &#39;A5&#39;, &#39;A6&#39;, &#39;A7&#39;],
+                    &#39;B&#39;: [&#39;B4&#39;, &#39;B5&#39;, &#39;B6&#39;, &#39;B7&#39;],
+                    &#39;C&#39;: [&#39;C4&#39;, &#39;C5&#39;, &#39;C6&#39;, &#39;C7&#39;],
+                    &#39;D&#39;: [&#39;D4&#39;, &#39;D5&#39;, &#39;D6&#39;, &#39;D7&#39;]},
+                    index=[0, 1, 2, 3])
 
 
-df3 = pd.DataFrame({<span class="hljs-string">'A'</span>: [<span class="hljs-string">'A8'</span>, <span class="hljs-string">'A9'</span>, <span class="hljs-string">'A10'</span>, <span class="hljs-string">'A11'</span>],
-                    <span class="hljs-string">'B'</span>: [<span class="hljs-string">'B8'</span>, <span class="hljs-string">'B9'</span>, <span class="hljs-string">'B10'</span>, <span class="hljs-string">'B11'</span>],
-                    <span class="hljs-string">'C'</span>: [<span class="hljs-string">'C8'</span>, <span class="hljs-string">'C9'</span>, <span class="hljs-string">'C10'</span>, <span class="hljs-string">'C11'</span>],
-                    <span class="hljs-string">'D'</span>: [<span class="hljs-string">'D8'</span>, <span class="hljs-string">'D9'</span>, <span class="hljs-string">'D10'</span>, <span class="hljs-string">'D11'</span>]},
-                    index=[<span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>])
-pd.concat([df1, df2, df3]) <span class="hljs-comment"># 方式一，添加参数 ignore_index=True 使index重新生成</span>
-df1.append(df2).append(df3) <span class="hljs-comment"># 方式二</span>
+df3 = pd.DataFrame({&#39;A&#39;: [&#39;A8&#39;, &#39;A9&#39;, &#39;A10&#39;, &#39;A11&#39;],
+                    &#39;B&#39;: [&#39;B8&#39;, &#39;B9&#39;, &#39;B10&#39;, &#39;B11&#39;],
+                    &#39;C&#39;: [&#39;C8&#39;, &#39;C9&#39;, &#39;C10&#39;, &#39;C11&#39;],
+                    &#39;D&#39;: [&#39;D8&#39;, &#39;D9&#39;, &#39;D10&#39;, &#39;D11&#39;]},
+                    index=[2, 3, 4, 5])
+pd.concat([df1, df2, df3]) # 方式一，添加参数 ignore_index=True 使index重新生成
+df1.append(df2).append(df3) # 方式二
 </code></pre>
-<p><img src="/images/python6/merge_concat.png" alt="Alt text" /></p>
-<hr />
+<p><img src="/images/python6/merge_concat.png" alt="Alt text"></p>
+<hr>
 <p>列堆积</p>
-<pre class="highlight"><code class="python">df4 = pd.DataFrame({<span class="hljs-string">'B'</span>: [<span class="hljs-string">'B2'</span>, <span class="hljs-string">'B3'</span>, <span class="hljs-string">'B6'</span>, <span class="hljs-string">'B7'</span>],
-                    <span class="hljs-string">'D'</span>: [<span class="hljs-string">'D2'</span>, <span class="hljs-string">'D3'</span>, <span class="hljs-string">'D6'</span>, <span class="hljs-string">'D7'</span>],
-                    <span class="hljs-string">'F'</span>: [<span class="hljs-string">'F2'</span>, <span class="hljs-string">'F3'</span>, <span class="hljs-string">'F6'</span>, <span class="hljs-string">'F7'</span>]},
-                    index=[<span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>])
-pd.concat([df1, df4], axis = <span class="hljs-number">1</span>)
+<pre><code class="lang-python">df4 = pd.DataFrame({&#39;B&#39;: [&#39;B2&#39;, &#39;B3&#39;, &#39;B6&#39;, &#39;B7&#39;],
+                    &#39;D&#39;: [&#39;D2&#39;, &#39;D3&#39;, &#39;D6&#39;, &#39;D7&#39;],
+                    &#39;F&#39;: [&#39;F2&#39;, &#39;F3&#39;, &#39;F6&#39;, &#39;F7&#39;]},
+                    index=[2, 3, 6, 7])
+pd.concat([df1, df4], axis = 1)
 </code></pre>
-<p><img src="/images/python6/merge_concat_col.png" alt="Alt text" /></p>
-<h2 id="填充缺失"><a class="markdownIt-Anchor" href="#填充缺失"></a> 填充缺失</h2>
-<pre class="highlight"><code class="python">df = pd.DataFrame([[np.nan, <span class="hljs-number">2</span>, np.nan, <span class="hljs-number">0</span>],
-                   [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>, np.nan, <span class="hljs-number">1</span>],
-                   [np.nan, np.nan, np.nan, <span class="hljs-number">5</span>],
-                   [np.nan, <span class="hljs-number">3</span>, np.nan, <span class="hljs-number">4</span>]],
-                  columns = [<span class="hljs-string">'A'</span>, <span class="hljs-string">'B'</span>, <span class="hljs-string">'C'</span>, <span class="hljs-string">'D'</span>])
-<span class="hljs-comment"># 寻找缺失的行和列</span>
-df.isnull() <span class="hljs-comment"># 查看每个值</span>
-df.isnull().sum() <span class="hljs-comment"># 统计空值</span>
-df.isnull().any(axis = <span class="hljs-number">0</span>) <span class="hljs-comment"># 哪些列含有至少一个空值，可作为筛选的条件</span>
-df.isnull().any(axis = <span class="hljs-number">1</span>) <span class="hljs-comment"># 哪些行含有至少一个空值，可作为筛选的条件</span>
-df.isnull().all(axis = <span class="hljs-number">0</span>) <span class="hljs-comment"># 哪些列全部都是空值，可作为筛选的条件</span>
-df.isnull().all(axis = <span class="hljs-number">1</span>) <span class="hljs-comment"># 哪些行全部都是空值，可作为筛选的条件</span>
-df.loc[:, df.isnull().all(axis = <span class="hljs-number">0</span>)]
+<p><img src="/images/python6/merge_concat_col.png" alt="Alt text"></p>
+<h2 id="填充缺失"><a href="#填充缺失" class="headerlink" title="填充缺失"></a>填充缺失</h2><pre><code class="lang-python">df = pd.DataFrame([[np.nan, 2, np.nan, 0],
+                   [3, 4, np.nan, 1],
+                   [np.nan, np.nan, np.nan, 5],
+                   [np.nan, 3, np.nan, 4]],
+                  columns = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;])
+# 寻找缺失的行和列
+df.isnull() # 查看每个值
+df.isnull().sum() # 统计空值
+df.isnull().any(axis = 0) # 哪些列含有至少一个空值，可作为筛选的条件
+df.isnull().any(axis = 1) # 哪些行含有至少一个空值，可作为筛选的条件
+df.isnull().all(axis = 0) # 哪些列全部都是空值，可作为筛选的条件
+df.isnull().all(axis = 1) # 哪些行全部都是空值，可作为筛选的条件
+df.loc[:, df.isnull().all(axis = 0)]
 
-<span class="hljs-comment"># 填充</span>
-df.fillna(<span class="hljs-number">0</span>) <span class="hljs-comment"># 用0填充</span>
-df.fillna(method = <span class="hljs-string">'ffill'</span>) <span class="hljs-comment"># 用前一个值填充</span>
-df.fillna(value = {<span class="hljs-string">'A'</span>: <span class="hljs-number">0</span>, <span class="hljs-string">'B'</span>: <span class="hljs-number">1</span>, <span class="hljs-string">'C'</span>: <span class="hljs-number">2</span>, <span class="hljs-string">'D'</span>: <span class="hljs-number">3</span>}) <span class="hljs-comment"># 不同列的NaN值用不同的值填充</span>
-df.fillna(value = {<span class="hljs-string">'A'</span>: <span class="hljs-number">0</span>, <span class="hljs-string">'B'</span>: <span class="hljs-number">1</span>, <span class="hljs-string">'C'</span>: <span class="hljs-number">2</span>, <span class="hljs-string">'D'</span>: <span class="hljs-number">3</span>}, limit = <span class="hljs-number">1</span>) <span class="hljs-comment"># 每列只填充第一个NaN值</span>
+# 填充
+df.fillna(0) # 用0填充
+df.fillna(method = &#39;ffill&#39;) # 用前一个值填充
+df.fillna(value = {&#39;A&#39;: 0, &#39;B&#39;: 1, &#39;C&#39;: 2, &#39;D&#39;: 3}) # 不同列的NaN值用不同的值填充
+df.fillna(value = {&#39;A&#39;: 0, &#39;B&#39;: 1, &#39;C&#39;: 2, &#39;D&#39;: 3}, limit = 1) # 每列只填充第一个NaN值
 
-<span class="hljs-comment"># 丢掉含有缺失的行，不声明axis就是默认对行进行操作</span>
-df.dropna(how = <span class="hljs-string">'any'</span>) <span class="hljs-comment"># 只要含有NaN的行就去掉</span>
-df.dropna(how = <span class="hljs-string">'all'</span>) <span class="hljs-comment"># 要全是NaN的行才去掉</span>
-df.dropna(thresh = <span class="hljs-number">2</span>)  <span class="hljs-comment"># 留下至少2个非空的的行</span>
-df.dropna(how = <span class="hljs-string">'any'</span>, subset = [<span class="hljs-string">'A'</span>, <span class="hljs-string">'B'</span>]) <span class="hljs-comment"># 只在乎其中几列的空缺情况</span>
+# 丢掉含有缺失的行，不声明axis就是默认对行进行操作
+df.dropna(how = &#39;any&#39;) # 只要含有NaN的行就去掉
+df.dropna(how = &#39;all&#39;) # 要全是NaN的行才去掉
+df.dropna(thresh = 2)  # 留下至少2个非空的的行
+df.dropna(how = &#39;any&#39;, subset = [&#39;A&#39;, &#39;B&#39;]) # 只在乎其中几列的空缺情况
 </code></pre>
-<h2 id="描述统计"><a class="markdownIt-Anchor" href="#描述统计"></a> 描述统计</h2>
-<pre class="highlight"><code class="python">df = pd.read_csv(<span class="hljs-string">'https://raw.githubusercontent.com/justmarkham/DAT8/master/data/u.user'</span>,
-                  sep = <span class="hljs-string">'|'</span>,
-                  index_col = <span class="hljs-string">'user_id'</span>)
-df.sort_values(by = <span class="hljs-string">'zip_code'</span>) <span class="hljs-comment"># 将整个DataFrame按照某一列排序，查看tail，找到分界点</span>
-new_df = df.loc[df.zip_code &lt;= <span class="hljs-string">'99835'</span>].copy() <span class="hljs-comment"># 将正常的部分截取</span>
-new_df.zip_code = new_df.zip_code.astype(int) <span class="hljs-comment"># 将zip_code转化为integer</span>
+<h2 id="描述统计"><a href="#描述统计" class="headerlink" title="描述统计"></a>描述统计</h2><pre><code class="lang-python">df = pd.read_csv(&#39;https://raw.githubusercontent.com/justmarkham/DAT8/master/data/u.user&#39;,
+                  sep = &#39;|&#39;,
+                  index_col = &#39;user_id&#39;)
+df.sort_values(by = &#39;zip_code&#39;) # 将整个DataFrame按照某一列排序，查看tail，找到分界点
+new_df = df.loc[df.zip_code &lt;= &#39;99835&#39;].copy() # 将正常的部分截取
+new_df.zip_code = new_df.zip_code.astype(int) # 将zip_code转化为integer
 
-new_df.describe() <span class="hljs-comment"># 整个DataFrame的数值型列的统计</span>
-new_df.gender.describe() <span class="hljs-comment"># 单列的统计</span>
-new_df.gender.nunique() <span class="hljs-comment"># 这一列就多少个unique的值，一般用于类型为字符串的列</span>
-new_df.gender.value_counts() <span class="hljs-comment"># 每个unique值的出现频率，一般用于类型为字符串的列</span>
+new_df.describe() # 整个DataFrame的数值型列的统计
+new_df.gender.describe() # 单列的统计
+new_df.gender.nunique() # 这一列就多少个unique的值，一般用于类型为字符串的列
+new_df.gender.value_counts() # 每个unique值的出现频率，一般用于类型为字符串的列
 </code></pre>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -590,6 +587,7 @@ new_df.gender.value_counts() <span class="hljs-comment"># 每个unique值的出�
 </tr>
 </tbody>
 </table>
+</div>
 
       </div>
       

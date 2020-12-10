@@ -321,11 +321,8 @@
         
       </div>
       <div class="post-content">
-        <h2 id="题目链接-httpsleetcodecomproblemsbinary-search-tree-to-greater-sum-tree"><a class="markdownIt-Anchor" href="#题目链接-httpsleetcodecomproblemsbinary-search-tree-to-greater-sum-tree"></a> 题目链接 <a href="https://leetcode.com/problems/binary-search-tree-to-greater-sum-tree/" target="_blank" rel="noopener">https://leetcode.com/problems/binary-search-tree-to-greater-sum-tree/</a></h2>
-<h2 id="题目难度-medium-790"><a class="markdownIt-Anchor" href="#题目难度-medium-790"></a> 题目难度 Medium 79.0%</h2>
-<a id="more"></a>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<p>Given the root of a binary search tree with distinct values, modify it so that every node has a new value equal to the sum of the values of the original tree that are greater than or equal to node.val.</p>
+        <h2 id="题目链接-https-leetcode-com-problems-binary-search-tree-to-greater-sum-tree"><a href="#题目链接-https-leetcode-com-problems-binary-search-tree-to-greater-sum-tree" class="headerlink" title="题目链接 https://leetcode.com/problems/binary-search-tree-to-greater-sum-tree/"></a>题目链接 <a href="https://leetcode.com/problems/binary-search-tree-to-greater-sum-tree/" target="_blank" rel="noopener">https://leetcode.com/problems/binary-search-tree-to-greater-sum-tree/</a></h2><h2 id="题目难度-Medium-79-0"><a href="#题目难度-Medium-79-0" class="headerlink" title="题目难度 Medium 79.0%"></a>题目难度 Medium 79.0%</h2><a id="more"></a>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Given the root of a binary search tree with distinct values, modify it so that every node has a new value equal to the sum of the values of the original tree that are greater than or equal to node.val.</p>
 <p>As a reminder, a binary search tree is a tree that satisfies these constraints:</p>
 <ul>
 <li>The left subtree of a node contains only nodes with keys less than the node’s key.</li>
@@ -333,21 +330,18 @@
 <li>Both the left and right subtrees must also be binary search trees.</li>
 </ul>
 <p>Example 1:</p>
-<pre class="highlight"><code class="">Input: [4,1,6,0,2,5,7,null,null,null,3,null,null,null,8]
+<pre><code>Input: [4,1,6,0,2,5,7,null,null,null,3,null,null,null,8]
 Output: [30,36,21,36,35,26,15,null,null,null,33,null,null,null,8]
-</code></pre>
-<h2 id="题目分析"><a class="markdownIt-Anchor" href="#题目分析"></a> 题目分析</h2>
-<p>还记得之前拿到这道题还得使劲分析一下，知道大概怎么做但是写code还有点犹豫。但这次竟然就很通畅，一次bug free，还是挺开心的。这种一看就是dfs加上累计信息的，就是要有一个global variable去记录和更新。</p>
-<h2 id="完整代码"><a class="markdownIt-Anchor" href="#完整代码"></a> 完整代码</h2>
-<pre class="highlight"><code class="java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
-    <span class="hljs-keyword">int</span> sum = <span class="hljs-number">0</span>;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> TreeNode <span class="hljs-title">bstToGst</span><span class="hljs-params">(TreeNode root)</span> </span>{
+</code></pre><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>还记得之前拿到这道题还得使劲分析一下，知道大概怎么做但是写code还有点犹豫。但这次竟然就很通畅，一次bug free，还是挺开心的。这种一看就是dfs加上累计信息的，就是要有一个global variable去记录和更新。</p>
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre><code class="lang-java">class Solution {
+    int sum = 0;
+    public TreeNode bstToGst(TreeNode root) {
         dfs(root);
-        <span class="hljs-keyword">return</span> root;
+        return root;
     }
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">dfs</span><span class="hljs-params">(TreeNode root)</span></span>{
-        <span class="hljs-keyword">if</span>(root == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span>;
+    public void dfs(TreeNode root){
+        if(root == null) return;
         dfs(root.right);
         root.val += sum;
         sum = root.val;
@@ -355,9 +349,7 @@ Output: [30,36,21,36,35,26,15,null,null,null,33,null,null,null,8]
     }
 }
 </code></pre>
-<h2 id="通过效率"><a class="markdownIt-Anchor" href="#通过效率"></a> 通过效率</h2>
-<p>Runtime: 100.00%<br />
-Memory: 100.00%</p>
+<h2 id="通过效率"><a href="#通过效率" class="headerlink" title="通过效率"></a>通过效率</h2><p>Runtime: 100.00%<br>Memory: 100.00%</p>
 
       </div>
       

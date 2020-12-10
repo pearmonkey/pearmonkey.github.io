@@ -313,89 +313,82 @@
         
       </div>
       <div class="post-content">
-        <p>GroupBy是数据处理最常用的形式之一。整个GroupBy的过程可以分为&quot;Split-Apply-Combine&quot;（拆分-应用-合并）三个阶段。</p>
-<a id="more"></a>
-<h2 id="groupby"><a class="markdownIt-Anchor" href="#groupby"></a> GroupBy</h2>
-<p>过程：</p>
+        <p>GroupBy是数据处理最常用的形式之一。整个GroupBy的过程可以分为”Split-Apply-Combine”（拆分-应用-合并）三个阶段。<br><a id="more"></a></p>
+<h2 id="GroupBy"><a href="#GroupBy" class="headerlink" title="GroupBy"></a>GroupBy</h2><p>过程：</p>
 <ul>
 <li><strong>Splitting</strong> the data into groups based on some criteria</li>
 <li><strong>Applying</strong> a function to each group independently</li>
-<li><strong>Combining</strong> the results into a data structure<br />
-<img src="/images/python7/SAC.jpg" alt="Alt text" /></li>
+<li><strong>Combining</strong> the results into a data structure<br><img src="/images/python7/SAC.jpg" alt="Alt text"></li>
 </ul>
-<p>作用：<br />
-In the <strong>apply</strong> step, we might wish to do one of the following:</p>
+<p>作用：<br>In the <strong>apply</strong> step, we might wish to do one of the following:</p>
 <ul>
 <li><strong>Aggregation</strong>: 为每个group计算统计量，例如，group sums/group means/group sizes/group counts</li>
 <li><strong>Transformation</strong>: 每个group中的每一行都会有个计算值，例如，standardize data within a group</li>
 <li><strong>Filtration</strong>: 用于去掉一些group，例如，只想留下平均分大于60的班级</li>
 </ul>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
-df = pd.read_csv(<span class="hljs-string">'https://raw.githubusercontent.com/yeayee/joyful-pandas/master/data/table.csv'</span>)
-df.head() <span class="hljs-comment"># 查看前5行</span>
-df.shape <span class="hljs-comment"># 查看shape</span>
-df.dtypes <span class="hljs-comment"># 查看数据类型</span>
+<pre><code class="lang-python">import pandas as pd
+df = pd.read_csv(&#39;https://raw.githubusercontent.com/yeayee/joyful-pandas/master/data/table.csv&#39;)
+df.head() # 查看前5行
+df.shape # 查看shape
+df.dtypes # 查看数据类型
 
-<span class="hljs-comment"># 按照School分组</span>
-df.School.value_counts() <span class="hljs-comment"># 统计School列不同值的count</span>
-df_single_group = df.groupby(<span class="hljs-string">'School'</span>) <span class="hljs-comment"># 按照School分组</span>
-df_single_group.size() <span class="hljs-comment"># 查看分组情况</span>
-df_single_group.get_group(<span class="hljs-string">'S_2'</span>) <span class="hljs-comment"># 分别查看group的DataFrame</span>
+# 按照School分组
+df.School.value_counts() # 统计School列不同值的count
+df_single_group = df.groupby(&#39;School&#39;) # 按照School分组
+df_single_group.size() # 查看分组情况
+df_single_group.get_group(&#39;S_2&#39;) # 分别查看group的DataFrame
 
-<span class="hljs-comment"># 查看每个组</span>
-<span class="hljs-keyword">for</span> name, group <span class="hljs-keyword">in</span> df.groupby(<span class="hljs-string">'School'</span>):
+# 查看每个组
+for name, group in df.groupby(&#39;School&#39;):
     print(name)
     print(group)
 
-<span class="hljs-comment"># 按照School和Class分组</span>
-df_multi_group = df.groupby([<span class="hljs-string">'School'</span>, <span class="hljs-string">'Class'</span>], dropna = <span class="hljs-literal">True</span>) <span class="hljs-comment"># School为第一level，Class为第二level</span>
-df_multi_group.size() <span class="hljs-comment"># 查看分组情况</span>
-df_multi_group.get_group((<span class="hljs-string">'S_2'</span>, <span class="hljs-string">'C_1'</span>)) <span class="hljs-comment"># 查看具体的一个分组，注意是圆括号</span>
+# 按照School和Class分组
+df_multi_group = df.groupby([&#39;School&#39;, &#39;Class&#39;], dropna = True) # School为第一level，Class为第二level
+df_multi_group.size() # 查看分组情况
+df_multi_group.get_group((&#39;S_2&#39;, &#39;C_1&#39;)) # 查看具体的一个分组，注意是圆括号
 </code></pre>
-<h2 id="aggregation"><a class="markdownIt-Anchor" href="#aggregation"></a> Aggregation</h2>
-<p>生成的结果会比原DataFrame的行数少。与R里面的dplyr的summarize类似。</p>
-<pre class="highlight"><code class="python"><span class="hljs-comment"># 用Series自带的function，单个function</span>
-df.groupby(<span class="hljs-string">'School'</span>)[<span class="hljs-string">'Math'</span>].mean() <span class="hljs-comment"># 选择感兴趣的列，进行计算，得到结果</span>
-df.groupby(<span class="hljs-string">'School'</span>)[<span class="hljs-string">'Math'</span>].std() <span class="hljs-comment"># mean函数可以替换成任何统计描述: nth()/min()/max()</span>
-df.groupby(<span class="hljs-string">'School'</span>)[<span class="hljs-string">'Math'</span>].nlargest(<span class="hljs-number">3</span>) <span class="hljs-comment"># 每个学校的数学前三名，可替换nsmallest</span>
-df.groupby([<span class="hljs-string">'School'</span>, <span class="hljs-string">'Class'</span>])[<span class="hljs-string">'Height'</span>].mean() <span class="hljs-comment"># 选择感兴趣的列，进行计算，得到结果</span>
-df.groupby([<span class="hljs-string">'School'</span>, <span class="hljs-string">'Class'</span>])[<span class="hljs-string">'Height'</span>].std() <span class="hljs-comment"># mean函数可以替换成任何统计描述</span>
-df.groupby([<span class="hljs-string">'School'</span>, <span class="hljs-string">'Class'</span>])[<span class="hljs-string">'Height'</span>].mean().reset_index() <span class="hljs-comment"># 规范成DataFrame</span>
+<h2 id="Aggregation"><a href="#Aggregation" class="headerlink" title="Aggregation"></a>Aggregation</h2><p>生成的结果会比原DataFrame的行数少。与R里面的dplyr的summarize类似。</p>
+<pre><code class="lang-python"># 用Series自带的function，单个function
+df.groupby(&#39;School&#39;)[&#39;Math&#39;].mean() # 选择感兴趣的列，进行计算，得到结果
+df.groupby(&#39;School&#39;)[&#39;Math&#39;].std() # mean函数可以替换成任何统计描述: nth()/min()/max()
+df.groupby(&#39;School&#39;)[&#39;Math&#39;].nlargest(3) # 每个学校的数学前三名，可替换nsmallest
+df.groupby([&#39;School&#39;, &#39;Class&#39;])[&#39;Height&#39;].mean() # 选择感兴趣的列，进行计算，得到结果
+df.groupby([&#39;School&#39;, &#39;Class&#39;])[&#39;Height&#39;].std() # mean函数可以替换成任何统计描述
+df.groupby([&#39;School&#39;, &#39;Class&#39;])[&#39;Height&#39;].mean().reset_index() # 规范成DataFrame
 
-<span class="hljs-comment"># 同时计算多个Numpy function</span>
-df.groupby(<span class="hljs-string">'School'</span>)[<span class="hljs-string">'Math'</span>].agg([np.sum, np.mean, np.std])
-df.groupby(<span class="hljs-string">'School'</span>)[<span class="hljs-string">'Math'</span>, <span class="hljs-string">'Height'</span>].agg([np.sum, np.mean, np.std])
+# 同时计算多个Numpy function
+df.groupby(&#39;School&#39;)[&#39;Math&#39;].agg([np.sum, np.mean, np.std])
+df.groupby(&#39;School&#39;)[&#39;Math&#39;, &#39;Height&#39;].agg([np.sum, np.mean, np.std])
 
-<span class="hljs-comment"># 同时计算多个自定义的function</span>
-df.groupby(<span class="hljs-string">'School'</span>)[<span class="hljs-string">'Math'</span>].agg([<span class="hljs-keyword">lambda</span> x : x.max() - x.min(),
-                                  <span class="hljs-keyword">lambda</span> x : x.median() - x.mean()]) <span class="hljs-comment"># 同一列使用不同的function</span>
-df.groupby(<span class="hljs-string">'School'</span>).agg({<span class="hljs-string">'Math'</span>: <span class="hljs-keyword">lambda</span> x : x.median() - x.mean(),
-                          <span class="hljs-string">'Height'</span>: <span class="hljs-keyword">lambda</span> x : x.max() - x.min()}) <span class="hljs-comment"># 不同列使用不同的function</span>
+# 同时计算多个自定义的function
+df.groupby(&#39;School&#39;)[&#39;Math&#39;].agg([lambda x : x.max() - x.min(),
+                                  lambda x : x.median() - x.mean()]) # 同一列使用不同的function
+df.groupby(&#39;School&#39;)[&#39;Math&#39;].agg(max_min = (lambda y : y.max() - y.min()),
+                                 median_mean = (lambda y : y.median() - y.mean())) # 不同列使用不同的function
 </code></pre>
-<h2 id="transformation"><a class="markdownIt-Anchor" href="#transformation"></a> Transformation</h2>
-<p>生成的结果和原DataFrame的行数一样。与R里面的dplyr的mutate类似。</p>
-<pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
-<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<h2 id="Transformation"><a href="#Transformation" class="headerlink" title="Transformation"></a>Transformation</h2><p>生成的结果和原DataFrame的行数一样。与R里面的dplyr的mutate类似。</p>
+<pre><code class="lang-python">import pandas as pd
+import numpy as np
 
-index = pd.date_range(<span class="hljs-string">'10/1/1999'</span>, periods=<span class="hljs-number">1100</span>)
-df = pd.DataFrame({<span class="hljs-string">'data'</span>: np.random.normal(<span class="hljs-number">0.5</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1100</span>)}, index = index)
+index = pd.date_range(&#39;10/1/1999&#39;, periods=1100)
+df = pd.DataFrame({&#39;data&#39;: np.random.normal(0.5, 2, 1100)}, index = index)
 
-<span class="hljs-comment"># 用存在的function</span>
-ts.groupby(ts.index.year).transform(<span class="hljs-string">'mean'</span>)
-ts.groupby(ts.index.year).transform(<span class="hljs-string">'std'</span>)
+# 用存在的function
+ts.groupby(ts.index.year).transform(&#39;mean&#39;)
+ts.groupby(ts.index.year).transform(&#39;std&#39;)
 
-<span class="hljs-comment"># 自己定义function</span>
-ts.groupby(ts.index.year)[<span class="hljs-string">'data'</span>].transform(<span class="hljs-keyword">lambda</span> x : (x - x.mean()) / x.std()) <span class="hljs-comment"># 按年来standardize</span>
+# 自己定义function
+ts.groupby(ts.index.year)[&#39;data&#39;].transform(lambda x : (x - x.mean()) / x.std()) # 按年来standardize
 </code></pre>
-<h2 id="filtration"><a class="markdownIt-Anchor" href="#filtration"></a> Filtration</h2>
-<p>选择符合条件的group</p>
-<pre class="highlight"><code class="python">df = pd.read_csv(<span class="hljs-string">'https://raw.githubusercontent.com/yeayee/joyful-pandas/master/data/table.csv'</span>)
-df.groupby([<span class="hljs-string">'School'</span>, <span class="hljs-string">'Class'</span>])[<span class="hljs-string">'Math'</span>].mean()
-df.groupby([<span class="hljs-string">'School'</span>, <span class="hljs-string">'Class'</span>])[<span class="hljs-string">'Math'</span>].filter(mean(x) &gt;= <span class="hljs-number">60</span>) <span class="hljs-comment"># 只留下班级平均分大于等于60的record</span>
+<h2 id="Filtration"><a href="#Filtration" class="headerlink" title="Filtration"></a>Filtration</h2><p>选择符合条件的group</p>
+<pre><code class="lang-python">df = pd.read_csv(&#39;https://raw.githubusercontent.com/yeayee/joyful-pandas/master/data/table.csv&#39;)
+df.groupby([&#39;School&#39;, &#39;Class&#39;])[&#39;Math&#39;].mean()
+df.groupby([&#39;School&#39;, &#39;Class&#39;]).filter(lambda x : x[&#39;Math&#39;].mean() &gt;= 60)  # 只留下班级平均分大于等于60的record
 
-df = pd.DataFrame({<span class="hljs-string">'A'</span>: np.arange(<span class="hljs-number">8</span>),
-                   <span class="hljs-string">'B'</span>: [<span class="hljs-string">'a'</span>, <span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>, <span class="hljs-string">'b'</span>, <span class="hljs-string">'b'</span>, <span class="hljs-string">'b'</span>, <span class="hljs-string">'c'</span>, <span class="hljs-string">'c'</span>]})
-dff.groupby(<span class="hljs-string">'B'</span>).filter(<span class="hljs-keyword">lambda</span> x: len(x) &gt; <span class="hljs-number">2</span>)
+df = pd.DataFrame({&#39;A&#39;: np.arange(8),
+                   &#39;B&#39;: [&#39;a&#39;, &#39;a&#39;, &#39;b&#39;, &#39;b&#39;, &#39;b&#39;, &#39;b&#39;, &#39;c&#39;, &#39;c&#39;]})
+dff.groupby(&#39;B&#39;).filter(lambda x: len(x) &gt; 2)
 </code></pre>
 
       </div>

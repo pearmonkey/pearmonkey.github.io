@@ -321,63 +321,58 @@
         
       </div>
       <div class="post-content">
-        <h2 id="问题描述"><a class="markdownIt-Anchor" href="#问题描述"></a> 问题描述</h2>
-<p>回文字符串英文叫 palindromic string/substring。所谓“回文”，就是正着读和反着读都是相同的字符序列，例如“level”，“noon”。所有回文字符串可以分为两大类：1）奇数回文，如“level”，中间有一个单独字符，两边延展的字符都相同；2）偶数回文，如“noon”，没有中间单独字符，对折的字符都相同。所以，在遇到回文字符串的题，这两种都要考虑进来。</p>
+        <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>回文字符串英文叫 palindromic string/substring。所谓“回文”，就是正着读和反着读都是相同的字符序列，例如“level”，“noon”。所有回文字符串可以分为两大类：1）奇数回文，如“level”，中间有一个单独字符，两边延展的字符都相同；2）偶数回文，如“noon”，没有中间单独字符，对折的字符都相同。所以，在遇到回文字符串的题，这两种都要考虑进来。</p>
 <a id="more"></a>
 <p>首先，先不看题，我们自己能想到的问题有哪些。</p>
 <ol>
-<li>最基本的是判断一个字符串是否是回文串。完成这个功能有两种方式：<br />
-a. 从最左和最右开始往里检查</li>
-</ol>
-<pre class="highlight"><code class="java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isPalindromic</span><span class="hljs-params">(String s)</span></span>{
-  <span class="hljs-keyword">int</span> l = <span class="hljs-number">0</span>, r = s.length() - <span class="hljs-number">1</span>;
-  <span class="hljs-keyword">while</span>(l &lt; r){
-      <span class="hljs-keyword">if</span>(s.charAt(l) != s.charAt(r))
-          <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
-      l++;
-      r--;
-  }
-  <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+<li>最基本的是判断一个字符串是否是回文串。完成这个功能有两种方式：<br>a. 从最左和最右开始往里检查<pre><code class="lang-java">public static boolean isPalindromic(String s){
+ int l = 0, r = s.length() - 1;
+ while(l &lt; r){
+     if(s.charAt(l) != s.charAt(r))
+         return false;
+     l++;
+     r--;
+ }
+ return true;
 }
 </code></pre>
-<p>b. 从中间开始，往两边检查</p>
-<pre class="highlight"><code class="java">	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isPalindromic</span><span class="hljs-params">(String s)</span></span>{
-      <span class="hljs-keyword">int</span> len = s.length();
-      <span class="hljs-keyword">int</span> l = (len - <span class="hljs-number">1</span>) / <span class="hljs-number">2</span>;
-      <span class="hljs-comment">//如果长度是奇数，r与l相等；是偶数，则l+1</span>
-    <span class="hljs-keyword">int</span> r = len % <span class="hljs-number">2</span> == <span class="hljs-number">0</span> ? l + <span class="hljs-number">1</span> : l;
-      <span class="hljs-keyword">while</span>(l &gt;= <span class="hljs-number">0</span> &amp;&amp; r &lt; len){
-          <span class="hljs-keyword">if</span>(s.charAt(l) != s.charAt(r))
-              <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
-          l--;
-          r++;
-      }
-      <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
-  }
+b. 从中间开始，往两边检查<pre><code class="lang-java">   public static boolean isPalindromic(String s){
+     int len = s.length();
+     int l = (len - 1) / 2;
+     //如果长度是奇数，r与l相等；是偶数，则l+1
+   int r = len % 2 == 0 ? l + 1 : l;
+     while(l &gt;= 0 &amp;&amp; r &lt; len){
+         if(s.charAt(l) != s.charAt(r))
+             return false;
+         l--;
+         r++;
+     }
+     return true;
+ }
 </code></pre>
-<ol start="2">
-<li>一些字符能否组成一个回文串。这个判断只需要count每个字符的出现次数，考虑的可能性还是偶回文和奇回文：</li>
+</li>
+<li>一些字符能否组成一个回文串。这个判断只需要count每个字符的出现次数，考虑的可能性还是偶回文和奇回文：<pre><code class="lang-java">public static boolean CanBePalindromic(String s){
+ //因为不确定是否只有字母，所以假设s可能包含任何ASCII字符
+ int[] count = new int[128];
+ for(char c : s.toCharArray())
+     //既然考虑到了所有ASCII字符，就可以直接将char强转为int
+     count[(int)c]++;
+ boolean odd_flag = false;
+ for(int n : count){
+     //如果之前已经出现过奇数字符，现在又出现了，就直接返回false
+     if(n % 2 == 1 &amp;&amp; odd_flag == true)
+         return false;
+     //上面没有返回false说明目前有可能还没有出现奇数字符
+     if(n % 2 == 1)
+         odd_flag = true;
+ }
+ return true;
+}
+</code></pre>
+</li>
 </ol>
-<pre class="highlight"><code class="java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">CanBePalindromic</span><span class="hljs-params">(String s)</span></span>{
-    <span class="hljs-comment">//因为不确定是否只有字母，所以假设s可能包含任何ASCII字符</span>
-    <span class="hljs-keyword">int</span>[] count = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">128</span>];
-    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">char</span> c : s.toCharArray())
-        <span class="hljs-comment">//既然考虑到了所有ASCII字符，就可以直接将char强转为int</span>
-        count[(<span class="hljs-keyword">int</span>)c]++;
-    <span class="hljs-keyword">boolean</span> odd_flag = <span class="hljs-keyword">false</span>;
-    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> n : count){
-        <span class="hljs-comment">//如果之前已经出现过奇数字符，现在又出现了，就直接返回false</span>
-        <span class="hljs-keyword">if</span>(n % <span class="hljs-number">2</span> == <span class="hljs-number">1</span> &amp;&amp; odd_flag == <span class="hljs-keyword">true</span>)
-            <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
-        <span class="hljs-comment">//上面没有返回false说明目前有可能还没有出现奇数字符</span>
-        <span class="hljs-keyword">if</span>(n % <span class="hljs-number">2</span> == <span class="hljs-number">1</span>)
-            odd_flag = <span class="hljs-keyword">true</span>;
-    }
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
-  }
-</code></pre>
-<h2 id="题目列表"><a class="markdownIt-Anchor" href="#题目列表"></a> 题目列表</h2>
-<p>到目前为止（12/5/2019），在Leetcode里搜索Palindrome关键字会出现24道题，6道easy，7道medium，11道hard。说明回文串这个知识点是可以出到很难的题的。下面的列表中列出了easy和medium的题目，在最后一列中列出了每道题考察的关键知识点。如果在以后碰到回文串的题，就尽可能往这些知识点上想，大部分都应该能想出来。</p>
+<h2 id="题目列表"><a href="#题目列表" class="headerlink" title="题目列表"></a>题目列表</h2><p>到目前为止（12/5/2019），在Leetcode里搜索Palindrome关键字会出现24道题，6道easy，7道medium，11道hard。说明回文串这个知识点是可以出到很难的题的。下面的列表中列出了easy和medium的题目，在最后一列中列出了每道题考察的关键知识点。如果在以后碰到回文串的题，就尽可能往这些知识点上想，大部分都应该能想出来。</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -492,10 +487,10 @@ a. 从最左和最右开始往里检查</li>
 <td>Medium</td>
 <td>22.2%</td>
 <td></td>
-<td></td>
 </tr>
 </tbody>
 </table>
+</div>
 
       </div>
       
