@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://pearmonkey.com/2020/12/07/Python5-Pandas-ReadWriteFile/</loc>
+    <lastmod>2020-12-12</lastmod>
+  </url>  <url>
+    <loc>http://pearmonkey.com/2020/12/11/Python8-Pandas-Pivot/</loc>
+    <lastmod>2020-12-12</lastmod>
+  </url>  <url>
     <loc>http://pearmonkey.com/2020/12/09/Python7-Pandas-Grouping/</loc>
     <lastmod>2020-12-10</lastmod>
   </url>  <url>
     <loc>http://pearmonkey.com/2020/12/07/Python6-Pandas-DataPreprocessing/</loc>
-    <lastmod>2020-12-07</lastmod>
-  </url>  <url>
-    <loc>http://pearmonkey.com/2020/12/07/Python5-Pandas-ReadWriteFile/</loc>
     <lastmod>2020-12-07</lastmod>
   </url>  <url>
     <loc>http://pearmonkey.com/2020/12/06/Python4-Pandas-Introduction/</loc>

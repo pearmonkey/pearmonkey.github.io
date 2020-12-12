@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://pearmonkey.com/2020/12/07/Python5-Pandas-ReadWriteFile/</loc>
+    
+    <lastmod>2020-12-12T22:36:07.215Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://pearmonkey.com/2020/12/11/Python8-Pandas-Pivot/</loc>
+    
+    <lastmod>2020-12-12T22:12:43.535Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://pearmonkey.com/2020/12/09/Python7-Pandas-Grouping/</loc>
     
     <lastmod>2020-12-10T03:50:29.433Z</lastmod>
@@ -12,13 +26,6 @@
     <loc>http://pearmonkey.com/2020/12/07/Python6-Pandas-DataPreprocessing/</loc>
     
     <lastmod>2020-12-07T22:06:14.524Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://pearmonkey.com/2020/12/07/Python5-Pandas-ReadWriteFile/</loc>
-    
-    <lastmod>2020-12-07T16:49:53.136Z</lastmod>
     
   </url>
   
