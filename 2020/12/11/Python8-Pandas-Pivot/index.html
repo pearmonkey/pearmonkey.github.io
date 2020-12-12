@@ -316,27 +316,29 @@
         <p>像Numpy Array的reshape一样，Pandas DataFrame也是可以reshape的。但由于DataFrame的行和列分别都是有明确意义的，并且各自有自己的index，所以reshape之前，需要思考reshape之后的DataFrame应该是个什么样子。所以，在进行coding之前，在纸上画出自己想要的形式是一个很有帮助的习惯。</p>
 <a id="more"></a>
 <h2 id="melt"><a class="markdownIt-Anchor" href="#melt"></a> Melt</h2>
+<!-- ![Alt text](/images/python8/p5.png){:height="50%" width="50%"} -->
 <img src="/images/python8/p5.png" width="700"/>
-如果我们生成下一个Dataset:
-```python
-import pandas as pd
-import numpy as np
-<p>columns = [‘Sub’ + x for x in np.array(np.arange(1, 9)).astype(str)]<br />
-df = pd.DataFrame(np.random.randint(40, 100, (40, 8)),<br />
-columns = columns)<br />
-df[‘School’] = [‘S_1’] * 20 + [‘S_2’] * 20<br />
-df[‘Class’] = [‘C_1’] * 5 + [‘C_2’] * 5 + [‘C_3’] * 5 + [‘C_4’] * 5 + <br />
-[‘C_1’] * 5 + [‘C_2’] * 5 + [‘C_3’] * 5 + [‘C_4’] * 5<br />
-df[‘StudentID’] = np.arange(1, 41)<br />
-df = df[[‘School’, ‘Class’, ‘StudentID’] + columns]</p>
-<pre class="highlight"><code class="">&lt;img src=&quot;/images/python8/p1.png&quot; width=&quot;500&quot;/&gt;
+<p>如果我们生成下一个Dataset:</p>
+<pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+
+columns = [<span class="hljs-string">'Sub'</span> + x <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> np.array(np.arange(<span class="hljs-number">1</span>, <span class="hljs-number">9</span>)).astype(str)]
+df = pd.DataFrame(np.random.randint(<span class="hljs-number">40</span>, <span class="hljs-number">100</span>, (<span class="hljs-number">40</span>, <span class="hljs-number">8</span>)),
+             columns = columns)
+df[<span class="hljs-string">'School'</span>] = [<span class="hljs-string">'S_1'</span>] * <span class="hljs-number">20</span> + [<span class="hljs-string">'S_2'</span>] * <span class="hljs-number">20</span>
+df[<span class="hljs-string">'Class'</span>] = [<span class="hljs-string">'C_1'</span>] * <span class="hljs-number">5</span> + [<span class="hljs-string">'C_2'</span>] * <span class="hljs-number">5</span> + [<span class="hljs-string">'C_3'</span>] * <span class="hljs-number">5</span> + [<span class="hljs-string">'C_4'</span>] * <span class="hljs-number">5</span> + \
+[<span class="hljs-string">'C_1'</span>] * <span class="hljs-number">5</span> + [<span class="hljs-string">'C_2'</span>] * <span class="hljs-number">5</span> + [<span class="hljs-string">'C_3'</span>] * <span class="hljs-number">5</span> + [<span class="hljs-string">'C_4'</span>] * <span class="hljs-number">5</span>
+df[<span class="hljs-string">'StudentID'</span>] = np.arange(<span class="hljs-number">1</span>, <span class="hljs-number">41</span>)
+df = df[[<span class="hljs-string">'School'</span>, <span class="hljs-string">'Class'</span>, <span class="hljs-string">'StudentID'</span>] + columns]
+</code></pre>
+<img src="/images/python8/p1.png" width="500"/>
 如果我们想看每个学校的每个班级的各项平均成绩可以直接用：
 ```python
 # 在Jupyter中，如果换行之后，前一句可以被当作一句完整的语句，
 # 系统会分开处理两句，所以这时需要在第一句后面加一个斜杠\来表示“这句没有结束”
 df.groupby(['School', 'Class'])\
 [['Sub1', 'Sub2', 'Sub3', 'Sub4', 'Sub5', 'Sub6', 'Sub7', 'Sub8']].mean()
-</code></pre>
+```
 <img src="/images/python8/p2.png" width="500"/>
 如果我想看相对于每个Subject，不同的学校的平均成绩如何，应该要怎么办呢，这时，我们就需要将整个DataFrame换一种形式，将Sub变成一列，才能用GroupBy：
 ```python
