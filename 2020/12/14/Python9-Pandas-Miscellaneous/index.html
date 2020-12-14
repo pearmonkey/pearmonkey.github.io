@@ -12,7 +12,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>8. Python8-Pandas-Reshape | 雪梨猴的小站</title>
+  <title>9. Python-Pandas-Miscellaneous | 雪梨猴的小站</title>
   
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -285,7 +285,7 @@
     <article class="post post-detail">
       
         <div class="post-title">
-          8. Python8-Pandas-Reshape
+          9. Python-Pandas-Miscellaneous
         </div>
       
 
@@ -297,7 +297,7 @@
       
 
       
-        <span class="post-time">2020-12-11</span>
+        <span class="post-time">2020-12-14</span>
         <h>|</h>
       
 
@@ -313,15 +313,13 @@
         
       </div>
       <div class="post-content">
-        <p>像Numpy Array的reshape一样，Pandas DataFrame也是可以reshape的。但由于DataFrame的行和列分别都是有明确意义的，并且各自有自己的index，所以reshape之前，需要思考reshape之后的DataFrame应该是个什么样子。所以，在进行coding之前，在纸上画出自己想要的形式是一个很有帮助的习惯。</p>
+        <p>其实重要和常用的功能已经系统的介绍完了。这篇主要是查漏补缺一些function。</p>
 <a id="more"></a>
-<h2 id="melt"><a class="markdownIt-Anchor" href="#melt"></a> Melt</h2>
-<!-- ![Alt text](/images/python8/p5.png){:height="50%" width="50%"} -->
-<img src="/images/python8/p5.png" width="700"/>
-<p>如果我们生成下一个Dataset:</p>
+<p>推荐大家熟悉这个<a href="https://pandas.pydata.org/Pandas_Cheat_Sheet.pdf" target="_blank" rel="noopener">cheat sheet</a>，一般的学习工作需要的功能都能在里面找到类似的列子。所以我们根据这个cheat sheet查漏补缺还没有提及的功能和用法。</p>
+<h2 id="multiindex"><a class="markdownIt-Anchor" href="#multiindex"></a> MultiIndex</h2>
+<p>一般情况下，我们会直接读入数据，而不是生成数据，所以手动传入MultiIndex的机会不多。更常见的是当我们按照多列GroupBy之后，Index是按照GroupBy中列的顺序进行分级，最左边的列名是最高级，最右边的列名是最低级。</p>
 <pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
-
 columns = [<span class="hljs-string">'Sub'</span> + x <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> np.array(np.arange(<span class="hljs-number">1</span>, <span class="hljs-number">9</span>)).astype(str)]
 df = pd.DataFrame(np.random.randint(<span class="hljs-number">40</span>, <span class="hljs-number">100</span>, (<span class="hljs-number">40</span>, <span class="hljs-number">8</span>)),
              columns = columns)
@@ -329,40 +327,103 @@ df[<span class="hljs-string">'School'</span>] = [<span class="hljs-string">'S_1'
 df[<span class="hljs-string">'Class'</span>] = [<span class="hljs-string">'C_1'</span>] * <span class="hljs-number">5</span> + [<span class="hljs-string">'C_2'</span>] * <span class="hljs-number">5</span> + [<span class="hljs-string">'C_3'</span>] * <span class="hljs-number">5</span> + [<span class="hljs-string">'C_4'</span>] * <span class="hljs-number">5</span> + \
 [<span class="hljs-string">'C_1'</span>] * <span class="hljs-number">5</span> + [<span class="hljs-string">'C_2'</span>] * <span class="hljs-number">5</span> + [<span class="hljs-string">'C_3'</span>] * <span class="hljs-number">5</span> + [<span class="hljs-string">'C_4'</span>] * <span class="hljs-number">5</span>
 df[<span class="hljs-string">'StudentID'</span>] = np.arange(<span class="hljs-number">1</span>, <span class="hljs-number">41</span>)
-df = df[[<span class="hljs-string">'School'</span>, <span class="hljs-string">'Class'</span>, <span class="hljs-string">'StudentID'</span>] + columns]
-</code></pre>
-<img src="/images/python8/p1.png" width="500"/>
-<p>如果我们想看每个学校的每个班级的各项平均成绩可以直接用：</p>
-<pre class="highlight"><code class="python"><span class="hljs-comment"># 在Jupyter中，如果换行之后，前一句可以被当作一句完整的语句，</span>
-<span class="hljs-comment"># 系统会分开处理两句，所以这时需要在第一句后面加一个斜杠\来表示“这句没有结束”</span>
+df = df[[<span class="hljs-string">'School'</span>, <span class="hljs-string">'Class'</span>, <span class="hljs-string">'StudentID'</span>] + columns[<span class="hljs-number">0</span>:<span class="hljs-number">3</span>]]
 df.groupby([<span class="hljs-string">'School'</span>, <span class="hljs-string">'Class'</span>])\
-[[<span class="hljs-string">'Sub1'</span>, <span class="hljs-string">'Sub2'</span>, <span class="hljs-string">'Sub3'</span>, <span class="hljs-string">'Sub4'</span>, <span class="hljs-string">'Sub5'</span>, <span class="hljs-string">'Sub6'</span>, <span class="hljs-string">'Sub7'</span>, <span class="hljs-string">'Sub8'</span>]].mean()
+[columns[<span class="hljs-number">0</span>:<span class="hljs-number">3</span>]].mean()
 </code></pre>
-<img src="/images/python8/p2.png" width="500"/>
-<p>如果我想看相对于每个Subject，不同的学校的平均成绩如何，应该要怎么办呢，这时，我们就需要将整个DataFrame换一种形式，将Sub变成一列，才能用GroupBy：</p>
-<pre class="highlight"><code class="python">df2 = df.melt(id_vars = [<span class="hljs-string">'School'</span>, <span class="hljs-string">'Class'</span>, <span class="hljs-string">'StudentID'</span>],
-        value_vars = [<span class="hljs-string">'Sub1'</span>, <span class="hljs-string">'Sub2'</span>, <span class="hljs-string">'Sub3'</span>, <span class="hljs-string">'Sub4'</span>, <span class="hljs-string">'Sub5'</span>, <span class="hljs-string">'Sub6'</span>, <span class="hljs-string">'Sub7'</span>, <span class="hljs-string">'Sub8'</span>],
-        var_name=<span class="hljs-string">'Subject'</span>, value_name=<span class="hljs-string">'Score'</span>)
+<img src="/images/python9/p1.png" width="500"/>
+去除嵌套关系可以用```df.reset_index()```。
+<h2 id="query"><a class="markdownIt-Anchor" href="#query"></a> query</h2>
+<p>选择符合条件的行</p>
+<pre class="highlight"><code class="python">df.query(<span class="hljs-string">'Sub1 &gt; 90'</span>)
+df.query(<span class="hljs-string">'Sub1 &gt; 90 and Sub2 &gt; 90'</span>)
+</code></pre>
+<h2 id="date"><a class="markdownIt-Anchor" href="#date"></a> Date</h2>
+<p>日期是数据中常见的一列，Date类型不属于数值型也不属于字符型。<br />
+将Integer转化为Date：</p>
+<pre class="highlight"><code class="python">pd.to_datetime(<span class="hljs-string">'20200101'</span>)
+pd.to_datetime(<span class="hljs-string">'2020-01-01'</span>)
+pd.to_datetime(<span class="hljs-string">'2020/01/01'</span>)
+pd.to_datetime(<span class="hljs-string">'20200101'</span>).year
+pd.to_datetime(<span class="hljs-string">'20200101'</span>).month
+pd.to_datetime(<span class="hljs-string">'20200101'</span>).day
+pd.to_datetime(<span class="hljs-string">'202001'</span>, format = <span class="hljs-string">'%Y%m'</span>)
+
+<span class="hljs-comment"># 移动日期</span>
+<span class="hljs-keyword">import</span> datetime
+pd.to_datetime(<span class="hljs-string">'202001'</span>, format = <span class="hljs-string">'%Y%m'</span>) + datetime.timedelta(days=<span class="hljs-number">5</span>)
+
+<span class="hljs-comment"># date to string</span>
+str(pd.to_datetime(<span class="hljs-string">'202001'</span>, format = <span class="hljs-string">'%Y%m'</span>) + datetime.timedelta(days=<span class="hljs-number">5</span>))
+</code></pre>
+<h2 id="strcontains"><a class="markdownIt-Anchor" href="#strcontains"></a> str.contains</h2>
+<p>筛选符合条件的字符串</p>
+<pre class="highlight"><code class="python">df2 = pd.DataFrame({<span class="hljs-string">'name'</span>: [<span class="hljs-string">'Bob_James'</span>, <span class="hljs-string">'Hunter_James'</span>, <span class="hljs-string">'Alice_Peter'</span>],
+                   <span class="hljs-string">'score'</span>: [<span class="hljs-number">90</span>, <span class="hljs-number">80</span>, <span class="hljs-number">100</span>]})
 df2
+df2.name.str.contains(<span class="hljs-string">'James'</span>)
+df2[df2.name.str.contains(<span class="hljs-string">'James'</span>)]
 </code></pre>
-<img src="/images/python8/p3.png" width="300"/>
-<p>然后我们就能查看不同的学校在每个学科中的比较了。</p>
-<pre class="highlight"><code class="python">df3 = df2.groupby([<span class="hljs-string">'Subject'</span>, <span class="hljs-string">'School'</span>])[<span class="hljs-string">'Score'</span>].agg([np.mean, np.min, np.max])
-df3
+<h2 id="qcut"><a class="markdownIt-Anchor" href="#qcut"></a> qcut</h2>
+<p>把Series切成分量相等（几乎相等）的小段，如果unique值的个数比分数小，则报错无法切。</p>
+<pre class="highlight"><code class="python">pd.qcut(np.arange(<span class="hljs-number">10</span>), <span class="hljs-number">3</span>)
+pd.qcut(np.arange(<span class="hljs-number">10</span>), <span class="hljs-number">3</span>, labels = [<span class="hljs-string">'low'</span>, <span class="hljs-string">'medium'</span>, <span class="hljs-string">'high'</span>])
+pd.qcut([<span class="hljs-number">1</span>] * <span class="hljs-number">10</span>, <span class="hljs-number">3</span>, labels = [<span class="hljs-string">'low'</span>, <span class="hljs-string">'medium'</span>, <span class="hljs-string">'high'</span>]) <span class="hljs-comment"># Error</span>
 </code></pre>
-<img src="/images/python8/p4.png" width="300"/>
-<p>行index出现了层次嵌套关系，如果想变成简单的index，可以用<code>df3.reset_index()</code>来去掉嵌套关系。如果想去掉列的嵌套关系，用<code>df3.columns = df3.columns.droplevel()</code>。</p>
-<h2 id="pivot"><a class="markdownIt-Anchor" href="#pivot"></a> Pivot</h2>
-<p>Melt是将不同的列整合成两列（variable，value），一列是表示原来的列名，一列是原来列对应的值。由宽矩阵转化为长矩阵。<br />
-Pivot就是将长矩阵转化为宽矩阵。<br />
-<img src="/images/python8/p6.png" width="700"/></p>
-<p>继续用df3来做例子，先用<code>df3 = df3.reset_index()</code>去掉行index的嵌套关系，得到：<br />
-<img src="/images/python8/p7.png" width="300"/></p>
-<p>然后用pivot将长型转化为宽型：</p>
-<pre class="highlight"><code class="python">df3_mean = df3.pivot(index=<span class="hljs-string">'School'</span>, columns=<span class="hljs-string">'Subject'</span>, values=<span class="hljs-string">'mean'</span>)
-df3_mean
+<h2 id="shift-rank"><a class="markdownIt-Anchor" href="#shift-rank"></a> shift &amp; rank</h2>
+<p>纵向移动列</p>
+<pre class="highlight"><code class="python">df[<span class="hljs-string">'Sub1_next'</span>] = df.Sub1.shift(<span class="hljs-number">-1</span>)
+df[<span class="hljs-string">'Sub1_pre'</span>] = df.Sub1.shift(<span class="hljs-number">1</span>)
+df
 </code></pre>
-<img src="/images/python8/p8.png" width="500"/>
+<p>排序（GroupBy排序）</p>
+<pre class="highlight"><code class="python">df[<span class="hljs-string">'rank_overall'</span>] = df[<span class="hljs-string">'Sub1'</span>].rank(ascending = <span class="hljs-literal">False</span>).astype(int)
+df[<span class="hljs-string">'rank_school'</span>] = df.groupby(<span class="hljs-string">'School'</span>)[<span class="hljs-string">'Sub1'</span>].rank(ascending = <span class="hljs-literal">False</span>).astype(int)
+df[<span class="hljs-string">'rank_class'</span>] = df.groupby([<span class="hljs-string">'School'</span>, <span class="hljs-string">'Class'</span>])[<span class="hljs-string">'Sub1'</span>]\
+      .rank(ascending = <span class="hljs-literal">False</span>).astype(int)
+
+df
+</code></pre>
+<h2 id="isin"><a class="markdownIt-Anchor" href="#isin"></a> isin</h2>
+<p>查看一个Series的每个值是否在另一个Series里面，返回的布尔数组可以当作index用于筛选行。</p>
+<pre class="highlight"><code class="python"><span class="hljs-comment"># 选出df1中符合条件的行：df1的x在df2的y中出现过</span>
+df1[df1.x.isin(df2.y)]
+</code></pre>
+<h2 id="rolling"><a class="markdownIt-Anchor" href="#rolling"></a> rolling</h2>
+<p>求rolling window的统计量</p>
+<pre class="highlight"><code class="python"><span class="hljs-comment"># 包括自己的前五个求mean</span>
+df.Sub1.rolling(<span class="hljs-number">5</span>).mean()
+</code></pre>
+<h2 id="drop_duplicates"><a class="markdownIt-Anchor" href="#drop_duplicates"></a> drop_duplicates</h2>
+<pre class="highlight"><code class="python">df2 = pd.DataFrame({<span class="hljs-string">'name'</span>: [<span class="hljs-string">'Bob_James'</span>, <span class="hljs-string">'Hunter_James'</span>, <span class="hljs-string">'Bob_James'</span>],
+                   <span class="hljs-string">'score'</span>: [<span class="hljs-number">90</span>, <span class="hljs-number">80</span>, <span class="hljs-number">90</span>]})
+df2
+df2.drop_duplicates() <span class="hljs-comment"># 默认keep第一个</span>
+df2.drop_duplicates(keep = <span class="hljs-string">'last'</span>) <span class="hljs-comment"># 保留最后一个</span>
+df2.drop_duplicates(keep = <span class="hljs-literal">False</span>) <span class="hljs-comment"># 只要重复，都去掉</span>
+</code></pre>
+<h2 id="plotting"><a class="markdownIt-Anchor" href="#plotting"></a> Plotting</h2>
+<p>更多例子参考：<a href="https://pandas.pydata.org/pandas-docs/stable/user_guide/visualization.html" target="_blank" rel="noopener">https://pandas.pydata.org/pandas-docs/stable/user_guide/visualization.html</a></p>
+<pre class="highlight"><code class="python">ts = pd.Series(np.random.randn(<span class="hljs-number">1000</span>),
+            index=pd.date_range(<span class="hljs-string">'1/1/2000'</span>, periods=<span class="hljs-number">1000</span>))
+ts.cumsum().plot()
+
+df = pd.DataFrame(np.random.randn(<span class="hljs-number">1000</span>, <span class="hljs-number">4</span>),
+                  index=ts.index,
+                  columns=[<span class="hljs-string">'A'</span>, <span class="hljs-string">'B'</span>, <span class="hljs-string">'C'</span>, <span class="hljs-string">'D'</span>])
+df.cumsum().plot()
+df.iloc[<span class="hljs-number">5</span>].plot(kind=<span class="hljs-string">'bar'</span>)
+
+df2 = pd.DataFrame(np.random.rand(<span class="hljs-number">10</span>, <span class="hljs-number">4</span>), columns=[<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>, <span class="hljs-string">'c'</span>, <span class="hljs-string">'d'</span>])
+df2.plot.bar()
+
+df2.plot.bar(stacked=<span class="hljs-literal">True</span>)
+
+df2.plot.barh(stacked=<span class="hljs-literal">True</span>)
+
+<span class="hljs-comment"># save plot</span>
+df2.plot.barh(stacked=<span class="hljs-literal">True</span>).figure.savefig(<span class="hljs-string">'demo-file.pdf'</span>)
+</code></pre>
 
       </div>
       
@@ -371,18 +432,12 @@ df3_mean
     
       <div class="post-nav">
 
-  <div class="post-nav-prev post-nav-item">
-    <a href="/2020/12/14/Python9-Pandas-Miscellaneous/">
-      上一篇:    9. Python-Pandas-Miscellaneous
-    </a>
-  </div>
-
 
 
   <div class="post-nav-next post-nav-item">
-    <a href="/2020/12/09/Python7-Pandas-Grouping/">
+    <a href="/2020/12/11/Python8-Pandas-Pivot/">
       <span>
-        下一篇:    7. Python-Pandas分组和聚合 
+        下一篇:    8. Python8-Pandas-Reshape 
       </span>
     </a>
   </div>
